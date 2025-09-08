@@ -1,0 +1,638 @@
+{% comment %}
+** FAQ **
+{% endcomment %}
+
+{% liquid
+  assign id = section.id
+  assign width = section.settings.width
+%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for block in section.blocks %}
+      {% unless block.type == 'heading' %}
+        {
+          "@type": "Question",
+          "name": "{{ block.settings.title | escape }}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{ block.settings.answer | strip_html }}"
+          }
+        }{% unless forloop.last %},{% endunless %}
+      {% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+
+{% style %}
+  #shopify-section-{{ id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    {% if section.settings.custom_width != blank %}
+      max-width: {{ section.settings.custom_width }}px;
+      margin: 0 auto;
+    {% endif %}
+
+    {% if width == 'wide' %}
+      width: 100%;
+    {% endif %}
+  }
+
+  #shopify-section-{{ id }} .faq-heading-container {
+    margin-bottom: {{ section.settings.heading_bottom_padding }}px;
+  }
+
+  #shopify-section-{{ id }} .faq-heading {
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size }}px;
+    margin-bottom: 0;
+  }
+  
+  /* Default background for questions */
+  #shopify-section-{{ id }} .accordion__button {
+    color: {{ section.settings.question_color }};
+    background-color: {{ section.settings.question_background_color }};
+  }
+  
+  /* Alternating background colors for questions */
+  #shopify-section-{{ id }} .faq-accordion dt:nth-child(4n+1) .accordion__button {
+    background-color: {{ section.settings.question_background_color }};
+  }
+  
+  #shopify-section-{{ id }} .faq-accordion dt:nth-child(4n+3) .accordion__button {
+    background-color: {{ section.settings.alt_question_background_color | default: '#f5f5f5' }};
+  }
+  
+  #shopify-section-{{ id }} .icon {
+    fill: {{ section.settings.toggle_icon_color }};
+  }
+  
+  /* Make icons thicker */
+  #shopify-section-{{ id }} .icon--active,
+  #shopify-section-{{ id }} .icon {
+    transform: scale({{ section.settings.toggle_icon_thickness | default: 1 }});
+    transform-origin: center;
+    vertical-align: middle; /* Align icon with text */
+    position: relative; /* Allow for fine positioning */
+    top: -1px; /* Slight adjustment to align with text */
+  }
+  
+  /* Additional method to thicken icons */
+  #shopify-section-{{ id }} .icon path,
+  #shopify-section-{{ id }} .icon line,
+  #shopify-section-{{ id }} .icon rect {
+    stroke-width: {{ section.settings.toggle_icon_thickness | default: 1 }};
+  }
+  
+  /* For icons that use stroke */
+  #shopify-section-{{ id }} .icon[stroke] {
+    stroke-width: {{ section.settings.toggle_icon_thickness | default: 1 }};
+  }
+  
+  /* Ensure proper icon positioning */
+  #shopify-section-{{ id }} .accordion__button {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Restore horizontal spacing */
+  #shopify-section-{{ id }} .accordion__button .icon,
+  #shopify-section-{{ id }} .accordion__button .icon--active {
+    margin-right: 10px;
+  }
+  
+  /* Fix icon position in case it's absolutely positioned */
+  #shopify-section-{{ id }} .accordion__button svg {
+    position: static !important;
+  }
+  
+  #shopify-section-{{ id }} .content {
+    color: {{ section.settings.answer_color }};
+  }
+
+  @media only screen and (max-width: 798px) {
+    #shopify-section-{{ id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    
+    #shopify-section-{{ id }} .faq-heading-container {
+      margin-bottom: {{ section.settings.heading_bottom_padding_mobile }}px;
+    }
+    
+    #shopify-section-{{ id }} .faq-heading {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+      margin-bottom: 0;
+    }
+  }
+
+  {%
+    render 'css-loop',
+    css: section.settings.custom_css,
+    id: id,
+  %}
+{% endstyle %}
+
+{% capture icon_set %}
+  {% if settings.toggle_icon_style == 'carets' %}
+    {%
+      render 'icon',
+      name: 'down-caret',
+      icon_class: 'icon--rotate',
+    %}
+  {% else %}
+    {%
+      render 'icon',
+      name: 'plus',
+      icon_class: 'icon--active',
+    %}
+    {%
+      render 'icon',
+      name: 'minus',
+    %}
+  {% endif %}
+{% endcapture %}
+
+<section
+  class="
+    section
+    {{ section.settings.css_class }}
+    is-width-{{ width }}
+    has-gutter-enabled
+    {% if width == 'wide' %}
+      equal-columns--outside-trim
+    {% endif %}
+  "
+  {% if section.settings.animation != "none" %}
+    data-scroll-class="{{ section.settings.animation }}"
+  {% endif %}
+>
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <div class="faq-heading-container" style="width: 100%; text-align: {{ section.settings.heading_alignment }};">
+        <h2 class="faq-heading" style="display: inline-block; text-align: {{ section.settings.heading_alignment }};">{{ section.settings.title }}</h2>
+      </div>
+    {% endif %}
+
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        {% if block.type == 'image' %}
+          {% assign image = true %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <div
+      class="
+        page-faq__column-wrap
+        container
+        column-wrapper
+      "
+    >
+      <div
+        class="
+          {% if image == true %}
+            one-half
+          {% else %}
+            one-whole
+          {% endif %}
+          medium-down--one-whole
+          column
+          faq
+          faq__column-1
+        "
+      >
+        {% if section.blocks.size > 0 %}
+          <dl
+            class="
+              {{ section.settings.css_class }}
+              faq-accordion
+              accordion-icon--{{ settings.toggle_icon_style }}
+            "
+          >
+            {% for block in section.blocks %}
+              {% if block.type == 'content' %}
+                {% if block.settings.title != blank %}
+                  <dt>
+                    <button
+                      class="
+                        accordion-style--{{ settings.toggle_icon_style }}
+                        accordion__button
+                      "
+                      type="button"
+                      aria-controls="panel-{{ block.id }}"
+                      aria-expanded="true"
+                    >
+                      {{ icon_set }}
+                      {{ block.settings.title }}
+                    </button>
+                  </dt>
+
+                  <dd id="panel-{{ block.id }}" aria-hidden="false">
+                    <div class="content">
+                      {{- block.settings.answer -}}
+                    </div>
+                  </dd>
+                {% endif %}
+              {% elsif block.type == 'heading' %}
+                {% if block.settings.title != blank %}
+                  <h2 class="title faq-title">
+                    {{- block.settings.title -}}
+                  </h2>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </dl>
+        {% endif %}
+      </div>
+
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == 'image' %}
+            <div
+              class="
+                one-half
+                medium-down--one-whole
+                column
+                faq
+                faq--image
+                faq__column-2
+              "
+            >
+              {% if block.settings.image != blank %}
+                  {%
+                    render 'image-element',
+                    image: block.settings.image,
+                    alt: block.settings.image.alt,
+                    stretch_width: true,
+                    focal_point: block.settings.image.presentation.focal_point,
+                  %}
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<script data-theme-editor-load-script src="{{ 'z__jsFAQ.js' | asset_url }}"></script>
+
+{% schema %}
+  {
+    "name": "FAQ",
+    "class": "FAQ jsFAQ",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "FAQ"
+      },
+      {
+        "type": "header",
+        "content": "Text & Icon Colors"
+      },
+      {
+        "type": "color",
+        "id": "question_color",
+        "label": "Question text color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "question_background_color",
+        "label": "Question background color (primary)",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "alt_question_background_color",
+        "label": "Question background color (alternate)",
+        "default": "#f5f5f5"
+      },
+      {
+        "type": "color",
+        "id": "toggle_icon_color",
+        "label": "Toggle icon color (+ and -)",
+        "default": "#000000"
+      },
+      {
+        "type": "range",
+        "id": "toggle_icon_thickness",
+        "label": "Toggle icon thickness",
+        "min": 1,
+        "max": 2,
+        "step": 0.1,
+        "default": 1,
+        "info": "Increase to make the plus/minus icons thicker"
+      },
+      {
+        "type": "color",
+        "id": "answer_color",
+        "label": "Answer text color",
+        "default": "#333333"
+      },
+      {
+        "type": "header",
+        "content": "Heading Style"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color",
+        "default": "#000000"
+      },
+      {
+        "type": "range",
+        "id": "heading_size",
+        "label": "Heading size",
+        "min": 16,
+        "max": 60,
+        "default": 32,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "heading_bottom_padding",
+        "label": "Heading bottom padding",
+        "min": 0,
+        "max": 60,
+        "default": 20,
+        "unit": "px"
+      },
+      {
+        "type": "select",
+        "id": "heading_alignment",
+        "label": "Heading alignment",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "heading_size_mobile",
+        "label": "Heading size (mobile)",
+        "min": 14,
+        "max": 50,
+        "default": 26,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "heading_bottom_padding_mobile",
+        "label": "Heading bottom padding (mobile)",
+        "min": 0,
+        "max": 60,
+        "default": 15,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "select",
+        "id": "width",
+        "label": "Width",
+        "default": "standard",
+        "options": [
+          {
+            "value": "standard",
+            "label": "Standard"
+          },
+          {
+            "value": "wide",
+            "label": "Wide"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "custom_width",
+        "label": "Custom width (px)",
+        "info": "Leave blank to use default width setting above"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Top spacing",
+        "min": 0,
+        "max": 80,
+        "default": 56,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Bottom spacing",
+        "min": 0,
+        "max": 80,
+        "default": 56,
+        "unit": "px"
+      },
+      {
+        "type": "select",
+        "id": "animation",
+        "label": "Animation",
+        "default": "none",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "fadeIn",
+            "label": "Fade in"
+          },
+          {
+            "value": "fadeInDown",
+            "label": "Fade in down"
+          },
+          {
+            "value": "fadeInLeft",
+            "label": "Fade in left"
+          },
+          {
+            "value": "fadeInRight",
+            "label": "Fade in right"
+          },
+          {
+            "value": "slideInLeft",
+            "label": "Slide in left"
+          },
+          {
+            "value": "slideInRight",
+            "label": "Slide in right"
+          },
+          {
+            "value": "zoomIn",
+            "label": "Zoom in"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Mobile layout"
+      },
+      {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "label": "Mobile top spacing",
+        "min": 0,
+        "max": 80,
+        "default": 56,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "label": "Mobile bottom spacing",
+        "min": 0,
+        "max": 80,
+        "default": 56,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Advanced"
+      },
+      {
+        "type": "paragraph",
+        "content": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/360022329373)"
+      },
+      {
+        "type": "text",
+        "id": "css_class",
+        "label": "CSS Class"
+      },
+      {
+        "type": "textarea",
+        "id": "custom_css",
+        "label": "Custom CSS"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Frequently asked question",
+        "type": "content",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Question",
+            "default": "What is your question?"
+          },
+          {
+            "type": "richtext",
+            "id": "answer",
+            "label": "Answer",
+            "default": "<p>Provide the answer to the question here.</p>"
+          }
+        ]
+      },
+      {
+        "name": "Heading",
+        "type": "heading",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Section heading"
+          }
+        ]
+      },
+      {
+        "name": "Image",
+        "type": "image",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "1000 x 1000px recommended"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "FAQ",
+        "category": "Store information",
+        "blocks": [
+          {
+            "type": "heading",
+            "settings": {
+            }
+          },
+          {
+            "type": "content",
+            "settings": {
+            }
+          },
+          {
+            "type": "content",
+            "settings": {
+
+            }
+          },
+          {
+            "type": "content",
+            "settings": {
+            }
+          },
+          {
+            "type": "heading",
+            "settings": {
+            }
+          },
+          {
+            "type": "content",
+            "settings": {
+            }
+          },
+          {
+            "type": "content",
+            "settings": {
+            }
+          },
+          {
+            "type": "content",
+            "settings": {
+            }
+          },
+          {
+            "type": "image",
+            "settings": {
+            }
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+      "groups": [
+        "*"
+      ]
+    }
+  }
+{% endschema %}

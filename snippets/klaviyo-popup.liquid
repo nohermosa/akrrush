@@ -1,0 +1,54 @@
+// Updated Klaviyo Popup Trigger Script with debugging
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Klaviyo popup trigger script loaded');
+  
+  // Check if Klaviyo is loaded
+  if (typeof window._klOnsite === 'undefined') {
+    console.error('Klaviyo _klOnsite object not found. Make sure Klaviyo is properly installed.');
+    
+    // Initialize _klOnsite if it doesn't exist
+    window._klOnsite = window._klOnsite || [];
+  }
+  
+  // Function to trigger the Klaviyo popup
+  function triggerKlaviyoPopup() {
+    console.log('Attempting to trigger Klaviyo popup with form ID: ULXFCG');
+    window._klOnsite.push(['openForm', 'ULXFCG']);
+  }
+  
+  // Direct trigger for testing
+  window.triggerKlaviyoManually = triggerKlaviyoPopup;
+  
+  // Find all trigger elements
+  const triggerElements = document.querySelectorAll('.klaviyo-popup-trigger');
+  console.log('Found ' + triggerElements.length + ' Klaviyo trigger elements');
+  
+  // Add click event to each trigger
+  triggerElements.forEach(function(element) {
+    console.log('Adding click event to:', element);
+    
+    element.addEventListener('click', function(e) {
+      console.log('Klaviyo trigger clicked');
+      e.preventDefault();
+      triggerKlaviyoPopup();
+    });
+  });
+  
+  // Additional check - sometimes the elements load after the script
+  setTimeout(function() {
+    const delayedCheck = document.querySelectorAll('.klaviyo-popup-trigger');
+    if (delayedCheck.length > triggerElements.length) {
+      console.log('Found additional trigger elements after delay, attaching events');
+      delayedCheck.forEach(function(element) {
+        if (!element.hasKlaviyoEvent) {
+          element.hasKlaviyoEvent = true;
+          element.addEventListener('click', function(e) {
+            console.log('Delayed Klaviyo trigger clicked');
+            e.preventDefault();
+            triggerKlaviyoPopup();
+          });
+        }
+      });
+    }
+  }, 1000);
+});

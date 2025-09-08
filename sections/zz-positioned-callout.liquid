@@ -1,0 +1,1559 @@
+{% comment %}
+** Four callouts section with positioned elements over background image, animated pinging dots, and expandable callout content
+** UPDATED: Title and subtitle overlay with position controls
+** ADDED: Mobile background color with gradient options
+{% endcomment %}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  
+  #shopify-section-{{ section.id }} .section--no-max-width {
+    max-width: none !important;
+    width: 100%;
+  }
+  
+  #shopify-section-{{ section.id }} .container--custom-width {
+    max-width: {% if section.settings.section_width == 'max' %}3420px{% else %}{{ section.settings.custom_width }}px{% endif %} !important;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    position: relative;
+  }
+
+  /* Updated section header to overlay on image */
+  #shopify-section-{{ section.id }} .section-header {
+    position: absolute;
+    z-index: 10;
+    /* Horizontal alignment */
+    {% if section.settings.heading_h_alignment == 'left' %}
+    left: {{ section.settings.heading_h_padding }}px;
+    text-align: left;
+    {% elsif section.settings.heading_h_alignment == 'right' %}
+    right: {{ section.settings.heading_h_padding }}px;
+    text-align: right;
+    {% else %}
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    {% endif %}
+    
+    /* Vertical alignment */
+    {% if section.settings.heading_v_alignment == 'top' %}
+    top: {{ section.settings.heading_v_padding }}px;
+    {% elsif section.settings.heading_v_alignment == 'bottom' %}
+    bottom: {{ section.settings.heading_v_padding }}px;
+    {% else %}
+    top: 50%;
+    transform: {% if section.settings.heading_h_alignment == 'center' %}translate(-50%, -50%){% else %}translateY(-50%){% endif %};
+    {% endif %}
+    
+    /* Make sure both transformations are applied if centered both ways */
+    {% if section.settings.heading_h_alignment == 'center' and section.settings.heading_v_alignment == 'middle' %}
+    transform: translate(-50%, -50%);
+    {% endif %}
+    
+    max-width: {{ section.settings.heading_max_width }}px;
+    display: flex;
+    flex-direction: column;
+    {% if section.settings.heading_alignment == 'center' %}
+    align-items: center;
+    {% elsif section.settings.heading_alignment == 'right' %}
+    align-items: flex-end;
+    {% else %}
+    align-items: flex-start;
+    {% endif %}
+  }
+  
+  #shopify-section-{{ section.id }} .section-header-background {
+    {% if section.settings.heading_background_color != blank %}
+    background-color: {{ section.settings.heading_background_color }};
+    padding: {{ section.settings.heading_padding }}px;
+    border-radius: {{ section.settings.heading_border_radius }}px;
+    {% if section.settings.heading_background_opacity < 100 %}
+    opacity: {{ section.settings.heading_background_opacity | divided_by: 100.0 }};
+    {% endif %}
+    {% endif %}
+    width: 100%;
+  }
+  
+  #shopify-section-{{ section.id }} .section-header .title {
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    margin-bottom: {{ section.settings.heading_subheading_spacing }}px;
+    {% if section.settings.heading_text_shadow %}
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    {% endif %}
+  }
+  
+  #shopify-section-{{ section.id }} .section-header .subtitle p{
+    color: {{ section.settings.subheading_color }};
+    font-size: {{ section.settings.subheading_size }}px;
+    font-weight: {{ section.settings.subheading_weight }};
+    {% if section.settings.heading_text_shadow %}
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .callout-text {
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.text_size }}px;
+    font-weight: {{ section.settings.text_weight }};
+  }
+
+  #shopify-section-{{ section.id }} .callout-title {
+    color: {{ section.settings.title_color }};
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: {{ section.settings.title_weight }};
+    margin-bottom: {{ section.settings.title_text_spacing }}px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 1.2 ;
+  }
+  
+  #shopify-section-{{ section.id }} .callout-title .toggle-icon {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    margin-left: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  
+  #shopify-section-{{ section.id }} .callout-title .toggle-icon:before,
+  #shopify-section-{{ section.id }} .callout-title .toggle-icon:after {
+    content: '';
+    position: absolute;
+    background-color: currentColor;
+    transition: transform 0.3s ease;
+  }
+  
+  #shopify-section-{{ section.id }} .callout-title .toggle-icon:before {
+    width: 12px;
+    height: 2px;
+  }
+  
+  #shopify-section-{{ section.id }} .callout-title .toggle-icon:after {
+    width: 2px;
+    height: 12px;
+  }
+  
+  #shopify-section-{{ section.id }} .callout-item.active .toggle-icon:after {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+  
+  #shopify-section-{{ section.id }} .callout-extra-content {
+    display: none;
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.text_size }}px;
+  }
+  
+  #shopify-section-{{ section.id }} .callout-item.active .callout-extra-content {
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .callouts-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .callout-background {
+    width: 100%;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .desktop-callouts .callout-item {
+    position: absolute;
+    text-align: left;
+    min-width: {{ section.settings.callout_width }}px;
+    {% if section.settings.callout_background != blank %}
+    background-color: {{ section.settings.callout_background }};
+    padding: {{ section.settings.callout_padding }}px;
+    border-radius: {{ section.settings.callout_border_radius }}px;
+    {% endif %}
+    z-index: 5;
+  }
+
+  #shopify-section-{{ section.id }} .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+  
+  #shopify-section-{{ section.id }} .callout-button {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  #shopify-section-{{ section.id }} .callout-button:hover {
+    opacity: 0.9;
+  }
+
+  /* Ping Animation Dots */
+  #shopify-section-{{ section.id }} .ping-dot-container {
+    position: absolute;
+    z-index: 1;
+  }
+  
+  #shopify-section-{{ section.id }} .ping-dot {
+    position: relative;
+    border-radius: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  
+  #shopify-section-{{ section.id }} .ping-dot::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    animation-name: ping-animation;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    opacity: 1;
+  }
+
+  @keyframes ping-animation {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+
+  @media only screen and (min-width: 799px) {
+    {% for block in section.blocks %}
+      {% if block.type == 'callout' %}
+        #shopify-section-{{ section.id }} .callout-item-{{ forloop.index }} {
+          top: {{ block.settings.position_y }}%;
+          left: {{ block.settings.position_x }}%;
+          transform: translate(-50%, -50%);
+        }
+      {% endif %}
+      
+      {% if block.type == 'ping_dot' %}
+        #shopify-section-{{ section.id }} .ping-dot-{{ forloop.index }} {
+          top: {{ block.settings.position_y }}%;
+          left: {{ block.settings.position_x }}%;
+        }
+        
+        #shopify-section-{{ section.id }} .ping-dot-{{ forloop.index }} .ping-dot {
+          width: {{ block.settings.dot_size }}px;
+          height: {{ block.settings.dot_size }}px;
+          background-color: {{ block.settings.dot_color }};
+        }
+        
+        #shopify-section-{{ section.id }} .ping-dot-{{ forloop.index }} .ping-dot::after {
+          background-color: {{ block.settings.dot_color }};
+          animation-duration: {{ block.settings.ping_speed }}s;
+        }
+      {% endif %}
+    {% endfor %}
+
+    #shopify-section-{{ section.id }} .mobile-background {
+      display: none;
+    }
+    
+    #shopify-section-{{ section.id }} .mobile-callouts {
+      display: none;
+    }
+  }
+
+  /* Mobile Styles */
+  @media only screen and (max-width: 798px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      {% if section.settings.enable_mobile_background %}
+        {% if section.settings.mobile_background_gradient_enabled %}
+          background: linear-gradient(
+            {{ section.settings.mobile_gradient_direction }}deg, 
+            {{ section.settings.mobile_background_color | default: '#ffffff' }} 0%, 
+            {{ section.settings.mobile_background_color_2 | default: section.settings.mobile_background_color | default: '#ffffff' }} 100%
+          );
+        {% else %}
+          background-color: {{ section.settings.mobile_background_color | default: 'transparent' }};
+        {% endif %}
+      {% endif %}
+    }
+
+    #shopify-section-{{ section.id }} .desktop-background {
+      display: none;
+    }
+    
+    #shopify-section-{{ section.id }} .desktop-callouts {
+      display: none;
+    }
+    
+    #shopify-section-{{ section.id }} .ping-dot-container {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .callouts-container {
+      position: relative;
+    }
+
+    #shopify-section-{{ section.id }} .section-header {
+      position: absolute;
+      /* Mobile positioning */
+      {% if section.settings.heading_mobile_h_alignment == 'left' %}
+      left: {{ section.settings.heading_mobile_h_padding }}px;
+      text-align: left;
+      transform: none;
+      {% elsif section.settings.heading_mobile_h_alignment == 'right' %}
+      right: {{ section.settings.heading_mobile_h_padding }}px;
+      left: auto;
+      text-align: right;
+      transform: none;
+      {% else %}
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      {% endif %}
+      
+      {% if section.settings.heading_mobile_v_alignment == 'top' %}
+      top: {{ section.settings.heading_mobile_v_padding }}px;
+      bottom: auto;
+      {% elsif section.settings.heading_mobile_v_alignment == 'bottom' %}
+      bottom: {{ section.settings.heading_mobile_v_padding }}px;
+      top: auto;
+      {% else %}
+      top: 50%;
+      transform: {% if section.settings.heading_mobile_h_alignment == 'center' %}translate(-50%, -50%){% else %}translateY(-50%){% endif %};
+      {% endif %}
+      
+      /* Make sure both transformations are applied if centered both ways on mobile */
+      {% if section.settings.heading_mobile_h_alignment == 'center' and section.settings.heading_mobile_v_alignment == 'middle' %}
+      transform: translate(-50%, -50%);
+      {% endif %}
+      
+      max-width: 90%;
+    }
+
+    #shopify-section-{{ section.id }} .mobile-callouts .callout-item {
+      position: relative;
+      max-width: 100%;
+      margin-bottom: 20px;
+      padding: 0 20px;
+      {% if section.settings.callout_background != blank %}
+      background-color: {{ section.settings.callout_background }};
+      padding: {{ section.settings.callout_padding }}px;
+      border-radius: {{ section.settings.callout_border_radius }}px;
+      margin: 0 20px 20px 20px;
+      {% endif %}
+    }
+
+    #shopify-section-{{ section.id }} .mobile-callouts {
+      padding-top: 20px;
+    }
+
+    
+    
+    /* Mobile Font Size Controls */
+    #shopify-section-{{ section.id }} .section-header .title {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+    }
+    
+    #shopify-section-{{ section.id }} .section-header .subtitle p {
+      font-size: {{ section.settings.subheading_size_mobile }}px;
+      
+    }
+    
+    #shopify-section-{{ section.id }} .callout-title {
+      font-size: {{ section.settings.title_size_mobile }}px;
+      
+    }
+    
+    #shopify-section-{{ section.id }} .callout-text p,
+    #shopify-section-{{ section.id }} .callout-extra-content {
+      font-size: {{ section.settings.text_size_mobile }}px;
+    }
+    
+    #shopify-section-{{ section.id }} .callout-button {
+      font-size: {{ section.settings.button_size_mobile }}px;
+    }
+  }
+
+  /* Mobile pulse dots for callouts */
+  @media only screen and (max-width: 798px) {
+    /* Container for the callout items */
+    #shopify-section-{{ section.id }} .mobile-callouts .callout-item {
+      position: relative;
+      padding-left: 40px; /* Make room for the pulse dot */
+    }
+    
+    /* Pulse dot styling */
+    #shopify-section-{{ section.id }} .mobile-pulse-dot {
+      position: absolute;
+      left: 5px;
+      top: 16px; /* Align with title */
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background-color: currentColor;
+      display: inline-block;
+      vertical-align: middle;
+      transition: all 0.3s ease;
+    }
+    
+    /* Pulsing animation */
+    #shopify-section-{{ section.id }} .mobile-pulse-dot:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      animation: mobile-ping-animation 2s infinite;
+      background-color: currentColor;
+      opacity: 1;
+    }
+    
+    /* Active state for the dot */
+    #shopify-section-{{ section.id }} .callout-item.active .mobile-pulse-dot {
+      background-color: {{ section.settings.button_background_color }};
+    }
+    
+    #shopify-section-{{ section.id }} .callout-item.active .mobile-pulse-dot:after {
+      background-color: {{ section.settings.button_background_color }};
+    }
+    
+    /* Animation keyframes */
+    @keyframes mobile-ping-animation {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2.5);
+        opacity: 0;
+      }
+    }
+    
+    /* Adjust toggle icon positioning to account for the dot */
+    #shopify-section-{{ section.id }} .mobile-callouts .callout-title {
+      padding-left: 0;
+    }
+  }
+
+  {% render 'css-loop',
+          css: section.settings.custom_css,
+          id: section.id
+  %}
+
+
+{% endstyle %}
+
+<section class="section section--no-max-width {{ section.settings.css_class }}"
+  {% if section.settings.animation != "none" %}
+    data-scroll-class="{{ section.settings.animation }}"
+  {% endif %}
+>
+  <div class="container container--custom-width">
+    <div class="callouts-container">
+      {% if section.settings.background_image != blank %}
+        <img src="{{ section.settings.background_image | img_url: '2048x' }}" alt="Background with lines" class="callout-background desktop-background">
+      {% endif %}
+      
+      {% if section.settings.mobile_background != blank %}
+        <img src="{{ section.settings.mobile_background | img_url: '600x' }}" alt="Mobile background" class="callout-background mobile-background">
+      {% endif %}
+      
+      {% if section.settings.heading != blank or section.settings.subheading != blank %}
+        <div class="section-header">
+          <div class="section-header-background">
+            {% if section.settings.heading != blank %}
+              <h2 class="title animate-on-scroll animate-left">{{ section.settings.heading }}</h2>
+            {% endif %}
+            {% if section.settings.subheading != blank %}
+              <div class="subtitle animate-on-scroll animate-left delay-1">{{ section.settings.subheading }}</div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+      
+      <div class="desktop-callouts is-hidden-mobile">
+        {% for block in section.blocks %}
+          {% if block.type == 'callout' %}
+            {% liquid
+              assign callout_title = block.settings.title
+              assign callout_text = block.settings.text
+              assign callout_extra = block.settings.extra_content
+              assign block_title_spacing = block.settings.spacing_override
+            %}
+            <div class="callout-item callout-item-{{ forloop.index }}" {{ block.shopify_attributes }}
+              {% if block.settings.width_override > 0 %}
+                style="min-width: {{ block.settings.width_override }}px;"
+              {% endif %}
+              data-callout-id="{{ forloop.index }}"
+            >
+              {% if callout_title != blank %}
+                <h3 class="callout-title js-toggle-callout animate-on-scroll animate-up" 
+                  {% if block.settings.title_color != blank or block_title_spacing > 0 %}
+                    style="
+                      {% if block.settings.title_color != blank %}color: {{ block.settings.title_color }};{% endif %}
+                      {% if block_title_spacing > 0 %}margin-bottom: {{ block_title_spacing }}px;{% endif %}
+                    "
+                  {% endif %}
+                >
+                  <span>{{ callout_title }}</span>
+                  {% if callout_extra != blank %}
+                    <span class="toggle-icon"></span>
+                  {% endif %}
+                </h3>
+              {% endif %}
+              
+              {% if callout_text != blank %}
+                <div class="callout-text animate-on-scroll animate-up delay-1"
+                  {% if block.settings.text_color != blank %}
+                    style="color: {{ block.settings.text_color }};"
+                  {% endif %}
+                >{{ callout_text }}</div>
+              {% endif %}
+              
+              {% if callout_extra != blank %}
+                <div class="callout-extra-content">
+                  {{ callout_extra }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+          
+          {% if block.type == 'ping_dot' %}
+            <div class="ping-dot-container ping-dot-{{ forloop.index }}" {{ block.shopify_attributes }}>
+              <div class="ping-dot"></div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <!-- Mobile layout (stacked) -->
+      <div class="mobile-callouts is-hidden-desktop">
+        <div class="columns is-multiline">
+          {% for block in section.blocks %}
+            {% if block.type == 'callout' %}
+              {% liquid
+                assign callout_title = block.settings.title
+                assign callout_text = block.settings.text
+                assign callout_extra = block.settings.extra_content
+                assign block_title_spacing = block.settings.spacing_override
+                
+                # Get the dot color, either from block override or section default
+                assign dot_color = block.settings.title_color | default: section.settings.title_color
+              %}
+              <div class="column is-12-mobile" {{ block.shopify_attributes }}>
+                <div class="callout-item" data-callout-id="mobile-{{ forloop.index }}">
+                  <!-- Add the pulse dot with the callout/dot color -->
+                  <span class="mobile-pulse-dot" style="color: {{ dot_color }};"></span>
+                  
+                  {% if callout_title != blank %}
+                    <h3 class="callout-title js-toggle-callout" 
+                      {% if block.settings.title_color != blank or block_title_spacing > 0 %}
+                        style="
+                          {% if block.settings.title_color != blank %}color: {{ block.settings.title_color }};{% endif %}
+                          {% if block_title_spacing > 0 %}margin-bottom: {{ block_title_spacing }}px;{% endif %}
+                        "
+                      {% endif %}
+                    >
+                      <span>{{ callout_title }}</span>
+                      {% if callout_extra != blank  %}
+                        <span class="toggle-icon"></span>
+                      {% endif %}
+                    </h3>
+                  {% endif %}
+                  
+                  {% if callout_text != blank %}
+                    <div class="callout-text"
+                      {% if block.settings.text_color != blank %}
+                        style="color: {{ block.settings.text_color }};"
+                      {% endif %}
+                    >{{ callout_text }}</div>
+                  {% endif %}
+                  
+                  {% if callout_extra != blank %}
+                    <div class="callout-extra-content">
+                      {{ callout_extra }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      
+      {% if section.settings.button_text != blank and section.settings.button_url != blank %}
+        <div class="button-container">
+          <a href="{{ section.settings.button_url }}" class="callout-button"
+             style="
+               background-color: {{ section.settings.button_background_color }};
+               color: {{ section.settings.button_text_color }};
+               border-radius: {{ section.settings.button_radius }}px;
+               font-size: {{ section.settings.button_size }}px;
+               padding: 15px 30px;
+               min-width: 200px;
+               border: 1px solid {{ section.settings.button_background_color }};
+             "
+          >
+            {{ section.settings.button_text }}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "ZZ Positioned Callouts",
+  "class": "callouts-section-positioned",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Product Benefits"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image with Lines",
+      "info": "Desktop version - 1200px wide recommended"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_background",
+      "label": "Mobile Background Image (Optional)",
+      "info": "If left blank, callouts will be stacked on mobile"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Background"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_background",
+      "label": "Enable Mobile Background Color",
+      "default": false,
+      "info": "Add a background color for mobile display"
+    },
+    {
+      "type": "color",
+      "id": "mobile_background_color",
+      "label": "Mobile Background Color",
+      "default": "#ffffff",
+      "info": "Primary background color for mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_background_gradient_enabled",
+      "label": "Enable Gradient Background",
+      "default": false,
+      "info": "Create a gradient effect with two colors"
+    },
+    {
+      "type": "color",
+      "id": "mobile_background_color_2",
+      "label": "Gradient Secondary Color",
+      "default": "#f5f5f5",
+      "info": "Second color for gradient (if gradient enabled)"
+    },
+    {
+      "type": "range",
+      "id": "mobile_gradient_direction",
+      "label": "Gradient Direction (degrees)",
+      "min": 0,
+      "max": 360,
+      "step": 45,
+      "default": 90,
+      "info": "Direction of gradient in degrees (0 = horizontal, 90 = vertical)"
+    },
+    {
+      "type": "header",
+      "content": "Title & Subtitle Overlay Position"
+    },
+    {
+      "type": "select",
+      "id": "heading_h_alignment",
+      "label": "Horizontal Position",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_v_alignment",
+      "label": "Vertical Position",
+      "default": "top",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_h_padding",
+      "label": "Horizontal Padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 30,
+      "unit": "px",
+      "info": "Distance from the edge when using left or right position"
+    },
+    {
+      "type": "range",
+      "id": "heading_v_padding",
+      "label": "Vertical Padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 30,
+      "unit": "px",
+      "info": "Distance from the edge when using top or bottom position"
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width",
+      "label": "Maximum Width",
+      "min": 200,
+      "max": 1200,
+      "step": 50,
+      "default": 600,
+      "unit": "px",
+      "info": "Maximum width of the title & subtitle overlay"
+    },
+    {
+      "type": "header",
+      "content": "Title & Subtitle Background"
+    },
+    {
+      "type": "color",
+      "id": "heading_background_color",
+      "label": "Background Color",
+      "info": "Leave blank for transparent background"
+    },
+    {
+      "type": "range",
+      "id": "heading_background_opacity",
+      "label": "Background Opacity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 85,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "heading_padding",
+      "label": "Padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px",
+      "info": "Inner padding for title & subtitle"
+    },
+    {
+      "type": "range",
+      "id": "heading_border_radius",
+      "label": "Border Radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_text_shadow",
+      "label": "Add Text Shadow",
+      "default": false,
+      "info": "Improves readability on varied backgrounds"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Title & Subtitle Position"
+    },
+    {
+      "type": "select",
+      "id": "heading_mobile_h_alignment",
+      "label": "Mobile Horizontal Position",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_mobile_v_alignment",
+      "label": "Mobile Vertical Position",
+      "default": "top",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_mobile_h_padding",
+      "label": "Mobile Horizontal Padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_mobile_v_padding",
+      "label": "Mobile Vertical Padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Controls"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_pulse_dots",
+      "label": "Enable Mobile Pulse Dots",
+      "default": true,
+      "info": "Add animated dots to mobile callouts"
+    },
+    {
+      "type": "color",
+      "id": "mobile_dot_color",
+      "label": "Mobile Dot Default Color",
+      "default": "#3498db",
+      "info": "Default color for pulse dots (can be overridden per callout)"
+    },
+    {
+      "type": "color",
+      "id": "mobile_dot_active_color",
+      "label": "Mobile Dot Active Color",
+      "default": "#e74c3c",
+      "info": "Color for pulse dots when callout is expanded"
+    },
+    {
+      "type": "range",
+      "id": "mobile_dot_size",
+      "label": "Mobile Dot Size",
+      "min": 6,
+      "max": 20,
+      "step": 1,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_dot_speed",
+      "label": "Mobile Dot Animation Speed",
+      "min": 1,
+      "max": 5,
+      "step": 0.5,
+      "default": 2,
+      "unit": "s",
+      "info": "Duration of pulse animation in seconds"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading Size (Mobile)",
+      "min": 16,
+      "max": 48,
+      "step": 1,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "label": "Subheading Size (Mobile)",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Callout Title Size (Mobile)",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Callout Text Size (Mobile)",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "default": 13,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_size_mobile",
+      "label": "Button Text Size (Mobile)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Section Header Styling"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Text Alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_weight",
+      "label": "Heading Weight",
+      "min": 400,
+      "max": 900,
+      "step": 100,
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "heading_subheading_spacing",
+      "label": "Space Between Heading and Subheading",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#555555"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading Size",
+      "min": 12,
+      "max": 60,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "subheading_weight",
+      "label": "Subheading Weight",
+      "min": 300,
+      "max": 700,
+      "step": 100,
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button Roundness",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "default": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_size",
+      "label": "Button Text Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Section Width"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section Width",
+      "default": "custom",
+      "options": [
+        {
+          "value": "custom",
+          "label": "Custom Width"
+        },
+        {
+          "value": "max",
+          "label": "Full Width (1920px)"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "Custom Width",
+      "min": 800,
+      "max": 1800,
+      "step": 100,
+      "default": 1200,
+      "unit": "px",
+      "info": "Used when 'Custom Width' is selected"
+    },
+    {
+      "type": "header",
+      "content": "Callout Styling"
+    },
+    {
+      "type": "range",
+      "id": "callout_width",
+      "label": "Callout Width",
+      "min": 100,
+      "max": 600,
+      "step": 10,
+      "default": 200,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "callout_background",
+      "label": "Callout Background Color",
+      "info": "Leave blank for transparent background"
+    },
+    {
+      "type": "range",
+      "id": "callout_padding",
+      "label": "Callout Padding",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "callout_border_radius",
+      "label": "Callout Border Radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Title Styling"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title Font Size",
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_weight",
+      "label": "Title Font Weight",
+      "min": 400,
+      "max": 900,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "title_text_spacing",
+      "label": "Space Between Title and Text",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "default": 5,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Text Styling"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text Font Size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "text_weight",
+      "label": "Text Font Weight",
+      "min": 300,
+      "max": 700,
+      "step": 100,
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Spacing",
+      "min": 0,
+      "max": 80,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Spacing",
+      "min": 0,
+      "max": 80,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Mobile Top Spacing",
+      "min": 0,
+      "max": 80,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Mobile Bottom Spacing",
+      "min": 0,
+      "max": 80,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "animation",
+      "label": "Animation",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "fadeIn",
+          "label": "Fade in"
+        },
+        {
+          "value": "fadeInDown",
+          "label": "Fade in down"
+        },
+        {
+          "value": "fadeInLeft",
+          "label": "Fade in left"
+        },
+        {
+          "value": "fadeInRight",
+          "label": "Fade in right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Advanced"
+    },
+    {
+      "type": "text",
+      "id": "css_class",
+      "label": "CSS Class"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_css",
+      "label": "Custom CSS"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "callout",
+      "name": "Callout",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Brief description of the feature or benefit</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "extra_content",
+          "label": "Expandable Content",
+          "default": "<p>This additional content will be shown when the callout is clicked. Add more detailed information here.</p>",
+          "info": "This content is hidden by default and shows when the callout is clicked"
+        },
+        {
+          "type": "range",
+          "id": "position_x",
+          "label": "Horizontal Position (X)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 25,
+          "unit": "%",
+          "info": "Position from left of image"
+        },
+        {
+          "type": "range",
+          "id": "position_y",
+          "label": "Vertical Position (Y)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 25,
+          "unit": "%",
+          "info": "Position from top of image"
+        },
+        {
+          "type": "header",
+          "content": "Individual Callout Styling (Optional)"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Override Title Color",
+          "info": "If set, overrides the section title color for this callout only"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Override Text Color",
+          "info": "If set, overrides the section text color for this callout only"
+        },
+        {
+          "type": "color",
+          "id": "mobile_dot_color",
+          "label": "Mobile Dot Color",
+          "info": "If set, overrides the default mobile dot color for this callout"
+        },
+        {
+          "type": "range",
+          "id": "width_override",
+          "label": "Override Callout Width",
+          "min": 0,
+          "max": 600,
+          "step": 10,
+          "default": 0,
+          "unit": "px",
+          "info": "If value greater than 0, overrides the section callout width for this callout only"
+        },
+        {
+          "type": "range",
+          "id": "spacing_override",
+          "label": "Override Title-Text Spacing",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "default": 0,
+          "unit": "px",
+          "info": "If value greater than 0, overrides the section spacing for this callout only"
+        }
+      ]
+    },
+    {
+      "type": "ping_dot",
+      "name": "Animated Dot",
+      "settings": [
+        {
+          "type": "range",
+          "id": "position_x",
+          "label": "Horizontal Position (X)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%",
+          "info": "Position from left of image"
+        },
+        {
+          "type": "range",
+          "id": "position_y",
+          "label": "Vertical Position (Y)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%",
+          "info": "Position from top of image"
+        },
+        {
+          "type": "color",
+          "id": "dot_color",
+          "label": "Dot Color",
+          "default": "#3498db"
+        },
+        {
+          "type": "range",
+          "id": "dot_size",
+          "label": "Dot Size",
+          "min": 4,
+          "max": 20,
+          "step": 1,
+          "default": 8,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "ping_speed",
+          "label": "Animation Speed",
+          "min": 1,
+          "max": 5,
+          "step": 0.1,
+          "default": 1.5,
+          "unit": "s",
+          "info": "Lower values = faster animation"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "ZZ Positioned Callouts",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "callout",
+          "settings": {
+            "title": "3X Faster absorption",
+            "text": "<p>No bloating, just results.</p>",
+            "extra_content": "<p>Our advanced formulation enables 3X faster absorption compared to standard supplements. This means you'll feel the effects sooner and experience better results with less waiting time. The rapid absorption also helps reduce bloating that's common with other supplements.</p>",
+            "position_x": 20,
+            "position_y": 25
+          }
+        },
+        {
+          "type": "callout",
+          "settings": {
+            "title": "Muscle + gut health",
+            "text": "<p>Supports performance & immunity.</p>",
+            "extra_content": "<p>Our formula contains specialized ingredients that not only support muscle development and recovery but also promote gut health. This dual-action approach ensures your performance improves while simultaneously strengthening your immune system through better gut microbiome health.</p>",
+            "position_x": 80,
+            "position_y": 25
+          }
+        },
+        {
+          "type": "callout",
+          "settings": {
+            "title": "Near 100% bioavailability",
+            "text": "<p>Every gram fuels you. Nothing wasted.</p>",
+            "extra_content": "<p>Through our patented processing technology, we've achieved a bioavailability rate of nearly 100%. This means your body can utilize virtually all of the nutrients in each serving, maximizing the value of every gram and eliminating waste. You'll need less product to achieve the same results as competing brands.</p>",
+            "position_x": 20,
+            "position_y": 75
+          }
+        },
+        {
+          "type": "callout",
+          "settings": {
+            "title": "Clean & sustainable",
+            "text": "<p>Norwegian-sourced, non-GMO, no fillers.</p>",
+            "extra_content": "<p>We source all our ingredients from sustainable Norwegian suppliers with strict quality controls. Our products are completely non-GMO and contain zero artificial fillers, colors, or preservatives. The packaging is also recyclable and made from environmentally-friendly materials to minimize our ecological footprint.</p>",
+            "position_x": 80,
+            "position_y": 75
+          }
+        },
+        {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 40,
+            "position_y": 50,
+            "dot_color": "#3498db",
+            "dot_size": 8,
+            "ping_speed": 1.5
+          }
+        },
+        {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 60,
+            "position_y": 50,
+            "dot_color": "#e74c3c",
+            "dot_size": 8,
+            "ping_speed": 1.5
+          }
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

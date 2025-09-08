@@ -1,0 +1,1864 @@
+{% comment %}
+[[ QQ - Parallax Banner ]] [[ Section for Shopify websites to display a block of text with an optional image ]]
+Author: qwiqode.com
+Created: 01.01.2022 Version: 1.24
+Company website: qwiqode.com
+Email: hello@qwiqode.com
+* (c) Copyright by Studio Umbrella Inc. /
+{% endcomment %}
+{% if request.design_mode == true %}
+<p class="QQ-JS-init-msg" style="display:block;padding: 10px 15px;text-align: center;max-width: 450px;background-color: #d5d5d5;color: red;border: 1px solid red;border-radius: 10px;margin: 0 auto;">Please save the Theme Editor before adding content or changing settings in order to initiate functionality.</p>
+{% endif %}
+
+
+
+{% liquid
+	assign sectionClass = section.settings.section_class
+	assign sectionMarginTop = section.settings.section_margin_top
+	assign sectionMarginTopMobile = section.settings.section_margin_top_mobile
+	assign sectionMarginBottom = section.settings.section_margin_bottom
+	assign sectionMarginBottomMobile = section.settings.section_margin_bottom_mobile
+	assign sectionHeight = section.settings.section_height
+	assign sectionHeightMobile = section.settings.section_height_mobile
+	assign sectionPaddingHorizontal = section.settings.section_padding_horizontal
+	assign sectionPaddingHorizontalMobile = section.settings.section_padding_horizontal_mobile
+	assign sectionPaddingTop = section.settings.section_padding_top
+	assign sectionPaddingTopMobile = section.settings.section_padding_top_mobile
+	assign sectionPaddingBottom = section.settings.section_padding_bottom
+	assign sectionPaddingBottomMobile = section.settings.section_padding_bottom_mobile
+	assign sectionTextAlignment = section.settings.text_alignment
+	assign sectionTextAlignmentMobile = section.settings.text_alignment_mobile
+	assign sectionTextMaxWidth = section.settings.text_max_width
+	assign blockContentAlignmentHorizontal = section.settings.content_alignment_horizontal
+	assign blockContentAlignmentVertical = section.settings.content_alignment_vertical
+	assign blockContentBackgroundColor = section.settings.content_background_color
+	assign blockContentBackgroundColorOpacity = section.settings.content_background_color_opacity
+	assign blockContentBorderRadius = section.settings.content_border_radius
+	assign blockContentPaddingTop = section.settings.content_padding_top
+	assign blockContentPaddingTopMobile = section.settings.content_padding_top_mobile
+	assign blockContentPaddingBottom = section.settings.content_padding_bottom
+	assign blockContentPaddingBottomMobile = section.settings.content_padding_bottom_mobile
+	assign blockContentPaddingHorizontal = section.settings.content_padding_horizontal
+	assign blockContentPaddingHorizontalMobile = section.settings.content_padding_horizontal_mobile
+	assign bannerImage = section.settings.banner_image
+	assign imageUrl = bannerImage | img_url: '1920x'
+	if bannerImage.alt != blank 
+		assign bannerImageAlt = 'alt="' | append: bannerImage.alt | append: '"'
+	else 
+		assign bannerImageAlt = ''
+	endif
+	assign bannerImageMobile = section.settings.banner_image_mobile
+	if bannerImageMobile != blank
+		assign imageUrlMobile = bannerImageMobile | img_url: '768x'
+	else
+		assign imageUrlMobile = ''
+	endif
+	if bannerImageMobile.alt != blank 
+		assign bannerImageMobileAlt = 'alt="' | append: bannerImageMobile.alt | append: '"'
+	else 
+		assign bannerImageMobileAlt = ''
+	endif
+	assign bannerVideo = section.settings.banner_video
+	assign overlayColor = section.settings.overlay_color
+	assign overlayOpacity = section.settings.overlay_opacity
+	assign parallaxType = section.settings.parallax_type
+	assign parallaxDisableMobile = section.settings.parallax_disable_mobile
+	assign parallaxSpeed = section.settings.parallax_speed
+	assign parallaxDirection = section.settings.parallax_direction
+	if parallaxDirection == '-'
+		assign parallaxSpeed = '-' | append: parallaxSpeed
+	endif
+		if bannerVideo != blank
+			assign parallaxSpeed = parallaxSpeed | times: 1.2
+		endif
+	if parallaxType == 'css'
+		assign wrapperClass = 'qq-parallax-css'
+		assign parallaxSpeed = 0
+	elsif parallaxType == 'parallax'
+		assign wrapperClass = 'qq-true-parallax'
+	else
+		assign wrapperClass = ''
+	endif
+	assign title = section.settings.title 	
+	assign titleCustomFont = section.settings.title_custom_font
+	assign titleFont = section.settings.title_font
+	assign titleFontName = section.settings.title_font_name
+	assign titleFontWeight = section.settings.title_font_weight
+	assign titleColor = section.settings.title_color
+	assign titleFontSize = section.settings.title_font_size
+	assign titleFontSizeMobile = section.settings.title_font_size_mobile
+	assign titleLineHeight = section.settings.title_line_height
+	assign titleLineHeightMobile = section.settings.title_line_height_mobile
+	assign titleLetterSpacing = section.settings.title_letter_spacing
+	assign titleLetterSpacingMobile = section.settings.title_letter_spacing_mobile
+	assign titleMarginTop = section.settings.title_margin_top
+	assign titleMarginTopMobile = section.settings.title_margin_top_mobile
+	assign titleMarginBottom = section.settings.title_margin_bottom
+	assign titleMarginBottomMobile = section.settings.title_margin_bottom_mobile
+	assign subtitle = section.settings.subtitle 	
+	assign subtitleColor = section.settings.subtitle_color
+	assign subtitleCustomFont = section.settings.subtitle_custom_font
+	assign subtitleFont = section.settings.subtitle_font
+	assign subtitleFontName = section.settings.subtitle_font_name
+	assign subtitleFontWeight = section.settings.subtitle_font_weight
+	assign subtitleMarginTop = section.settings.subtitle_margin_top
+	assign subtitleMarginTopMobile = section.settings.subtitle_margin_top_mobile
+	assign subtitleMarginBottom = section.settings.subtitle_margin_bottom
+	assign subtitleMarginBottomMobile = section.settings.subtitle_margin_bottom_mobile
+	assign subtitleFontSize = section.settings.subtitle_font_size
+	assign subtitleFontSizeMobile = section.settings.subtitle_font_size_mobile
+	assign subtitleLineHeight = section.settings.subtitle_line_height
+	assign subtitleLineHeightMobile = section.settings.subtitle_line_height_mobile
+	assign subtitleLetterSpacing = section.settings.subtitle_letter_spacing
+	assign subtitleLetterSpacingMobile = section.settings.subtitle_letter_spacing_mobile
+	assign buttonLabel_1 = section.settings.button_label_1
+	assign buttonUrl_1 = section.settings.button_url_1
+	assign buttonTab_1 = section.settings.button_tab_1
+	if buttonTab_1 == true
+		assign buttonTab_1 = 'target="blank"'
+	else
+		assign buttonTab_1 = ''
+	endif
+	assign buttonCustomFont = section.settings.button_custom_font
+	assign buttonFont = section.settings.button_font
+	assign buttonFontName = section.settings.button_font_name
+	assign buttonFontWeight = section.settings.button_font_weight
+	assign buttonMaxWidth = section.settings.button_max_width
+	assign buttonFontSize = section.settings.button_font_size
+	assign buttonFontSizeMobile = section.settings.button_font_size_mobile
+	assign buttonPaddingHorizontal = section.settings.button_padding_horizontal
+	assign buttonPaddingVertical =  section.settings.button_padding_vertical
+	assign buttonBorderWidth = section.settings.button_border_width
+	assign buttonRadius = section.settings.button_radius
+	assign buttonBackground = section.settings.button_background_color
+	assign buttonBackgroundHover = section.settings.button_background_color_hover
+	assign buttonColor = section.settings.button_text_color
+	assign buttonColorHover = section.settings.button_text_color_hover
+	assign buttonBorderColor = section.settings.button_border_color
+	assign buttonBorderColorHover = section.settings.button_border_color_hover
+	assign buttonLetterSpacing = section.settings.button_letter_spacing
+	assign buttonLetterSpacingMobile = section.settings.button_letter_spacing_mobile
+	assign buttonMarginTop = section.settings.button_margin_top
+	assign buttonMarginTopMobile = section.settings.button_margin_top_mobile
+	assign buttonMarginBottom = section.settings.button_margin_bottom
+	assign buttonMarginBottomMobile = section.settings.button_margin_bottom_mobile
+	assign divID = section.id | replace: 'template--', '' | replace: 'shopify-section-', '' | replace: '__', '' | prepend: 'qq'
+
+	assign enableCircleBackground = section.settings.enable_circle_background
+    assign circleSize = section.settings.circle_size
+    assign circlePositionX = section.settings.circle_position_x
+    assign circlePositionY = section.settings.circle_position_y
+    
+    assign enableOverlayImage = section.settings.enable_overlay_image
+    assign overlayImage = section.settings.overlay_image
+    assign overlayImageSize = section.settings.overlay_image_size
+    assign overlayImagePositionX = section.settings.overlay_image_position_x
+    assign overlayImagePositionY = section.settings.overlay_image_position_y
+    assign overlayImageZIndex = section.settings.overlay_image_z_index
+    assign overlayImageOpacity = section.settings.overlay_image_opacity
+    
+    assign enableOverlayImageMobile = section.settings.enable_overlay_image_mobile
+    assign overlayImageMobile = section.settings.overlay_image_mobile
+    assign overlayImageSizeMobile = section.settings.overlay_image_size_mobile
+    assign overlayImagePositionXMobile = section.settings.overlay_image_position_x_mobile
+    assign overlayImagePositionYMobile = section.settings.overlay_image_position_y_mobile
+    assign overlayImageOpacityMobile = section.settings.overlay_image_opacity_mobile
+
+	assign disableVideoOnMobile = section.settings.disable_video_on_mobile
+	assign mobilePosterHeight = section.settings.mobile_poster_height
+
+	assign enableMobileCircleSettings = section.settings.enable_mobile_circle_settings
+	assign circleSizeMobile = section.settings.circle_size_mobile
+	assign circlePositionXMobile = section.settings.circle_position_x_mobile
+	assign circlePositionYMobile = section.settings.circle_position_y_mobile
+	assign circleContentOffsetYMobile = section.settings.circle_content_offset_y_mobile
+	%}
+<div class="{{sectionClass}}" id="{{divID}}">
+  {% if enableOverlayImage and overlayImage != blank %}
+  <div class="overlay-image-container"></div>
+  {% endif %}
+  <div class="qq-parallax-wrapper {{wrapperClass}}" data-disable-mobile="{{parallaxDisableMobile}}">
+	{% if bannerVideo != blank %}
+    <div class="qq-parallax-video jarallax" data-speed="{{parallaxSpeed}}" data-videosrc="{% if bannerVideo contains 'vimeo' or bannerVideo contains 'youtube' or bannerVideo contains 'youtu.be' %}{%else%}mp4:{% endif %}{{bannerVideo}}" data-disable-video-mobile="{{disableVideoOnMobile}}">
+    {% if disableVideoOnMobile == true %}
+        <img class="qq-mobile-video-poster" src="{% if imageUrlMobile != blank %}{{imageUrlMobile}}{%else%}{{imageUrl}}{%endif%}" {% if imageUrlMobile != blank %}{{bannerImageMobileAlt}}{% else %}{{bannerImageAlt}}{% endif%}>
+    {% endif %}
+    </div>
+{% else %}
+    <div class="qq-parallax-image jarallax" data-speed="{{parallaxSpeed}}" data-banner-image="{{imageUrl}}" data-mobile-image="{{imageUrlMobile}}">
+        {% if bannerImage != blank %}
+            <img src="{{imageUrl}}" {{bannerImageAlt}} class="jarallax-img" loading="lazy">
+        {% endif %}
+    </div>
+    {% if parallaxDisableMobile == true %}
+        <img class="qq-mobile-fixed" 
+            src="{% if imageUrlMobile != blank %}{{imageUrlMobile}}{%else%}{{imageUrl}}{%endif%}" {% if imageUrlMobile != blank %}{{bannerImageMobileAlt}}{% else %}{{bannerImageAlt}}{% endif%}>
+    {% endif %}
+{% endif %}
+	<div class="qq-parallax-content">
+		<div class="qq-parallax-content-wrapper {% if enableCircleBackground %}qq-circle-background{% endif %}">
+			<div class="qq-content-inner">
+			{% if title != blank %}
+				<div class="qq-title">{{title}}</div>
+			{% endif %}
+			{% if subtitle != blank %}
+				<div class="qq-subtitle">{{subtitle}}</div>
+			{% endif %}
+			{% if buttonUrl_1 != blank %}
+				<div class="qq-button-wrapper">
+				{% if buttonUrl_1 != blank %}
+					<a class="qq-btn" href="{{buttonUrl_1}}" {{buttonTab_1}}>{{buttonLabel_1}}</a>
+				{% endif %}
+				</div>
+			{% endif %}
+			</div>
+		</div>
+	</div>
+  </div>
+</div>
+<style data='../ParallaxBanner.css.liquid'>section.qq-parallax-banner{width:100%;margin-left:auto;margin-right:auto;position:relative}section.qq-parallax-banner *{box-sizing:border-box}section.qq-parallax-banner>div{width:100%;height:100%;margin-left:auto;margin-right:auto;position:relative}section.qq-parallax-banner .qq-parallax-wrapper{height:100%}section.qq-parallax-banner .qq-parallax-wrapper .qq-parallax-image,section.qq-parallax-banner .qq-parallax-wrapper .qq-parallax-video{height:100%!important}section.qq-parallax-banner .qq-parallax-wrapper.qq-parallax-css{background-attachment:fixed;background-size:cover;background-position:center}section.qq-parallax-banner .qq-parallax-wrapper.qq-parallax-css .jarallax img{width:100%!important}@media (min-width:799px){section.qq-parallax-banner .qq-parallax-wrapper.qq-parallax-css .jarallax img{height:auto!important}}section.qq-parallax-banner .qq-parallax-wrapper.qq-parallax-css[data-disable-mobile=false] .jarallax img{transform:none!important;position:fixed!important}@media (min-width:799px){section.qq-parallax-banner .qq-parallax-wrapper.qq-parallax-css[data-disable-mobile=true] .qq-mobile-fixed{display:none!important}}@media (max-width:798px){section.qq-parallax-banner .qq-parallax-wrapper.qq-parallax-css[data-disable-mobile=true] .qq-parallax-image.jarallax{display:none!important}}section.qq-parallax-banner .qq-parallax-wrapper.qq-parallax-css[data-disable-mobile=true] .qq-mobile-fixed{position:absolute;width:100%;height:100%;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center}section.qq-parallax-banner .qq-parallax-wrapper .qq-parallax-content{z-index:11;position:absolute;top:0;height:100%;width:100%;margin-left:auto;margin-right:auto;display:flex;flex-direction:column;justify-content:center}section.qq-parallax-banner .qq-parallax-wrapper .qq-parallax-content .qq-parallax-content-wrapper{width:100%;position:relative}section.qq-parallax-banner .qq-parallax-wrapper .qq-parallax-content .qq-parallax-content-wrapper .qq-subtitle,section.qq-parallax-banner .qq-parallax-wrapper .qq-parallax-content .qq-parallax-content-wrapper .qq-title{display:inline-block;width:100%;z-index:9;position:relative}section.qq-parallax-banner .qq-parallax-wrapper .qq-parallax-content .qq-parallax-content-wrapper .qq-subtitle :not(ul):not(ol):not(li),section.qq-parallax-banner .qq-parallax-wrapper .qq-parallax-content .qq-parallax-content-wrapper .qq-title :not(ul):not(ol):not(li){margin-top:0;margin-bottom:0}section.qq-parallax-banner .qq-parallax-wrapper .qq-parallax-content .qq-button-wrapper{display:flex;width:100%;flex-direction:column}section.qq-parallax-banner .qq-parallax-wrapper .qq-parallax-content .qq-button-wrapper .qq-btn{width:100%;display:inline-block;text-align:center;text-decoration:none!important;transition:all .5s ease}html[dir=rtl] .qq-parallax-banner .qq-button-wrapper{direction:ltr}</style>
+{% assign sectionID = 'shopify-section-' | append: section.id %}
+<style data='../ParallaxBanner-inline-css.min.css.liquid'>{% if subtitleCustomFont %} {{subtitleFont | font_face: font_display: 'swap' | strip_newlines }} {% endif %} {% if subtitleCustomFont_2 %} {{subtitleFont_2 | font_face: font_display: 'swap' | strip_newlines }} {% endif %} {% if titleCustomFont %} {{titleFont | font_face: font_display: 'swap' | strip_newlines }} {% endif %} {% if textblockCustomFont %} {{textblockFont | font_face: font_display: 'swap' | strip_newlines }} {% endif %} {% if buttonCustomFont %} {{buttonFont | font_face: font_display: 'swap' | strip_newlines }} {% endif %} #{{sectionID}} * { text-transform:none; } #{{sectionID}} { width: 100vw !important; } html:not([dir="rtl"]) #{{sectionID}} { margin-left: -50vw !important; left: 50% !important; } html[dir="rtl"] #{{sectionID}} { margin-right: -50vw !important; right: 50% !important; } body { overflow-x:hidden; } {% if parallaxType == 'css' %} #{{sectionID}} .qq-parallax-content { max-width:{{sectionTextMaxWidth}}px !important; } {% else %} {% comment %} #{{sectionID}} > div { max-width:{{sectionTextMaxWidth}}px !important; } {% endcomment %} #{{sectionID}} .qq-parallax-content { max-width:{{sectionTextMaxWidth}}px !important; } {% endif %} {% if overlayColor contains '#' and overlayOpacity > 0 %} #{{sectionID}} .qq-parallax-wrapper:before { content:''; display:block; position:absolute; z-index:1; width:100%; height:100%; top:0; left:0; background-color:{{overlayColor}}; opacity:{{overlayOpacity}}; } #{{sectionID}} .qq-parallax-content { z-index:9; } {%endif%} {% if blockContentBackgroundColor contains '#' %} #{{sectionID}} .qq-parallax-content-wrapper:before { content:''; display:block; position:absolute; z-index:-1; width:100%; height:100%; top:0; left:0; background-color:{{blockContentBackgroundColor}}; opacity:{{blockContentBackgroundColorOpacity}}; border-radius:{{blockContentBorderRadius}}px; } {% endif %} #{{sectionID}} .qq-parallax-content { justify-content:{{blockContentAlignmentVertical}}; } #{{sectionID}} .qq-parallax-content-wrapper { max-width:{{sectionTextMaxWidth}}px; } #{{sectionID}} .qq-title * { {% if titleCustomFont %} {% if titleFontName != blank %} font-family: {{titleFontName}} !important; {% else %} font-family:{{titleFont.family}}, {{titleFont.fallback_families}} !important; {% endif %} {%endif%} {% if titleFontWeight != "default" %}font-weight:{{titleFontWeight}} !important;{%endif%} {% if titleColor != blank %}color:{{titleColor}};{%endif%} } #{{sectionID}} .qq-subtitle * { {% if subtitleCustomFont %} {% if subtitleFontName != blank %} font-family: {{subtitleFontName}} !important; {% else %} font-family:{{subtitleFont.family}}, {{subtitleFont.fallback_families}} !important; {% endif %} {%endif%} {% if subtitleFontWeight != "default" %}font-weight:{{subtitleFontWeight}} !important;{%endif%} {% if subtitleColor != blank %}color:{{subtitleColor}};{%endif%} } #{{sectionID}} .qq-btn { display:block; width:100%; {% if buttonCustomFont %} {% if buttonFontName != blank %} font-family: {{buttonFontName}} !important; {% else %} font-family:{{buttonFont.family}}, {{buttonFont.fallback_families}} !important; {% endif %} {%endif%} {% if buttonFontWeight != "default" %}font-weight:{{buttonFontWeight}} !important;{%endif%} max-width: {{buttonMaxWidth}}px; padding: {{buttonPaddingVertical}}px {{buttonPaddingHorizontal}}px; {% if buttonColor contains '#' %}color:{{buttonColor}};{%endif%} background-color:{{buttonBackground}}; {% if buttonBorderWidth != 0 and buttonBorderColor contains '#' %} border:{{buttonBorderWidth}}px solid {{buttonBorderColor}}; {% endif %} border-radius:{{buttonRadius}}px; } #{{sectionID}} .qq-btn:hover { {% if buttonColorHover contains '#' %}color: {{buttonColorHover}} !important;{% endif %} {% if buttonBackgroundHover contains '#' %}background-color:{{buttonBackgroundHover}} !important;{% endif %} {% if buttonBorderWidth != 0 and buttonBorderColorHover contains '#' %} border-color:{{buttonBorderColorHover}} !important; {% endif %} } @media only screen and (min-width: 799px) { #{{sectionID}} { {% if parallaxType == 'css' %} height:{{sectionHeight}}vw; {% else %} height:{{sectionHeight}}vh; {% endif %} margin-top:{{sectionMarginTop}}px; margin-bottom:{{sectionMarginBottom}}px; } #{{sectionID}} .qq-parallax-content { padding:{{sectionPaddingTop}}px {{sectionPaddingHorizontal}}px {{sectionPaddingBottom}}px {{sectionPaddingHorizontal}}px; } #{{sectionID}} .qq-parallax-content-wrapper { padding:{{blockContentPaddingTop}}px {{blockContentPaddingHorizontal}}px {{blockContentPaddingBottom}}px; } #{{sectionID}} .qq-title { margin-top:{{titleMarginTop}}px; margin-bottom:{{titleMarginBottom}}px; } #{{sectionID}} .qq-title * { {% if titleFontSize != 0 %}font-size:{{titleFontSize}}px;{% endif %} {% if titleLineHeight != 0 %}line-height:{{titleLineHeight}}px;{% endif %} {% if titleLetterSpacing != 0 %}letter-spacing:{{titleLetterSpacing}}px !important;{% endif %} text-align:{{sectionTextAlignment}}; } #{{sectionID}} .qq-subtitle { margin-top:{{subtitleMarginTop}}px; margin-bottom:{{subtitleMarginBottom}}px; } #{{sectionID}} .qq-subtitle * { {% if subtitleFontSize != 0 %}font-size:{{subtitleFontSize}}px;{% endif %} {% if subtitleLineHeight != 0 %}line-height:{{subtitleLineHeight}}px;{% endif %} {% if subtitleLetterSpacing != 0 %}letter-spacing:{{subtitleLetterSpacing}}px !important;{% endif %} text-align:{{sectionTextAlignment}}; } #{{sectionID}} .qq-button-wrapper { {% if sectionTextAlignment == 'left' %} justify-content: flex-start; align-items: flex-start; {% elsif sectionTextAlignment == 'right' %} justify-content: flex-end; align-items: flex-end; {% elsif sectionTextAlignment == 'center' %} justify-content: center; align-items: center; {% endif %} padding-top:{{buttonMarginTop}}px; padding-bottom:{{buttonMarginBottom}}px; } #{{sectionID}} .qq-btn { {% if buttonFontSize != 0 %}font-size:{{buttonFontSize}}px;{% endif %} {% if buttonLetterSpacing != 0 %}letter-spacing:{{buttonLetterSpacing}}px !important;{% endif %} } } @media only screen and (max-width: 798px) { #{{sectionID}} { height:{{sectionHeightMobile}}vh; margin-top:{{sectionMarginTopMobile}}px; margin-bottom:{{sectionMarginBottomMobile}}px; } #{{sectionID}} .qq-parallax-content { padding:{{sectionPaddingTopMobile}}px {{sectionPaddingHorizontalMobile}}px {{sectionPaddingBottomMobile}}px {{sectionPaddingHorizontalMobile}}px; } #{{sectionID}} .qq-parallax-content-wrapper { padding:{{blockContentPaddingTopMobile}}px {{blockContentPaddingHorizontalMobile}}px {{blockContentPaddingBottomMobile}}px; } #{{sectionID}} .qq-title { margin-top:{{titleMarginTopMobile}}px; margin-bottom:{{titleMarginBottomMobile}}px; } #{{sectionID}} .qq-title * { {% if titleFontSizeMobile != 0 %}font-size:{{titleFontSizeMobile}}px;{% endif %} {% if titleLineHeightMobile != 0 %}line-height:{{titleLineHeightMobile}}px;{% endif %} {% if titleLetterSpacingMobile != 0 %}letter-spacing:{{titleLetterSpacingMobile}}px !important;{% endif %} text-align:{{sectionTextAlignmentMobile}}; } #{{sectionID}} .qq-subtitle { margin-top:{{subtitleMarginTopMobile}}px; margin-bottom:{{subtitleMarginBottomMobile}}px; } #{{sectionID}} .qq-subtitle * { {% if subtitleFontSizeMobile != 0 %}font-size:{{subtitleFontSizeMobile}}px;{% endif %} {% if subtitleLineHeightMobile != 0 %}line-height:{{subtitleLineHeightMobile}}px;{% endif %} {% if subtitleLetterSpacingMobile != 0 %}letter-spacing:{{subtitleLetterSpacingMobile}}px !important;{% endif %} text-align:{{sectionTextAlignmentMobile}}; } #{{sectionID}} .qq-button-wrapper { {% if sectionTextAlignmentMobile == 'left' %} justify-content: flex-start; align-items: flex-start; {% elsif sectionTextAlignmentMobile == 'right' %} justify-content: flex-end; align-items: flex-end; {% elsif sectionTextAlignmentMobile == 'center' %} justify-content: center; align-items: center; {% endif %} padding-top:{{buttonMarginTopMobile}}px; padding-bottom:{{buttonMarginBottomMobile}}px; } #{{sectionID}} .qq-btn { {% if buttonFontSizeMobile != 0 %}font-size:{{buttonFontSizeMobile}}px;{% endif %} {% if buttonLetterSpacingMobile != 0 %}letter-spacing:{{buttonLetterSpacingMobile}}px !important;{% endif %} } } @media only screen and (min-width: 481px) { #{{sectionID}} .qq-parallax-content { {% if blockContentAlignmentHorizontal == 'left' %} left:0; {% elsif blockContentAlignmentHorizontal == 'right' %} right:0; {% else %} left:0; right:0; {% endif %} } } @media only screen and (max-width: 480px) { #{{sectionID}} .qq-parallax-content { align-items:center; } }@media only screen and (max-width: 480px) { 
+  #{{sectionID}} .qq-parallax-content { 
+    align-items:center; 
+  } 
+}
+
+{% if enableCircleBackground %}
+  /* Reset container styles for circle mode */
+  #{{sectionID}} {
+    position: relative;
+    overflow: hidden; /* Clip the circle */
+  }
+
+  /* Create the circle as a decorative background element */
+  #{{sectionID}} .qq-parallax-wrapper:after {
+    content: '';
+    position: absolute;
+    width: {{circleSize}}px;
+    height: {{circleSize}}px;
+    border-radius: 50%;
+    background-color: {{blockContentBackgroundColor}};
+    opacity: {{blockContentBackgroundColorOpacity}};
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translate({{circlePositionX}}%, {{circlePositionY}}%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  /* Remove any existing content background */
+  #{{sectionID}} .qq-parallax-content-wrapper:before {
+    display: none !important;
+  }
+  
+  /* Position the content to match the circle position */
+  #{{sectionID}} .qq-parallax-content {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  /* Position the inner content to match the circle */
+  #{{sectionID}} .qq-content-inner {
+    position: absolute !important;
+    /* Explicit left value based on horizontal position */
+    left: calc(50% + ({{circlePositionX}}% * 0.4)) !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) translateY({{circlePositionY}}%) !important;
+    width: calc({{circleSize}}px * 0.7) !important;
+    max-width: 80vw !important;
+    text-align: center !important;
+    z-index: 10 !important;
+  }
+  
+  /* Override horizontal alignment for circle mode */
+  #{{sectionID}} .qq-parallax-content-wrapper {
+    position: absolute !important;	
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) translate({{circlePositionX}}%, {{circlePositionY}}%) !important;
+    width: calc({{circleSize}}px * 0.7) !important;
+    max-width: 80vw !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    z-index: 10;
+    text-align: center !important;
+  }
+  
+  /* Force center alignment for all content items */
+  #{{sectionID}} .qq-title,
+  #{{sectionID}} .qq-subtitle {
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  #{{sectionID}} .qq-button-wrapper {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  
+  /* Mobile responsive settings */
+  @media only screen and (max-width: 798px) {
+    #{{sectionID}} .qq-parallax-wrapper:after {
+      width: min({{circleSize}}px, 90vw);
+      height: min({{circleSize}}px, 90vw);
+    }
+    
+    #{{sectionID}} .qq-parallax-content-wrapper {
+      width: calc(min({{circleSize}}px, 90vw) * 0.7) !important;
+    }
+  }
+{% endif %}
+
+{% if enableOverlayImage and overlayImage != blank %}
+  /* Create the overlay image container */
+  #{{sectionID}} .overlay-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: {{overlayImageZIndex}};
+  }
+  
+  /* Create the overlay image for desktop */
+  @media only screen and (min-width: 799px) {
+    #{{sectionID}} .overlay-image-container:after {
+      content: '';
+      position: absolute;
+      background-image: url({{ overlayImage | img_url: 'master' }});
+      background-repeat: no-repeat;
+      background-size: contain;
+      max-width: {{overlayImageSize}}px;
+      max-height: {{overlayImageSize}}px;
+      width: {{overlayImageSize}}px;
+      height: {{overlayImageSize}}px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translate({{overlayImagePositionX}}%, {{overlayImagePositionY}}%);
+      opacity: {{overlayImageOpacity}};
+      pointer-events: none;
+    }
+  }
+  
+  /* Create the overlay image for mobile */
+  @media only screen and (max-width: 798px) {
+    #{{sectionID}} .overlay-image-container:after {
+      content: '';
+      position: absolute;
+      background-image: url({% if enableOverlayImageMobile and overlayImageMobile != blank %}{{ overlayImageMobile | img_url: 'master' }}{% else %}{{ overlayImage | img_url: 'master' }}{% endif %});
+      background-repeat: no-repeat;
+      background-size: contain;
+      max-width: {% if enableOverlayImageMobile %}{{overlayImageSizeMobile}}{% else %}{{overlayImageSize}}{% endif %}px;
+      max-height: {% if enableOverlayImageMobile %}{{overlayImageSizeMobile}}{% else %}{{overlayImageSize}}{% endif %}px;
+      width: {% if enableOverlayImageMobile %}{{overlayImageSizeMobile}}{% else %}{{overlayImageSize}}{% endif %}px;
+      height: {% if enableOverlayImageMobile %}{{overlayImageSizeMobile}}{% else %}{{overlayImageSize}}{% endif %}px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translate(
+        {% if enableOverlayImageMobile %}{{overlayImagePositionXMobile}}{% else %}{{overlayImagePositionX}}{% endif %}%, 
+        {% if enableOverlayImageMobile %}{{overlayImagePositionYMobile}}{% else %}{{overlayImagePositionY}}{% endif %}%
+      );
+      opacity: {% if enableOverlayImageMobile %}{{overlayImageOpacityMobile}}{% else %}{{overlayImageOpacity}}{% endif %};
+      pointer-events: none;
+    }
+  }
+{% endif %}
+
+section.qq-parallax-banner .qq-parallax-wrapper .qq-parallax-video .qq-mobile-video-poster {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: none;
+}
+
+@media (max-width: 798px) {
+  section.qq-parallax-banner .qq-parallax-wrapper .qq-parallax-video[data-disable-video-mobile="true"] .jarallax-img {
+    display: none !important;
+  }
+}
+  @media only screen and (max-width: 798px) {
+  section.qq-parallax-banner .qq-parallax-wrapper .qq-parallax-video .qq-mobile-video-poster {
+    height: {{mobilePosterHeight}}vh !important;
+  }
+}
+ 
+{% if enableCircleBackground %}
+  /* Reset container styles for circle mode */
+  #{{sectionID}} {
+    position: relative;
+    overflow: hidden; /* Clip the circle */
+  }
+
+  /* Create the circle as a decorative background element */
+  #{{sectionID}} .qq-parallax-wrapper:after {
+    content: '';
+    position: absolute;
+    width: {{circleSize}}px;
+    height: {{circleSize}}px;
+    border-radius: 50%;
+    background-color: {{blockContentBackgroundColor}};
+    opacity: {{blockContentBackgroundColorOpacity}};
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translate({{circlePositionX}}%, {{circlePositionY}}%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  /* Remove any existing content background */
+  #{{sectionID}} .qq-parallax-content-wrapper:before {
+    display: none !important;
+  }
+  
+  /* Position the content to match the circle position */
+  #{{sectionID}} .qq-parallax-content {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  /* Position the inner content to match the circle */
+  #{{sectionID}} .qq-content-inner {
+    position: absolute !important;
+    /* Explicit left value based on horizontal position */
+    left: calc(50% + ({{circlePositionX}}% * 0.4)) !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) translateY({{circlePositionY}}%) !important;
+    width: calc({{circleSize}}px * 0.7) !important;
+    max-width: 80vw !important;
+    text-align: center !important;
+    z-index: 10 !important;
+  }
+  
+  /* Override horizontal alignment for circle mode */
+  #{{sectionID}} .qq-parallax-content-wrapper {
+    position: absolute !important;	
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) translate({{circlePositionX}}%, {{circlePositionY}}%) !important;
+    width: calc({{circleSize}}px * 0.7) !important;
+    max-width: 80vw !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    z-index: 10;
+    text-align: center !important;
+  }
+  
+  /* Force center alignment for all content items */
+  #{{sectionID}} .qq-title,
+  #{{sectionID}} .qq-subtitle {
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  #{{sectionID}} .qq-button-wrapper {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  
+  /* Mobile responsive settings */
+  @media only screen and (max-width: 798px) {
+    #{{sectionID}} .qq-parallax-wrapper:after {
+      width: {% if enableMobileCircleSettings %}{{circleSizeMobile}}{% else %}min({{circleSize}}px, 90vw){% endif %}px;
+      height: {% if enableMobileCircleSettings %}{{circleSizeMobile}}{% else %}min({{circleSize}}px, 90vw){% endif %}px;
+      {% if enableMobileCircleSettings %}
+      transform: translate(-50%, -50%) translate({{circlePositionXMobile}}%, {{circlePositionYMobile}}%);
+      {% endif %}
+    }
+    
+    #{{sectionID}} .qq-parallax-content-wrapper {
+      width: calc({% if enableMobileCircleSettings %}{{circleSizeMobile}}{% else %}min({{circleSize}}px, 90vw){% endif %}px * 0.4) !important;
+      {% if enableMobileCircleSettings %}
+      transform: translate(-50%, -50%) translate({{circlePositionXMobile}}%, {{circlePositionYMobile}}%) !important;
+      {% endif %}
+    }
+
+    #{{sectionID}} .qq-content-inner {
+      {% if enableMobileCircleSettings %}
+      left: calc(50% + ({{circlePositionXMobile}}% * 0.4)) !important;
+      transform: translate(-50%, -50%) translateY({{circlePositionYMobile}}%) !important;
+      width: calc({{circleSizeMobile}}px * 0.7) !important;
+      {% endif %}
+    }
+  }
+	@media only screen and (max-width: 798px) {
+  #{{sectionID}} .qq-content-inner {
+    left: calc(50% + ({% if enableMobileCircleSettings %}{{circlePositionXMobile}}{% else %}{{circlePositionX}}{% endif %}% * 0.4)) !important;
+    transform: translate(-50%, -50%) translateY({{circleContentOffsetYMobile}}%) !important;
+    width: calc({% if enableMobileCircleSettings %}{{circleSizeMobile}}{% else %}min({{circleSize}}px, 90vw){% endif %}px * 0.7) !important;
+  }
+}
+{% endif %}
+/* Add this to your parallax banner section's CSS */
+@media only screen and (max-width: 798px) {
+  /* Lower the z-index of all parallax banner elements */
+  #{{sectionID}} .qq-parallax-wrapper:after {
+    z-index: 5 !important; /* Circle background */
+  }
+
+  #{{sectionID}} .qq-parallax-content {
+    z-index: 6 !important; /* Content container */
+  }
+
+  #{{sectionID}} .qq-content-inner {
+    z-index: 7 !important; /* Inner content */
+  }
+
+  /* Ensure mobile header has much higher z-index */
+  .mobile-header,
+  .mobile-menu {
+    z-index: 1000 !important;
+  }
+
+  /* Ensure all mobile menu elements stay on top */
+  #mobile-header, 
+  #mobile-header-sticky-wrapper,
+  .mobile-menu--opened .mobile-menu,
+  .mobile-menu__content,
+  .mobile-menu__toggle,
+  .header__link.header__menu-toggle,
+  .mobile-menu--opened {
+    z-index: 1001 !important;
+  }
+}
+
+/* Ensure the mobile menu toggle stays clickable */
+@media only screen and (max-width: 798px) {
+  #{{sectionID}} {
+    position: relative;
+  }
+  
+  .header__menu-toggle,
+  .mobile-menu__toggle {
+    position: relative;
+    z-index: 1005 !important;
+  }
+}
+</style>
+
+<script>{% raw %}function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}(()=>{function t(){var e=document.querySelectorAll(".qq-parallax-banner .QQ-JS-init-msg");e&&e.forEach(function(e){e.remove()})}var a;function n(){(a=document.getElementsByClassName("qq-parallax-banner")).length&&!function t(){{var e;null==("undefined"==typeof $?"undefined":_typeof($))||null==window.$?(e=document.createElement("script"),document.head.appendChild(e),e.type="text/javascript",e.src="https://code.jquery.com/jquery-3.6.0.min.js",e.onload=function(){t()}):"undefined"==typeof jarallax?(e=document.createElement("script"),document.head.appendChild(e),e.type="text/javascript",e.src="https://unpkg.com/jarallax@2.0.3/dist/jarallax.min.js",e.onload=function(){var e=document.createElement("script");document.head.appendChild(e),e.type="text/javascript",e.src="https://unpkg.com/jarallax@2.0/dist/jarallax-video.min.js",e.onload=function(){t()}}):o()}}()}function o(){for(var e=0;e<a.length;e++){var t=a[e].id;t=t,$("#"+t).length&&(a=>{var e,t,n,o,i,r,d;$("#"+a).find(".qq-parallax-video").length?(n=document.getElementById(a),o=n.getElementsByClassName("qq-parallax-video"),e=$("#"+a).find(".qq-parallax-wrapper").attr("data-disable-mobile"),disableVideoMobile = o[0].getAttribute("data-disable-video-mobile") === "true",jarallax(o,{speed:Number(o[0].getAttribute("data-speed")),videoSrc:o[0].getAttribute("data-videosrc"),disableParallax:"true"==e&&$(window).width()<798?/iPad|iPhone|iPod|Android/:void 0,onInit:function(){var e,t=navigator.userAgent.match(/Version\/(\d+).*Safari/);
+      // Check if we should disable video on mobile
+      if(disableVideoMobile && $(window).width() < 798) {
+        var videoEl = $(o).find('video');
+        if(videoEl.length) {
+          videoEl.remove(); // Remove video element on mobile
+          $(".qq-mobile-video-poster").css("display", "block"); // Show the poster image
+        }
+      }
+      t&&t[1]&&15<=parseFloat(t[1])&&((e=$("#"+a+" .qq-parallax-video video")).attr("autoplay",""),e.attr("muted",""),e.append("<p></p>"),e.css("display","none"),setTimeout(function(){e.css("display","block"),e.find("p").remove()},20))}})):(t=function(){798<=$(window).width()?i.attr("src")!=r&&i.attr("src",r):i.attr("src",d)},n=document.getElementById(a),o=n.getElementsByClassName("qq-parallax-image"),i=$("#"+a).find(".qq-parallax-image img"),r=$("#"+a).find(".qq-parallax-image").attr("data-banner-image"),""!=(d=$("#"+a).find(".qq-parallax-image").attr("data-mobile-image"))&&(window.onresize=function(e){t()},t()),jarallax(o,{speed:Number(o[0].getAttribute("data-speed"))}))})(t)}}window.addEventListener("shopify:section:load",function(e){t()}),t(),"loading"!==document.readyState?n():document.addEventListener("DOMContentLoaded",function(){n()}),window.addEventListener("shopify:section:load",function(e){n()})})();{% endraw %}</script>
+{% schema %}
+{
+	"name": "Parallax Banner",
+	"tag": "section",
+	"class": "qq-parallax-banner",
+	"settings": [
+		{
+			"type": "text",
+			"id": "section_class",
+			"label": "Section Class",
+			"info": "Add section class (without .). Use spaces to add multiple classes"
+		},
+		{
+  "type": "header",
+  "content": "Overlay Image Settings"
+},
+{
+  "type": "checkbox",
+  "id": "enable_overlay_image",
+  "label": "Enable Overlay Image",
+  "default": false
+},
+{
+  "type": "image_picker",
+  "id": "overlay_image",
+  "label": "Overlay Image"
+},
+{
+  "type": "range",
+  "id": "overlay_image_size",
+  "min": 50,
+  "max": 1000,
+  "step": 10,
+  "unit": "px",
+  "label": "Image Size",
+  "default": 300,
+  "info": "Controls the largest dimension (width or height) while maintaining aspect ratio"
+},
+{
+  "type": "range",
+  "id": "overlay_image_position_x",
+  "min": -100,
+  "max": 100,
+  "step": 5,
+  "unit": "%",
+  "label": "Horizontal Position",
+  "default": 0,
+  "info": "0% is centered, negative moves left, positive moves right"
+},
+{
+  "type": "range",
+  "id": "overlay_image_position_y",
+  "min": -100,
+  "max": 100,
+  "step": 5,
+  "unit": "%",
+  "label": "Vertical Position",
+  "default": 0,
+  "info": "0% is centered, negative moves up, positive moves down"
+},
+{
+  "type": "range",
+  "id": "overlay_image_z_index",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "label": "Image Layer Position (Z-Index)",
+  "default": 5,
+  "info": "Higher numbers appear on top. Navbar typically has z-index 100+"
+},
+{
+  "type": "range",
+  "id": "overlay_image_opacity",
+  "min": 0.1,
+  "max": 1,
+  "step": 0.1,
+  "label": "Image Opacity",
+  "default": 1
+},
+{
+  "type": "header",
+  "content": "Overlay Image - Mobile Settings"
+},
+{
+  "type": "checkbox",
+  "id": "enable_overlay_image_mobile",
+  "label": "Enable Different Mobile Settings",
+  "default": false,
+  "info": "When enabled, mobile devices will use these settings instead"
+},
+{
+  "type": "image_picker",
+  "id": "overlay_image_mobile",
+  "label": "Overlay Image for Mobile (Optional)",
+  "info": "If left empty, will use the desktop image"
+},
+{
+  "type": "range",
+  "id": "overlay_image_size_mobile",
+  "min": 50,
+  "max": 500,
+  "step": 10,
+  "unit": "px",
+  "label": "Image Size - Mobile",
+  "default": 150
+},
+{
+  "type": "range",
+  "id": "overlay_image_position_x_mobile",
+  "min": -100,
+  "max": 100,
+  "step": 5,
+  "unit": "%",
+  "label": "Horizontal Position - Mobile",
+  "default": 0
+},
+{
+  "type": "range",
+  "id": "overlay_image_position_y_mobile",
+  "min": -100,
+  "max": 100,
+  "step": 5,
+  "unit": "%",
+  "label": "Vertical Position - Mobile",
+  "default": 0
+},
+{
+  "type": "range",
+  "id": "overlay_image_opacity_mobile",
+  "min": 0.1,
+  "max": 1,
+  "step": 0.1,
+  "label": "Image Opacity - Mobile",
+  "default": 1
+},
+		{
+			"type": "image_picker",
+			"id": "banner_image",
+			"label": "Banner Image",
+			"info": "Recommended size 1920px X 1080px"
+		},
+		{
+			"type": "image_picker",
+			"id": "banner_image_mobile",
+			"label": "Banner Image for Mobile",
+			"info": "Portrait Recommended Size"
+		},
+		{
+		"type": "range",
+		"id": "mobile_poster_height",
+		"min": 0,
+		"max": 100,
+		"step": 1,
+		"unit": "vh",
+		"label": "Mobile Poster Height",
+		"default": 40,
+		"info": "Height for mobile poster image when video is disabled"
+		},
+		{
+		"type": "checkbox",
+		"id": "disable_video_on_mobile",
+		"label": "Disable Video on Mobile",
+		"default": false,
+		"info": "When checked, mobile devices will only show the mobile banner image instead of video"
+		},
+		{
+			"type": "text",
+			"id": "banner_video",
+			"label": "Video URL",
+			"info": "For YouTube or Vimeo, just paste the URL of the video (i.e. 'https://www.youtube.com/watch?v=XXXXXX' or 'https://vimeo.com/XXXXX'). For Local MP4, paste the path of the uploaded file at Settings->Files. If this video path is valid and not blank, it will take priority over Banner Image."
+		},
+		{
+			"type": "header",
+			"content": "Parallax Settings"
+		},
+		{
+			"type": "select",
+			"id": "parallax_type",
+			"options": [
+				{
+					"value": "css",
+					"label": "Fixed Position"
+				},
+				{
+					"value": "parallax",
+					"label": "True Parallax"
+				}
+			],
+			"default": "css",
+			"label": "Parallax Type"
+		},
+		{
+			"type": "checkbox",
+			"id": "parallax_disable_mobile",
+			"label": "Disable Parallax on Mobile",
+			"default": false
+		},
+		{
+			"type": "range",
+			"id": "parallax_speed",
+			"min": 0,
+			"max": 2,
+			"step": 0.1,
+			"label": "Parallax Speed",
+			"default": 0.5,
+			"info": "Enabled only when using 'True Parallax'"
+		},
+		{
+			"type": "select",
+			"id": "parallax_direction",
+			"options": [
+				{
+					"value": "",
+					"label": "Normal Scrolling"
+				},
+				{
+					"value": "-",
+					"label": "Reverse Scrolling"
+				}
+			],
+			"default": "",
+			"label": "Parallax Direction",
+			"info": "Enabled only when using 'True Parallax'"
+		},
+		{
+			"type": "header",
+			"content": "Content"
+		},
+		{
+			"type": "richtext",
+			"id": "title",
+			"label": "Title",
+			"default": "<h2>Banner Title</h2>"
+		},		
+		{
+			"type": "richtext",
+			"id": "subtitle",
+			"default": "<h2>Banner Subtitle</h2>",
+			"label": "Subtitle"
+		},		
+		{
+			"type": "header",
+			"content": "Button"
+		},
+		{
+			"type": "text",
+			"id": "button_label_1",
+			"label": "Button Label",
+			"default": "Learn More"
+		},
+		{
+			"type": "url",
+			"id": "button_url_1",
+			"label": "Button Link"
+		},
+		{
+			"type": "checkbox",
+			"id": "button_tab_1",
+			"label": "Open in a New Tab",
+			"default": false
+		},
+		{
+			"type": "header",
+			"content": "Section Styling"
+		},
+		{
+			"type": "range",
+			"id": "section_height",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"label": "Section Height",
+			"default": 40
+		},
+		{
+			"type": "range",
+			"id": "section_margin_top",
+			"min": 0,
+			"max": 200,
+			"step": 2,
+			"unit": "px",
+			"label": "Section Top Margin",
+			"default": 20
+		},
+		{
+			"type": "range",
+			"id": "section_margin_bottom",
+			"min": 0,
+			"max": 200,
+			"step": 2,
+			"unit": "px",
+			"label": "Section Bottom Margin",
+			"default": 20
+		},
+		{
+			"type": "range",
+			"id": "section_padding_horizontal",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Section Horizontal Padding",
+			"default": 20
+		},
+		{
+			"type": "range",
+			"id": "section_padding_top",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Section Padding Top",
+			"default": 20
+		},
+		{
+			"type": "range",
+			"id": "section_padding_bottom",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Section Padding Bottom",
+			"default": 20
+		},
+		{
+			"type": "header",
+			"content": "Section Styling - Mobile"
+		},
+		{
+			"type": "range",
+			"id": "section_height_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"label": "Section Height - Mobile",
+			"default": 40
+		},
+		{
+			"type": "range",
+			"id": "section_margin_top_mobile",
+			"min": 0,
+			"max": 200,
+			"step": 2,
+			"unit": "px",
+			"label": "Section Top Margin - Mobile",
+			"default": 20
+		},
+		{
+			"type": "range",
+			"id": "section_margin_bottom_mobile",
+			"min": 0,
+			"max": 200,
+			"step": 2,
+			"unit": "px",
+			"label": "Section Bottom Margin - Mobile",
+			"default": 20
+		},
+		{
+			"type": "range",
+			"id": "section_padding_horizontal_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Section Horizontal Padding - Mobile",
+			"default": 20
+		},
+		{
+			"type": "range",
+			"id": "section_padding_top_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Section Padding Top - Mobile",
+			"default": 20
+		},
+		{
+			"type": "range",
+			"id": "section_padding_bottom_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Section Padding Bottom - Mobile",
+			"default": 20
+		},
+		{
+			"type": "header",
+			"content": "Content Styling"
+		},
+		{
+  "type": "header",
+  "content": "Circle Background Settings"
+},
+{
+  "type": "checkbox",
+  "id": "enable_circle_background",
+  "label": "Enable Circle Background",
+  "default": false
+},
+{
+  "type": "range",
+  "id": "circle_size",
+  "min": 100,
+  "max": 2000,  // Increased from 600 to 2000
+  "step": 50,   // Increased from 10 to 50
+  "unit": "px",
+  "label": "Circle Size",
+  "default": 500,
+  "info": "Diameter of the circle (can extend beyond section boundaries)"
+},
+{
+  "type": "range",
+  "id": "circle_position_x",
+  "min": -100,
+  "max": 100,
+  "step": 5,
+  "unit": "%",
+  "label": "Circle Horizontal Position",
+  "default": 0,
+  "info": "0% is centered, negative moves left, positive moves right"
+},
+{
+  "type": "range",
+  "id": "circle_position_y",
+  "min": -100,
+  "max": 100,
+  "step": 5,
+  "unit": "%",
+  "label": "Circle Vertical Position",
+  "default": 0,
+  "info": "0% is centered, negative moves up, positive moves down"
+},
+		{
+			"type": "color",
+			"id": "overlay_color",
+			"label": "Overlay Color",
+			"info": "Optional. Leave blank to remove."
+		},
+		{
+			"type": "range",
+			"id": "overlay_opacity",
+			"min": 0,
+			"max": 1,
+			"step": 0.1,
+			"label": "Overlay Opacity",
+			"default": 0
+		},
+		{
+			"type": "select",
+			"id": "text_alignment",
+			"options": [{
+					"value": "left",
+					"label": "Left"
+				},
+				{
+					"value": "center",
+					"label": "Center"
+				},
+				{
+					"value": "right",
+					"label": "Right"
+				}
+			],
+			"default": "center",
+			"label": "Text Alignment"
+		},
+		{
+			"type": "select",
+			"id": "content_alignment_horizontal",
+			"options": [{
+					"value": "left",
+					"label": "Left"
+				},
+				{
+					"value": "center",
+					"label": "Center"
+				},
+				{
+					"value": "right",
+					"label": "Right"
+				}
+			],
+			"default": "center",
+			"label": "Content Alignment Horizontal"
+		},
+		{
+			"type": "select",
+			"id": "content_alignment_vertical",
+			"options": [
+				{
+					"value": "flex-start",
+					"label": "Top"
+				},
+				{
+					"value": "center",
+					"label": "Center"
+				},
+				{
+					"value": "flex-end",
+					"label": "Bottom"
+				}
+			],
+			"default": "center",
+			"label": "Content Alignment Vertical"
+		},
+		{
+  "type": "header",
+  "content": "Circle Background - Mobile Settings"
+},
+{
+  "type": "checkbox",
+  "id": "enable_mobile_circle_settings",
+  "label": "Use Different Circle Settings for Mobile",
+  "default": false,
+  "info": "When enabled, mobile devices will use the settings below instead of the desktop settings"
+},
+{
+  "type": "range",
+  "id": "circle_size_mobile",
+  "min": 100,
+  "max": 1000,
+  "step": 50,
+  "unit": "px",
+  "label": "Circle Size - Mobile",
+  "default": 300,
+  "info": "Diameter of the circle on mobile devices"
+},
+{
+  "type": "range",
+  "id": "circle_content_offset_y_mobile",
+  "min": -100,
+  "max": 100,
+  "step": 5,
+  "unit": "%",
+  "label": "Circle Content Vertical Offset - Mobile",
+  "default": -35,
+  "info": "Fine-tune content position within the circle (negative values move up)"
+},
+{
+  "type": "range",
+  "id": "circle_position_x_mobile",
+  "min": -100,
+  "max": 100,
+  "step": 5,
+  "unit": "%",
+  "label": "Circle Horizontal Position - Mobile",
+  "default": 0,
+  "info": "0% is centered, negative moves left, positive moves right"
+},
+{
+  "type": "range",
+  "id": "circle_position_y_mobile",
+  "min": -100,
+  "max": 100,
+  "step": 5,
+  "unit": "%",
+  "label": "Circle Vertical Position - Mobile",
+  "default": 0,
+  "info": "0% is centered, negative moves up, positive moves down"
+},
+		{
+			"type": "color",
+			"id": "content_background_color",
+			"label": "Content Background Color"
+		},
+		{
+			"type": "range",
+			"id": "text_max_width",
+			"min": 300,
+			"max": 1400,
+			"step": 20,
+			"unit": "px",
+			"label": "Text Content Max Width",
+			"default": 1280
+		},
+		{
+			"type": "range",
+			"id": "content_background_color_opacity",
+			"min": 0,
+			"max": 1,
+			"step": 0.1,
+			"unit": "%",
+			"label": "Content Background Color Opacity",
+			"default": 0.8
+		},
+		{
+			"type": "range",
+			"id": "content_border_radius",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Content Border Radius",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "content_padding_top",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Content Padding Top",
+			"default": 20
+		},
+		{
+			"type": "range",
+			"id": "content_padding_bottom",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Content Padding Bottom",
+			"default": 20
+		},
+		{
+			"type": "range",
+			"id": "content_padding_horizontal",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Content Padding Horizontal",
+			"default": 20
+		},
+		{
+			"type": "header",
+			"content": "Content Styling - Mobile"
+		},
+		{
+			"type": "select",
+			"id": "text_alignment_mobile",
+			"options": [{
+					"value": "left",
+					"label": "Left"
+				},
+				{
+					"value": "center",
+					"label": "Center"
+				},
+				{
+					"value": "right",
+					"label": "Right"
+				}
+			],
+			"default": "center",
+			"label": "Text Alignment (mobile)"
+		},
+		{
+			"type": "range",
+			"id": "content_padding_top_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Content Padding Top - Mobile",
+			"default": 20
+		},
+		{
+			"type": "range",
+			"id": "content_padding_bottom_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Content Padding Bottom - Mobile",
+			"default": 20
+		},
+		{
+			"type": "range",
+			"id": "content_padding_horizontal_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Content Padding Horizontal - Mobile",
+			"default": 20
+		},
+		{
+			"type": "header",
+			"content": "Title Styling"
+		},
+		{
+			"type": "color",
+			"id": "title_color",
+			"label": "Title Color"
+		},
+		{
+			"type": "checkbox",
+			"id": "title_custom_font",
+			"label": "Use Custom Font",
+			"default": false
+		},
+		{
+			"type": "font_picker",
+			"id": "title_font",
+			"label": "Title Font",
+			"default": "mono"
+		},
+		{
+			"type": "text",
+			"id": "title_font_name",
+			"label": "Custom Font Family Name",
+			"info": "Add your custom font. Example: ‘Helvetica’, sans-serif."
+		},
+		{
+			"type": "select",
+			"id": "title_font_weight",
+			"options": [
+			{
+				"value": "default",
+				"label": "Default"
+			},
+			{
+				"value": "100",
+				"label": "100"
+			},
+			{
+				"value": "200",
+				"label": "200"
+			},
+			{
+				"value": "300",
+				"label": "300"
+			},
+			{
+				"value": "400",
+				"label": "400 (Regular)"
+			},
+			{
+				"value": "500",
+				"label": "500"
+			},
+			{
+				"value": "600",
+				"label": "600"
+			},
+			{
+				"value": "700",
+				"label": "700 (Bold)"
+			},
+			{
+				"value": "800",
+				"label": "800"
+			},
+			{
+				"value": "900",
+				"label": "900"
+			}
+			],
+			"default": "default",
+			"label": "Font Weight"
+		},
+		{
+			"type": "paragraph",
+			"content": "Set value to 0 to use your theme's default values:"
+		},
+		{
+			"type": "range",
+			"id": "title_margin_top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Title Top Margin",
+			"default": 10
+		},
+		{
+			"type": "range",
+			"id": "title_margin_bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Title Bottom Margin",
+			"default": 10
+		},
+		{
+			"type": "range",
+			"id": "title_font_size",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Title Font Size",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "title_line_height",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Title Line Height",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "title_letter_spacing",
+			"min": 0,
+			"max": 10,
+			"step": 1,
+			"unit": "px",
+			"label": "Title Letter Spacing",
+			"default": 0
+		},
+		{
+			"type": "header",
+			"content": "Title Styling - Mobile"
+		},
+		{
+			"type": "range",
+			"id": "title_margin_top_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Title Top Margin - Mobile",
+			"default": 10
+		},
+		{
+			"type": "range",
+			"id": "title_margin_bottom_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Title Bottom Margin - Mobile",
+			"default": 10
+		},
+		{
+			"type": "range",
+			"id": "title_font_size_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Title Font Size - Mobile",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "title_line_height_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Title Line Height - Mobile",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "title_letter_spacing_mobile",
+			"min": 0,
+			"max": 10,
+			"step": 1,
+			"unit": "px",
+			"label": "Title Letter Spacing - Mobile",
+			"default": 0
+		},
+		{
+			"type": "header",
+			"content": "Subtitle Styling"
+		},
+		{
+			"type": "color",
+			"id": "subtitle_color",
+			"label": "Subtitle Color"
+		},
+		{
+			"type": "checkbox",
+			"id": "subtitle_custom_font",
+			"label": "Use Custom Font",
+			"default": false
+		},
+		{
+			"type": "font_picker",
+			"id": "subtitle_font",
+			"label": "Subtitle Font",
+			"default": "mono"
+		},
+		{
+			"type": "text",
+			"id": "subtitle_font_name",
+			"label": "Custom Font Family Name",
+			"info": "Add your custom font. Example: ‘Helvetica’, sans-serif."
+		},
+		{
+			"type": "select",
+			"id": "subtitle_font_weight",
+			"options": [
+			{
+				"value": "default",
+				"label": "Default"
+			},
+			{
+				"value": "100",
+				"label": "100"
+			},
+			{
+				"value": "200",
+				"label": "200"
+			},
+			{
+				"value": "300",
+				"label": "300"
+			},
+			{
+				"value": "400",
+				"label": "400 (Regular)"
+			},
+			{
+				"value": "500",
+				"label": "500"
+			},
+			{
+				"value": "600",
+				"label": "600"
+			},
+			{
+				"value": "700",
+				"label": "700 (Bold)"
+			},
+			{
+				"value": "800",
+				"label": "800"
+			},
+			{
+				"value": "900",
+				"label": "900"
+			}
+			],
+			"default": "default",
+			"label": "Font Weight"
+		},
+		{
+			"type": "paragraph",
+			"content": "Set value to 0 to use your theme's default values:"
+		},
+		{
+			"type": "range",
+			"id": "subtitle_margin_top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Subtitle Top Margin",
+			"default": 10
+		},
+		{
+			"type": "range",
+			"id": "subtitle_margin_bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Subtitle Bottom Margin",
+			"default": 10
+		},
+		{
+			"type": "range",
+			"id": "subtitle_font_size",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Subtitle Font Size",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "subtitle_line_height",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Subtitle Line Height",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "subtitle_letter_spacing",
+			"min": 0,
+			"max": 10,
+			"step": 1,
+			"unit": "px",
+			"label": "Subtitle Letter Spacing",
+			"default": 0
+		},
+		{
+			"type": "header",
+			"content": "Subtitle Styling - Mobile"
+		},
+		{
+			"type": "range",
+			"id": "subtitle_margin_top_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Subtitle Top Margin - Mobile",
+			"default": 10
+		},
+		{
+			"type": "range",
+			"id": "subtitle_margin_bottom_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Subtitle Bottom Margin - Mobile",
+			"default": 10
+		},
+		{
+			"type": "range",
+			"id": "subtitle_font_size_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Subtitle Font Size - Mobile",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "subtitle_line_height_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Subtitle Line Height - Mobile",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "subtitle_letter_spacing_mobile",
+			"min": 0,
+			"max": 10,
+			"step": 1,
+			"unit": "px",
+			"label": "Subtitle Letter Spacing - Mobile",
+			"default": 0
+		},
+		{
+			"type": "header",
+			"content": "Button Styling"
+		},
+		{
+			"type": "checkbox",
+			"id": "button_custom_font",
+			"label": "Use Custom Font",
+			"default": false
+		},
+		{
+			"type": "font_picker",
+			"id": "button_font",
+			"label": "Button Font",
+			"default": "mono"
+		},
+		{
+			"type": "text",
+			"id": "button_font_name",
+			"label": "Custom Font Family Name",
+			"info": "Add your custom font. Example: ‘Helvetica’, sans-serif."
+		},
+		{
+			"type": "select",
+			"id": "button_font_weight",
+			"options": [
+			{
+				"value": "default",
+				"label": "Default"
+			},
+			{
+				"value": "100",
+				"label": "100"
+			},
+			{
+				"value": "200",
+				"label": "200"
+			},
+			{
+				"value": "300",
+				"label": "300"
+			},
+			{
+				"value": "400",
+				"label": "400 (Regular)"
+			},
+			{
+				"value": "500",
+				"label": "500"
+			},
+			{
+				"value": "600",
+				"label": "600"
+			},
+			{
+				"value": "700",
+				"label": "700 (Bold)"
+			},
+			{
+				"value": "800",
+				"label": "800"
+			},
+			{
+				"value": "900",
+				"label": "900"
+			}
+			],
+			"default": "default",
+			"label": "Font Weight"
+		},
+		{
+			"type": "range",
+			"id": "button_max_width",
+			"min": 40,
+			"max": 700,
+			"step": 20,
+			"unit": "px",
+			"label": "Button Max Width Size",
+			"default": 180
+		},
+		{
+			"type": "range",
+			"id": "button_border_width",
+			"min": 0,
+			"max": 30,
+			"step": 1,
+			"unit": "px",
+			"label": "Button Border Width",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "button_radius",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Button Border Radius",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "button_margin_top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Button Top Margin",
+			"default": 10
+		},
+		{
+			"type": "range",
+			"id": "button_margin_bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Button Bottom Margin",
+			"default": 10
+		},
+		{
+			"type": "range",
+			"id": "button_padding_horizontal",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Button Horizontal Padding",
+			"default": 20
+		},
+		{
+			"type": "range",
+			"id": "button_padding_vertical",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Button Vertical Padding",
+			"default": 10
+		},
+		{
+			"type": "header",
+			"content": "Button Styling - Mobile"
+		},
+		{
+			"type": "range",
+			"id": "button_margin_top_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Button Top Margin - Mobile",
+			"default": 10
+		},
+		{
+			"type": "range",
+			"id": "button_margin_bottom_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"label": "Button Bottom Margin - Mobile",
+			"default": 10
+		},
+		{
+			"type": "header",
+			"content": "Button Text Styling"
+		},
+		{
+			"type": "paragraph",
+			"content": "Set value to 0 to use your theme's default values:"
+		},
+		{
+			"type": "range",
+			"id": "button_font_size",
+			"min": 0,
+			"max": 50,
+			"step": 1,
+			"unit": "px",
+			"label": "Button Font Size",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "button_letter_spacing",
+			"min": 0,
+			"max": 10,
+			"step": 1,
+			"unit": "px",
+			"label": "Button Letter Spacing",
+			"default": 0
+		},
+		{
+			"type": "header",
+			"content": "Button Text Styling - Mobile"
+		},
+		{
+			"type": "range",
+			"id": "button_font_size_mobile",
+			"min": 0,
+			"max": 50,
+			"step": 1,
+			"unit": "px",
+			"label": "Button Font Size - Mobile",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "button_letter_spacing_mobile",
+			"min": 0,
+			"max": 10,
+			"step": 1,
+			"unit": "px",
+			"label": "Button Letter Spacing - Mobile",
+			"default": 0
+		},
+		{
+			"type": "header",
+			"content": "Button Colors"
+		},
+		{
+			"type": "color",
+			"id": "button_background_color",
+			"label": "Button Background Color",
+			"default": "#000000"
+		},
+		{
+			"type": "color",
+			"id": "button_text_color",
+			"label": "Button Text Color",
+			"default": "#ffffff"
+		},
+		{
+			"type": "color",
+			"id": "button_border_color",
+			"label": "Button Border Color"
+		},
+		{
+			"type": "header",
+			"content": "Button Hover Colors"
+		},
+		{
+			"type": "color",
+			"id": "button_background_color_hover",
+			"label": "Button Hover Background Color",
+			"default": "#ffffff"
+		},
+		{
+			"type": "color",
+			"id": "button_text_color_hover",
+			"label": "Button Hover Text Color",
+			"default": "#000000"
+		},
+		{
+			"type": "color",
+			"id": "button_border_color_hover",
+			"label": "Button Hover Border Color"
+		}
+	],
+	"presets": [{
+		"name": "Parallax Banner"
+	}]
+}
+{% endschema %}

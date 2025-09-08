@@ -1,0 +1,1160 @@
+{% if product.handle == 'akrrush-bone-broth-variety-pack' %}
+
+{% comment %}
+** Tabbed Image with text and custom icon images **
+{% endcomment %}
+
+{%- liquid
+  assign blocks = section.settings.tab_content
+  assign mobile_text_position = section.settings.mobile_text_position
+  assign tabs = section.settings.tabs
+-%}
+
+{% comment %} Section specific CSS {% endcomment %}
+{% style %}
+/**
+ * Tabbed Content Section
+ * Controls layout, tabs, responsiveness and content display
+ */
+
+/* -----------------------------
+ * 1. Section Base Styles
+ * ----------------------------- */
+#shopify-section-{{ section.id }} {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  {% if section.settings.width == 'wide' %}
+    width: 100%;
+  {% endif %}
+}
+
+/* -----------------------------
+ * 2. Layout Structure
+ * ----------------------------- */
+#shopify-section-{{ section.id }} .tab-content {
+  width: 100%;
+}
+
+#shopify-section-{{ section.id }} .tab-row {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+#shopify-section-{{ section.id }} .tab-column {
+  width: 50%;
+  flex: 0 0 50%;
+  padding: 0 15px;
+}
+
+/* -----------------------------
+ * 3. Tabs Navigation
+ * ----------------------------- */
+.tabs-container {
+  margin-bottom: 30px;
+}
+
+.tabs-nav {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.tab-button {
+  padding: 12px 24px;
+  margin-right: 5px;
+  margin-bottom: -1px;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  transition: all 0.3s ease;
+  font-size: 30px;
+  color: #7B6154;
+}
+
+.tab-button.active {
+  background: #249FB0;
+  border-color: #e8e8e8;
+  border-bottom: 2px solid #fff;
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+  border-radius: 20px;
+}
+
+.tab-button:hover:not(.active) {
+  background: rgba(0,0,0,0.02);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* -----------------------------
+ * 4. Image Settings
+ * ----------------------------- */
+#shopify-section-{{ section.id }} .image-with-text__image-column .image-element__wrap {
+  max-height: {{ section.settings.image_max_height }}px;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#shopify-section-{{ section.id }} .image-with-text__image {
+  object-fit: {{ section.settings.image_fit }};
+  width: auto;
+  max-width: 100%;
+  max-height: {{ section.settings.image_max_height }}px;
+}
+
+#shopify-section-{{ section.id }} .image-with-text__image-column .image-element__wrap img[style*="object-fit: contain"] {
+  width: auto !important;
+  height: auto !important;
+  max-height: {{ section.settings.image_max_height }}px !important;
+  max-width: 100% !important;
+}
+
+/* -----------------------------
+ * 5. Text Styling
+ * ----------------------------- */
+#shopify-section-{{ section.id }} .tab-text .image-with-text__heading {
+  color: var(--heading-color, {{ settings.heading_color }});
+}
+
+#shopify-section-{{ section.id }} .tab-text .image-with-text__text {
+  color: var(--text-color, {{ settings.regular_color }});
+}
+
+/* -----------------------------
+ * 6. Icon Styles
+ * ----------------------------- */
+/* Icon row layout */
+.icon-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin-top: 20px;
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  text-align: center;
+  width: calc(25% - 20px);
+}
+
+.icon-container {
+  width: {{ section.settings.icon_size }}px;
+  height: 70px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.icon-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.icon-text {
+  font-size: 14px;
+  color: #000000;
+}
+
+/* -----------------------------
+ * 7. Responsive Styles
+ * ----------------------------- */
+@media only screen and (max-width: 798px) {
+  /* Section padding */
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.mobile_padding_top }}px;
+    padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+  }
+
+  /* Layout for mobile */
+  #shopify-section-{{ section.id }} .tab-row {
+    flex-wrap: wrap;
+  }
+  
+  #shopify-section-{{ section.id }} .tab-column {
+    width: 100%;
+    flex: 0 0 100%;
+  }
+
+  /* Mobile image sizes */
+  #shopify-section-{{ section.id }} .image-with-text__image-column .image-element__wrap {
+    max-height: {{ section.settings.mobile_image_max_height }}px;
+  }
+  
+  #shopify-section-{{ section.id }} .image-with-text__image {
+    max-height: {{ section.settings.mobile_image_max_height }}px;
+  }
+
+  /* Mobile icon adjustments */
+  .icon-container {
+    width: {{ section.settings.mobile_icon_size }}px;
+    height: {{ section.settings.mobile_icon_size }}px;
+  }
+  
+  .icon-text {
+    font-size: 12px;
+  }
+  
+  .icon-item {
+    width: calc(50% - 20px);
+  }
+
+  .icon-container .image-element__wrap {
+    width: 120px;
+  }
+
+  /* Mobile tab navigation */
+  .tabs-nav {
+    flex-direction: column;
+    border-bottom: none;
+  }
+
+  .tab-button {
+    margin-bottom: 5px;
+    border: 1px solid #e8e8e8;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 20px;
+  }
+
+  .tab-button.active {
+    border-bottom: 1px solid #e8e8e8;
+  }
+}
+
+/* Custom CSS from theme settings */
+{% render 'css-loop',
+        css: section.settings.custom_css,
+        id: section.id
+%}
+{% endstyle %}
+
+{% comment %} HTML structure for tabs with content left, image right layout {% endcomment %}
+<section class="section {{ section.settings.css_class }}">
+  <div class="container">
+    <!-- Tabs Navigation -->
+    <div class="tabs-container">
+      <ul class="tabs-nav">
+        {% for i in (1..3) %}
+          {% assign tab_title = 'tab_title_' | append: i %}
+          {% if section.settings[tab_title] != blank %}
+            <li>
+              <button class="tab-button {% if forloop.first %}active{% endif %}" data-tab="{{ i }}">
+                {{ section.settings[tab_title] }}
+              </button>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Tabs Content -->
+    {% for i in (1..3) %}
+      <div class="tab-content {% if forloop.first %}active{% endif %}" data-tab-content="{{ i }}">
+        <div class="tab-row">
+          <!-- Left Column (Text/Content) -->
+          <div class="tab-column tab-text">
+            {% for block in section.blocks %}
+              {% assign tab_number = block.settings.tab_number | default: 1 | plus: 0 %}
+              {% if tab_number == i and block.type == 'text' %}
+                {%- liquid
+                  assign title = block.settings.title
+                  assign heading_size = block.settings.heading_size
+                  assign text = block.settings.text
+                  assign alignment = block.settings.alignment
+                  assign mobile_title = block.settings.mobile_title
+                  assign mobile_heading_size = block.settings.mobile_heading_size
+                  assign mobile_text = block.settings.mobile_text
+                  assign mobile_alignment = block.settings.mobile_alignment
+                  
+                  if mobile_heading_size == 'same_as_desktop'
+                    assign mobile_heading_size = heading_size
+                  endif
+                  
+                  if mobile_alignment == 'same_as_desktop'
+                    assign mobile_alignment = alignment
+                  endif
+
+                  # Color settings
+                  assign heading_color = block.settings.heading_color
+                  assign text_color = block.settings.text_color
+                  assign bg_color = block.settings.background
+                -%}
+                
+                {% comment %} Block specific CSS {% endcomment %}
+                <style>
+                  #block-{{ block.id }} .image-with-text__heading {
+                    {% if block.settings.heading_color != "rgba(0,0,0,0)" %}color: {{ block.settings.heading_color }} !important;{% endif %}
+                    {% if block.settings.heading_font_size %}font-size: {{ block.settings.heading_font_size }}px !important;{% endif %}
+                    {% if block.settings.heading_font_weight %}font-weight: {{ block.settings.heading_font_weight }} !important;{% endif %}
+                    line-height: 1.2;
+                  }
+                  
+                  @media only screen and (max-width: 798px) {
+                    #block-{{ block.id }} .image-with-text__heading {
+                      {% if block.settings.mobile_heading_font_size %}font-size: {{ block.settings.mobile_heading_font_size }}px !important;{% endif %}
+                    }
+                  }
+                  
+                  #block-{{ block.id }} .image-with-text__text {
+                    {% if block.settings.text_color != "rgba(0,0,0,0)" %}color: {{ block.settings.text_color }} !important;{% endif %}
+                  }
+                  
+                  {% if block.settings.background != "rgba(0,0,0,0)" %}
+                  #block-{{ block.id }} {
+                    background-color: {{ block.settings.background }};
+                    padding: 20px;
+                  }
+                  {% endif %}
+                </style>
+                
+                <div id="block-{{ block.id }}" class="image-with-text__text-wrapper animate-on-scroll animate-left" {{ block.shopify_attributes }}>
+                  {% if title != blank %}
+                    <h2 class="image-with-text__heading text-align-{{ alignment }} is-{{ heading_size }} is-hidden-mobile-only">
+                      {{ title }}
+                    </h2>
+                  {% endif %}
+                  
+                  {%- if mobile_title != blank or title != blank -%}
+                    <h2 class="image-with-text__heading text-align-{{ mobile_alignment }} is-{{ mobile_heading_size }} is-hidden-desktop-only">
+                      {%- if mobile_title != blank -%}
+                        {{- mobile_title -}}
+                      {%- else -%}
+                        {{- title -}}
+                      {%- endif -%}
+                    </h2>
+                  {%- endif -%}
+                  
+                  {% if text != blank %}
+                    <div class="image-with-text__text text-align-{{ alignment }} content is-hidden-mobile-only">
+                      {{ text }}
+                    </div>
+                  {% endif %}
+                  
+                  {%- if mobile_text != blank or text != blank -%}
+                    <div class="image-with-text__text text-align-{{ mobile_alignment }} content is-hidden-desktop-only">
+                      {%- if mobile_text != blank -%}
+                        {{- mobile_text -}}
+                      {%- else -%}
+                        {{- text -}}
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                  
+                  {% comment %} ICONS SECTION {% endcomment %}
+                  {% if block.settings.show_icons %}
+                    <div class="icon-row">
+                      {% for j in (1..4) %}
+                        {% assign icon_image = 'icon_image_' | append: j %}
+                        {% assign icon_text = 'icon_text_' | append: j %}
+                        {% assign icon_link = 'icon_link_' | append: j %}
+                        
+                        {% if block.settings[icon_image] != blank %}
+                          <div class="icon-item">
+                            {% if block.settings[icon_link] != blank %}
+                              <a href="{{ block.settings[icon_link] }}">
+                            {% endif %}
+                              <div class="icon-container">
+                                {%
+                                  render 'image-element',
+                                  image: block.settings[icon_image],
+                                  alt: block.settings[icon_text] | default: 'Icon',
+                                  stretch_width: false,
+                                  additional_classes: 'icon-image',
+                                %}
+                              </div>
+                              {% if block.settings[icon_text] != blank %}
+                                <span class="icon-text">{{ block.settings[icon_text] }}</span>
+                              {% endif %}
+                            {% if block.settings[icon_link] != blank %}
+                              </a>
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                  
+                  {% if block.settings.button_label != blank %}
+                    <div class="image-with-text__button image-with-text__button--text-align-{{ alignment }} buttons">
+                      {%
+                        render 'button',
+                        label: block.settings.button_label,
+                        href: block.settings.link,
+                        style: block.settings.button_style,
+                        type: "link",
+                      %}
+                    </div>
+                  {% endif %}
+                </div>
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          <!-- Right Column (Image) -->
+          <div class="tab-column tab-image">
+            {% for block in section.blocks %}
+              {% assign tab_number = block.settings.tab_number | default: 1 | plus: 0 %}
+              {% if tab_number == i and block.type == 'image' %}
+                {%- liquid
+                  assign image = block.settings.image
+                  assign mobile_image = block.settings.mobile_image
+                  assign image_additional_wrapper_classes = ''
+                  
+                  if mobile_image != blank
+                    assign image_additional_wrapper_classes = 'is-hidden-mobile-only'
+                  endif
+                -%}
+                
+                <div id="block-{{ block.id }}" class="image-with-text__image-wrapper animate-on-scroll animate-right" {{ block.shopify_attributes }}>
+                  {% if block.settings.image_link %}
+                    <a href="{{ block.settings.image_link }}">
+                  {% endif %}
+                    {% if image != blank %}
+                      {%
+                        render 'image-element',
+                        image: image,
+                        alt: image.alt,
+                        stretch_width: true,
+                        additional_classes: 'image-with-text__image',
+                        additional_wrapper_classes: image_additional_wrapper_classes,
+                        focal_point: image.presentation.focal_point,
+                      %}
+                    {% else %}
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {% endif %}
+                    
+                    {%- if mobile_image != blank -%}
+                      {%
+                        render 'image-element',
+                        image: mobile_image,
+                        alt: mobile_image.alt,
+                        stretch_width: true,
+                        additional_classes: 'image-with-text__image',
+                        additional_wrapper_classes: 'is-hidden-desktop-only',
+                        focal_point: mobile_image.presentation.focal_point,
+                      %}
+                    {%- endif -%}
+                  {% if block.settings.image_link %}
+                    </a>
+                  {% endif %}
+                </div>
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% comment %} JavaScript for tab functionality {% endcomment %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const tabIndex = this.getAttribute('data-tab');
+        
+        // Remove active class from all buttons and contents
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Add active class to clicked button and corresponding content
+        this.classList.add('active');
+        document.querySelector(`[data-tab-content="${tabIndex}"]`).classList.add('active');
+      });
+    });
+  });
+</script>
+
+{% endif %}
+
+{% schema %}
+{
+  "name": "Tabbed Image text icons",
+  "max_blocks": 12,
+  "class": "image-with-text tabbed-content",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Tab Settings"
+    },
+    {
+      "type": "text",
+      "id": "tab_title_1",
+      "label": "Tab 1 Title",
+      "default": "Tab 1"
+    },
+    {
+      "type": "text",
+      "id": "tab_title_2",
+      "label": "Tab 2 Title",
+      "default": "Tab 2"
+    },
+    {
+      "type": "text",
+      "id": "tab_title_3",
+      "label": "Tab 3 Title",
+      "default": "Tab 3"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "default": "standard",
+      "options": [
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_gutter",
+      "label": "Show gutter",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 80,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "default": 0,
+      "min": 0,
+      "max": 80,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "range",
+      "id": "image_max_height",
+      "label": "Max image height",
+      "min": 100,
+      "max": 800,
+      "step": 10,
+      "default": 400,
+      "unit": "px",
+      "info": "Sets a maximum height limit for images"
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_max_height",
+      "label": "Mobile max image height",
+      "min": 100,
+      "max": 800,
+      "step": 10,
+      "default": 300,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover (fills area, may crop)"
+        },
+        {
+          "value": "contain",
+          "label": "Contain (shows full image)"
+        }
+      ],
+      "default": "cover",
+      "info": "Affects how the image fills the available space"
+    },
+    {
+      "type": "select",
+      "id": "animation",
+      "label": "Animation",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "fadeIn",
+          "label": "Fade in"
+        },
+        {
+          "value": "fadeInDown",
+          "label": "Fade in down"
+        },
+        {
+          "value": "fadeInLeft",
+          "label": "Fade in left"
+        },
+        {
+          "value": "fadeInRight",
+          "label": "Fade in right"
+        },
+        {
+          "value": "slideInLeft",
+          "label": "Slide in left"
+        },
+        {
+          "value": "slideInRight",
+          "label": "Slide in right"
+        },
+        {
+          "value": "zoomIn",
+          "label": "Zoom in"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Icon Settings"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Desktop icon size",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_icon_size",
+      "label": "Mobile icon size",
+      "min": 30,
+      "max": 120,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Mobile text"
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_position",
+      "label": "Mobile text position",
+      "options": [
+        {
+          "value": "same_as_desktop",
+          "label": "Same as desktop"
+        },
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "same_as_desktop",
+      "info": "Only applies when both image and text blocks are shown."
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "Mobile top spacing",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Mobile bottom spacing",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Advanced",
+      "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/360022329373)"
+    },
+    {
+      "type": "text",
+      "id": "css_class",
+      "label": "CSS Class"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_css",
+      "label": "Custom CSS"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "select",
+          "id": "tab_number",
+          "label": "Tab",
+          "options": [
+            { "value": "1", "label": "Tab 1" },
+            { "value": "2", "label": "Tab 2" },
+            { "value": "3", "label": "Tab 3" }
+          ],
+          "default": "1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "1024 x 1024px recommended"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile image",
+          "info": "Optional. Desktop image will show on mobile by default."
+        },
+        {
+          "type": "url",
+          "id": "image_link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "select",
+          "id": "tab_number",
+          "label": "Tab",
+          "options": [
+            { "value": "1", "label": "Tab 1" },
+            { "value": "2", "label": "Tab 2" },
+            { "value": "3", "label": "Tab 3" }
+          ],
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Heading text here"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading base size (Theme Default)",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "regular",
+              "label": "Regular"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ],
+          "default": "regular",
+          "info": "This is the theme's default size setting. Use the custom size controls below to override."
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        },
+        {
+          "type": "text_alignment",
+          "id": "alignment",
+          "label": "Text alignment"
+        },
+        {
+          "type": "select",
+          "id": "vertical_position",
+          "label": "Vertical text position",
+          "options": [
+            {
+              "value": "start",
+              "label": "Top"
+            },
+            {
+              "value": "center",
+              "label": "Middle"
+            },
+            {
+              "value": "end",
+              "label": "Bottom"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "header",
+          "content": "Icons"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_icons",
+          "label": "Show icons",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image_1",
+          "label": "Icon 1",
+          "info": "Square images recommended (100 x 100px)"
+        },
+        {
+          "type": "text",
+          "id": "icon_text_1",
+          "label": "Icon 1 text"
+        },
+        {
+          "type": "url",
+          "id": "icon_link_1",
+          "label": "Icon 1 link"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image_2",
+          "label": "Icon 2",
+          "info": "Square images recommended (100 x 100px)"
+        },
+        {
+          "type": "text",
+          "id": "icon_text_2",
+          "label": "Icon 2 text"
+        },
+        {
+          "type": "url",
+          "id": "icon_link_2",
+          "label": "Icon 2 link"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image_3",
+          "label": "Icon 3",
+          "info": "Square images recommended (100 x 100px)"
+        },
+        {
+          "type": "text",
+          "id": "icon_text_3",
+          "label": "Icon 3 text"
+        },
+        {
+          "type": "url",
+          "id": "icon_link_3",
+          "label": "Icon 3 link"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image_4",
+          "label": "Icon 4",
+          "info": "Square images recommended (100 x 100px)"
+        },
+        {
+          "type": "text",
+          "id": "icon_text_4",
+          "label": "Icon 4 text"
+        },
+        {
+          "type": "url",
+          "id": "icon_link_4",
+          "label": "Icon 4 link"
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "View all"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "button--primary",
+              "label": "Primary"
+            },
+            {
+              "value": "button--secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "button--link-style",
+              "label": "Link style"
+            }
+          ],
+          "default": "button--primary"
+        },
+        {
+          "type": "header",
+          "content": "Heading Styles"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "heading_font_size",
+          "label": "Heading font size",
+          "min": 16,
+          "max": 60,
+          "step": 1,
+          "default": 32,
+          "unit": "px"
+        },
+        {
+          "type": "select",
+          "id": "heading_font_weight",
+          "label": "Heading font weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "Regular (400)"
+            },
+            {
+              "value": "500",
+              "label": "Medium (500)"
+            },
+            {
+              "value": "600",
+              "label": "Semi-Bold (600)"
+            },
+            {
+              "value": "700",
+              "label": "Bold (700)"
+            },
+            {
+              "value": "800",
+              "label": "Extra Bold (800)"
+            }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "range",
+          "id": "mobile_heading_font_size",
+          "label": "Mobile heading font size",
+          "min": 14,
+          "max": 42,
+          "step": 1,
+          "default": 24,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Background",
+          "default": "rgba(0,0,0,0)"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text",
+          "default": "rgba(0,0,0,0)"
+        },
+        {
+          "type": "header",
+          "content": "Mobile text"
+        },
+        {
+          "type": "text",
+          "id": "mobile_title",
+          "label": "Mobile heading"
+        },
+        {
+          "type": "select",
+          "id": "mobile_heading_size",
+          "label": "Mobile heading base size",
+          "options": [
+            {
+              "value": "same_as_desktop",
+              "label": "Same as desktop"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "regular",
+              "label": "Regular"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ],
+          "default": "same_as_desktop"
+        },
+        {
+          "type": "richtext",
+          "id": "mobile_text",
+          "label": "Mobile text"
+        },
+        {
+          "type": "select",
+          "id": "mobile_alignment",
+          "label": "Mobile text alignment",
+          "options": [
+            {
+              "value": "same_as_desktop",
+              "label": "Same as desktop"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "same_as_desktop"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tabbed Image text icons",
+      "category": "Image",
+      "settings": {
+          "padding_top": 20,
+          "padding_bottom": 20,
+          "tab_title_1": "Tab 1",
+          "tab_title_2": "Tab 2",
+          "tab_title_3": "Tab 3"
+      },
+      "blocks": [
+        {
+          "type": "image",
+          "settings": {
+            "tab_number": "1"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "tab_number": "1",
+            "title": "Tab 1 Content"
+          }
+        },
+        {
+          "type": "image",
+          "settings": {
+            "tab_number": "2"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "tab_number": "2",
+            "title": "Tab 2 Content"
+          }
+        },
+        {
+          "type": "image",
+          "settings": {
+            "tab_number": "3"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "tab_number": "3",
+            "title": "Tab 3 Content"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "*"
+    ]
+  }
+}
+
+        {% endschema %}

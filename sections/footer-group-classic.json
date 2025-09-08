@@ -1,0 +1,123 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer_icon_bar": {
+      "type": "footer__icon-bar",
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "icon": "leaf",
+            "text": "100% Organic",
+            "link": ""
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "icon": "bunny",
+            "text": "Cruelty free",
+            "link": ""
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "icon": "chat",
+            "text": "24/7 support",
+            "link": ""
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "icon": "truck",
+            "text": "Free shipping",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_1",
+        "text_2",
+        "text_3",
+        "text_4"
+      ],
+      "disabled": true,
+      "settings": {
+        "show_icon_bar": true,
+        "icon_position": "row",
+        "alignment": "center",
+        "mobile_alignment": "none",
+        "size": "medium",
+        "background": "#ea7552",
+        "link_color": "#ffffff",
+        "link_hover_color": "#000000",
+        "text_color": "#ffffff",
+        "width": "wide",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "footer": {
+      "type": "footer-classic",
+      "blocks": {
+        "logo": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/akrrushLogo_3dce48ff-44be-482b-a289-7542c4785579.png",
+            "size": "small",
+            "text": "",
+            "social_icons_footer": true
+          }
+        },
+        "link_list": {
+          "type": "link_list",
+          "settings": {
+            "menu": "main-menu",
+            "social_icons_footer": false
+          }
+        },
+        "newsletter_QNzpLP": {
+          "type": "newsletter",
+          "settings": {
+            "newsletter_title": "Stay in the loop!",
+            "newsletter_richtext": "<p>Be the first to know about the latest releases, promos, and more</p>",
+            "display_first_name": false,
+            "display_last_name": false
+          }
+        }
+      },
+      "block_order": [
+        "logo",
+        "link_list",
+        "newsletter_QNzpLP"
+      ],
+      "settings": {
+        "copyright_text": "<p><strong>Identity International Inc.</strong> | All Rights Reserved</p>",
+        "display_designed_by": false,
+        "display_shopify": false,
+        "show_follow_on_shop": false,
+        "show_locale_selector": false,
+        "show_currency_selector": false,
+        "display_payment_methods": true,
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "footer_icon_bar",
+    "footer"
+  ]
+}

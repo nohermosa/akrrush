@@ -1,0 +1,253 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "banner",
+      "disabled": true,
+      "settings": {
+        "image_darken": false,
+        "subtitle": "Subheading",
+        "width": "wide",
+        "banner_height": "medium",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "page": {
+      "type": "page-content__main",
+      "disabled": true,
+      "settings": {
+        "show_heading": true,
+        "heading_alignment": "left",
+        "width": "standard",
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "main": {
+      "type": "index__faq",
+      "blocks": {
+        "16306825309648acac-1": {
+          "type": "content",
+          "repeater": "{{ page.metafields.custom.faq_questions_and_answers.value }}",
+          "settings": {
+            "title": "{{ block.repeater.question_01.value }}",
+            "answer": "{{ block.repeater.answer_01 | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": [
+        "16306825309648acac-1"
+      ],
+      "settings": {
+        "title": "FAQ",
+        "question_color": "#ffffff",
+        "question_background_color": "#665048",
+        "alt_question_background_color": "#7b6154",
+        "toggle_icon_color": "#ffffff",
+        "toggle_icon_thickness": 1.5,
+        "answer_color": "#7d6355",
+        "heading_color": "#ea7552",
+        "heading_size": 40,
+        "heading_bottom_padding": 60,
+        "heading_alignment": "center",
+        "heading_size_mobile": 26,
+        "heading_bottom_padding_mobile": 15,
+        "width": "standard",
+        "custom_width": "",
+        "padding_top": 60,
+        "padding_bottom": 80,
+        "animation": "fadeInRight",
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "qq_marquee_image_text_yG8gVH": {
+      "type": "QQ-MarqueeImageText",
+      "blocks": {
+        "image_Dx9K3b": {
+          "type": "image",
+          "settings": {
+            "image": "{{ page.metafields.custom.icon_carousel.value.icon_01.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_ABczYf": {
+          "type": "image",
+          "settings": {
+            "image": "{{ page.metafields.custom.icon_carousel.value.icon_02.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_6DK846": {
+          "type": "image",
+          "settings": {
+            "image": "{{ page.metafields.custom.icon_carousel.value.icon_03.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_wLzBcJ": {
+          "type": "image",
+          "settings": {
+            "image": "{{ page.metafields.custom.icon_carousel.value.icon_04.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_ipAp9T": {
+          "type": "image",
+          "settings": {
+            "image": "{{ page.metafields.custom.icon_carousel.value.icon_05.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_Dx9K3b",
+        "image_ABczYf",
+        "image_6DK846",
+        "image_wLzBcJ",
+        "image_ipAp9T"
+      ],
+      "disabled": true,
+      "settings": {
+        "marquee_speed": 40,
+        "marquee_gap": 60,
+        "marquee_gap_mobile": 0,
+        "marquee_direction": "left",
+        "items_alignment": "center",
+        "section_background_color": "#ffffff",
+        "section_width": "fullwidth",
+        "content_max_width": 1280,
+        "section_border_color": "",
+        "section_border_top_width": 0,
+        "section_border_bottom_width": 0,
+        "section_margin_top": 20,
+        "section_margin_bottom": 0,
+        "section_padding_top": 20,
+        "section_padding_bottom": 20,
+        "section_margin_top_mobile": 20,
+        "section_margin_bottom_mobile": 20,
+        "section_padding_top_mobile": 20,
+        "section_padding_bottom_mobile": 20,
+        "media_width": 125,
+        "media_width_mobile": 50,
+        "underline_link": "none",
+        "underline_link_color": "",
+        "underline_link_hover_color": "",
+        "text_color": "",
+        "text_custom_font": false,
+        "text_font": "mono",
+        "text_font_name": "",
+        "text_font_weight": "default",
+        "text_font_size": 20,
+        "text_letter_spacing": 0,
+        "text_font_size_mobile": 16,
+        "text_letter_spacing_mobile": 0,
+        "section_class": ""
+      }
+    },
+    "index_image_with_text_overlay_8bUaXq": {
+      "type": "index__image-with-text-overlay",
+      "disabled": true,
+      "settings": {
+        "caption_padding": 40,
+        "image": "shopify://shop_images/blankImage750px.png",
+        "link": "",
+        "pretext": "",
+        "title": "Here for you, Anytime",
+        "heading_h1": false,
+        "subtitle": "<p>We believe that great customer service is just as important as the quality of our bone broth. That’s why we’re proud to offer 24/7 customer support. No matter the time or your needs, we’re here to support you on your bone broth journey.</p>",
+        "pretext_color": "#000000",
+        "heading_color": "#ea7552",
+        "subheading_color": "#7d6355",
+        "text_alignment": "center",
+        "text_horizontal_position": "center",
+        "text_vertical_position": "middle",
+        "text_width": 50,
+        "text_box_shape": "circle",
+        "text_border_radius": 20,
+        "background_color": "#ffffff",
+        "background_opacity": 100,
+        "border_color": "#ffffff",
+        "border_width": 0,
+        "button_1": "Contact Us",
+        "button_1_link": "shopify://pages/contact",
+        "button_1_style": "button--primary",
+        "button_2": "",
+        "button_2_link": "",
+        "button_2_style": "button--secondary",
+        "width": "wide",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_left": 0,
+        "padding_right": 0,
+        "animation": "none",
+        "mobile_text_below_image": true,
+        "mobile_preheading": "",
+        "mobile_heading": "",
+        "mobile_subheading": "",
+        "pretext_color_mobile": "rgba(0,0,0,0)",
+        "heading_color_mobile": "rgba(0,0,0,0)",
+        "subheading_color_mobile": "rgba(0,0,0,0)",
+        "text_alignment_mobile": "same_as_desktop",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "css_class": "",
+        "custom_css": ".image-with-text-overlay__buttons .button, .image-with-text-overlay__buttons .age-gate__confirm_btn {\n    flex: 0 0 100%;\n}"
+      }
+    },
+    "index_featured_collection_wF4ae4": {
+      "type": "index__featured-collection",
+      "settings": {
+        "title": "Check out some of our best sellers",
+        "subtitle": "",
+        "collection": "bone-broth",
+        "products_per": 4,
+        "products_limit": 4,
+        "align_height": false,
+        "collection_height": 200,
+        "button_label": "",
+        "button_style": "button--primary",
+        "collection_style": "grid",
+        "width": "wide",
+        "show_gutter": true,
+        "padding_top": 61,
+        "padding_bottom": 20,
+        "animation": "fadeInLeft",
+        "collection_layout_mobile": "grid",
+        "mobile_products_per_row": "1",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "page",
+    "main",
+    "qq_marquee_image_text_yG8gVH",
+    "index_image_with_text_overlay_8bUaXq",
+    "index_featured_collection_wF4ae4"
+  ]
+}

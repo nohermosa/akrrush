@@ -1,0 +1,51 @@
+{% if settings.collection_swatches %}
+  {% assign file_extension = 'png' %}
+  {% for option in product.options_with_values %}
+    {% assign swatch_trigger = settings.swatch_trigger | strip | downcase %}
+    {% assign option_name = option.name | downcase %}
+    {% if option_name == swatch_trigger %}
+      {% assign option_index = forloop.index0 %}
+      {% assign values = '' %}
+      <div class="thumbnail-swatch is-justify-{{ settings.thumbnail_text_alignment }} is-flex-wrap">
+        {% for variant in product.variants %}
+          {% assign value = variant.options[option_index] %}
+          {% unless values contains value %}
+            {% assign values = values | join: ',' %}
+            {% assign values = values | append: ',' | append: value %}
+            {% assign values = values | split: ',' %}
+            {% assign swatch_file_url = variant.image | img_url: 'small' %}
+            <a href="{{ variant.url | within: collection }}" class="swatch swatch__style--{{ settings.collection_swatches_shape }}" data-swatch-name="meta-{{ option_name }}_{{ value | replace: ' ', '_' | downcase }}">
+              <span {% if section.settings.products_per_row == '2'%}
+                      data-image="{{ variant.featured_image | img_url: '600x' }}"
+                    {% elsif section.settings.products_per_row == '3' %}
+                      data-image="{{ variant.featured_image | img_url: '500x' }}"
+                    {% else %}
+                      data-image="{{ variant.featured_image | img_url: '400x' }}"
+                    {% endif %}
+                    style="
+                      {% if settings.swatches_option_style == 'variant_image' and variant.featured_image != blank %}
+                        background-image: url({{ variant.featured_image | img_url: 'small' }});
+                      {% else %}
+                        background-color: {{ value | split: ' ' | last | handle }};
+                      {% endif %}
+                    ">
+                  {% comment %} ✅ FIXED: Use variant.featured_image instead of looking for swatch files {% endcomment %}
+                  {% assign image_name = value | handle | append: '.' | append: file_extension %}
+                  {% assign swatch = images[image_name] %}
+                  
+                  {% comment %} Use variant image if available, otherwise fallback to swatch file, then to placeholder {% endcomment %}
+                  {% if variant.featured_image != blank %}
+                    <img class="swatch__image" src="{{ variant.featured_image | img_url: '150x' }}" alt="{{ variant.title }}">
+                  {% elsif swatch != empty %}
+                    <img class="swatch__image" src="{{ swatch | img_url: '150x' }}" alt="{{ variant.title }}">
+                  {% else %}
+                    <img class="swatch__image swatch__image--empty" src="{{ 'no-image.png' | asset_img_url: '150x' }}" alt="{{ variant.title }}">
+                  {% endif %}
+                </span>
+            </a>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}

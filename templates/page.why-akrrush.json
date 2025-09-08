@@ -1,0 +1,730 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-content__main",
+      "disabled": true,
+      "settings": {
+        "show_heading": true,
+        "heading_alignment": "left",
+        "width": "standard",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "qq_marquee_image_text_KdRj6r": {
+      "type": "QQ-MarqueeImageText",
+      "blocks": {
+        "image_Lykqwp": {
+          "type": "image",
+          "settings": {
+            "image": "{{ page.metafields.custom.icon_carousel.value.icon_01.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_CKmTnc": {
+          "type": "image",
+          "settings": {
+            "image": "{{ page.metafields.custom.icon_carousel.value.icon_02.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_crye7w": {
+          "type": "image",
+          "settings": {
+            "image": "{{ page.metafields.custom.icon_carousel.value.icon_03.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_ehXmJy": {
+          "type": "image",
+          "settings": {
+            "image": "{{ page.metafields.custom.icon_carousel.value.icon_04.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_3zD9fa": {
+          "type": "image",
+          "settings": {
+            "image": "{{ page.metafields.custom.icon_carousel.value.icon_05.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_Lykqwp",
+        "image_CKmTnc",
+        "image_crye7w",
+        "image_ehXmJy",
+        "image_3zD9fa"
+      ],
+      "disabled": true,
+      "settings": {
+        "marquee_speed": 40,
+        "marquee_gap": 60,
+        "marquee_gap_mobile": 0,
+        "marquee_direction": "left",
+        "items_alignment": "center",
+        "section_background_color": "#ffffff",
+        "section_width": "fullwidth",
+        "content_max_width": 1280,
+        "section_border_color": "",
+        "section_border_top_width": 0,
+        "section_border_bottom_width": 0,
+        "section_margin_top": 0,
+        "section_margin_bottom": 20,
+        "section_padding_top": 20,
+        "section_padding_bottom": 20,
+        "section_margin_top_mobile": 20,
+        "section_margin_bottom_mobile": 20,
+        "section_padding_top_mobile": 20,
+        "section_padding_bottom_mobile": 20,
+        "media_width": 125,
+        "media_width_mobile": 50,
+        "underline_link": "none",
+        "underline_link_color": "",
+        "underline_link_hover_color": "",
+        "text_color": "",
+        "text_custom_font": false,
+        "text_font": "mono",
+        "text_font_name": "",
+        "text_font_weight": "default",
+        "text_font_size": 20,
+        "text_letter_spacing": 0,
+        "text_font_size_mobile": 16,
+        "text_letter_spacing_mobile": 0,
+        "section_class": ""
+      }
+    },
+    "grid_tWj9jm": {
+      "type": "grid",
+      "blocks": {
+        "grid_item_q8Eimd": {
+          "type": "grid_item",
+          "settings": {
+            "link": "",
+            "heading": "Family Farm Sourced",
+            "use_custom_heading": false,
+            "heading_custom_size": 24,
+            "heading_custom_color": "#ea7552",
+            "heading_custom_weight": 400,
+            "text": "Small Norwegian farms (averaging just 27 animals) where care is individual, not industrial",
+            "use_custom_text": false,
+            "text_custom_size": 30,
+            "text_custom_color": "#7d6355",
+            "text_custom_weight": 400,
+            "button_label": "",
+            "button_style": "button--primary",
+            "text_color": "rgba(0,0,0,0)",
+            "overlay_background": "rgba(0,0,0,0)",
+            "overlay_background_opacity": 0
+          }
+        },
+        "grid_item_XBDEw7": {
+          "type": "grid_item",
+          "settings": {
+            "link": "",
+            "heading": "Naturally Pure",
+            "use_custom_heading": false,
+            "heading_custom_size": 24,
+            "heading_custom_color": "#000000",
+            "heading_custom_weight": 400,
+            "text": "Zero antibiotics, non-GMO feed, true free-range environments",
+            "use_custom_text": false,
+            "text_custom_size": 16,
+            "text_custom_color": "#404040",
+            "text_custom_weight": 400,
+            "button_label": "Button",
+            "button_style": "button--primary",
+            "text_color": "rgba(0,0,0,0)",
+            "overlay_background": "rgba(0,0,0,0)",
+            "overlay_background_opacity": 0
+          }
+        },
+        "grid_item_xMG7CU": {
+          "type": "grid_item",
+          "settings": {
+            "link": "",
+            "heading": "Sustainability in Action",
+            "use_custom_heading": false,
+            "heading_custom_size": 24,
+            "heading_custom_color": "#000000",
+            "heading_custom_weight": 400,
+            "text": "Part of Norway's circular economy, transforming what others waste into what nourishes",
+            "use_custom_text": true,
+            "text_custom_size": 30,
+            "text_custom_color": "#7d6355",
+            "text_custom_weight": 400,
+            "button_label": "",
+            "button_style": "button--primary",
+            "text_color": "rgba(0,0,0,0)",
+            "overlay_background": "rgba(0,0,0,0)",
+            "overlay_background_opacity": 0
+          }
+        },
+        "grid_item_8PexUD": {
+          "type": "grid_item",
+          "settings": {
+            "link": "",
+            "heading": "Verified Clean",
+            "use_custom_heading": false,
+            "heading_custom_size": 24,
+            "heading_custom_color": "#000000",
+            "heading_custom_weight": 400,
+            "text": "Among the world's cleanest biomass, free from heavy metals and toxins",
+            "use_custom_text": false,
+            "text_custom_size": 16,
+            "text_custom_color": "#404040",
+            "text_custom_weight": 400,
+            "button_label": "Button",
+            "button_style": "button--primary",
+            "text_color": "rgba(0,0,0,0)",
+            "overlay_background": "rgba(0,0,0,0)",
+            "overlay_background_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "grid_item_q8Eimd",
+        "grid_item_XBDEw7",
+        "grid_item_xMG7CU",
+        "grid_item_8PexUD"
+      ],
+      "disabled": true,
+      "settings": {
+        "column_count": 4,
+        "width": "wide",
+        "show_gutter": true,
+        "padding_top": 20,
+        "padding_bottom": 60,
+        "align_height": false,
+        "image_height": 300,
+        "border_radius": 0,
+        "enable_zoom": true,
+        "show_text_below_image": true,
+        "text_alignment": "center",
+        "text_horizontal_position": "center",
+        "text_vertical_position": "middle",
+        "text_width": 80,
+        "heading_size": "small",
+        "use_custom_heading": true,
+        "heading_custom_size": 26,
+        "heading_custom_color": "#ea7552",
+        "heading_custom_weight": 600,
+        "use_custom_text": true,
+        "text_custom_size": 20,
+        "text_custom_color": "#7d6355",
+        "text_custom_weight": 400,
+        "text_color": "rgba(0,0,0,0)",
+        "overlay_background": "rgba(0,0,0,0)",
+        "overlay_background_opacity": 0,
+        "section_background_color": "rgba(0,0,0,0)",
+        "animation": "none",
+        "mobile_heading_size": "same_as_desktop",
+        "mobile_text_alignment": "same_as_desktop",
+        "mobile_text_horizontal_position": "same_as_desktop",
+        "mobile_text_vertical_position": "same_as_desktop",
+        "mobile_text_width": 100,
+        "mobile_layout": "slider",
+        "show_arrows": false,
+        "show_nav_buttons": true,
+        "mobile_padding_top": 20,
+        "mobile_padding_bottom": 20
+      }
+    },
+    "index_heading_iAji8H": {
+      "type": "index__heading",
+      "disabled": true,
+      "settings": {
+        "preheading": "",
+        "title": "What's clean for the planet becomes clean for your body.",
+        "subheading": "",
+        "heading_alignment": "center",
+        "vertical_spacing": "medium",
+        "preheading_color": "rgba(0,0,0,0)",
+        "use_custom_preheading": false,
+        "preheading_size": 16,
+        "preheading_weight": 400,
+        "heading_color": "#7d6355",
+        "use_custom_heading": true,
+        "heading_size": 40,
+        "heading_weight": 600,
+        "subheading_color": "#7d6355",
+        "use_custom_subheading": true,
+        "subheading_size": 30,
+        "subheading_weight": 400,
+        "use_custom_mobile": false,
+        "mobile_preheading_size": 14,
+        "mobile_heading_size": 28,
+        "mobile_subheading_size": 14,
+        "background": "rgba(0,0,0,0)",
+        "gradient": "rgba(0,0,0,0)",
+        "gradient_rotation": 0,
+        "width": "standard",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_left": 0,
+        "padding_right": 0,
+        "animation": "none",
+        "mobile_text_alignment": "none",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "feature_boxes_section_DPmit8": {
+      "type": "feature-boxes-section",
+      "blocks": {
+        "feature_box_b3C9Gg": {
+          "type": "feature_box",
+          "settings": {
+            "title": "Enzymatic Hydrolysis",
+            "subtitle": "Natural enzymes break down protein into its most powerful form"
+          }
+        },
+        "feature_box_PzbgYU": {
+          "type": "feature_box",
+          "settings": {
+            "title": "World-Exclusive System",
+            "subtitle": "The only continuous hydrolysis process for poultry protein"
+          }
+        },
+        "feature_box_H6FAHk": {
+          "type": "feature_box",
+          "settings": {
+            "title": "Zero-Waste Promise",
+            "subtitle": "Closed-loop system utilizes 100% of input materials"
+          }
+        },
+        "feature_box_zJHqLi": {
+          "type": "feature_box",
+          "settings": {
+            "title": "Fresh Processing",
+            "subtitle": "Raw materials travel directly from farm to facility, maintaining ultimate purity"
+          }
+        }
+      },
+      "block_order": [
+        "feature_box_b3C9Gg",
+        "feature_box_PzbgYU",
+        "feature_box_H6FAHk",
+        "feature_box_zJHqLi"
+      ],
+      "disabled": true,
+      "settings": {
+        "is_full_width": true,
+        "section_width": 1600,
+        "full_width_padding": 0,
+        "background_color": "#ffffff",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "title": "Revolutionary Process",
+        "title_size": 40,
+        "mobile_title_size": 28,
+        "title_color": "#f28c65",
+        "title_weight": "font-medium",
+        "subtitle": "Nature's Intelligence Amplified",
+        "subtitle_size": 30,
+        "mobile_subtitle_size": 18,
+        "subtitle_color": "#f28c65",
+        "subtitle_weight": "font-normal",
+        "description": "While others rely on conventional methods, we've channeled the Viking spirit of exploration to pioneer something extraordinary.",
+        "description_size": 24,
+        "mobile_description_size": 14,
+        "description_color": "#7d6355",
+        "product_image": "shopify://shop_images/Trio_1.png",
+        "box_background_color": "#fffaf5",
+        "box_border_color": "#f28c65",
+        "box_border_thickness": 3,
+        "box_border_radius": 10,
+        "box_title_size": 24,
+        "mobile_box_title_size": 16,
+        "box_title_color": "#f28c65",
+        "box_title_weight": "medium",
+        "box_subtitle_size": 20,
+        "mobile_box_subtitle_size": 12,
+        "box_subtitle_color": "#333333",
+        "bottom_statement": "This isn't incremental improvement—it's fundamental transformation.",
+        "bottom_statement_size": 30,
+        "mobile_bottom_statement_size": 16,
+        "bottom_statement_color": "#7d6355",
+        "bottom_statement_weight": "bold",
+        "button_text": "Get started now",
+        "button_link": "",
+        "button_style": "primary",
+        "button_background": "#f28c65",
+        "button_text_color": "#ffffff",
+        "button_radius": 30,
+        "animation": "none",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "index_image_with_text_bVnCeC": {
+      "type": "index__image-with-text",
+      "blocks": {
+        "image_VmdAzC": {
+          "type": "image",
+          "settings": {
+            "image_link": ""
+          }
+        },
+        "text_XadALY": {
+          "type": "text",
+          "settings": {
+            "title": "Peptide Power:  Beyond Protein",
+            "heading_size": "regular",
+            "text": "<p>Traditional proteins are complex chains your body must work to break down. Our peptides speak your body's molecular language directly.</p><p><strong>Pre-Digested Advantage</strong> – Significant portion already broken down to optimal size for immediate absorption </p><p><strong>98% Instant Absorption</strong> – Compared to just 4% in traditional bone broths </p><p><strong>Rapid Delivery</strong> – Nutrients reach bloodstream in 20-30 minutes, not 2-3 hours </p><p><strong>Bioactive Benefits</strong> – Specific peptide sequences trigger responses beyond simple nutrition</p>",
+            "secondary_title": "",
+            "secondary_text": "",
+            "alignment": "left",
+            "vertical_position": "center",
+            "button_label": "",
+            "link": "",
+            "button_style": "button--primary",
+            "background": "rgba(0,0,0,0)",
+            "text_color": "#7d6355",
+            "mobile_title": "",
+            "mobile_heading_size": "same_as_desktop",
+            "mobile_text": "",
+            "mobile_secondary_title": "",
+            "mobile_secondary_text": "",
+            "mobile_alignment": "same_as_desktop"
+          }
+        }
+      },
+      "block_order": [
+        "image_VmdAzC",
+        "text_XadALY"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading_pixel_size": 40,
+        "heading_color": "#ea7552",
+        "text_pixel_size": 26,
+        "mobile_heading_pixel_size": 20,
+        "mobile_text_pixel_size": 14,
+        "width": "wide",
+        "show_gutter": false,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "animation": "none",
+        "mobile_text_position": "same_as_desktop",
+        "mobile_padding_top": 20,
+        "mobile_padding_bottom": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "index_heading_tQBx7w": {
+      "type": "index__heading",
+      "disabled": true,
+      "settings": {
+        "preheading": "",
+        "title": "This isn't just absorption. This is liberation.",
+        "subheading": "",
+        "heading_alignment": "center",
+        "vertical_spacing": "medium",
+        "preheading_color": "rgba(0,0,0,0)",
+        "use_custom_preheading": false,
+        "preheading_size": 16,
+        "preheading_weight": 400,
+        "heading_color": "#7d6355",
+        "use_custom_heading": true,
+        "heading_size": 40,
+        "heading_weight": 600,
+        "subheading_color": "#7d6355",
+        "use_custom_subheading": true,
+        "subheading_size": 30,
+        "subheading_weight": 400,
+        "use_custom_mobile": false,
+        "mobile_preheading_size": 14,
+        "mobile_heading_size": 28,
+        "mobile_subheading_size": 14,
+        "background": "rgba(0,0,0,0)",
+        "gradient": "rgba(0,0,0,0)",
+        "gradient_rotation": 0,
+        "width": "standard",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_left": 0,
+        "padding_right": 0,
+        "animation": "none",
+        "mobile_text_alignment": "none",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "index_image_with_text_iQhh3t": {
+      "type": "index__image-with-text",
+      "blocks": {
+        "text_HtJFGc": {
+          "type": "text",
+          "settings": {
+            "title": "Transformative Benefits <br>You Can Feel",
+            "heading_size": "regular",
+            "text": "<p>Experience nutrition not as modern science defines it, but as ancient wisdom always understood it: a force that transforms.</p><p><strong>Accelerated Recovery</strong> – Rapid muscle repair, reduced inflammation, enhanced protein synthesis </p><p><strong>Digestive Harmony</strong> – No bloating or discomfort, supports gut barrier function and microbiome balance </p><p><strong>Complete Nourishment</strong> – Full spectrum of essential amino acids, natural B vitamins, beneficial compounds </p><p><strong>Metabolic Support </strong>– Studies show potential for improved blood pressure and energy metabolism</p>",
+            "secondary_title": "",
+            "secondary_text": "",
+            "alignment": "left",
+            "vertical_position": "center",
+            "button_label": "",
+            "link": "",
+            "button_style": "button--primary",
+            "background": "rgba(0,0,0,0)",
+            "text_color": "#7d6355",
+            "mobile_title": "",
+            "mobile_heading_size": "same_as_desktop",
+            "mobile_text": "",
+            "mobile_secondary_title": "",
+            "mobile_secondary_text": "",
+            "mobile_alignment": "same_as_desktop"
+          }
+        },
+        "image_UgJEmy": {
+          "type": "image",
+          "settings": {
+            "image_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_HtJFGc",
+        "image_UgJEmy"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading_pixel_size": 40,
+        "heading_color": "#ea7552",
+        "text_pixel_size": 26,
+        "mobile_heading_pixel_size": 20,
+        "mobile_text_pixel_size": 14,
+        "width": "wide",
+        "show_gutter": false,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "animation": "none",
+        "mobile_text_position": "same_as_desktop",
+        "mobile_padding_top": 20,
+        "mobile_padding_bottom": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "index_heading_cqhmng": {
+      "type": "index__heading",
+      "disabled": true,
+      "settings": {
+        "preheading": "",
+        "title": "Krrush boundaries. Krrush expectations. Krrush what you thought possible.",
+        "subheading": "<p>Join us in embracing the power of clean nutrition.</p><p>Challenge the ordinary. Nourish your potential. Live better.</p>",
+        "heading_alignment": "center",
+        "vertical_spacing": "medium",
+        "preheading_color": "rgba(0,0,0,0)",
+        "use_custom_preheading": false,
+        "preheading_size": 16,
+        "preheading_weight": 400,
+        "heading_color": "#ea7552",
+        "use_custom_heading": true,
+        "heading_size": 40,
+        "heading_weight": 600,
+        "subheading_color": "#7d6355",
+        "use_custom_subheading": true,
+        "subheading_size": 30,
+        "subheading_weight": 400,
+        "use_custom_mobile": false,
+        "mobile_preheading_size": 14,
+        "mobile_heading_size": 28,
+        "mobile_subheading_size": 14,
+        "background": "rgba(0,0,0,0)",
+        "gradient": "rgba(0,0,0,0)",
+        "gradient_rotation": 0,
+        "width": "wide",
+        "padding_top": 60,
+        "padding_bottom": 30,
+        "padding_left": 0,
+        "padding_right": 0,
+        "animation": "none",
+        "mobile_text_alignment": "none",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "index_featured_collection_aDTmgt": {
+      "type": "index__featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "collection": "bone-broth",
+        "products_per": 4,
+        "products_limit": 4,
+        "align_height": false,
+        "collection_height": 200,
+        "button_label": "",
+        "button_style": "button--primary",
+        "collection_style": "grid",
+        "width": "wide",
+        "show_gutter": true,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "animation": "none",
+        "collection_layout_mobile": "grid",
+        "mobile_products_per_row": "1",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "index_image_with_text_overlay_Dcrzkc": {
+      "type": "index__image-with-text-overlay",
+      "disabled": true,
+      "settings": {
+        "caption_padding": 40,
+        "image": "shopify://shop_images/blankImage750px.png",
+        "link": "",
+        "pretext": "",
+        "title": "Here for you, Anytime",
+        "heading_h1": false,
+        "subtitle": "<p>We believe that great customer service is just as important as the quality of our bone broth. That’s why we’re proud to offer 24/7 customer support. No matter the time or your needs, we’re here to support you on your bone broth journey.</p>",
+        "pretext_color": "#000000",
+        "heading_color": "#ea7552",
+        "subheading_color": "#7d6355",
+        "text_alignment": "center",
+        "text_horizontal_position": "center",
+        "text_vertical_position": "middle",
+        "text_width": 50,
+        "text_box_shape": "circle",
+        "text_border_radius": 20,
+        "background_color": "#ffffff",
+        "background_opacity": 100,
+        "border_color": "#ffffff",
+        "border_width": 0,
+        "button_1": "Contact Us",
+        "button_1_link": "shopify://pages/contact",
+        "button_1_style": "button--primary",
+        "button_2": "",
+        "button_2_link": "",
+        "button_2_style": "button--secondary",
+        "width": "wide",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_left": 0,
+        "padding_right": 0,
+        "animation": "none",
+        "mobile_text_below_image": true,
+        "mobile_preheading": "",
+        "mobile_heading": "",
+        "mobile_subheading": "",
+        "pretext_color_mobile": "rgba(0,0,0,0)",
+        "heading_color_mobile": "rgba(0,0,0,0)",
+        "subheading_color_mobile": "rgba(0,0,0,0)",
+        "text_alignment_mobile": "same_as_desktop",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "css_class": "",
+        "custom_css": ".image-with-text-overlay__buttons .button, .image-with-text-overlay__buttons .age-gate__confirm_btn {\n    flex: 0 0 100%;\n}"
+      }
+    },
+    "index_image_with_text_overlay_kjfNEr": {
+      "type": "index__image-with-text-overlay",
+      "settings": {
+        "caption_padding": 30,
+        "image": "shopify://shop_images/banner.jpg",
+        "mobile_image": "shopify://shop_images/bannerMobileWhy.jpg",
+        "link": "",
+        "pretext": "",
+        "title": "The Norwegian Difference",
+        "heading_h1": true,
+        "subtitle": "",
+        "pretext_color": "#000000",
+        "heading_color": "#ffffff",
+        "subheading_color": "#ffffff",
+        "text_alignment": "left",
+        "text_horizontal_position": "left",
+        "text_vertical_position": "top",
+        "text_width": 50,
+        "text_box_shape": "square",
+        "text_border_radius": 20,
+        "background_color": "#ffffff",
+        "background_opacity": 0,
+        "border_color": "#ffffff",
+        "border_width": 0,
+        "button_1": "",
+        "button_1_link": "",
+        "button_1_style": "button--secondary",
+        "button_2": "",
+        "button_2_link": "",
+        "button_2_style": "button--secondary",
+        "width": "wide",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_left": 0,
+        "padding_right": 0,
+        "animation": "fadeInDown",
+        "mobile_text_below_image": true,
+        "mobile_preheading": "",
+        "mobile_heading": "The Norwegian Difference",
+        "mobile_subheading": "",
+        "pretext_color_mobile": "rgba(0,0,0,0)",
+        "heading_color_mobile": "#7d6355",
+        "subheading_color_mobile": "rgba(0,0,0,0)",
+        "text_alignment_mobile": "same_as_desktop",
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "css_class": "why-akrrush-page",
+        "custom_css": ""
+      }
+    },
+    "ecom_why_akrrush_nuture_section_VFd4qY": {
+      "type": "ecom-why-akrrush-nuture-section",
+      "settings": {}
+    },
+    "ecom_why_akrrush_enzymatic_hydrol_section_tRetYe": {
+      "type": "ecom-why-akrrush-enzymatic-hydrol-section",
+      "settings": {}
+    },
+    "ecom_why_akrrush_chart_section_7NPCcD": {
+      "type": "ecom-why-akrrush-chart-section",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "qq_marquee_image_text_KdRj6r",
+    "grid_tWj9jm",
+    "index_heading_iAji8H",
+    "feature_boxes_section_DPmit8",
+    "index_image_with_text_bVnCeC",
+    "index_heading_tQBx7w",
+    "index_image_with_text_iQhh3t",
+    "index_heading_cqhmng",
+    "index_featured_collection_aDTmgt",
+    "index_image_with_text_overlay_Dcrzkc",
+    "index_image_with_text_overlay_kjfNEr",
+    "ecom_why_akrrush_nuture_section_VFd4qY",
+    "ecom_why_akrrush_enzymatic_hydrol_section_tRetYe",
+    "ecom_why_akrrush_chart_section_7NPCcD"
+  ]
+}

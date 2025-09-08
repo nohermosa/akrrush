@@ -1,0 +1,46 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-content__main",
+      "disabled": true,
+      "settings": {
+        "show_heading": true,
+        "heading_alignment": "left",
+        "width": "standard",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "index_html_KjUcTf": {
+      "type": "index__html",
+      "settings": {
+        "html_content": "<div class=\"yotpo-widget-instance\" data-yotpo-instance-id=\"1086437\"></div>",
+        "width": "standard",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_left": 0,
+        "padding_right": 0,
+        "animation": "none",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "index_html_KjUcTf"
+  ]
+}

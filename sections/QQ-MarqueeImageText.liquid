@@ -1,0 +1,709 @@
+{% comment %}
+[[ QQ - Image & Text Marquee ]] [[ Section for Shopify Websites to display a scrolling marquee of text and images ]]
+Author: qwiqode.com
+Created: 07.17.2024 Version: 1.02
+Company website: qwiqode.com
+Email: hello@qwiqode.com
+* (c) Copyright by Studio Umbrella Inc. /
+{% endcomment %}
+{% assign iconSize = true %}
+{% if iconSize == true %}
+    {% assign imageSizes = "768,500,256,128x,56,32" | split: ',' %}
+{% else %}
+    {% assign imageSizes = "2400,1920,1500,1200,900x,768,500,240" | split: ',' %}
+{% endif %}  
+  {% liquid
+  assign sectionClass = section.settings.section_class
+  assign contentMaxWidth = section.settings.content_max_width
+  assign sectionBackgroundColor = section.settings.section_background_color
+  assign sectionBorderColor = section.settings.section_border_color
+  assign sectionBorderTopWidth = section.settings.section_border_top_width
+  assign sectionBorderBottomWidth = section.settings.section_border_bottom_width
+  assign sectionWidth = section.settings.section_width
+  assign sectionMarginTop = section.settings.section_margin_top
+	assign sectionMarginTopMobile = section.settings.section_margin_top_mobile
+	assign sectionMarginBottom = section.settings.section_margin_bottom
+	assign sectionMarginBottomMobile = section.settings.section_margin_bottom_mobile
+  assign sectionPaddingTop = section.settings.section_padding_top
+	assign sectionPaddingTopMobile = section.settings.section_padding_top_mobile
+  assign sectionPaddingBottom = section.settings.section_padding_bottom
+	assign sectionPaddingBottomMobile = section.settings.section_padding_bottom_mobile
+  assign textColor = section.settings.text_color
+  assign textCustomFont = section.settings.text_custom_font
+  assign textFont = section.settings.text_font
+  assign textFontName = section.settings.text_font_name
+  assign textCustomFontWeight = section.settings.text_font_weight
+  assign textFontSize = section.settings.text_font_size
+  assign textFontSizeMobile = section.settings.text_font_size_mobile
+  assign textLetterSpacing = section.settings.text_letter_spacing
+  assign textLetterSpacingMobile = section.settings.text_letter_spacing_mobile
+  assign textLink = section.settings.underline_link
+  assign textLinkColor = section.settings.underline_link_color
+  assign textLinkHoverColor = section.settings.underline_link_hover_color
+  assign mediaWidth = section.settings.media_width
+  assign mediaWidthMobile = section.settings.media_width_mobile
+  assign marqueeSpeed = section.settings.marquee_speed
+  assign marqueeDirection = section.settings.marquee_direction
+  assign marqueeGap = section.settings.marquee_gap
+  assign marqueeGapMobile = section.settings.marquee_gap_mobile
+  assign itemsAlignment = section.settings.items_alignment
+  assign estimated_item_width = 300
+  assign screen_width = 1920
+  assign items_count = section.blocks.size
+  assign total_items_width = items_count | times: estimated_item_width | times: 1.0
+  assign duplication_factor = screen_width | divided_by: total_items_width | ceil
+  assign duplication_factor = duplication_factor | times: 2 | plus: 2
+%}
+<div class="qq-image-text-marquee-wrapper {{sectionClass}}">
+    <div class="qq-image-text-marquee__inner" aria-hidden="true">
+      {%- for i in (1..duplication_factor) -%}
+        {%- for block in section.blocks -%}
+          <div class="qq-item qq-{{block.type}}">
+            {% if block.type == "image" %}              
+              {% liquid
+                assign blockImage = block.settings.image
+                assign imageDimensions = block.settings.image_dimensions                
+                assign imageBorderRadius = block.settings.image_border_radius         
+              %}            
+              {% if blockImage != blank %}
+                {% assign loopImage = blockImage %}								
+                {% assign mediaSize = imageDimensions %}								
+                {% liquid 
+                    if loopImage.alt != blank
+                      assign loopImageAlt = 'alt="' | append: loopImage.alt | append: '"'
+                    else
+                      assign loopImageAlt = ''
+                    endif
+                    assign proportion = loopImage.aspect_ratio
+                    assign imageW = loopImage.width
+                    assign imageH = loopImage.height   
+                    for imageSize in imageSizes
+                      assign maxWidthAllowed = imageSize | remove: 'x'
+                      assign maxHeightAllowed = imageSize | remove: 'x'
+                      if proportion > 1
+                        # landscape
+                        assign mostW = maxWidthAllowed
+                        assign mostH = mostW | times: proportion
+                      elsif proportion < 1
+                        # portrait
+                        assign mostH = maxHeightAllowed
+                        assign mostW = mostH | times: proportion
+                      else
+                        # square
+                        assign mostW = maxWidthAllowed
+                        assign mostH = mostW
+                      endif
+                      assign iw = imageW | at_most: mostW | round
+                      assign ih	= imageH | at_most: mostH | round
+                      if mediaSize == 'portrait'
+                        if halfSquarePortrait == true  
+                          assign ih = iw | times: 2 | round
+                            if imageH < ih
+                                assign ih = imageH
+                                assign iw = ih | divided_by: 2 | round
+                            endif
+                            if imageW < iw
+                                assign iw = imageW
+                                assign ih = iw | times: 2 | round
+                            endif
+                        else 
+                          assign ih = iw | divided_by: 0.6666667 | round
+                          if imageH < ih
+                            assign ih = imageH
+                            assign iw = ih | divided_by: 1.5 | round
+                          endif
+                          if imageW < iw
+                            assign iw = imageW
+                            assign ih = iw | divided_by: 0.666667 | round
+                          endif
+                        endif
+                      elsif mediaSize == 'vertical'
+                        assign ih = iw | times: 16 | divided_by: 9 | round
+                        if imageH < ih
+                          assign ih = imageH
+                          assign iw = ih | times: 9 | divided_by: 16 | round
+                        endif
+                        if imageW < iw
+                          assign iw = imageW
+                          assign ih = iw | times: 16 | divided_by: 9 | round
+                        endif     
+                      elsif mediaSize == 'horizontal'
+                        assign ih = iw | times: 9 | divided_by: 16 | round
+                        if imageH < ih
+                          assign ih = imageH
+                          assign iw = ih | times: 16 | divided_by: 9 | round
+                        endif
+                        if imageW < iw
+                          assign iw = imageW
+                          assign ih = iw | times: 9 | divided_by: 16 | round
+                        endif                                          
+                      elsif mediaSize == 'square'
+                        assign ih = iw
+                        if iw > imageW
+                          assign iw = imageW
+                          assign ih = iw
+                        endif
+                        if ih > imageH
+                          assign ih = imageH
+                          assign iw = ih
+                        endif
+                      elsif mediaSize == 'landscape'
+                        if halfSquareLandscape == true 
+                          assign ih = iw | times: 0.5 | round
+                          if imageH < ih
+                            assign ih = imageH
+                            assign iw = ih | times: 2 | round
+                          endif
+                          if imageW < iw
+                            assign iw = imageW
+                            assign ih = iw | times: 0.5 | round
+                          endif                        
+                        else 
+                         assign ih = iw | times: 4 | divided_by: 6 | round
+                          if imageH < ih
+                            assign ih = imageH
+                            assign iw = ih | times: 6 | divided_by: 4 | round
+                          endif
+                          if imageW < iw
+                            assign iw = imageW
+                            assign ih = iw | times: 4 | divided_by: 6 | round
+                          endif
+                        endif
+                      elsif mediaSize == 'original'
+                        assign ih = iw | divided_by: proportion | round
+                      endif
+                      assign size = iw | append: 'x' | append: ih
+                      assign imageUrl = loopImage | img_url: size, crop: 'center'
+                      if forloop.first
+                        assign imageUrls = imageUrl
+                      else
+                        assign imageUrls = imageUrls | append: ',' | append: imageUrl
+                      endif                      
+                    endfor
+                    assign imageUrls = imageUrls | split: ','                                                              
+%}
+                {% assign blockImageAlt = loopImageAlt %}
+                {% assign blockImageUrls = imageUrls %}	
+                {% capture blockImagesLoopArray %}
+                  {% for imageSize in imageSizes %}
+                    {% if imageSize contains 'x' %}
+                    {% assign defaultImageUrl = blockImageUrls[forloop.index0] %}
+                    {% assign imageSize = imageSize | remove: 'x' %}
+                    {% endif %}
+                    {{blockImageUrls[forloop.index0]}} {{imageSize}}w{% unless forloop.last %},{% endunless %}
+                  {% endfor %}
+                {% endcapture %}                
+                <picture>
+                  <img srcset="{{blockImagesLoopArray}}" {{blockImageAlt}} src=”{{defaultImageUrl}}”/ style="border-radius:{{imageBorderRadius}}px;">
+                </picture>
+              {% else %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 771 771" style="width:100%;height:100%	;" preserveAspectRatio="xMidYMid slice"><g style="isolation:isolate"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1" style="fill:#efefef;"><rect width="771" height="771" style="fill:#efefef;"/><g style="opacity:0.5"><path d="M280.73,441.53V406.12h-.48c-3,6.78-8.91,10.7-17.23,10.7-14.49,0-23-11.77-23-30.42S248.41,356,263.14,356c8.79,0,14.74,4,17.59,11.28h.47l.6-9.86H290v84.13Zm0-53.71V385c0-12.83-6.42-20.44-16-20.44s-15.1,7.72-15.1,21.87,5.47,21.86,15.1,21.86S280.73,400.66,280.73,387.82Z" style="fill:#373833"/><path d="M302.48,357.4h8.91l7.72,44.09h.48l10-44.09h7.49l10,44.09h.47l7.73-44.09h8.55l-10.81,58h-9.87l-9.74-43h-.47l-9.75,43h-9.86Z" style="fill:#373833"/><path d="M376.86,407.19h20V365.6h-20v-8.2h29.23v49.79h20v8.2h-49.2Zm15.21-69.52a8.08,8.08,0,1,1,8.08,8.09A7.87,7.87,0,0,1,392.07,337.67Z" style="fill:#373833"/><path d="M471.45,441.53V406.12H471c-3,6.78-8.92,10.7-17.23,10.7-14.5,0-23.06-11.77-23.06-30.42S439.13,356,453.86,356c8.8,0,14.74,4,17.59,11.28h.48l.59-9.86h8.2v84.13Zm0-53.71V385c0-12.83-6.41-20.44-16-20.44s-15.09,7.72-15.09,21.87,5.47,21.86,15.09,21.86S471.45,400.66,471.45,387.82Z" style="fill:#373833"/><path d="M492.72,386.4c0-19.73,8.8-30.42,25.19-30.42s25.2,10.69,25.2,30.42-8.8,30.42-25.2,30.42S492.72,406.12,492.72,386.4Zm40.76,0c0-14.38-5.35-21.87-15.57-21.87S502.35,372,502.35,386.4s5.35,21.86,15.56,21.86S533.48,400.77,533.48,386.4Z" style="fill:#373833"/><path d="M553.09,386.4c0-18.66,8.55-30.42,23-30.42,8.32,0,14.26,3.92,17.23,10.69h.48V331h9.27v84.37h-8.2l-.6-9.86h-.47c-2.85,7.25-8.8,11.29-17.59,11.29C561.52,416.82,553.09,405.17,553.09,386.4Zm40.76,1.42V385c0-12.83-6.42-20.44-16.05-20.44s-15.09,7.72-15.09,21.87,5.47,21.86,15.09,21.86S593.85,400.66,593.85,387.82Z" style="fill:#373833"/><path d="M615.36,386.28c0-19.61,8.79-30.3,25.31-30.3S666,366.67,666,386.28a18.15,18.15,0,0,1-.12,2.49H625c.59,13,6.06,19.49,16.52,19.49,6.53,0,11-2.61,13.43-7.6h10.34C661.94,411,654,416.82,641.38,416.82,624.39,416.82,615.36,406.24,615.36,386.28Zm40.75-5.35c-1.3-10.81-6.53-16.4-15.44-16.4s-14.15,5.59-15.45,16.4Z" style="fill:#373833"/><polygon points="105.12 429.87 179.13 385.56 105.12 341.26 115.51 324 201.41 375.33 201.41 395.8 115.51 447.13 105.12 429.87" style="fill:#29abe2"/><polygon points="119.25 395.8 119.25 375.33 205.22 323.97 215.55 341.26 141.53 385.56 215.55 429.87 205.16 447.13 119.25 395.8" style="fill:#0071bc;mix-blend-mode:multiply"/></g></g></g></g></svg>              
+              {% endif %}                       
+            {% elsif block.type == "text" %}
+              {% assign title = block.settings.title %}
+              {% if title != blank %}
+                {{title}}
+              {% endif %}
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+</div>
+{% assign sectionID = 'shopify-section-' | append: section.id %}
+<style data='../MarqueeImageText-inline-css.min.css.liquid'>{% if textCustomFont %} {{ textFont | font_face: font_display: 'swap' | strip_newlines }} {% endif %} html[dir="rtl"] #{{sectionID}} { direction:ltr; } html[dir="rtl"] #{{sectionID}} .qq-item span { direction:rtl; } {% if sectionWidth == 'fullwidth' %} #{{sectionID}} { width: 100vw !important; position: relative !important; height: auto !important; } html:not([dir="rtl"]) #{{sectionID}} { margin-left: -50vw !important; left: 50% !important; } html[dir="rtl"] #{{sectionID}} { margin-right: -50vw !important; right: 50% !important; } body { overflow-x:hidden; } {% else %} #{{sectionID}} { width:100%; max-width:{{contentMaxWidth}}px; } {% endif %} #{{sectionID}} { {% if sectionBackgroundColor contains '#' %} background-color:{{sectionBackgroundColor}};{% endif %} {% comment %} overflow:hidden; {% endcomment %} {% if sectionBorderColor contains '#' %} {% if sectionBorderTopWidth > 0 %} border-top:{{sectionBorderTopWidth}}px solid {{sectionBorderColor}}; {% endif %} {% if sectionBorderBottomWidth > 0 %} border-bottom:{{sectionBorderBottomWidth}}px solid {{sectionBorderColor}}; {% endif %} {% endif %} } #{{sectionID}}, #{{sectionID}} > div { width:100%; margin-left:auto; margin-right:auto; } #{{sectionID}} * { text-transform:none; box-sizing:border-box; } #{{sectionID}} .qq-text * { {% if textCustomFont %} {% if textFontName != blank %} font-family: {{textFontName}} !important; {% else %} font-family:{{textFont.family}}, {{textFont.fallback_families}} !important; {% endif %} {%endif%} {% if textColor contains '#' %}color:{{textColor}}; {% endif %} {% if textCustomFontWeight != "default" %}font-weight:{{textCustomFontWeight}} !important;{%endif%} display:inline-block; margin-top:0 !important; margin-bottom:0 !important; } #{{sectionID}} .qq-text a { {% if textLink == 'underline' %} text-decoration: underline !important; {% else %} text-decoration: none !important; {% endif %} {% if textLinkColor contains '#' %} color: {{textLinkColor}}; {% endif %} transition: all 0.3s ease; } {% if textLinkHoverColor contains '#' or textLink == 'underline_hover' %} #{{sectionID}} .qq-text a:hover { {% if textLinkHoverColor contains '#' %}color: {{textLinkHoverColor}}!important;{% endif %} {% if textLink == 'underline_hover' %} text-decoration:underline !important; {% endif %} } {% endif %} #{{sectionID}} .qq-image-text-marquee-wrapper { position: relative; overflow: hidden; white-space: nowrap; } #{{sectionID}} .qq-image-text-marquee__inner { display: inline-flex; will-change: transform; position: relative; white-space: nowrap; align-items: {{itemsAlignment}}; {% if marqueeDirection == 'left' %} transform: translate3d(0%, 0, 0); animation: {{sectionID}}-marqueeLtr {{marqueeSpeed}}s linear infinite; {% else %} transform: translate3d(-50%, 0, 0); animation: {{sectionID}}-marqueeRtl {{marqueeSpeed}}s linear infinite; {% endif %} } #{{sectionID}} .qq-item { display: inline-block; } #{{sectionID}} .qq-text { white-space: nowrap; } #{{sectionID}} .qq-image img { display:block; width:100%; height:auto; } /* ====================== Media Queries ====================== */ @media screen and (min-width: 768px) { #{{sectionID}} { margin-top:{{sectionMarginTop}}px; margin-bottom:{{sectionMarginBottom}}px; padding-top:{{sectionPaddingTop}}px; padding-bottom:{{sectionPaddingBottom}}px; } #{{sectionID}} .qq-item { margin-right:{{marqueeGap | divided_by:2.0}}px; margin-left:{{marqueeGap | divided_by:2.0}}px; } #{{sectionID}} .qq-text * { {% if textLetterSpacing != 0 %}letter-spacing:{{textLetterSpacing}}px !important;{% endif %} {% if textFontSize != 0 %}font-size: {{textFontSize}}px; {% endif %} } #{{sectionID}} .qq-image { width:{{mediaWidth}}px; } } @media screen and (max-width: 767px) { #{{sectionID}} { margin-top:{{sectionMarginTopMobile}}px; margin-bottom:{{sectionMarginBottomMobile}}px; padding-top:{{sectionPaddingTopMobile}}px; padding-bottom:{{sectionPaddingBottomMobile}}px; } #{{sectionID}} .qq-item { margin-left:{{marqueeGapMobile | divided_by:2.0}}px; margin-right:{{marqueeGapMobile | divided_by:2.0}}px; } #{{sectionID}} .qq-text * { {% if textLetterSpacingMobile != 0 %}letter-spacing:{{textLetterSpacingMobile}}px !important;{% endif %} {% if textFontSizeMobile != 0 %}font-size: {{textFontSizeMobile}}px; {% endif %} } #{{sectionID}} .qq-image { width:{{mediaWidthMobile}}px; } } /* ====================== Animations ====================== */ @keyframes {{sectionID}}-marqueeLtr { from { transform: translate3d(0%,0,0); } to { transform: translate3d(-50%,0,0); } } @keyframes {{sectionID}}-marqueeRtl { from { transform: translate3d(-50%,0,0); } to { transform: translate3d(0%,0,0); } }</style>
+{% schema %}
+  {
+    "name": "Image & Text Marquee",
+    "tag": "section",
+    "class": "qq-image-text-marquee",
+    "settings": [           
+      {
+        "type": "header",
+        "content": "Marquee Settings"
+      },
+      {
+        "type": "range",
+        "id": "marquee_speed",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "label": "Speed",
+        "default": 10,
+        "info": "The higher the number, the slower the speed"
+      },
+      {
+        "type": "range",
+        "id": "marquee_gap",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "Gap Between Items",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "marquee_gap_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Gap Between Items - Mobile",
+        "default": 0
+      },
+      {
+        "type": "select",
+        "id": "marquee_direction",
+        "options": [
+          {
+            "value": "left",
+            "label": "Right to Left"
+          },
+          {
+            "value": "right",
+            "label": "Left to Right"
+          }
+        ],
+        "default": "left",
+        "label": "Direction of Movement"
+      },
+      {
+        "type": "select",
+        "id": "items_alignment",
+        "options": [
+          {
+            "value": "flex-end",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "default": "center",
+        "label": "Alignment of items"
+      },
+      {
+        "type": "header",
+        "content": "Section Styling"
+      },
+      {
+        "type": "color",
+        "id": "section_background_color",
+        "label": "Section Background Color"
+      },
+      {
+        "type": "select",
+        "id": "section_width",
+        "options": [
+          {
+            "value": "regular",
+            "label": "Regular"
+          },
+          {
+            "value": "fullwidth",
+            "label": "Fullwidth"
+          }
+        ],
+        "default": "regular",
+        "label": "Section Width"
+      },
+      {
+        "type": "range",
+        "id": "content_max_width",
+        "min": 500,
+        "max": 1500,
+        "step": 20,
+        "unit": "px",
+        "label": "Content Max Width",
+        "info": "Use for not-fullwidth Section Width",
+        "default": 1280
+      },
+      {
+        "type": "color",
+        "id": "section_border_color",
+        "label": "Section Border Color"
+      },
+      {
+        "type": "range",
+        "id": "section_border_top_width",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "px",
+        "label": "Section Border Top Width",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "section_border_bottom_width",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "px",
+        "label": "Section Border Bottom Width",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "section_margin_top",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Section Top Margin",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "section_margin_bottom",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Section Bottom Margin",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "section_padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section Top Padding",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "section_padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section Bottom Padding",
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Section Styling - Mobile"
+      },
+      {
+        "type": "range",
+        "id": "section_margin_top_mobile",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Section Top Margin - Mobile",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "section_margin_bottom_mobile",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Section Bottom Margin - Mobile",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "section_padding_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section Top Padding - Mobile",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "section_padding_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section Bottom Padding - Mobile",
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Image Styling"
+      },
+      {
+        "type": "range",
+        "id": "media_width",
+        "min": 50,
+        "max": 500,
+        "step": 5,
+        "unit": "px",
+        "label": "Image Width",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "media_width_mobile",
+        "min": 50,
+        "max": 150,
+        "step": 1,
+        "unit": "px",
+        "label": "Image Width - Mobile",
+        "default": 50
+      },
+      {
+        "type": "header",
+        "content": "Link Styling"
+      },
+      {
+        "type": "paragraph",
+        "content": "Only if link is added to marquee text"
+      },
+      {
+        "type": "select",
+        "id": "underline_link",
+        "options": [
+          {
+            "value": "none",
+            "label": "None"
+          },
+          {
+            "value": "underline",
+            "label": "Underline visible"
+          },
+          {
+            "value": "underline_hover",
+            "label": "Underline only on Hover"
+          }
+        ],
+        "default": "none",
+        "label": "Link Decoration",        
+      },
+      {
+        "type": "color",
+        "id": "underline_link_color",
+        "label": "Link Text Color"        
+      },
+      {
+        "type": "color",
+        "id": "underline_link_hover_color",
+        "label": "Link Text Color - Hover"
+      },
+      {
+        "type": "header",
+        "content": "Text Styling"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color"
+      },
+      {
+        "type": "checkbox",
+        "id": "text_custom_font",
+        "label": "Use Custom Font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "text_font",
+        "label": "Text Text Font",
+        "default": "mono"
+      },
+      {
+        "type": "text",
+        "id": "text_font_name",
+        "label": "Custom Font Family Name",
+        "info": "Add your custom font. Example: ‘Helvetica’, sans-serif."
+      },
+      {
+        "type": "select",
+        "id": "text_font_weight",
+        "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "100",
+          "label": "100"
+        },
+        {
+          "value": "200",
+          "label": "200"
+        },
+        {
+          "value": "300",
+          "label": "300"
+        },
+        {
+          "value": "400",
+          "label": "400 (Regular)"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        {
+          "value": "700",
+          "label": "700 (Bold)"
+        },
+        {
+          "value": "800",
+          "label": "800"
+        },
+        {
+          "value": "900",
+          "label": "900"
+        }
+        ],
+        "default": "default",
+        "label": "Font Weight"
+      },
+      {
+        "type": "range",
+        "id": "text_font_size",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "label": "Text Font Size",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "text_letter_spacing",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Text Letter Spacing",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Text Styling - Mobile"
+      },
+      {
+        "type": "range",
+        "id": "text_font_size_mobile",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "label": "Text Font Size - Mobile",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "text_letter_spacing_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Text Letter Spacing - Mobile",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Advanced"        
+      }, 
+      {
+        "type": "text",
+        "id": "section_class",
+        "label": "Section Class",
+        "info": "Add section class (without .). Use spaces to add multiple classes"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "title",
+            "default": "<p>Marquee text</p>",
+            "label": "Text"
+          }         
+        ]
+      }, 
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "select",
+            "id": "image_dimensions",
+            "options": [
+    {
+        "value": "original",
+        "label": "Original"
+    },
+    {
+        "value": "landscape",
+        "label": "Landscape"
+    },            
+    {
+        "value": "portrait",
+        "label": "Portrait"
+    },
+    {
+        "value": "square",
+        "label": "Square"
+    },
+    {
+        "value": "horizontal",
+        "label": "Horizontal (16x9)"
+    },
+    {
+        "value": "vertical",
+        "label": "Vertical (9x16)"
+    }
+],
+            "default": "square",
+            "label": "Image Dimensions"
+          },
+          {
+            "type": "range",
+            "id": "image_border_radius",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Border Radius",
+            "default": 0
+          }
+        ]
+      }
+    ],
+    "presets": [
+    {
+      "name": "Image & Text Marquee",
+      "blocks": [
+          {
+            "type": "text"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "text"
+          },
+          {
+            "type": "image"
+          }
+		    ]
+    }
+  ]
+  }
+{% endschema %}

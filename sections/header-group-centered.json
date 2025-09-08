@@ -1,0 +1,95 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "announcement_bar": {
+      "type": "announcement-bar",
+      "disabled": true,
+      "settings": {
+        "homepage_only": false,
+        "enable_sticky": false,
+        "show_close_icon": true,
+        "icon_label": "",
+        "text": "<p>Get 15% Off 1st Time Subscription</p>",
+        "mobile_text": "",
+        "alignment": "center",
+        "size": "regular",
+        "button_label": "",
+        "link": "",
+        "button_style": "button--primary",
+        "background": "#ea7552",
+        "text_color": "#ffffff",
+        "width": "wide",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "header_top_bar": {
+      "type": "header-centered__top-bar",
+      "settings": {
+        "show_social_icons": true,
+        "text": "Click here to get 20% off your first order",
+        "top_bar_background": "#7d6355",
+        "top_bar_link": "#fffbf2",
+        "top_bar_link_hover": "rgba(0,0,0,0)",
+        "top_bar_text": "#fffbf2",
+        "font": "open_sans_n4",
+        "font_style": "none",
+        "font_size": 20,
+        "letter_spacing": 0,
+        "show_locale_selector": false,
+        "show_currency_selector": false,
+        "display_search": false,
+        "icon_style": "icons",
+        "cart_button_background": "rgba(0,0,0,0)",
+        "cart_button_text": "#ffffff",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "header": {
+      "type": "header-centered",
+      "settings": {
+        "logo": "shopify://shop_images/akrrushLogo_3dce48ff-44be-482b-a289-7542c4785579.png",
+        "logo_width": 270,
+        "logo_position": "between",
+        "main_linklist": "main-menu",
+        "enable_shop_button": true,
+        "shop_button_color": "#ea7552",
+        "shop_button_text_color": "#ffffff",
+        "shop_button_hover_color": "#7d6355",
+        "shop_button_text_hover_color": "#ffffff",
+        "menu_spacing": "default",
+        "dropdown_click": false,
+        "enable_overlay": false,
+        "show_text_shadow": false,
+        "overlay_background": "#ffffff",
+        "overlay_background_opacity": 0,
+        "overlay_link_color": "#7d6355",
+        "overlay_link_hover_color": "rgba(0,0,0,0)",
+        "overlay_logo_width": 30,
+        "enable_sticky": true,
+        "display_search": false,
+        "sticky_background_opacity": 90,
+        "scroll_logo_width": 200,
+        "width": "wide",
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "announcement_bar",
+    "header_top_bar",
+    "header"
+  ]
+}

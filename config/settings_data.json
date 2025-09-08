@@ -1,0 +1,128 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "shop_bg_color": "#ffffff",
+    "regular_color": "#7d6355",
+    "link_color": "#7d6355",
+    "link_hover_color": "#ea7552",
+    "heading_color": "#7d6355",
+    "logo_text": "#fffbf2",
+    "header_background": "#FFFFFF",
+    "header_link_color": "#7d6355",
+    "header_link_hover_color": "#ea7552",
+    "header_cart_badge_color": "#ea7552",
+    "dropdown_background": "#D3D3D3",
+    "dropdown_link_color": "#585757",
+    "dropdown_link_hover_color": "#ea7552",
+    "footer_background": "#fffbf2",
+    "footer_border": "#7d6355",
+    "footer_link_color": "#7d6355",
+    "footer_link_hover_color": "#ea7552",
+    "footer_text_color": "#7d6355",
+    "qty_icon_color": "#FFFFFF",
+    "qty_icon_hover_color": "#FFFFFF",
+    "qty_background_color": "rgba(0,0,0,0)",
+    "qty_background_hover_color": "rgba(0,0,0,0)",
+    "regular__font": "open_sans_n4",
+    "regular_font_size": 20,
+    "nav__font": "open_sans_n7",
+    "nav_font_size": 20,
+    "dropdown_heading_font_size": 17,
+    "dropdown_font_size": 17,
+    "dropdown_letter_spacing": 1,
+    "heading__font": "open_sans_n7",
+    "heading_size": 35,
+    "banner_heading__font": "open_sans_n6",
+    "banner_text_size": 30,
+    "footer_font_size": 20,
+    "header_layout": "centered",
+    "show_search_icon_mobile": false,
+    "show_locale_selector": false,
+    "show_currency_selector": false,
+    "mobile_menu_background_color": "#ffffff",
+    "mobile_menu_link_color": "#7d6355",
+    "mobile_menu_link_hover_color": "#7d6355",
+    "button_primary_bg_color": "#ea7552",
+    "button_primary_bg_color--highlight": "#7d6355",
+    "button_primary_border_radius": 25,
+    "button_secondary_border_color": "#ea7552",
+    "button_secondary_text_color": "#ea7552",
+    "button_secondary_bg_color--highlight": "#7d6355",
+    "button_secondary_border_radius": 5,
+    "button_cart_bg_color": "#7d6355",
+    "button_cart_bg_color--highlight": "#ea7552",
+    "button_cart_border_color": "#FFFFFF",
+    "button_cart_border_color--highlight": "#000000",
+    "button_cart_icon": "plus",
+    "button_cart_border_radius": 20,
+    "breadcrumb_separator": "arrow",
+    "dropdown_style": "vertical",
+    "dropdown_position": "below-parent",
+    "use_placeholders": true,
+    "display_heading_divider": false,
+    "heading_divider_style": "short",
+    "qty_border_radius": 25,
+    "enable_shopify_collection_badges": false,
+    "show_secondary_image": true,
+    "thumbnail_hover_enabled": false,
+    "sticker_position": "right",
+    "collection_swatches": true,
+    "select_first_available_variant": true,
+    "display_product_quantity": true,
+    "display_inventory_left": true,
+    "product_form_style": "radio",
+    "sold_out_options": "selectable",
+    "enable_swatches": true,
+    "swatch_trigger": "Size",
+    "swatch_style": "square",
+    "swatches_option_style": "variant_image",
+    "notify_me_form": false,
+    "enable_quickshop": false,
+    "facebook_link": "https://www.facebook.com/akrrushofficial",
+    "instagram_link": "https://instagram.com/akrrushofficial",
+    "pinterest_link": "",
+    "youtube_link": "",
+    "favicon": "shopify://shop_images/favicon.png",
+    "cart_icon": "cart",
+    "display_savings": true,
+    "display_ajax_quantity_box": true,
+    "content_for_index": [],
+    "blocks": {
+      "7570552984445421165": {
+        "type": "shopify://apps/yotpo-product-reviews/blocks/settings/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+        "disabled": false,
+        "settings": {}
+      },
+      "855628211100114053": {
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": false,
+        "settings": {}
+      },
+      "21474836472147483647": {
+        "type": "shopify://apps/ecomposer-landing-page-builder/blocks/app-embed/a0fc26e1-7741-4773-8b27-39389b4fb4a0",
+        "disabled": false,
+        "settings": {}
+      },
+      "10436698916776057164": {
+        "type": "shopify://apps/appstle-subscription/blocks/appstle-subscription-helper/fe257d39-6f88-4f35-ab08-bd437e3aa94e",
+        "disabled": false,
+        "settings": {}
+      },
+      "14339172867238703359": {
+        "type": "shopify://apps/yotpo-product-reviews/blocks/reviews_tab/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+        "disabled": false,
+        "settings": {
+          "product": ""
+        }
+      }
+    }
+  }
+}

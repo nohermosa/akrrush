@@ -1,0 +1,3097 @@
+
+{% comment %}
+[[ QQ - Split Screen Video ]] [[ Section for Shopify Websites to display an image with block of text ]]
+Author: qwiqode.com
+Created: 01.01.2022 Version: 1.31
+Company website: qwiqode.com
+Email: hello@qwiqode.com
+* (c) Copyright by Studio Umbrella Inc. /
+{% endcomment %}
+
+{% style %}
+    .block-image-container {
+      display: flex;
+      gap: 20px;
+    }
+    .qq-block-image-text {
+          margin-top: 10px;
+          margin-bottom: 10px;
+          align-self: center;
+          max-width: 40%;
+          color: white;
+    }
+    .qq-block-image-text h2 {
+      color: white;
+    }
+
+    .qq-section-wrap-fullwidth, .qq-section-wrap-regular {
+      position: relative;
+    }
+
+    .qq-overlay-image-container {
+      position: absolute !important;
+    }
+
+    /* Video Overlay Styles */
+.qq-section-video {
+  position: relative;
+  overflow: hidden; /* This will contain the overlay within the video section */
+}
+
+.qq-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  pointer-events: none;
+  overflow: hidden; /* Ensure nothing extends outside */
+}
+
+    .qq-video-overlay .overlay-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .qq-video-overlay .circle-cutout {
+      position: absolute;
+      border-radius: 50%;
+      background-color: transparent;
+      box-shadow: 0 0 0 9999px var(--overlay-color); /* Creates cutout effect */
+      pointer-events: none;
+    }
+
+    @media only screen and (max-width: 767px) {
+    .qq-video-overlay .circle-cutout {
+      width: {{videoMobileCutoutSize}}px !important;
+      height: {{videoMobileCutoutSize}}px !important;
+    }
+  }
+
+    /* Mobile overlay image adjustments */
+    {% if overlayImageEnabled and overlayImage != blank and overlayImageMobileSettings %}
+    #{{sectionID}} .qq-overlay-image-container {
+      width: {{overlayImageMobileWidth}}% !important;
+      top: {{overlayImageMobileTopPosition}}% !important;
+      left: {{overlayImageMobileLeftPosition}}% !important;
+      right: auto !important;
+    }    
+    {% endif %}
+    
+  {% endstyle %}
+  
+  {% if request.design_mode == true %}
+  <p class="QQ-JS-init-msg" style="display:block;padding: 10px 15px;text-align: center;max-width: 450px;background-color: #d5d5d5;color: red;border: 1px solid red;border-radius: 10px;margin: 0 auto;">Please save the Theme Editor before adding content or changing settings in order to initiate functionality.</p>
+  {% endif %}
+  {% liquid
+    assign contentMaxWidth = section.settings.content_max_width
+    assign contentFullwidth = section.settings.content_fullwidth
+    assign mainMediaColumnWidth = section.settings.block_media_column_width  
+    assign blockTextWidth = 100 | minus: mainMediaColumnWidth
+    assign mainMediaColumnWidthMobile = section.settings.block_media_column_width_mobile
+    assign sectionClass = section.settings.section_class
+    assign sectionWidth = section.settings.section_width
+    assign sectionBackgroundColor = section.settings.background_color
+    assign textAreaVerticalPosition = section.settings.text_vertical_position
+    assign textAreaTextAlign = section.settings.text_alignment
+    assign textAreaTextAlignMobile = section.settings.text_alignment_mobile
+    if textAreaTextAlign == 'left'
+      assign buttonsAlignment = 'flex-start'
+    elsif textAreaTextAlign == 'right'
+      assign buttonsAlignment = 'flex-end'
+    else
+      assign buttonsAlignment = textAreaTextAlign
+    endif
+    if textAreaTextAlignMobile == 'left'
+      assign buttonsAlignmentMobile = 'flex-start'
+    elsif textAreaTextAlignMobile == 'right'
+      assign buttonsAlignmentMobile = 'flex-end'
+    else
+      assign buttonsAlignmentMobile = textAreaTextAlignMobile
+    endif
+    assign sectionMarginTop = section.settings.section_margin_top
+    assign sectionMarginTopMobile = section.settings.section_margin_top_mobile
+    assign sectionMarginBottom = section.settings.section_margin_bottom
+    assign sectionMarginBottomMobile = section.settings.section_margin_bottom_mobile
+    assign sectionPaddingHorizontal = section.settings.section_padding_horizontal
+    assign sectionPaddingHorizontalMobile = section.settings.section_padding_horizontal_mobile
+    assign sectionPaddingTop = section.settings.section_padding_top
+    assign sectionPaddingTopMobile = section.settings.section_padding_top_mobile
+    assign sectionPaddingBottom = section.settings.section_padding_bottom
+    assign sectionPaddingBottomMobile = section.settings.section_padding_bottom_mobile
+    assign textAreaPaddingRight = section.settings.text_area_padding_right
+    assign textAreaPaddingLeft = section.settings.text_area_padding_left
+    assign textAreaPaddingHorizontalMobile = section.settings.text_area_padding_horizontal_mobile
+    assign textAreaPaddingTop = section.settings.text_area_padding_top
+    assign textAreaPaddingTopMobile = section.settings.text_area_padding_top_mobile
+    assign textAreaPaddingBottom = section.settings.text_area_padding_bottom
+    assign textAreaPaddingBottomMobile = section.settings.text_area_padding_bottom_mobile
+    assign buttonsMargin = section.settings.buttons_margin
+    assign buttonsLayout = section.settings.buttons_layout  
+    
+   
+    assign overlayImageEnabled = section.settings.enable_overlay_image
+    assign overlayImage = section.settings.overlay_image
+    assign overlayImageWidth = section.settings.overlay_image_width
+    assign overlayImageTopPosition = section.settings.overlay_image_top_position
+    assign overlayImageLeftPosition = section.settings.overlay_image_left_position
+    assign overlayImageRightPosition = section.settings.overlay_image_right_position
+    assign overlayImageRotation = section.settings.overlay_image_rotation
+    assign overlayImageOpacity = section.settings.overlay_image_opacity
+    assign overlayImageLink = section.settings.overlay_image_link
+    assign overlayImageZIndex = section.settings.overlay_image_z_index
+    assign overlayImageMobileSettings = section.settings.overlay_image_mobile_settings
+    assign overlayImageMobileTopPosition = section.settings.overlay_image_mobile_top_position
+    assign overlayImageMobileLeftPosition = section.settings.overlay_image_mobile_left_position
+    assign overlayImageMobileWidth = section.settings.overlay_image_mobile_width
+
+
+    assign videoOverlayEnabled = section.settings.enable_video_overlay
+    assign videoOverlayColor = section.settings.video_overlay_color
+    assign videoCutoutSize = section.settings.video_cutout_size
+    assign videoCutoutPosition = section.settings.video_cutout_position
+    assign videoCutoutPositionX = section.settings.video_cutout_position_x
+    assign videoCutoutPositionY = section.settings.video_cutout_position_y
+    assign videoMobileCutoutSize = section.settings.video_mobile_cutout_size
+  %}
+  {% if iconSize == true %}
+      {% assign imageSizes = "768,500,256,128x,56,32" | split: ',' %}
+  {% else %}
+      {% assign imageSizes = "2400,1920,1500,1200,900x,768,500,240" | split: ',' %}
+  {% endif %}  
+  {% assign buttonCounter = 1 %}
+  {% assign sectionImage = false %}
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'image' -%}
+        {% liquid
+          assign imagePosition = block.settings.image_position
+          assign imagePositionMobile = block.settings.image_position_mobile                
+          assign sectionImageHeight = block.settings.section_image_height        
+          if imagePosition == 'right'
+            assign blocksOrder = 'qq-row'
+          elsif imagePosition == 'left'
+            assign blocksOrder = 'qq-row-reverse'
+          endif
+          if imagePositionMobile == 'top'
+            assign blocksOrderMobile = 'qq-column-reverse'
+          elsif imagePositionMobile == 'bottom'
+            assign blocksOrderMobile = 'qq-column'
+          elsif imagePositionMobile == 'hidden'
+            assign blocksOrderMobile = 'qq-column'
+            assign imageClass = 'qq-hidden-on-mobile'
+          endif
+          assign mainMediaSize = block.settings.media_size
+          assign imageWidth = block.settings.image_width        
+          assign imageLink = block.settings.image_link
+          assign mainImage = block.settings.image 
+          assign sectionImage = true
+        %}
+        {% capture imageElement %}
+          {% if sectionImage == true %}
+            {% if mainImage != blank %}
+              {% assign loopImage = mainImage %}								
+              {% assign mediaSize = mainMediaSize %}								
+              {% liquid 
+                      if loopImage.alt != blank
+                        assign loopImageAlt = 'alt="' | append: loopImage.alt | append: '"'
+                      else
+                        assign loopImageAlt = ''
+                      endif
+                      assign proportion = loopImage.aspect_ratio
+                      assign imageW = loopImage.width
+                      assign imageH = loopImage.height   
+                      for imageSize in imageSizes
+                        assign maxWidthAllowed = imageSize | remove: 'x'
+                        assign maxHeightAllowed = imageSize | remove: 'x'
+                        if proportion > 1
+                          # landscape
+                          assign mostW = maxWidthAllowed
+                          assign mostH = mostW | times: proportion
+                        elsif proportion < 1
+                          # portrait
+                          assign mostH = maxHeightAllowed
+                          assign mostW = mostH | times: proportion
+                        else
+                          # square
+                          assign mostW = maxWidthAllowed
+                          assign mostH = mostW
+                        endif
+                        assign iw = imageW | at_most: mostW | round
+                        assign ih	= imageH | at_most: mostH | round
+                        if mediaSize == 'portrait'
+                          if halfSquarePortrait == true  
+                            assign ih = iw | times: 2 | round
+                              if imageH < ih
+                                  assign ih = imageH
+                                  assign iw = ih | divided_by: 2 | round
+                              endif
+                              if imageW < iw
+                                  assign iw = imageW
+                                  assign ih = iw | times: 2 | round
+                              endif
+                          else 
+                            assign ih = iw | divided_by: 0.6666667 | round
+                            if imageH < ih
+                              assign ih = imageH
+                              assign iw = ih | divided_by: 1.5 | round
+                            endif
+                            if imageW < iw
+                              assign iw = imageW
+                              assign ih = iw | divided_by: 0.666667 | round
+                            endif
+                          endif
+                        elsif mediaSize == 'vertical'
+                          assign ih = iw | times: 16 | divided_by: 9 | round
+                          if imageH < ih
+                            assign ih = imageH
+                            assign iw = ih | times: 9 | divided_by: 16 | round
+                          endif
+                          if imageW < iw
+                            assign iw = imageW
+                            assign ih = iw | times: 16 | divided_by: 9 | round
+                          endif     
+                        elsif mediaSize == 'horizontal'
+                          assign ih = iw | times: 9 | divided_by: 16 | round
+                          if imageH < ih
+                            assign ih = imageH
+                            assign iw = ih | times: 16 | divided_by: 9 | round
+                          endif
+                          if imageW < iw
+                            assign iw = imageW
+                            assign ih = iw | times: 9 | divided_by: 16 | round
+                          endif                                          
+                        elsif mediaSize == 'square'
+                          assign ih = iw
+                          if iw > imageW
+                            assign iw = imageW
+                            assign ih = iw
+                          endif
+                          if ih > imageH
+                            assign ih = imageH
+                            assign iw = ih
+                          endif
+                        elsif mediaSize == 'landscape'
+                          if halfSquareLandscape == true 
+                            assign ih = iw | times: 0.5 | round
+                            if imageH < ih
+                              assign ih = imageH
+                              assign iw = ih | times: 2 | round
+                            endif
+                            if imageW < iw
+                              assign iw = imageW
+                              assign ih = iw | times: 0.5 | round
+                            endif                        
+                          else 
+                           assign ih = iw | times: 4 | divided_by: 6 | round
+                            if imageH < ih
+                              assign ih = imageH
+                              assign iw = ih | times: 6 | divided_by: 4 | round
+                            endif
+                            if imageW < iw
+                              assign iw = imageW
+                              assign ih = iw | times: 4 | divided_by: 6 | round
+                            endif
+                          endif
+                        elsif mediaSize == 'original'
+                          assign ih = iw | divided_by: proportion | round
+                        endif
+                        assign size = iw | append: 'x' | append: ih
+                        assign imageUrl = loopImage | img_url: size, crop: 'center'
+                        if forloop.first
+                          assign imageUrls = imageUrl
+                        else
+                          assign imageUrls = imageUrls | append: ',' | append: imageUrl
+                        endif                      
+                      endfor
+                      assign imageUrls = imageUrls | split: ','                                                              
+  %}
+              {% assign imageAlt = loopImageAlt %}
+              {% assign mainImageUrls = imageUrls %}	
+              {% capture mainImagesLoopArray %}
+              {% for imageSize in imageSizes %}
+                {% if imageSize contains 'x' %}
+                {% assign defaultImageUrl = mainImageUrls[forloop.index0] %}
+                {% assign imageSize = imageSize | remove: 'x' %}
+                {% endif %}
+                {{mainImageUrls[forloop.index0]}} {{imageSize}}w{% unless forloop.last %},{% endunless %}
+              {% endfor %}
+              {% endcapture %}
+            {% endif %}          
+            <div class="{{imageClass}}">
+              {% if imageLink != blank %}
+                <a href="{{imageLink}}">
+              {% endif %}
+              {% if mainImage != blank %}
+                <picture>
+                  <img srcset="{{mainImagesLoopArray}}" {{mainImageAlt}} src=”{{defaultImageUrl}}”/ loading="lazy">
+                </picture>
+              {% else %}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 771 771" style="width:100%;height:100%	;" preserveAspectRatio="xMidYMid slice"><g style="isolation:isolate"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1" style="fill:#efefef;"><rect width="771" height="771" style="fill:#efefef;"/><g style="opacity:0.5"><path d="M280.73,441.53V406.12h-.48c-3,6.78-8.91,10.7-17.23,10.7-14.49,0-23-11.77-23-30.42S248.41,356,263.14,356c8.79,0,14.74,4,17.59,11.28h.47l.6-9.86H290v84.13Zm0-53.71V385c0-12.83-6.42-20.44-16-20.44s-15.1,7.72-15.1,21.87,5.47,21.86,15.1,21.86S280.73,400.66,280.73,387.82Z" style="fill:#373833"/><path d="M302.48,357.4h8.91l7.72,44.09h.48l10-44.09h7.49l10,44.09h.47l7.73-44.09h8.55l-10.81,58h-9.87l-9.74-43h-.47l-9.75,43h-9.86Z" style="fill:#373833"/><path d="M376.86,407.19h20V365.6h-20v-8.2h29.23v49.79h20v8.2h-49.2Zm15.21-69.52a8.08,8.08,0,1,1,8.08,8.09A7.87,7.87,0,0,1,392.07,337.67Z" style="fill:#373833"/><path d="M471.45,441.53V406.12H471c-3,6.78-8.92,10.7-17.23,10.7-14.5,0-23.06-11.77-23.06-30.42S439.13,356,453.86,356c8.8,0,14.74,4,17.59,11.28h.48l.59-9.86h8.2v84.13Zm0-53.71V385c0-12.83-6.41-20.44-16-20.44s-15.09,7.72-15.09,21.87,5.47,21.86,15.09,21.86S471.45,400.66,471.45,387.82Z" style="fill:#373833"/><path d="M492.72,386.4c0-19.73,8.8-30.42,25.19-30.42s25.2,10.69,25.2,30.42-8.8,30.42-25.2,30.42S492.72,406.12,492.72,386.4Zm40.76,0c0-14.38-5.35-21.87-15.57-21.87S502.35,372,502.35,386.4s5.35,21.86,15.56,21.86S533.48,400.77,533.48,386.4Z" style="fill:#373833"/><path d="M553.09,386.4c0-18.66,8.55-30.42,23-30.42,8.32,0,14.26,3.92,17.23,10.69h.48V331h9.27v84.37h-8.2l-.6-9.86h-.47c-2.85,7.25-8.8,11.29-17.59,11.29C561.52,416.82,553.09,405.17,553.09,386.4Zm40.76,1.42V385c0-12.83-6.42-20.44-16.05-20.44s-15.09,7.72-15.09,21.87,5.47,21.86,15.09,21.86S593.85,400.66,593.85,387.82Z" style="fill:#373833"/><path d="M615.36,386.28c0-19.61,8.79-30.3,25.31-30.3S666,366.67,666,386.28a18.15,18.15,0,0,1-.12,2.49H625c.59,13,6.06,19.49,16.52,19.49,6.53,0,11-2.61,13.43-7.6h10.34C661.94,411,654,416.82,641.38,416.82,624.39,416.82,615.36,406.24,615.36,386.28Zm40.75-5.35c-1.3-10.81-6.53-16.4-15.44-16.4s-14.15,5.59-15.45,16.4Z" style="fill:#373833"/><polygon points="105.12 429.87 179.13 385.56 105.12 341.26 115.51 324 201.41 375.33 201.41 395.8 115.51 447.13 105.12 429.87" style="fill:#29abe2"/><polygon points="119.25 395.8 119.25 375.33 205.22 323.97 215.55 341.26 141.53 385.56 215.55 429.87 205.16 447.13 119.25 395.8" style="fill:#0071bc;mix-blend-mode:multiply"/></g></g></g></g></svg>
+              {% endif %}          
+              {% if imageLink != blank %}
+                </a>
+              {% endif %}
+            </div>        
+          {% endif %}
+        {% endcapture %}
+      {%- when 'title' -%}
+              {% liquid
+          assign title = block.settings.title 
+                  assign titleCustomFont = block.settings.title_custom_font
+                  assign titleFont = block.settings.title_font
+          assign titleFontName = block.settings.title_font_name
+          assign titleFontWeight = block.settings.title_font_weight
+                  assign titleColor = block.settings.title_color
+                  assign titleFontSize = block.settings.title_font_size
+                  assign titleFontSizeMobile = block.settings.title_font_size_mobile
+                  assign titleLineHeight = block.settings.title_line_height
+                  assign titleLineHeightMobile = block.settings.title_line_height_mobile
+                  assign titleLetterSpacing = block.settings.title_letter_spacing
+                  assign titleLetterSpacingMobile = block.settings.title_letter_spacing_mobile
+                  assign titleMarginTop = block.settings.title_margin_top
+                  assign titleMarginTopMobile = block.settings.title_margin_top_mobile
+                  assign titleMarginBottom = block.settings.title_margin_bottom
+                  assign titleMarginBottomMobile = block.settings.title_margin_bottom_mobile
+              %}
+        {% capture titleElement %}
+          <div class="qq-title">{{title}}</div>
+        {% endcapture %}
+      {%- when 'subtitle' -%}
+              {% liquid
+          assign subtitle = block.settings.subtitle			
+                  assign subtitleCustomFont = block.settings.subtitle_custom_font
+                  assign subtitleFont = block.settings.subtitle_font
+          assign subtitleFontName = block.settings.subtitle_font_name
+          assign subtitleFontWeight = block.settings.subtitle_font_weight
+                  assign subtitleColor = block.settings.subtitle_color
+                  assign subtitleFontSize = block.settings.subtitle_font_size
+                  assign subtitleFontSizeMobile = block.settings.subtitle_font_size_mobile
+                  assign subtitleLineHeight = block.settings.subtitle_line_height
+                  assign subtitleLineHeightMobile = block.settings.subtitle_line_height_mobile
+                  assign subtitleLetterSpacing = block.settings.subtitle_letter_spacing
+                  assign subtitleLetterSpacingMobile = block.settings.subtitle_letter_spacing_mobile
+                  assign subtitleMarginTop = block.settings.subtitle_margin_top
+                  assign subtitleMarginTopMobile = block.settings.subtitle_margin_top_mobile
+                  assign subtitleMarginBottom = block.settings.subtitle_margin_bottom
+                  assign subtitleMarginBottomMobile = block.settings.subtitle_margin_bottom_mobile
+              %}
+        {% capture subtitleElement %}
+          <div class="qq-subtitle">{{subtitle}}</div>
+        {% endcapture %}
+      {%- when 'textblock' -%}
+              {% liquid        
+                  assign textblockCustomFont = block.settings.textblock_custom_font
+                  assign textblockFont = block.settings.textblock_font
+          assign textblockFontName = block.settings.textblock_font_name
+          assign textblockFontWeight = block.settings.textblock_font_weight
+                  assign textblockColor = block.settings.textblock_color
+                  assign textblockFontSize = block.settings.textblock_font_size
+                  assign textblockFontSizeMobile = block.settings.textblock_font_size_mobile
+                  assign textblockLineHeight = block.settings.textblock_line_height
+                  assign textblockLineHeightMobile = block.settings.textblock_line_height_mobile
+                  assign textblockLetterSpacing = block.settings.textblock_letter_spacing
+                  assign textblockLetterSpacingMobile = block.settings.textblock_letter_spacing_mobile
+          assign textblockMarginTop = block.settings.textblock_margin_top
+                  assign textblockMarginTopMobile = block.settings.textblock_margin_top_mobile
+                  assign textblockMarginBottom = block.settings.textblock_margin_bottom
+                  assign textblockMarginBottomMobile = block.settings.textblock_margin_bottom_mobile
+              %}
+        {% capture textblockElement %}
+          <div class="qq-rte">
+            {{ block.settings.textblock }}
+          </div>
+        {% endcapture %}
+      {%- when 'buttons' -%}
+              {% liquid
+          assign buttonUrl = block.settings.button_link
+          assign buttonLabel = block.settings.button_label
+          assign buttonClass = block.settings.button_class
+          assign buttonCustomFont = block.settings.button_custom_font
+          assign buttonFont = block.settings.button_font
+          assign buttonFontName = block.settings.button_font_name
+          assign buttonFontWeight = block.settings.button_font_weight
+          assign buttonMaxWidth = block.settings.button_max_width
+          assign buttonFontSize = block.settings.button_font_size
+          assign buttonPaddingHorizontal = block.settings.button_padding_horizontal
+          assign buttonPaddingVertical =  block.settings.button_padding_vertical
+          assign buttonBorder = block.settings.button_border
+          assign buttonRadius = block.settings.button_radius
+          assign buttonBackground = block.settings.button_background_color
+          assign buttonBackgroundHover = block.settings.button_background_color_hover
+          assign buttonColor = block.settings.button_text_color
+          assign buttonColorHover = block.settings.button_text_color_hover
+          assign buttonBorderColor = block.settings.button_border_color
+          assign buttonBorderColorHover = block.settings.button_border_color_hover
+          assign buttonLetterSpacing = block.settings.button_letter_spacing
+          assign buttonLetterSpacingMobile = block.settings.button_letter_spacing_mobile
+          assign buttonMarginTop = block.settings.button_margin_top
+          assign buttonMarginTopMobile = block.settings.button_margin_top_mobile
+          assign buttonMarginBottom = block.settings.button_margin_bottom
+          assign buttonMarginBottomMobile = block.settings.button_margin_bottom_mobile
+          if block.settings.button_tab
+            assign buttonTab = 'target="blank"'
+          else
+            assign buttonTab = ''
+          endif
+          assign buttonUrl_2 = block.settings.button_link_2
+          assign buttonLabel_2 = block.settings.button_label_2
+          assign buttonClass_2 = block.settings.button_class_2
+          assign buttonCustomFont_2 = block.settings.button_custom_font_2
+          assign buttonFont_2 = block.settings.button_font_2
+          assign buttonFontName_2 = block.settings.button_font_name_2
+          assign buttonFontWeight_2 = block.settings.button_font_weight_2
+          assign buttonMaxWidth_2 = block.settings.button_max_width_2
+          assign buttonFontSize_2 = block.settings.button_font_size_2
+          assign buttonFontSizeMobile_2 = block.settings.button_font_size_mobile_2
+          assign buttonPaddingHorizontal_2 = block.settings.button_padding_horizontal_2
+          assign buttonPaddingVertical_2 =  block.settings.button_padding_vertical_2
+          assign buttonBorder_2 = block.settings.button_border_2
+          assign buttonRadius_2 = block.settings.button_radius_2
+          assign buttonBackground_2 = block.settings.button_background_color_2
+          assign buttonBackgroundHover_2 = block.settings.button_background_color_hover_2
+          assign buttonColor_2 = block.settings.button_text_color_2
+          assign buttonColorHover_2 = block.settings.button_text_color_hover_2
+          assign buttonBorderColor_2 = block.settings.button_border_color_2
+          assign buttonBorderColorHover_2 = block.settings.button_border_color_hover_2
+          assign buttonLetterSpacing_2 = block.settings.button_letter_spacing_2
+          assign buttonLetterSpacingMobile_2 = block.settings.button_letter_spacing_mobile_2
+          assign buttonMarginTop_2 = block.settings.button_margin_top_2
+          assign buttonMarginTopMobile_2 = block.settings.button_margin_top_mobile_2
+          assign buttonMarginBottom_2 = block.settings.button_margin_bottom_2
+          assign buttonMarginBottomMobile_2 = block.settings.button_margin_bottom_mobile_2
+          if block.settings.button_tab_2
+            assign buttonTab_2 = 'target="blank"'
+          else
+            assign buttonTab_2 = ''
+          endif
+              %}
+        {% capture buttonElement %}
+          <a href="{{buttonUrl}}" class="qq-btn {{buttonClass}} qq-el-1" {{buttonTab}}>{{ buttonLabel | escape }}</a>
+        {% endcapture %}
+          {% capture buttonElement_2 %}
+          {% if buttonLabel_2 != blank %}
+              <a href="{{buttonUrl_2}}" class="qq-btn {{buttonClass_2}} qq-el-2" {{buttonTab_2}}>{{ buttonLabel_2 | escape }}</a>
+          {% endif %}
+        {% endcapture %}
+      {%- when 'video' -%}
+        {% capture videoElement %}
+          {% liquid
+            assign blockVideo = true
+            assign externalVideo = block.settings.video_url
+            assign localVideo = block.settings.local_video_url
+            assign posterImage = block.settings.poster_image
+            assign playIcon = block.settings.video_icon
+            assign playIconSize = block.settings.video_icon_size
+            assign videoAutoplay = block.settings.video_autoplay
+            assign videoLoop = block.settings.video_loop
+            assign videoControls = block.settings.video_controls
+            assign videoDimensions = block.settings.video_dimensions
+            assign videoHeight = block.settings.video_height
+            assign videoPosition = block.settings.video_position
+            assign videoPositionMobile = block.settings.video_position_mobile
+            if videoPosition == 'right'
+              assign blocksOrderVideo = 'qq-row'
+            elsif videoPosition == 'left'
+              assign blocksOrderVideo = 'qq-row-reverse'
+            endif
+            if videoPositionMobile == 'top'
+              assign blocksOrderVideoMobile = 'qq-column-reverse'
+            elsif videoPositionMobile == 'bottom'
+              assign blocksOrderVideoMobile = 'qq-column'
+            elsif videoPositionMobile == 'hidden'
+              assign blocksOrderVideoMobile = 'qq-column'
+              assign videoClass = 'qq-hidden-on-mobile'
+            endif
+            if posterImage
+              assign posterImageUrl = posterImage | img_url: '900x375'
+            endif
+            if playIcon != blank
+              assign iconClass = playIconSize
+              assign playIconUrl = playIcon | img_url: '300x125'
+            else
+              assign iconClass = playIconSize | append: ' qq-default'
+            endif
+            if externalVideo != blank or localVideo != blank
+              assign divClass = 'qq-responsive-video-container '
+              assign blockVideo = true
+            else
+              assign divClass = ''
+              assign blockVideo = false
+            endif
+          %}
+          {% if posterImage != blank %}
+            {% assign coverID = 'qq-video-cover-' | append: section.id %}
+            {% assign videoID = 'qq-video-' | append: section.id  %}
+            <div id="{{coverID}}" data-vidID="{{videoID}}" class="qq-video-cover" onclick="" style="background-image:url('{{posterImageUrl}}')">
+              <a href="#" class="qq-play-icon qq-{{iconClass}}" {% if playIconUrl != blank %}style="background-image:url('{{ playIconUrl }}');"{% endif %}></a>
+            </div>
+          {% endif %}
+          <div class="{{divClass}}{{videoClass}} qq-{{videoDimensions}}" style="position: relative;">
+            {% if videoOverlayEnabled %}
+              <div class="qq-video-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 9; overflow: hidden;">
+                <div style="
+                  position: absolute;
+                  width: 100%;
+                  height: 100%;
+                  background: radial-gradient(
+                    circle at 
+                    {% if videoCutoutPosition == 'custom' %}{{videoCutoutPositionX}}% {{videoCutoutPositionY}}%{% elsif videoCutoutPosition == 'center' %}center{% elsif videoCutoutPosition == 'top-left' %}10% 10%{% elsif videoCutoutPosition == 'top-right' %}90% 10%{% elsif videoCutoutPosition == 'bottom-left' %}10% 90%{% elsif videoCutoutPosition == 'bottom-right' %}90% 90%{% endif %},
+                    transparent {{videoCutoutSize | divided_by: 2}}px,
+                    {{videoOverlayColor}} {{videoCutoutSize | divided_by: 2 | plus: 1}}px
+                  );
+                ">
+                </div>
+              </div>
+            {% endif %}
+            
+            {% if localVideo != blank %}
+              {% liquid
+                if posterImage != blank
+                  assign videoAttributes = ''
+                else
+                  if videoAutoplay == true
+                    assign videoAttributes = ' muted="" autoplay'
+                  else
+                    assign videoAttributes = ''
+                  endif
+                endif
+                if videoControls == true
+                  assign videoAttributes = videoAttributes | append: ' controls'
+                endif
+                if videoLoop == true
+                  assign videoAttributes = videoAttributes | append: ' loop'
+                endif
+                for vid in localVideo.sources
+                  if vid.format == 'mp4'
+                    assign localVideoUrl = vid.url
+                    assign localVideoMime = vid.mime_type
+                    break
+                  endif
+                endfor
+              %}
+              <video
+                {{videoAttributes}}
+                playsinline="true"
+                preload="{{vid_preload}}"
+                class="qq-local"
+                id="{{videoID}}">
+                  <source src="{{localVideoUrl}}#t=0.1" type="{{ localVideoMime }}">
+              </video>
+            {% else %}
+              {% if externalVideo %}
+                {% if externalVideo.type == 'youtube' %}
+                  {% liquid
+                    if posterImage != blank
+                      assign videoAttributes = ''
+                    else
+                      if videoAutoplay == true
+                        assign videoAttributes = '&autoplay=1&mute=1'
+                      else
+                        assign videoAttributes = ''
+                      endif
+                    endif
+                    if videoControls == false
+                      assign videoAttributes = videoAttributes | append: '&controls=0&modestbranding=1&showinfo=0&showsearch=0'
+                    endif
+                    if videoLoop == true
+                      assign videoAttributes = videoAttributes | append: '&loop=1&playlist=' | append: externalVideo.id
+                    endif
+                  %}                
+                  <div class="qq-video-wrapper">
+                    <iframe class="youtube" src="//www.youtube.com/embed/{{ externalVideo.id }}?rel=0&amp;showinfo=0{{videoAttributes}}&iv_load_policy=3" frameborder="0" allowfullscreen  {{ block.shopify_attributes }} {% unless request.design_mode == true %}loading="lazy"{% endunless %}></iframe>
+                  </div>
+                {% elsif externalVideo.type == 'vimeo' %}
+                  {% liquid
+                    if posterImage != blank
+                      assign videoAttributes = ''
+                    else
+                      if videoAutoplay == true
+                        assign videoAttributes = '&autoplay=1&muted=1'
+                      else
+                        assign videoAttributes = ''
+                      endif
+                    endif
+                    if videoControls == false
+                      assign videoAttributes = videoAttributes | append: '&controls=0'
+                    endif
+                    if videoLoop == true
+                      assign videoAttributes = videoAttributes | append: '&loop=1'
+                    endif
+                  %}                
+                  <iframe class="vimeo" src="//player.vimeo.com/video/{{ externalVideo.id }}?{{videoAttributes}}" width="500" height="232" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen  {{ block.shopify_attributes }} loading="lazy"></iframe>
+                {% endif %}
+              {% else %}
+                <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 771 771" style="width:100%;height:100%;" preserveAspectRatio="xMidYMid slice"><g style="isolation:isolate"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1" style="fill:#efefef;"><rect width="771" height="771" style="fill:#efefef;"/><g style="opacity:0.5"><path d="M280.73,441.53V406.12h-.48c-3,6.78-8.91,10.7-17.23,10.7-14.49,0-23-11.77-23-30.42S248.41,356,263.14,356c8.79,0,14.74,4,17.59,11.28h.47l.6-9.86H290v84.13Zm0-53.71V385c0-12.83-6.42-20.44-16-20.44s-15.1,7.72-15.1,21.87,5.47,21.86,15.1,21.86S280.73,400.66,280.73,387.82Z" style="fill:#373833"/><path d="M302.48,357.4h8.91l7.72,44.09h.48l10-44.09h7.49l10,44.09h.47l7.73-44.09h8.55l-10.81,58h-9.87l-9.74-43h-.47l-9.75,43h-9.86Z" style="fill:#373833"/><path d="M376.86,407.19h20V365.6h-20v-8.2h29.23v49.79h20v8.2h-49.2Zm15.21-69.52a8.08,8.08,0,1,1,8.08,8.09A7.87,7.87,0,0,1,392.07,337.67Z" style="fill:#373833"/><path d="M471.45,441.53V406.12H471c-3,6.78-8.92,10.7-17.23,10.7-14.5,0-23.06-11.77-23.06-30.42S439.13,356,453.86,356c8.8,0,14.74,4,17.59,11.28h.48l.59-9.86h8.2v84.13Zm0-53.71V385c0-12.83-6.41-20.44-16-20.44s-15.09,7.72-15.09,21.87,5.47,21.86,15.09,21.86S471.45,400.66,471.45,387.82Z" style="fill:#373833"/><path d="M492.72,386.4c0-19.73,8.8-30.42,25.19-30.42s25.2,10.69,25.2,30.42-8.8,30.42-25.2,30.42S492.72,406.12,492.72,386.4Zm40.76,0c0-14.38-5.35-21.87-15.57-21.87S502.35,372,502.35,386.4s5.35,21.86,15.56,21.86S533.48,400.77,533.48,386.4Z" style="fill:#373833"/><path d="M553.09,386.4c0-18.66,8.55-30.42,23-30.42,8.32,0,14.26,3.92,17.23,10.69h.48V331h9.27v84.37h-8.2l-.6-9.86h-.47c-2.85,7.25-8.8,11.29-17.59,11.29C561.52,416.82,553.09,405.17,553.09,386.4Zm40.76,1.42V385c0-12.83-6.42-20.44-16.05-20.44s-15.09,7.72-15.09,21.87,5.47,21.86,15.09,21.86S593.85,400.66,593.85,387.82Z" style="fill:#373833"/><path d="M615.36,386.28c0-19.61,8.79-30.3,25.31-30.3S666,366.67,666,386.28a18.15,18.15,0,0,1-.12,2.49H625c.59,13,6.06,19.49,16.52,19.49,6.53,0,11-2.61,13.43-7.6h10.34C661.94,411,654,416.82,641.38,416.82,624.39,416.82,615.36,406.24,615.36,386.28Zm40.75-5.35c-1.3-10.81-6.53-16.4-15.44-16.4s-14.15,5.59-15.45,16.4Z" style="fill:#373833"/><polygon points="105.12 429.87 179.13 385.56 105.12 341.26 115.51 324 201.41 375.33 201.41 395.8 115.51 447.13 105.12 429.87" style="fill:#29abe2"/><polygon points="119.25 395.8 119.25 375.33 205.22 323.97 215.55 341.26 141.53 385.56 215.55 429.87 205.16 447.13 119.25 395.8" style="fill:#0071bc;mix-blend-mode:multiply"/></g></g></g></g></svg> </div>
+              {% endif %}
+            {% endif %}
+          </div>
+        {% endcapture %}
+    {% endcase %}
+  {% endfor %}
+  <div class="qq-section-wrap-{{sectionWidth}} {{sectionClass}}">
+    {% comment %} Overlay Image Container - Only render if enabled {% endcomment %}
+    {% if overlayImageEnabled and overlayImage != blank %}
+      {% liquid
+        # Process the overlay image
+        if overlayImage.alt != blank
+          assign overlayImageAlt = 'alt="' | append: overlayImage.alt | append: '"'
+        else
+          assign overlayImageAlt = 'alt="Overlay image"'
+        endif
+        assign overlayImageUrl = overlayImage | img_url: 'master'
+        assign linkClass = ''
+        if overlayImageLink != blank
+          assign linkClass = 'with-link'
+        endif
+      %}
+      <div class="qq-overlay-image-container {{linkClass}}" style="
+        width: {{overlayImageWidth}}%;
+        top: {{overlayImageTopPosition}}%;
+        {% if overlayImageLeftPosition != blank %}left: {{overlayImageLeftPosition}}%;{% endif %}
+        {% if overlayImageRightPosition != blank %}right: {{overlayImageRightPosition}}%;{% endif %}
+        transform: rotate({{overlayImageRotation}}deg);
+        opacity: {{overlayImageOpacity | divided_by: 100.0}};
+        z-index: {{overlayImageZIndex}};
+      ">
+        {% if overlayImageLink != blank %}
+          <a href="{{overlayImageLink}}">
+        {% endif %}
+          <img src="{{overlayImageUrl}}" {{overlayImageAlt}} loading="lazy">
+        {% if overlayImageLink != blank %}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if section.settings.section_title != blank %}
+    <div class="heading-wrapper--featured-collection
+              heading-wrapper
+              heading-wrapper--short
+              one-whole column
+              is-flex
+              is-flex-column
+              is-align-center
+              text-align-center">
+      <h2 class="featured-collection__title title">{{ section.settings.section_title }}</h2>
+    </div>
+    {% endif %}
+    <div class="qq-split-sections
+      {% if blocksOrderVideo%}
+        {{blocksOrderVideo}} {{blocksOrderVideoMobile}}
+      {%else%}
+        {{blocksOrder}} {{blocksOrderMobile}}
+      {%endif%}
+      {%if section.blocks.size > 1%}qq-grid{%endif%}">
+      <div class="qq-section-content">
+        <div>
+          {% assign buttonCounter = 1 %}        
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'title' -%}
+                {{titleElement}}
+              {%- when 'subtitle' -%}
+                {{subtitleElement}}
+              {%- when 'textblock' -%}
+                {{textblockElement}}
+              {%- when 'buttons' -%}
+                <div class="qq-button-wrapper" style="display:flex;">
+                  {{buttonElement}} {% if buttonElement_2 %}{{buttonElement_2}}{%endif%}
+                </div>  
+              {%- when 'block-image' -%}
+                {% liquid                 
+                  assign blockImageBorderRadius = block.settings.image_border_radius
+                  assign blockImageMarginTop = block.settings.image_margin_top
+                  assign blockImageMarginTopMobile = block.settings.image_margin_top_mobile
+                  assign blockImageMarginBottom = block.settings.image_margin_bottom
+                  assign blockImageMarginBottomMobile = block.settings.image_margin_bottom_mobile
+                  assign blockImageMaxWidth = block.settings.image_max_width
+                  assign blockImageMaxWidthMobile = block.settings.image_max_width_mobile
+                  assign blockImageDisplayMobile = block.settings.image_display_mobile
+                  assign blockImage = block.settings.block_image                
+                  assign blockMediaSize = block.settings.media_size                
+                %}              
+                {% if blockImage != blank %}
+                  {% assign loopImage = blockImage %}								
+                  {% assign mediaSize = blockMediaSize %}								
+                  {% liquid 
+                      if loopImage.alt != blank
+                        assign loopImageAlt = 'alt="' | append: loopImage.alt | append: '"'
+                      else
+                        assign loopImageAlt = ''
+                      endif
+                      assign proportion = loopImage.aspect_ratio
+                      assign imageW = loopImage.width
+                      assign imageH = loopImage.height   
+                      for imageSize in imageSizes
+                        assign maxWidthAllowed = imageSize | remove: 'x'
+                        assign maxHeightAllowed = imageSize | remove: 'x'
+                        if proportion > 1
+                          # landscape
+                          assign mostW = maxWidthAllowed
+                          assign mostH = mostW | times: proportion
+                        elsif proportion < 1
+                          # portrait
+                          assign mostH = maxHeightAllowed
+                          assign mostW = mostH | times: proportion
+                        else
+                          # square
+                          assign mostW = maxWidthAllowed
+                          assign mostH = mostW
+                        endif
+                        assign iw = imageW | at_most: mostW | round
+                        assign ih	= imageH | at_most: mostH | round
+                        if mediaSize == 'portrait'
+                          if halfSquarePortrait == true  
+                            assign ih = iw | times: 2 | round
+                              if imageH < ih
+                                  assign ih = imageH
+                                  assign iw = ih | divided_by: 2 | round
+                              endif
+                              if imageW < iw
+                                  assign iw = imageW
+                                  assign ih = iw | times: 2 | round
+                              endif
+                          else 
+                            assign ih = iw | divided_by: 0.6666667 | round
+                            if imageH < ih
+                              assign ih = imageH
+                              assign iw = ih | divided_by: 1.5 | round
+                            endif
+                            if imageW < iw
+                              assign iw = imageW
+                              assign ih = iw | divided_by: 0.666667 | round
+                            endif
+                          endif
+                        elsif mediaSize == 'vertical'
+                          assign ih = iw | times: 16 | divided_by: 9 | round
+                          if imageH < ih
+                            assign ih = imageH
+                            assign iw = ih | times: 9 | divided_by: 16 | round
+                          endif
+                          if imageW < iw
+                            assign iw = imageW
+                            assign ih = iw | times: 16 | divided_by: 9 | round
+                          endif     
+                        elsif mediaSize == 'horizontal'
+                          assign ih = iw | times: 9 | divided_by: 16 | round
+                          if imageH < ih
+                            assign ih = imageH
+                            assign iw = ih | times: 16 | divided_by: 9 | round
+                          endif
+                          if imageW < iw
+                            assign iw = imageW
+                            assign ih = iw | times: 9 | divided_by: 16 | round
+                          endif                                          
+                        elsif mediaSize == 'square'
+                          assign ih = iw
+                          if iw > imageW
+                            assign iw = imageW
+                            assign ih = iw
+                          endif
+                          if ih > imageH
+                            assign ih = imageH
+                            assign iw = ih
+                          endif
+                        elsif mediaSize == 'landscape'
+                          if halfSquareLandscape == true 
+                            assign ih = iw | times: 0.5 | round
+                            if imageH < ih
+                              assign ih = imageH
+                              assign iw = ih | times: 2 | round
+                            endif
+                            if imageW < iw
+                              assign iw = imageW
+                              assign ih = iw | times: 0.5 | round
+                            endif                        
+                          else 
+                           assign ih = iw | times: 4 | divided_by: 6 | round
+                            if imageH < ih
+                              assign ih = imageH
+                              assign iw = ih | times: 6 | divided_by: 4 | round
+                            endif
+                            if imageW < iw
+                              assign iw = imageW
+                              assign ih = iw | times: 4 | divided_by: 6 | round
+                            endif
+                          endif
+                        elsif mediaSize == 'original'
+                          assign ih = iw | divided_by: proportion | round
+                        endif
+                        assign size = iw | append: 'x' | append: ih
+                        assign imageUrl = loopImage | img_url: size, crop: 'center'
+                        if forloop.first
+                          assign imageUrls = imageUrl
+                        else
+                          assign imageUrls = imageUrls | append: ',' | append: imageUrl
+                        endif                      
+                      endfor
+                      assign imageUrls = imageUrls | split: ','                                                              
+  %}
+                  {% assign blockImageAlt = loopImageAlt %}
+                  {% assign blockImageUrls = imageUrls %}	
+                  {% capture blockImagesLoopArray %}
+                  {% for imageSize in imageSizes %}
+                    {% if imageSize contains 'x' %}
+                    {% assign defaultImageUrl = blockImageUrls[forloop.index0] %}
+                    {% assign imageSize = imageSize | remove: 'x' %}
+                    {% endif %}
+                    {{blockImageUrls[forloop.index0]}} {{imageSize}}w{% unless forloop.last %},{% endunless %}
+                  {% endfor %}
+                  {% endcapture %}
+                {% endif %} 
+              <div class="block-image-container">
+                <div class="qq-block-image">		                
+                  {% if blockImage != blank %}
+                    <picture>
+                      <img srcset="{{blockImagesLoopArray}}" {{blockImageAlt}} src=”{{defaultImageUrl}}”/ loading="lazy">
+                    </picture>
+                    
+                  {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 771 771" style="width:100%;height:100%	;" preserveAspectRatio="xMidYMid slice"><g style="isolation:isolate"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1" style="fill:#efefef;"><rect width="771" height="771" style="fill:#efefef;"/><g style="opacity:0.5"><path d="M280.73,441.53V406.12h-.48c-3,6.78-8.91,10.7-17.23,10.7-14.49,0-23-11.77-23-30.42S248.41,356,263.14,356c8.79,0,14.74,4,17.59,11.28h.47l.6-9.86H290v84.13Zm0-53.71V385c0-12.83-6.42-20.44-16-20.44s-15.1,7.72-15.1,21.87,5.47,21.86,15.1,21.86S280.73,400.66,280.73,387.82Z" style="fill:#373833"/><path d="M302.48,357.4h8.91l7.72,44.09h.48l10-44.09h7.49l10,44.09h.47l7.73-44.09h8.55l-10.81,58h-9.87l-9.74-43h-.47l-9.75,43h-9.86Z" style="fill:#373833"/><path d="M376.86,407.19h20V365.6h-20v-8.2h29.23v49.79h20v8.2h-49.2Zm15.21-69.52a8.08,8.08,0,1,1,8.08,8.09A7.87,7.87,0,0,1,392.07,337.67Z" style="fill:#373833"/><path d="M471.45,441.53V406.12H471c-3,6.78-8.92,10.7-17.23,10.7-14.5,0-23.06-11.77-23.06-30.42S439.13,356,453.86,356c8.8,0,14.74,4,17.59,11.28h.48l.59-9.86h8.2v84.13Zm0-53.71V385c0-12.83-6.41-20.44-16-20.44s-15.09,7.72-15.09,21.87,5.47,21.86,15.09,21.86S471.45,400.66,471.45,387.82Z" style="fill:#373833"/><path d="M492.72,386.4c0-19.73,8.8-30.42,25.19-30.42s25.2,10.69,25.2,30.42-8.8,30.42-25.2,30.42S492.72,406.12,492.72,386.4Zm40.76,0c0-14.38-5.35-21.87-15.57-21.87S502.35,372,502.35,386.4s5.35,21.86,15.56,21.86S533.48,400.77,533.48,386.4Z" style="fill:#373833"/><path d="M553.09,386.4c0-18.66,8.55-30.42,23-30.42,8.32,0,14.26,3.92,17.23,10.69h.48V331h9.27v84.37h-8.2l-.6-9.86h-.47c-2.85,7.25-8.8,11.29-17.59,11.29C561.52,416.82,553.09,405.17,553.09,386.4Zm40.76,1.42V385c0-12.83-6.42-20.44-16.05-20.44s-15.09,7.72-15.09,21.87,5.47,21.86,15.09,21.86S593.85,400.66,593.85,387.82Z" style="fill:#373833"/><path d="M615.36,386.28c0-19.61,8.79-30.3,25.31-30.3S666,366.67,666,386.28a18.15,18.15,0,0,1-.12,2.49H625c.59,13,6.06,19.49,16.52,19.49,6.53,0,11-2.61,13.43-7.6h10.34C661.94,411,654,416.82,641.38,416.82,624.39,416.82,615.36,406.24,615.36,386.28Zm40.75-5.35c-1.3-10.81-6.53-16.4-15.44-16.4s-14.15,5.59-15.45,16.4Z" style="fill:#373833"/><polygon points="105.12 429.87 179.13 385.56 105.12 341.26 115.51 324 201.41 375.33 201.41 395.8 115.51 447.13 105.12 429.87" style="fill:#29abe2"/><polygon points="119.25 395.8 119.25 375.33 205.22 323.97 215.55 341.26 141.53 385.56 215.55 429.87 205.16 447.13 119.25 395.8" style="fill:#0071bc;mix-blend-mode:multiply"/></g></g></g></g></svg>
+                  {% endif %}	
+                </div>  
+              <div class="qq-block-image-text">
+                {{ block.settings.image_title }}
+                {{ block.settings.image_subtitle }}
+              </div>
+              </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+      {% if imageElement or videoElement %}
+        {% liquid
+          if videoElement
+            assign sectionClass = 'qq-section-video'
+          else
+            if imageElement
+              assign sectionClass = 'qq-section-image'
+            endif
+          endif
+        %}
+        <div class="{{sectionClass}}">
+          {% if videoElement %}
+            {{videoElement}}
+          {% else %}
+            {{imageElement}}
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <style data='../SplitScreenVideo.css.liquid'>section.qq-splitscreen-section{margin-left:auto;margin-right:auto;position:relative}section.qq-splitscreen-section>div{width:100%;margin-left:auto;margin-right:auto;position:relative}section.qq-splitscreen-section>div.qq-section-wrap-fullwidth{max-width:100%}section.qq-splitscreen-section .qq-split-sections.qq-grid{width:100%;position:relative;margin:auto}@media (min-width:768px){section.qq-splitscreen-section .qq-split-sections.qq-grid{display:grid}section.qq-splitscreen-section .qq-split-sections.qq-grid.qq-row-reverse>div{grid-row:1}section.qq-splitscreen-section .qq-split-sections.qq-grid.qq-row-reverse>div.qq-section-image,section.qq-splitscreen-section .qq-split-sections.qq-grid.qq-row-reverse>div.qq-section-video{grid-column:1}section.qq-splitscreen-section .qq-split-sections.qq-grid.qq-row-reverse>div.qq-section-content{grid-column:2}}@media (max-width:767px){section.qq-splitscreen-section .qq-split-sections.qq-grid{display:flex}section.qq-splitscreen-section .qq-split-sections.qq-grid.qq-column{flex-direction:column}section.qq-splitscreen-section .qq-split-sections.qq-grid.qq-column-reverse{flex-direction:column-reverse}}section.qq-splitscreen-section .qq-split-sections.qq-grid>div{position:relative}@media (max-width:767px){section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-hidden-on-mobile{display:none}}@media (min-width:768px){section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video{height:100%;display:flex;flex-direction:column;justify-content:center}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video>div{height:100%}}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-image{width:100%}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-block-image img,section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-block-image picture,section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-image img,section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-image picture{display:block;width:100%}@media (max-width:767px){section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video{width:100%!important}}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video div:not(.qq-responsive-video-container):not(.qq-video-cover):not(.qq-video-wrapper){display:flex;width:100%;align-items:center;justify-content:center}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-video-cover{position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;display:flex;justify-content:center;align-items:center;background-size:cover;background-position:center;cursor:pointer;z-index:9}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-video-cover:not(:hover) .qq-play-icon{opacity:.85}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-video-cover:hover .qq-play-icon{opacity:1}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-video-cover .qq-play-icon{transition:opacity .25s ease;background-size:contain;background-position:center;background-repeat:no-repeat}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-video-cover .qq-play-icon.qq-default{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60' style='enable-background:new 0 0 60 60' xml:space='preserve'%3E%3Cpath style='fill:%23fff' d='M30 0C13.458 0 0 13.458 0 30s13.458 30 30 30 30-13.458 30-30S46.542 0 30 0zm15.563 30.826-22 15a1.002 1.002 0 0 1-1.03.058A.999.999 0 0 1 22 45V15a.999.999 0 0 1 1.564-.826l22 15a1.001 1.001 0 0 1-.001 1.652z'/%3E%3C/svg%3E")}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-video-cover .qq-play-icon.qq-small{width:50px;height:50px}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-video-cover .qq-play-icon.qq-medium{width:90px;height:90px}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-video-cover .qq-play-icon.qq-large{width:130px;height:130px}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-video-cover .qq-play-icon.qq-extra-large{width:180px;height:180px}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container:not(.qq-original){overflow:hidden;position:relative;width:100%;height:0}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container:not(.qq-original).qq-landscape{padding-bottom:56.25%}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container:not(.qq-original).qq-portrait{padding-bottom:146.77%}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container:not(.qq-original).qq-square{padding-bottom:100%}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container:not(.qq-original).qq-square .qq-video-wrapper{padding-bottom:100%;left:0;right:0;height:0;overflow:hidden}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container:not(.qq-original) embed,section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container:not(.qq-original) iframe,section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container:not(.qq-original) object,section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container:not(.qq-original) video{position:absolute;top:0;left:0;width:100%;height:100%}@media (min-width:768px){section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container:not(.qq-original) video{-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center}}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container:not(.qq-original) video:fullscreen{-o-object-fit:contain!important;object-fit:contain!important}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container.qq-original{height:auto;width:100%}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container.qq-original embed,section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container.qq-original iframe,section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container.qq-original object,section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container.qq-original video{width:100%;height:auto}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container .qq-video-wrapper{z-index:1}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container .qq-video-wrapper .qq-video-thumb,section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container .qq-video-wrapper video{transition:all .25s ease}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container .qq-play-icon{transition:opacity .25s ease;background-size:contain;background-position:center;background-repeat:no-repeat;position:absolute;left:0;right:0;margin-left:auto;margin-right:auto;z-index:9}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container .qq-play-icon.qq-small{width:50px;height:50px;top:calc(50% - 25px)}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container .qq-play-icon.qq-medium{width:70px;height:70px;top:calc(50% - 35px)}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container .qq-play-icon.qq-large{width:90px;height:90px;top:calc(50% - 45px)}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-video .qq-responsive-video-container .qq-play-icon img{width:100%;height:100%;-o-object-fit:contain;object-fit:contain;-o-object-position:center;object-position:center}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-content>div{display:flex;flex-direction:column}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-content .qq-rte :not(ul):not(ol):not(li),section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-content .qq-subtitle :not(ul):not(ol):not(li),section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-content .qq-title :not(ul):not(ol):not(li){margin-top:0;margin-bottom:0}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-content .qq-btn{text-align:center}section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-content .qq-btn,section.qq-splitscreen-section .qq-split-sections.qq-grid .qq-section-content .qq-btn:hover{text-decoration:none!important}html[dir=rtl] .qq-splitscreen-section .qq-button-wrapper{direction:ltr}</style>
+  {% assign sectionID = 'shopify-section-' | append: section.id %}
+  <style data='../SplitScreenVideo-inline-css.min.css.liquid'>{% if titleCustomFont %} {{titleFont | font_face: font_display: 'swap' | strip_newlines }} {% endif %} {% if textblockCustomFont %} {{textblockFont | font_face: font_display: 'swap' | strip_newlines }} {% endif %} {% if buttonCustomFont %} {{buttonFont | font_face: font_display: 'swap' | strip_newlines }} {% endif %} {% if buttonCustomFont_2 %} {{buttonFont_2 | font_face: font_display: 'swap' | strip_newlines }} {% endif %} #{{sectionID}} * { text-transform:none; } {% if sectionWidth == 'fullwidth' %} #{{sectionID}} { width: 100vw !important; position: relative !important; height: auto !important; background: {{sectionBackgroundColor}}; } html:not([dir="rtl"]) #{{sectionID}} { margin-left: -50vw !important; left: 50% !important; } html[dir="rtl"] #{{sectionID}} { margin-right: -50vw !important; right: 50% !important; } body { overflow-x:hidden; } {% if contentFullwidth == false %} #{{sectionID}} > div { max-width:{{contentMaxWidth}}px; } {% endif %} {% else %} #{{sectionID}} { max-width:{{contentMaxWidth}}px; } #{{sectionID}} .qq-split-sections { background: {{sectionBackgroundColor}}; } {% endif %} {% if blockImage != blank and blockImageBorderRadius != 0 %} #{{sectionID}} .qq-block-image, #{{sectionID}} .qq-block-image * { border-radius:{{blockImageBorderRadius}}px; } {% endif %} #{{sectionID}} .qq-title * { {% if titleCustomFont %} {% if titleFontName != blank %} font-family: {{titleFontName}} !important; {% else %} font-family:{{titleFont.family}}, {{titleFont.fallback_families}} !important; {% endif %} {%endif%} {% if titleFontWeight != "default" %}font-weight:{{titleFontWeight}} !important;{%endif%} {% if titleColor contains '#' %}color:{{titleColor}};{%endif%} } #{{sectionID}} .qq-subtitle * { {% if subtitleCustomFont %} {% if subtitleFontName != blank %} font-family: {{subtitleFontName}} !important; {% else %} font-family:{{subtitleFont.family}}, {{subtitleFont.fallback_families}} !important; {% endif %} {%endif%} {% if subtitleFontWeight != "default" %}font-weight:{{subtitleFontWeight}} !important;{%endif%} {% if subtitleColor contains '#' %}color:{{subtitleColor}};{%endif%} } #{{sectionID}} .qq-rte * { {% if textblockCustomFont %} {% if textblockFontName != blank %} font-family: {{textblockFontName}} !important; {% else %} font-family:{{textblockFont.family}}, {{textblockFont.fallback_families}} !important; {% endif %} {%endif%} {% if textblockFontWeight != "default" %}font-weight:{{textblockFontWeight}} !important;{%endif%} {% if textblockColor contains '#' %}color:{{textblockColor}};{%endif%} } #{{sectionID}} .qq-btn { display: flex; align-items: center; justify-content: center; } #{{sectionID}} .qq-btn.qq-el-1 { {% if butttonFontSize != 0 %}font-size:{{butttonFontSize}}px;{% endif %} {% if butttonLetterSpacing != 0 %}letter-spacing:{{butttonLetterSpacing}}px !important;{% endif %} } #{{sectionID}} .qq-btn.qq-el-1 { width:100%; {% if buttonCustomFont %} {% if buttonFontName != blank %} font-family: {{buttonFontName}} !important; {% else %} font-family:{{buttonFont.family}}, {{buttonFont.fallback_families}} !important; {% endif %} {%endif%} {% if buttonFontWeight != "default" %}font-weight:{{buttonFontWeight}} !important;{%endif%} max-width: {{buttonMaxWidth}}px; padding: {{buttonPaddingVertical}}px {{buttonPaddingHorizontal}}px; color:{{buttonColor}}; background-color:{{buttonBackground}}; {% if buttonBorderColor contains '#' %} border:{{buttonBorder}}px solid {{buttonBorderColor}}; {% endif %} border-radius:{{buttonRadius}}px; transition: all 0.5s ease; } #{{sectionID}} .qq-btn.qq-el-1:hover { color: {{buttonColorHover}} !important; background-color:{{buttonBackgroundHover}} !important; border-color:{{buttonBorderColorHover}} !important; } {% if blockVideo == true and playIcon != blank %} #{{sectionID}} .play-icon:not(.default) { background-image:url('{{playIconUrl}}'); } {% endif %} {% if buttonElement_2 %} #{{sectionID}} .qq-btn.qq-el-2 { width:100%; {% if buttonCustomFont_2 %} {% if buttonFontName_2 != blank %} font-family: {{buttonFontName_2}} !important; {% else %} font-family:{{buttonFont_2.family}}, {{buttonFont.fallback_families}} !important; {% endif %} {%endif%} {% if buttonFontWeight_2 != "default" %}font-weight:{{buttonFontWeight_2}} !important;{%endif%} max-width: {{buttonMaxWidth_2}}px; padding: {{buttonPaddingVertical_2}}px {{buttonPaddingHorizontal_2}}px; color:{{buttonColor_2}}; background-color:{{buttonBackground_2}}; {% if buttonBorderColor_2 contains '#' %} border:{{buttonBorder_2}}px solid {{buttonBorderColor_2}}; {% endif %} border-radius:{{buttonRadius_2}}px; transition: all 0.5s ease; } #{{sectionID}} .qq-btn.qq-el-2:hover { color: {{buttonColorHover_2}} !important; background-color:{{buttonBackgroundHover_2}} !important; border-color:{{buttonBorderColorHover_2}} !important; } {% endif %} #{{sectionID}} .qq-split-sections { align-items:{{textAreaVerticalPosition}}; } @media only screen and (min-width: 768px) { #{{sectionID}} { margin-top:{{sectionMarginTop}}px; margin-bottom:{{sectionMarginBottom}}px; } {% if sectionWidth == 'fullwidth' %} #{{sectionID}} { padding:{{sectionPaddingTop}}px {{sectionPaddingHorizontal}}px {{sectionPaddingBottom}}px {{sectionPaddingHorizontal}}px; } {% else %} #{{sectionID}} .qq-split-sections { padding:{{sectionPaddingTop}}px {{sectionPaddingHorizontal}}px {{sectionPaddingBottom}}px {{sectionPaddingHorizontal}}px; } {% endif %} #{{sectionID}} .qq-section-content { padding:{{textAreaPaddingTop}}px {{textAreaPaddingRight}}px {{textAreaPaddingBottom}}px {{textAreaPaddingLeft}}px; } {% if sectionImage == true %} {% if sectionImageHeight == 'full' %} #{{sectionID}} .qq-section-image, #{{sectionID}} .qq-section-image * { height:100%; } #{{sectionID}} .qq-section-image img { object-fit:cover; object-position:center; } {% else %} #{{sectionID}} .qq-section-image, #{{sectionID}} .qq-section-image * { height:auto; } {% endif %} {% endif %} #{{sectionID}} .qq-title { margin-top:{{titleMarginTop}}px; margin-bottom:{{titleMarginBottom}}px; } #{{sectionID}} .qq-title * { {% if titleFontSize != 0 %}font-size:{{titleFontSize}}px;{% endif %} {% if titleLineHeight != 0 %}line-height:{{titleLineHeight}}px;{% endif %} {% if titleLetterSpacing != 0 %}letter-spacing:{{titleLetterSpacing}}px !important;{% endif %} text-align:{{textAreaTextAlign}}; } #{{sectionID}} .qq-subtitle { margin-top:{{subtitleMarginTop}}px; margin-bottom:{{subtitleMarginBottom}}px; } #{{sectionID}} .qq-subtitle * { {% if subtitleFontSize != 0 %}font-size:{{subtitleFontSize}}px;{% endif %} {% if subtitleLineHeight != 0 %}line-height:{{subtitleLineHeight}}px;{% endif %} {% if subtitleLetterSpacing != 0 %}letter-spacing:{{subtitleLetterSpacing}}px !important;{% endif %} text-align:{{textAreaTextAlign}}; } #{{sectionID}} .qq-rte { margin-top:{{textblockMarginTop}}px; margin-bottom:{{textblockMarginBottom}}px; } #{{sectionID}} .qq-rte * { {% if textblockFontSize != 0 %}font-size:{{textblockFontSize}}px;{% endif %} {% if textblockLineHeight != 0 %}line-height:{{textblockLineHeight}}px;{% endif %} {% if textblockLetterSpacing != 0 %}letter-spacing:{{textblockLetterSpacing}}px !important;{% endif %} text-align:{{textAreaTextAlign}}; } #{{sectionID}} .qq-split-sections.qq-row { grid-template-columns: {{blockTextWidth}}% {{mainMediaColumnWidth}}%; } #{{sectionID}} .qq-split-sections.qq-row-reverse { grid-template-columns: {{mainMediaColumnWidth}}% {{blockTextWidth}}%; } {% if blockImage != blank %} #{{sectionID}} .qq-block-image { margin-top:{{blockImageMarginTop}}px; margin-bottom:{{blockImageMarginBottom}}px; {% if blockImageMaxWidth != 100 %} align-self:{{buttonsAlignment}}; max-width:{{blockImageMaxWidth}}%; {% endif %} } {% endif %} {% if videoHeight == 'full' %} #{{sectionID}} .qq-section-video * { height:100% !important; } {% endif %} #{{sectionID}} .qq-button-wrapper { padding-top:{{buttonMarginTop}}px; padding-bottom:{{buttonMarginBottom}}px; } #{{sectionID}} .qq-button-wrapper { flex-direction:{{buttonsLayout}}; justify-content:{{buttonsAlignment}}; } #{{sectionID}} .qq-btn.qq-el-1 { {% if buttonFontSize != 0 %}font-size:{{buttonFontSize}}px;{% endif %} {% if buttonLetterSpacing != 0 %}letter-spacing:{{buttonLetterSpacing}}px !important;{% endif %} } {% if buttonElement_2 %} #{{sectionID}} .qq-btn.qq-el-2 { {% if buttonFontSize_2 != 0 %}font-size:{{buttonFontSize_2}}px;{% endif %} {% if buttonLetterSpacing_2 != 0 %}letter-spacing:{{buttonLetterSpacing_2}}px !important;{% endif %} } html:not([dir="rtl"]) #{{sectionID}} .qq-btn.qq-el-2 { {% if buttonsLayout == 'row' %} margin-left:{{buttonsMargin}}px; {% else %} margin-top:{{buttonsMargin}}px; {% endif %} } html[dir="rtl"] #{{sectionID}} .qq-btn.qq-el-2 { {% if buttonsLayout == 'row' %} margin-right:{{buttonsMargin}}px; {% else %} margin-top:{{buttonsMargin}}px; {% endif %} } {% endif %} } @media only screen and (max-width: 767px) { #{{sectionID}} { margin-top:{{sectionMarginTopMobile}}px; margin-bottom:{{sectionMarginBottomMobile}}px; padding:{{sectionPaddingTopMobile}}px {{sectionPaddingHorizontalMobile}}px {{sectionPaddingBottomMobile}}px {{sectionPaddingHorizontalMobile}}px; } {% if sectionWidth == 'fullwidth' %} #{{sectionID}} { padding:{{sectionPaddingTopMobile}}px {{sectionPaddingHorizontalMobile}}px {{sectionPaddingBottomMobile}}px {{sectionPaddingHorizontalMobile}}px; } {% else %} #{{sectionID}} .qq-split-sections { padding:{{sectionPaddingTopMobile}}px {{sectionPaddingHorizontalMobile}}px {{sectionPaddingBottomMobile}}px {{sectionPaddingHorizontalMobile}}px; } {% endif %} #{{sectionID}} .qq-section-image, #{{sectionID}} .qq-section-video { max-width:{{mainMediaColumnWidthMobile}}%; align-self:{{buttonsAlignmentMobile}}; } #{{sectionID}} .qq-section-content { padding:{{textAreaPaddingTopMobile}}px {{textAreaPaddingHorizontalMobile}}px {{textAreaPaddingBottomMobile}}px {{textAreaPaddingHorizontalMobile}}px; } {% if blockImage != blank %} #{{sectionID}} .qq-block-image { {% if blockImageDisplayMobile == true %} margin-top:{{blockImageMarginTopMobile}}px; margin-bttom:{{blockImageMarginBottomMobile}}px; {% if blockImageMaxWidthMobile != 100 %} align-self:{{buttonsAlignmentMobile}}; max-width:{{blockImageMaxWidthMobile}}%; {% endif %} {% else %} display:none !important; {% endif %} } {% endif %} #{{sectionID}} .qq-title { margin-top:{{titleMarginTopMobile}}px; margin-bottom:{{titleMarginBottomMobile}}px; } #{{sectionID}} .qq-title * { {% if titleFontSizeMobile != 0 %}font-size:{{titleFontSizeMobile}}px;{% endif %} {% if titleLineHeightMobile != 0 %}line-height:{{titleLineHeightMobile}}px;{% endif %} {% if titleLetterSpacingMobile != 0 %}letter-spacing:{{titleLetterSpacingMobile}}px !important;{% endif %} text-align:{{textAreaTextAlignMobile}}; } #{{sectionID}} .qq-subtitle { margin-top:{{subtitleMarginTopMobile}}px; margin-bottom:{{subtitleMarginBottomMobile}}px; } #{{sectionID}} .qq-subtitle * { {% if subtitleFontSizeMobile != 0 %}font-size:{{subtitleFontSizeMobile}}px;{% endif %} {% if subtitleLineHeightMobile != 0 %}line-height:{{subtitleLineHeightMobile}}px;{% endif %} {% if subtitleLetterSpacingMobile != 0 %}letter-spacing:{{subtitleLetterSpacingMobile}}px !important;{% endif %} text-align:{{textAreaTextAlignMobile}}; } #{{sectionID}} .qq-rte { margin-top:{{textblockMarginTopMobile}}px; margin-bottom:{{textblockMarginBottomMobile}}px; } #{{sectionID}} .qq-rte * { {% if textblockFontSizeMobile != 0 %}font-size:{{textblockFontSizeMobile}}px;{% endif %} {% if textblockLineHeightMobile != 0 %}line-height:{{textblockLineHeightMobile}}px;{% endif %} {% if textblockLetterSpacingMobile != 0 %}letter-spacing:{{textblockLetterSpacingMobile}}px !important;{% endif %} text-align:{{textAreaTextAlignMobile}}; } #{{sectionID}} .qq-button-wrapper { {% comment %} margin-top:{{buttonMarginTopMobile}}px; {% endcomment %} {% comment %} margin-bottom:{{buttonMarginBottomMobile}}px; {% endcomment %} padding-top:{{buttonMarginTopMobile}}px; padding-bottom:{{buttonMarginBottomMobile}}px; flex-direction:column; } #{{sectionID}} .qq-button-wrapper { align-items:{{buttonsAlignmentMobile}}; } #{{sectionID}} .qq-btn.qq-el-1 { {% if buttonFontSizeMobile != 0 %}font-size:{{buttonFontSizeMobile}}px;{% endif %} {% if buttonLetterSpacingMobile != 0 %}letter-spacing:{{buttonLetterSpacingMobile}}px !important;{% endif %} } {% if buttonElement_2 %} #{{sectionID}} .qq-btn.qq-el-2 { {% if buttonFontSizeMobile_2 != 0 %}font-size:{{buttonFontSizeMobile_2}}px;{% endif %} {% if buttonLetterSpacingMobile_2 != 0 %}letter-spacing:{{buttonLetterSpacingMobile_2}}px !important;{% endif %} margin-top:{{buttonsMargin}}px; } {% endif %} }</style>
+  <!-- js:../SplitScreenVideo.min.js --><script>{% raw %}(()=>{function t(){var e=document.querySelectorAll(".qq-splitscreen-with-video .QQ-JS-init-msg");e&&e.forEach(function(e){e.remove()})}var n;function i(){(n=document.getElementsByClassName("qq-splitscreen-with-video")).length&&o()}function o(){if(n.length)for(var e=0;e<n.length;e++){var t=n[e].id.replace("shopify-section-","qq-video-cover-");document.getElementById(t)&&(t=document.getElementById(t))&&t.addEventListener("click",function(e){e.preventDefault();var e=this.id,t=this.getAttribute("data-vidID");document.getElementById(e).style.display="none",void 0!==(e=document.getElementById(t))&&null!=e&&e.play()})}}window.addEventListener("shopify:section:load",function(e){t()}),t(),"loading"!==document.readyState?i():document.addEventListener("DOMContentLoaded",function(){i()}),window.addEventListener("shopify:section:load",function(e){i()}),window.addEventListener("shopify:block:select",function(e){o()})})();{% endraw %}</script><!-- endjs -->
+  {% schema %}
+  {
+    "name": "Main Banner Split",
+    "tag": "section",
+    "class": "qq-splitscreen-section qq-splitscreen-with-video",
+    "settings": [
+      {
+        "type": "text",
+        "id": "section_class",
+        "label": "Section Class",
+        "info": "Add section class (without .). Use spaces to add multiple classes"
+      },
+      {
+  "type": "header",
+  "content": "Overlay Image Settings"
+},
+{
+  "type": "checkbox",
+  "id": "enable_overlay_image",
+  "label": "Enable Overlay Image",
+  "default": false,
+  "info": "Add an image that can be positioned anywhere on top of the section"
+},
+{
+  "type": "image_picker",
+  "id": "overlay_image",
+  "label": "Overlay Image",
+  "info": "Choose an image to overlay"
+},
+{
+  "type": "range",
+  "id": "overlay_image_width",
+  "min": 5,
+  "max": 100,
+  "step": 1,
+  "unit": "%",
+  "label": "Image Width",
+  "default": 20,
+  "info": "Width of the overlay image relative to the section"
+},
+{
+  "type": "range",
+  "id": "overlay_image_top_position",
+  "min": -50,
+  "max": 150,
+  "step": 5,
+  "unit": "%",
+  "label": "Top Position",
+  "default": 10,
+  "info": "Position from the top of the section"
+},
+{
+  "type": "range",
+  "id": "overlay_image_left_position",
+  "min": -50,
+  "max": 150,
+  "step": 5,
+  "unit": "%",
+  "label": "Left Position",
+  "default": 10,
+  "info": "Position from the left of the section"
+},
+{
+  "type": "range",
+  "id": "overlay_image_right_position",
+  "min": -50,
+  "max": 150,
+  "step": 5,
+  "unit": "%",
+  "label": "Right Position",
+  "default": 10,
+  "info": "Position from the right of the section. Left takes precedence if both are set"
+},
+{
+  "type": "range",
+  "id": "overlay_image_rotation",
+  "min": -180,
+  "max": 180,
+  "step": 5,
+  "unit": "°",
+  "label": "Rotation",
+  "default": 0,
+  "info": "Rotate the image (degrees)"
+},
+{
+  "type": "range",
+  "id": "overlay_image_opacity",
+  "min": 10,
+  "max": 100,
+  "step": 5,
+  "unit": "%",
+  "label": "Opacity",
+  "default": 100,
+  "info": "Adjust the transparency of the overlay image"
+},
+{
+  "type": "range",
+  "id": "overlay_image_z_index",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "label": "Z-Index",
+  "default": 10,
+  "info": "Controls layering. Higher values appear on top"
+},
+{
+  "type": "url",
+  "id": "overlay_image_link",
+  "label": "Image Link",
+  "info": "Optional link for the overlay image"
+},
+{
+  "type": "header",
+  "content": "Overlay Image Mobile Settings"
+},
+{
+  "type": "checkbox",
+  "id": "overlay_image_mobile_settings",
+  "label": "Use Custom Mobile Settings",
+  "default": true,
+  "info": "Enable to use different positioning on mobile devices"
+},
+{
+  "type": "range",
+  "id": "overlay_image_mobile_width",
+  "min": 5,
+  "max": 100,
+  "step": 1,
+  "unit": "%",
+  "label": "Mobile Width",
+  "default": 30,
+  "info": "Width of the overlay image on mobile"
+},
+{
+  "type": "range",
+  "id": "overlay_image_mobile_top_position",
+  "min": -50,
+  "max": 150,
+  "step": 5,
+  "unit": "%",
+  "label": "Mobile Top Position",
+  "default": 5,
+  "info": "Position from the top on mobile"
+},
+{
+  "type": "range",
+  "id": "overlay_image_mobile_left_position",
+  "min": -50,
+  "max": 150,
+  "step": 5,
+  "unit": "%",
+  "label": "Mobile Left Position",
+  "default": 5,
+  "info": "Position from the left on mobile"
+},
+       {
+        "type": "text",
+        "id": "section_title",
+        "label": "Section Title"
+      },
+      {
+        "type": "header",
+        "content": "Section Styling"
+      },
+      {
+        "type": "select",
+        "id": "section_width",
+        "options": [
+          {
+            "value": "regular",
+            "label": "Regular"
+          },
+          {
+            "value": "fullwidth",
+            "label": "Fullwidth"
+          }
+        ],
+        "default": "regular",
+        "label": "Section Width"
+      },
+      {
+        "type": "range",
+        "id": "content_max_width",
+        "min": 500,
+        "max": 1500,
+        "step": 20,
+        "unit": "px",
+        "label": "Content Max Width",
+        "default": 1280
+      },
+      {
+        "type": "checkbox",
+        "id": "content_fullwidth",
+        "label": "Real Fullwidth",
+        "info": "Enable to ignore 'Content Max Width'",
+        "default": false
+      },    
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Section Background Color"
+      },
+      {
+        "type": "range",
+        "id": "section_margin_top",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Section Margin Top",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "section_margin_bottom",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Section Margin Bottom",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "section_padding_horizontal",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section Padding Horizontal",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "section_padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section Padding Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "section_padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section Padding Bottom",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Section Styling - Mobile"
+      },
+      {
+        "type": "range",
+        "id": "section_margin_top_mobile",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Section Margin Top - Mobile",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "section_margin_bottom_mobile",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Section Margin Bottom - Mobile",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "section_padding_horizontal_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section Padding Horizontal - Mobile",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "section_padding_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section Padding Top - Mobile",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "section_padding_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section Padding Bottom - Mobile",
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Media Styling"
+      },
+      {
+  "type": "header",
+  "content": "Video Overlay Settings"
+},
+{
+  "type": "checkbox",
+  "id": "enable_video_overlay",
+  "label": "Enable Video Overlay",
+  "default": false,
+  "info": "Add a colored overlay with a circular cutout"
+},
+{
+  "type": "color",
+  "id": "video_overlay_color",
+  "label": "Overlay Color",
+  "default": "#000000",
+  "info": "Color of the overlay that covers the video"
+},
+{
+  "type": "range",
+  "id": "video_cutout_size",
+  "min": 50,
+  "max": 800,
+  "step": 10,
+  "unit": "px",
+  "label": "Circle Cutout Size",
+  "default": 300,
+  "info": "Size of the circular cutout that reveals the video"
+},
+{
+  "type": "select",
+  "id": "video_cutout_position",
+  "options": [
+    {
+      "value": "center",
+      "label": "Center"
+    },
+    {
+      "value": "top-left",
+      "label": "Top Left"
+    },
+    {
+      "value": "top-right",
+      "label": "Top Right"
+    },
+    {
+      "value": "bottom-left",
+      "label": "Bottom Left"
+    },
+    {
+      "value": "bottom-right",
+      "label": "Bottom Right"
+    },
+    {
+      "value": "custom",
+      "label": "Custom Position"
+    }
+  ],
+  "default": "center",
+  "label": "Circle Position"
+},
+    {
+      "type": "range",
+      "id": "video_cutout_position_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Custom X Position",
+      "default": 50,
+      "info": "Horizontal position (0% = left, 100% = right)"
+    },
+    {
+      "type": "range",
+      "id": "video_cutout_position_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Custom Y Position",
+      "default": 50,
+      "info": "Vertical position (0% = top, 100% = bottom)"
+    },
+    {
+      "type": "range",
+      "id": "video_mobile_cutout_size",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile Circle Size",
+      "default": 150,
+      "info": "Size of the circular cutout on mobile devices"
+    },
+      
+      {
+        "type": "range",
+        "id": "block_media_column_width",
+        "min": 10,
+        "max": 90,
+        "step": 1,
+        "unit": "%",
+        "label": "Video/Image Column Width",
+        "default": 50
+      },    
+      {
+        "type": "range",
+        "id": "block_media_column_width_mobile",
+        "min": 10,
+        "max": 100,
+        "step": 1,
+        "unit": "%",
+        "label": "Video/Image Column Width - Mobile",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Text Area Styling"
+      },
+      {
+        "type": "select",
+        "id": "text_vertical_position",
+        "options": [
+          {
+            "value": "flex-start",
+            "label": "Top"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "flex-end",
+            "label": "Bottom"
+          }
+        ],
+        "default": "center",
+        "label": "Text Area Vertical Position"
+      },
+      {
+        "type": "select",
+        "id": "text_alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left",
+        "label": "Text Alignment"
+      },
+      {
+        "type": "range",
+        "id": "text_area_padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Text Area Padding Top",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "text_area_padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Text Area Padding Bottom",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "text_area_padding_left",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Text Area Padding Left",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "text_area_padding_right",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Text Area Padding Right",
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Text Area Styling - Mobile"
+      },
+      {
+        "type": "select",
+        "id": "text_alignment_mobile",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center",
+        "label": "Text Alignment - Mobile"
+      },
+      {
+        "type": "range",
+        "id": "text_area_padding_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Text Area Top Padding - Mobile",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "text_area_padding_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Text Area Bottom Padding - Mobile",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "text_area_padding_horizontal_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Text Area Horizontal Padding - Mobile",
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Buttons Styling"
+      },
+      {
+        "type": "range",
+        "id": "buttons_margin",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin between buttons",
+        "default": 20
+      },
+      {
+        "type": "select",
+        "id": "buttons_layout",
+        "options": [
+          {
+            "value": "row",
+            "label": "Side by Side"
+          },
+          {
+            "value": "column",
+            "label": "Stacked"
+          }
+        ],
+        "default": "row",
+        "label": "Buttons Layout"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "video",
+        "name": "Video",
+        "limit": 1,
+        "settings": [
+          {
+            "id": "video_url",
+            "type": "video_url",
+            "label": "Video URL",
+            "placeholder": "Enter Video URL here",
+            "accept": [
+              "youtube",
+              "vimeo"
+            ],
+            "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "info": "Leave blank if you don't want to use a Youtube or Vimeo video"
+          },
+          {
+            "type": "video",
+            "id": "local_video_url",
+            "label": "A Shopify-hosted MP4 video",
+            "info": "This will take priority over Youtube/Vimeo videos"
+          },
+          {
+            "type": "image_picker",
+            "id": "poster_image",
+            "label": "Video Poster Image",
+            "info": "Optional"
+          },
+          {
+            "type": "header",
+            "content": "Play Icon"
+          },
+          {
+            "type": "paragraph",
+            "content": "To see this icon, you must add a Video Poster Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "video_icon",
+            "label": "Play Icon",
+            "info": "Optional"
+          },
+          {
+            "type": "select",
+            "id": "video_icon_size",
+            "label": "Play icon Size",
+            "options": [
+              {
+                "value": "small",
+                "label": "Small"
+              },
+              {
+                "value": "medium",
+                "label": "Medium"
+              },
+              {
+                "value": "large",
+                "label": "Large"
+              },
+              {
+                "value": "extra-large",
+                "label": "Extra Large"
+              }
+            ],
+            "default": "medium"
+          },
+          {
+            "type": "header",
+            "content": "Video Settings"
+          },
+          {
+            "type": "checkbox",
+            "id": "video_autoplay",
+            "label": "Autoplay Video",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "video_loop",
+            "label": "Loop Video",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "video_controls",
+            "label": "Show Controls on Video",
+            "default": true
+          },
+          {
+            "type": "select",
+            "id": "video_dimensions",
+            "options": [
+      {
+          "value": "original",
+          "label": "Original"
+      },
+      {
+          "value": "landscape",
+          "label": "Landscape"
+      },            
+      {
+          "value": "portrait",
+          "label": "Portrait"
+      },
+      {
+          "value": "square",
+          "label": "Square"
+      },
+      {
+          "value": "horizontal",
+          "label": "Horizontal (16x9)"
+      },
+      {
+          "value": "vertical",
+          "label": "Vertical (9x16)"
+      }
+  ],
+            "default": "landscape",
+            "label": "Video Dimensions"
+          },                
+          {
+            "type": "select",
+            "id": "video_height",
+            "label": "Video Height",
+            "options": [
+              {
+                "value": "auto",
+                "label": "Auto (From Video Dimensions)"
+              },
+              {
+                "value": "full",
+                "label": "Full Height of Column"
+              }           
+            ],          
+            "default": "auto",
+            "info": "Only available for Desktop"      
+          }, 
+          {
+            "type": "select",
+            "id": "video_position",
+            "label": "Video Position",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ],
+            "default": "right"
+          },
+          {
+            "type": "select",
+            "id": "video_position_mobile",
+            "label": "Video position on Mobile",
+            "options": [
+              {
+                "value": "top",
+                "label": "Top"
+              },
+              {
+                "value": "bottom",
+                "label": "Bottom"
+              },
+              {
+                "value": "hidden",
+                "label": "Hidden"
+              }
+            ],
+            "default": "top"
+          }
+        ]
+      },
+      {
+        "type": "image",
+        "name": "Section Image",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "image_link",
+            "label": "Add a link to the image"
+          },
+          {
+            "type": "header",
+            "content": "Image Styling"
+          },  
+          {
+            "type": "select",
+            "id": "media_size",
+            "options": [
+      {
+          "value": "original",
+          "label": "Original"
+      },
+      {
+          "value": "landscape",
+          "label": "Landscape"
+      },            
+      {
+          "value": "portrait",
+          "label": "Portrait"
+      },
+      {
+          "value": "square",
+          "label": "Square"
+      },
+      {
+          "value": "horizontal",
+          "label": "Horizontal (16x9)"
+      },
+      {
+          "value": "vertical",
+          "label": "Vertical (9x16)"
+      }
+  ],
+            "default": "square",
+            "label": "Image Dimensions"
+          }, 
+          {
+            "type": "select",
+            "id": "image_position",
+            "label": "Image Position",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ],
+            "default": "right"
+          },         
+          {
+            "type": "select",
+            "id": "section_image_height",
+            "label": "Section Image Height",
+            "options": [
+              {
+                "value": "auto",
+                "label": "Auto"
+              },
+              {
+                "value": "full",
+                "label": "Full Height of Column"
+              }           
+            ],          
+            "default": "auto"
+          },                                                      
+          {
+            "type": "header",
+            "content": "Image Styling - Mobile "
+          },
+           {
+            "type": "select",
+            "id": "image_position_mobile",
+            "label": "Image position on Mobile",
+            "options": [
+              {
+                "value": "top",
+                "label": "Top"
+              },
+              {
+                "value": "bottom",
+                "label": "Bottom"
+              },
+              {
+                "value": "hidden",
+                "label": "Hidden"
+              }
+            ],
+            "default": "top"
+          }               
+        ]
+      },
+      {
+        "type": "title",
+        "name": "Title",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "title",
+            "default": "<h2>Section Title</h2>",
+            "label": "Title"
+          },       
+          {
+            "type": "header",
+            "content": "Title Styling"
+          },
+          {
+            "type": "checkbox",
+            "id": "title_custom_font",
+            "label": "Use Custom Font",
+            "default": false
+          },
+          {
+            "type": "font_picker",
+            "id": "title_font",
+            "label": "Title Font",
+            "default": "mono"
+          },
+          {
+            "type": "text",
+            "id": "title_font_name",
+            "label": "Custom Font Family Name",
+            "info": "Add your custom font. Example: ‘Helvetica’, sans-serif."
+          },
+          {
+            "type": "select",
+            "id": "title_font_weight",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "100",
+                "label": "100"
+              },
+              {
+                "value": "200",
+                "label": "200"
+              },
+              {
+                "value": "300",
+                "label": "300"
+              },
+              {
+                "value": "400",
+                "label": "400 (Regular)"
+              },
+              {
+                "value": "500",
+                "label": "500"
+              },
+              {
+                "value": "600",
+                "label": "600"
+              },
+              {
+                "value": "700",
+                "label": "700 (Bold)"
+              },
+              {
+                "value": "800",
+                "label": "800"
+              },
+              {
+                "value": "900",
+                "label": "900"
+              }
+            ],
+            "default": "default",
+            "label": "Font Weight"
+          },
+          {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title Color"
+          },
+          {
+            "type": "paragraph",
+            "content": "Set value to 0 to use your theme's default values:"
+          },
+          {
+            "type": "range",
+            "id": "title_font_size",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Title Font Size",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "title_line_height",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Title Line Height",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "title_letter_spacing",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Title Letter Spacing",
+            "default": 0
+          },
+          {
+            "type": "header",
+            "content": "Title Styling - Mobile"
+          },
+          {
+            "type": "range",
+            "id": "title_font_size_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Title Font Size - Mobile",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "title_line_height_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Title Line Height - Mobile",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "title_letter_spacing_mobile",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Title Letter Spacing - Mobile",
+            "default": 0
+          },
+          {
+            "type": "header",
+            "content": "Title Margins"
+          },
+          {
+            "type": "range",
+            "id": "title_margin_top",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Title Margin Top",
+            "default": 10
+          },
+          {
+            "type": "range",
+            "id": "title_margin_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Title Margin Bottom",
+            "default": 10
+          },
+          {
+            "type": "header",
+            "content": "Title Margins - Mobile"
+          },
+          {
+            "type": "range",
+            "id": "title_margin_top_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Title Margin Top - Mobile",
+            "default": 10
+          },
+          {
+            "type": "range",
+            "id": "title_margin_bottom_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Title Margin Bottom - Mobile",
+            "default": 10
+          }
+        ]
+      },
+      {
+        "type": "subtitle",
+        "name": "Subtitle",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "subtitle",
+            "default": "<h3>Section Subtitle</h3>",
+            "label": "Subtitle"
+          },        
+          {
+            "type": "header",
+            "content": "Subtitle Styling"
+          },
+          {
+            "type": "checkbox",
+            "id": "subtitle_custom_font",
+            "label": "Use Custom Font",
+            "default": false
+          },
+          {
+            "type": "font_picker",
+            "id": "subtitle_font",
+            "label": "Subtitle Font",
+            "default": "mono"
+          },
+          {
+            "type": "text",
+            "id": "subtitle_font_name",
+            "label": "Custom Font Family Name",
+            "info": "Add your custom font. Example: ‘Helvetica’, sans-serif."
+          },
+          {
+            "type": "select",
+            "id": "subtitle_font_weight",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "100",
+                "label": "100"
+              },
+              {
+                "value": "200",
+                "label": "200"
+              },
+              {
+                "value": "300",
+                "label": "300"
+              },
+              {
+                "value": "400",
+                "label": "400 (Regular)"
+              },
+              {
+                "value": "500",
+                "label": "500"
+              },
+              {
+                "value": "600",
+                "label": "600"
+              },
+              {
+                "value": "700",
+                "label": "700 (Bold)"
+              },
+              {
+                "value": "800",
+                "label": "800"
+              },
+              {
+                "value": "900",
+                "label": "900"
+              }
+            ],
+            "default": "default",
+            "label": "Font Weight"
+          },
+          {
+            "type": "color",
+            "id": "subtitle_color",
+            "label": "Subtitle Color"
+          },
+          {
+            "type": "paragraph",
+            "content": "Set value to 0 to use your theme's default values:"
+          },
+          {
+            "type": "range",
+            "id": "subtitle_font_size",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Subtitle Font Size",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "subtitle_line_height",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Subtitle Line Height",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "subtitle_letter_spacing",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Subtitle Letter Spacing",
+            "default": 0
+          },
+          {
+            "type": "header",
+            "content": "Subtitle Styling - Mobile"
+          },
+          {
+            "type": "range",
+            "id": "subtitle_font_size_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Subtitle Font Size - Mobile",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "subtitle_line_height_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Subtitle Line Height - Mobile",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "subtitle_letter_spacing_mobile",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Subtitle Letter Spacing - Mobile",
+            "default": 0
+          },
+          {
+            "type": "header",
+            "content": "Subtitle Margins"
+          },
+          {
+            "type": "range",
+            "id": "subtitle_margin_top",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Subtitle Margin Top",
+            "default": 10
+          },
+          {
+            "type": "range",
+            "id": "subtitle_margin_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Subtitle Margin Bottom",
+            "default": 10
+          },
+          {
+            "type": "header",
+            "content": "Subtitle Margins - Mobile"
+          },
+          {
+            "type": "range",
+            "id": "subtitle_margin_top_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Subtitle Margin Top - Mobile",
+            "default": 10
+          },
+          {
+            "type": "range",
+            "id": "subtitle_margin_bottom_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Subtitle Margin Bottom - Mobile",
+            "default": 10
+          }
+        ]
+      },
+      {
+        "type": "textblock",
+        "name": "Text Block",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "textblock",
+            "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "label": "Text Block"
+          },
+          {
+            "type": "header",
+            "content": "Text Block Styling"
+          },
+          {
+            "type": "checkbox",
+            "id": "textblock_custom_font",
+            "label": "Use Custom Font",
+            "default": false
+          },
+          {
+            "type": "font_picker",
+            "id": "textblock_font",
+            "label": "Text Font",
+            "default": "mono"
+          },
+          {
+            "type": "text",
+            "id": "textblock_font_name",
+            "label": "Custom Font Family Name",
+            "info": "Add your custom font. Example: ‘Helvetica’, sans-serif."
+          },
+          {
+            "type": "select",
+            "id": "textblock_font_weight",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "100",
+                "label": "100"
+              },
+              {
+                "value": "200",
+                "label": "200"
+              },
+              {
+                "value": "300",
+                "label": "300"
+              },
+              {
+                "value": "400",
+                "label": "400 (Regular)"
+              },
+              {
+                "value": "500",
+                "label": "500"
+              },
+              {
+                "value": "600",
+                "label": "600"
+              },
+              {
+                "value": "700",
+                "label": "700 (Bold)"
+              },
+              {
+                "value": "800",
+                "label": "800"
+              },
+              {
+                "value": "900",
+                "label": "900"
+              }
+            ],
+            "default": "default",
+            "label": "Font Weight"
+          },
+          {
+            "type": "color",
+            "id": "textblock_color",
+            "label": "Text Block Color"
+          },
+          {
+            "type": "paragraph",
+            "content": "Set value to 0 to use your theme's default values:"
+          },
+          {
+            "type": "range",
+            "id": "textblock_font_size",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Text Block Font Size",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "textblock_line_height",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Text Block Line Height",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "textblock_letter_spacing",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Text Block Letter Spacing",
+            "default": 0
+          },
+          {
+            "type": "header",
+            "content": "Text Block Styling - Mobile"
+          },
+          {
+            "type": "range",
+            "id": "textblock_font_size_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Text Block Font Size - Mobile",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "textblock_line_height_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Text Block Line Height - Mobile",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "textblock_letter_spacing_mobile",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Text Block Letter Spacing - Mobile",
+            "default": 0
+          },
+           {
+            "type": "header",
+            "content": "Text Block Margins"
+          },
+          {
+            "type": "range",
+            "id": "textblock_margin_top",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Text Block Margin Top",
+            "default": 10
+          },
+          {
+            "type": "range",
+            "id": "textblock_margin_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Text Block Margin Bottom",
+            "default": 10
+          },
+          {
+            "type": "header",
+            "content": "Text Block Margins - Mobile"
+          },
+          {
+            "type": "range",
+            "id": "textblock_margin_top_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Text Block Margin Top - Mobile",
+            "default": 10
+          },
+          {
+            "type": "range",
+            "id": "textblock_margin_bottom_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Text Block Margin Bottom - Mobile",
+            "default": 10
+          }
+        ]
+      },
+      {
+        "type": "buttons",
+        "name": "Buttons",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Button"
+          },
+          {
+            "type": "text",
+            "id": "button_class",
+            "label": "Button CSS Class (Optional)"
+          },
+          {
+            "type": "text",
+            "id": "button_label",
+            "default": "Button label",
+            "label": "Button Label"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Link"
+          },
+          {
+            "type": "checkbox",
+            "id": "button_tab",
+            "label": "Open in a New Tab",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "Button Styling"
+          },
+          {
+            "type": "checkbox",
+            "id": "button_custom_font",
+            "label": "Use Custom Font",
+            "default": false
+          },
+          {
+            "type": "font_picker",
+            "id": "button_font",
+            "label": "Button Font",
+            "default": "mono"
+          },
+          {
+            "type": "text",
+            "id": "button_font_name",
+            "label": "Custom Font Family Name",
+            "info": "Add your custom font. Example: ‘Helvetica’, sans-serif."
+          },
+          {
+            "type": "select",
+            "id": "button_font_weight",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "100",
+                "label": "100"
+              },
+              {
+                "value": "200",
+                "label": "200"
+              },
+              {
+                "value": "300",
+                "label": "300"
+              },
+              {
+                "value": "400",
+                "label": "400 (Regular)"
+              },
+              {
+                "value": "500",
+                "label": "500"
+              },
+              {
+                "value": "600",
+                "label": "600"
+              },
+              {
+                "value": "700",
+                "label": "700 (Bold)"
+              },
+              {
+                "value": "800",
+                "label": "800"
+              },
+              {
+                "value": "900",
+                "label": "900"
+              }
+            ],
+            "default": "default",
+            "label": "Font Weight"
+          },
+          {
+            "type": "range",
+            "id": "button_border",
+            "min": 0,
+            "max": 30,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Border Width",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "button_radius",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Border Radius",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "button_max_width",
+            "min": 40,
+            "max": 700,
+            "step": 20,
+            "unit": "px",
+            "label": "Button Max Width Size",
+            "default": 180
+          },
+          {
+            "type": "range",
+            "id": "button_padding_horizontal",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Horizontal Padding",
+            "default": 20
+          },
+          {
+            "type": "range",
+            "id": "button_padding_vertical",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Vertical Padding",
+            "default": 10
+          },
+          {
+            "type": "range",
+            "id": "button_margin_top",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Margin Top",
+            "default": 20
+          },
+          {
+            "type": "range",
+            "id": "button_margin_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Margin Bottom",
+            "default": 20
+          },
+          {
+            "type": "range",
+            "id": "button_font_size",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Font Size",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "button_letter_spacing",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Letter Spacing",
+            "default": 0
+          },
+          {
+            "type": "header",
+            "content": "Button Styling - Mobile"
+          },
+          {
+            "type": "range",
+            "id": "button_margin_top_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Margin Top - Mobile",
+            "default": 20
+          },
+          {
+            "type": "range",
+            "id": "button_margin_bottom_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Margin Bottom - Mobile",
+            "default": 20
+          },
+          {
+            "type": "range",
+            "id": "button_font_size_mobile",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Font Size - Mobile",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "button_letter_spacing_mobile",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Letter Spacing - Mobile",
+            "default": 0
+          },
+          {
+            "type": "header",
+            "content": "Button Colors"
+          },
+          {
+            "type": "color",
+            "id": "button_background_color",
+            "label": "Button Background Color",
+            "default": "#000000"
+          },
+          {
+            "type": "color",
+            "id": "button_text_color",
+            "label": "Button Text Color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "color",
+            "id": "button_border_color",
+            "label": "Button Border Color"
+          },
+          {
+            "type": "header",
+            "content": "Button Hover Colors"
+          },
+          {
+            "type": "color",
+            "id": "button_background_color_hover",
+            "label": "Button Hover Background Color",
+            "default": "#333333"
+          },
+          {
+            "type": "color",
+            "id": "button_text_color_hover",
+            "label": "Button Hover Text Color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "color",
+            "id": "button_border_color_hover",
+            "label": "Button Hover Border Color"
+          },
+          {
+            "type": "header",
+            "content": "Button 2"
+          },
+          {
+            "type": "text",
+            "id": "button_class_2",
+            "label": "Button 2 CSS Class (Optional)"
+          },
+          {
+            "type": "text",
+            "id": "button_label_2",
+            "label": "Button 2 Label"
+          },
+          {
+            "type": "url",
+            "id": "button_link_2",
+            "label": "Button 2 Link"
+          },
+          {
+            "type": "checkbox",
+            "id": "button_tab_2",
+            "label": "Open in a New Tab",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "Button 2 Styling"
+          },
+          {
+            "type": "checkbox",
+            "id": "button_custom_font_2",
+            "label": "Use Custom Font",
+            "default": false
+          },
+          {
+            "type": "font_picker",
+            "id": "button_font_2",
+            "label": "Button 2 Font",
+            "default": "mono"
+          },
+          {
+            "type": "text",
+            "id": "button_font_name_2",
+            "label": "Custom Font Family Name",
+            "info": "Add your custom font. Example: ‘Helvetica’, sans-serif."
+          },
+          {
+            "type": "select",
+            "id": "button_font_weight_2",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "100",
+                "label": "100"
+              },
+              {
+                "value": "200",
+                "label": "200"
+              },
+              {
+                "value": "300",
+                "label": "300"
+              },
+              {
+                "value": "400",
+                "label": "400 (Regular)"
+              },
+              {
+                "value": "500",
+                "label": "500"
+              },
+              {
+                "value": "600",
+                "label": "600"
+              },
+              {
+                "value": "700",
+                "label": "700 (Bold)"
+              },
+              {
+                "value": "800",
+                "label": "800"
+              },
+              {
+                "value": "900",
+                "label": "900"
+              }
+            ],
+            "default": "default",
+            "label": "Font Weight"
+          },
+          {
+            "type": "range",
+            "id": "button_border_2",
+            "min": 0,
+            "max": 30,
+            "step": 1,
+            "unit": "px",
+            "label": "Button 2 Border Width",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "button_radius_2",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button 2 Border Radius",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "button_max_width_2",
+            "min": 40,
+            "max": 700,
+            "step": 20,
+            "unit": "px",
+            "label": "Button 2 Max Width Size",
+            "default": 180
+          },
+          {
+            "type": "range",
+            "id": "button_padding_horizontal_2",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button 2 Horizontal Padding",
+            "default": 20
+          },
+          {
+            "type": "range",
+            "id": "button_padding_vertical_2",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button 2 Vertical Padding",
+            "default": 10
+          },
+          {
+            "type": "range",
+            "id": "button_margin_top_2",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button 2 Margin Top",
+            "default": 20
+          },
+          {
+            "type": "range",
+            "id": "button_margin_bottom_2",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button 2 Margin Bottom",
+            "default": 20
+          },
+          {
+            "type": "range",
+            "id": "button_font_size_2",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "unit": "px",
+            "label": "Button 2 Font Size",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "button_letter_spacing_2",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Button 2 Letter Spacing",
+            "default": 0
+          },
+          {
+            "type": "header",
+            "content": "Button 2 Styling - Mobile"
+          },
+          {
+            "type": "range",
+            "id": "button_margin_top_mobile_2",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button 2 Margin Top - Mobile",
+            "default": 20
+          },
+          {
+            "type": "range",
+            "id": "button_margin_bottom_mobile_2",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Button 2 Margin Bottom - Mobile",
+            "default": 20
+          },
+          {
+            "type": "range",
+            "id": "button_font_size_mobile_2",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "unit": "px",
+            "label": "Button 2 Font Size - Mobile",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "button_letter_spacing_mobile_2",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Button 2 Letter Spacing - Mobile",
+            "default": 0
+          },
+          {
+            "type": "header",
+            "content": "Button 2 Colors"
+          },
+          {
+            "type": "color",
+            "id": "button_background_color_2",
+            "label": "Button 2 Background Color",
+            "default": "#000000"
+          },
+          {
+            "type": "color",
+            "id": "button_text_color_2",
+            "label": "Button 2 Text Color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "color",
+            "id": "button_border_color_2",
+            "label": "Button 2 Border Color"
+          },
+          {
+            "type": "header",
+            "content": "Button 2 Hover Colors"
+          },
+          {
+            "type": "color",
+            "id": "button_background_color_hover_2",
+            "label": "Button 2 Hover Background Color",
+            "default": "#333333"
+          },
+          {
+            "type": "color",
+            "id": "button_text_color_hover_2",
+            "label": "Button 2 Hover Text Color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "color",
+            "id": "button_border_color_hover_2",
+            "label": "Button 2 Hover Border Color"
+          }
+        ]
+      },
+       {
+        "type": "block-image",
+        "name": "Block Image",
+        "limit": 3,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "block_image",
+            "label": "Image"
+          },  
+          {
+            "type": "header",
+            "content": "Image Styling"
+          },      
+          {
+            "type": "select",
+            "id": "media_size",
+            "options": [
+      {
+          "value": "original",
+          "label": "Original"
+      },
+      {
+          "value": "landscape",
+          "label": "Landscape"
+      },            
+      {
+          "value": "portrait",
+          "label": "Portrait"
+      },
+      {
+          "value": "square",
+          "label": "Square"
+      },
+      {
+          "value": "horizontal",
+          "label": "Horizontal (16x9)"
+      },
+      {
+          "value": "vertical",
+          "label": "Vertical (9x16)"
+      }
+  ],
+            "default": "landscape",
+            "label": "Image Dimensions"
+          },
+          {
+            "type": "range",
+            "id": "image_border_radius",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Image Border Radius",
+            "default": 0
+          },         
+          {
+            "type": "range",
+            "id": "image_margin_top",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Image Top Margin",
+            "default": 10
+          }, 
+          {
+            "type": "range",
+            "id": "image_margin_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Image Bottom Margin",
+            "default": 10
+          },  
+          {
+            "type": "range",
+            "id": "image_max_width",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Image Max Width",
+            "default": 100
+          },  
+          {
+            "type": "header",
+            "content": "Image Styling - Mobile"
+          },
+          {
+            "type": "checkbox",
+            "id": "image_display_mobile",
+            "label": "Show image on mobile",        
+            "default": true
+          },   
+          {
+            "type": "range",
+            "id": "image_margin_top_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Image Top Margin - Mobile",
+            "default": 0
+          }, 
+           {
+            "type": "range",
+            "id": "image_margin_bottom_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Image Bottom Margin - Mobile",
+            "default": 10
+          }, 
+          {
+            "type": "range",
+            "id": "image_max_width_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Image Max Width - Mobile",
+            "default": 100
+          },
+           {
+            "type": "header",
+            "content": "Text Styling"
+          },
+          {
+            "type": "richtext",
+            "id": "image_title",
+            "default": "<h2>Image Title</h2>",
+            "label": "Image Title"
+          },
+          {
+            "type": "richtext",
+            "id": "image_subtitle",
+            "default": "<p>Image Subtitle</p>",
+            "label": "Image Subtitle"
+          }
+        ]
+      }  
+    ],
+    "presets": [
+      {
+        "name": "Main Banner Split",
+        "blocks": [
+          {
+            "type": "video"
+          },
+          {
+            "type": "title"
+          },
+          {
+            "type": "textblock"
+          },
+          {
+            "type": "buttons"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}

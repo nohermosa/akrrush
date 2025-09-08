@@ -1,0 +1,874 @@
+{% comment %}
+** Feature Boxes Section - Four boxes with image on left **
+{% endcomment %}
+
+{%- liquid
+  assign blocks = section.blocks
+-%}
+
+{% comment %} Section specific CSS {% endcomment %}
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+  
+  #shopify-section-{{ section.id }} .container {
+    {% if section.settings.is_full_width %}
+      width: 100%;
+      max-width: 100%;
+      padding: 0 {{ section.settings.full_width_padding }}px;
+    {% else %}
+      max-width: {{ section.settings.section_width }}px;
+      margin: 0 auto;
+      padding: 0 20px;
+    {% endif %}
+  }
+
+  /* Main title styling */
+  #shopify-section-{{ section.id }} .feature-boxes__main-title {
+    font-size: {{ section.settings.title_size }}px;
+    color: {{ section.settings.title_color }};
+    font-weight: {{ section.settings.title_weight }};
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+    max-width: {% if section.settings.is_full_width %}100%{% else %}{{ section.settings.section_width }}px{% endif %};
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Subtitle styling */
+  #shopify-section-{{ section.id }} .feature-boxes__subtitle {
+    font-size: {{ section.settings.subtitle_size }}px;
+    color: {{ section.settings.subtitle_color }};
+    font-weight: {{ section.settings.subtitle_weight }};
+    margin-bottom: 15px;
+    text-align: center;
+    width: 100%;
+    max-width: {% if section.settings.is_full_width %}100%{% else %}{{ section.settings.section_width }}px{% endif %};
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Description styling */
+  #shopify-section-{{ section.id }} .feature-boxes__description {
+    font-size: {{ section.settings.description_size }}px;
+    color: {{ section.settings.description_color }};
+    max-width: {% if section.settings.is_full_width %}100%{% else %}800px{% endif %};
+    margin: 0 auto 30px;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Feature box styling */
+  #shopify-section-{{ section.id }} .feature-box {
+    border: {{ section.settings.box_border_thickness }}px solid {{ section.settings.box_border_color }};
+    border-radius: {{ section.settings.box_border_radius }}px;
+    padding: 20px;
+    height: 100%;
+    background-color: {{ section.settings.box_background_color }};
+    transition: transform 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .feature-box:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Feature box title styling */
+  #shopify-section-{{ section.id }} .feature-box__title {
+    font-size: {{ section.settings.box_title_size }}px;
+    color: {{ section.settings.box_title_color }};
+    font-weight: {{ section.settings.box_title_weight }};
+    margin-bottom: 10px;
+  }
+
+  /* Feature box subtitle styling */
+  #shopify-section-{{ section.id }} .feature-box__subtitle {
+    font-size: {{ section.settings.box_subtitle_size }}px;
+    color: {{ section.settings.box_subtitle_color }};
+  }
+
+  /* Bottom statement styling */
+  #shopify-section-{{ section.id }} .feature-boxes__bottom-statement {
+    font-size: {{ section.settings.bottom_statement_size }}px;
+    color: {{ section.settings.bottom_statement_color }};
+    font-weight: {{ section.settings.bottom_statement_weight }};
+    margin-bottom: 20px;
+  }
+
+  /* Button styling */
+  #shopify-section-{{ section.id }} .feature-boxes__button {
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    border-radius: {{ section.settings.button_radius }}px;
+    padding: 10px 30px;
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .feature-boxes__button:hover {
+    opacity: 0.9;
+  }
+
+  @media only screen and (max-width: 798px) {
+    #shopify-section-{{ section.id }} .container {
+      {% if section.settings.is_full_width %}
+        padding: 0 {{ section.settings.full_width_padding | divided_by: 2 }}px;
+      {% else %}
+        padding: 0 15px;
+      {% endif %}
+    }
+    
+    #shopify-section-{{ section.id }} .feature-boxes__grid {
+      grid-template-columns: 1fr;
+    }
+
+    #shopify-section-{{ section.id }} .feature-boxes__main-title {
+      font-size: {{ section.settings.mobile_title_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .feature-boxes__subtitle {
+      font-size: {{ section.settings.mobile_subtitle_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .feature-boxes__description {
+      font-size: {{ section.settings.mobile_description_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .feature-box__title {
+      font-size: {{ section.settings.mobile_box_title_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .feature-box__subtitle {
+      font-size: {{ section.settings.mobile_box_subtitle_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .feature-boxes__bottom-statement {
+      font-size: {{ section.settings.mobile_bottom_statement_size }}px;
+    }
+  }
+
+  {% render 'css-loop',
+          css: section.settings.custom_css,
+          id: section.id
+  %}
+{% endstyle %}
+
+{% comment %} HTML markup {% endcomment %}
+<section class="section feature-boxes-section {{ section.settings.css_class }}"
+         {% if section.settings.animation != "none" %}
+           data-scroll-class="{{ section.settings.animation }}"
+         {% endif %}>
+  <div class="container">
+    <!-- Title Section -->
+    <div class="feature-boxes__header">
+      {% if section.settings.title != blank %}
+        <h2 class="feature-boxes__main-title">{{ section.settings.title }}</h2>
+      {% endif %}
+      
+      {% if section.settings.subtitle != blank %}
+        <h3 class="feature-boxes__subtitle">{{ section.settings.subtitle }}</h3>
+      {% endif %}
+      
+      {% if section.settings.description != blank %}
+        <div class="feature-boxes__description">{{ section.settings.description }}</div>
+      {% endif %}
+    </div>
+
+    <!-- Content Section -->
+    <div class="feature-boxes__content-wrapper {% if section.settings.is_full_width %}is-full-width{% endif %}">
+      <div class="feature-boxes__row">
+        <!-- Left Image Column -->
+        <div class="feature-boxes__image-column">
+          {% if section.settings.product_image != blank %}
+            {{ section.settings.product_image | image_url: width: 500 | image_tag: class: 'feature-boxes__image', alt: section.settings.title }}
+          {% else %}
+            <div class="feature-boxes__placeholder">
+              <span>Add product image</span>
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Right Features Column -->
+        <div class="feature-boxes__grid-column">
+          <div class="feature-boxes__grid">
+            {% for block in section.blocks %}
+              {% if block.type == 'feature_box' %}
+                <div class="feature-box" {{ block.shopify_attributes }}>
+                  <h4 class="feature-box__title">{{ block.settings.title }}</h4>
+                  <p class="feature-box__subtitle">{{ block.settings.subtitle }}</p>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="feature-boxes__footer text-center">
+      {% if section.settings.bottom_statement != blank %}
+        <p class="feature-boxes__bottom-statement">{{ section.settings.bottom_statement }}</p>
+      {% endif %}
+      
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link }}" class="feature-boxes__button">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-boxes__header {
+    margin-bottom: 40px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .feature-boxes__content-wrapper {
+    width: 100%;
+  }
+  
+  .is-full-width {
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  .is-full-width .feature-boxes__row {
+    justify-content: space-between;
+  }
+  
+  .feature-boxes__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .feature-boxes__image-column {
+    width: {% if section.settings.is_full_width %}48%{% else %}50%{% endif %};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feature-boxes__grid-column {
+    width: {% if section.settings.is_full_width %}48%{% else %}50%{% endif %};
+  }
+
+  .feature-boxes__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    height: 100%;
+  }
+
+  .feature-boxes__image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .feature-boxes__placeholder {
+    background-color: #f0f0f0;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+  }
+
+  .feature-boxes__footer {
+    margin-top: 30px;
+    text-align: center;
+    width: 100%;
+  }
+
+  @media only screen and (max-width: 798px) {
+    .feature-boxes__image-column,
+    .feature-boxes__grid-column {
+      width: 100%;
+    }
+    
+    .feature-boxes__image-column {
+      margin-bottom: 30px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Feature Boxes",
+  "class": "feature-boxes-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_full_width",
+      "label": "Full Width Section",
+      "default": false,
+      "info": "When enabled, the section will expand to 100% of the screen width"
+    },
+    {
+      "type": "range",
+      "id": "section_width",
+      "label": "Section Width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "default": 1200,
+      "unit": "px",
+      "info": "Controls the maximum width of the section content when not using full width"
+    },
+    {
+      "type": "range",
+      "id": "full_width_padding",
+      "label": "Full Width Side Padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 30,
+      "unit": "px",
+      "info": "Side padding when using full width mode"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 100,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 100,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Main Title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Revolutionary Process"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Font Size",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_title_size",
+      "label": "Mobile Font Size",
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Font Color",
+      "default": "#F28C65"
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Font Weight",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "bold",
+          "label": "Bold"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "header",
+      "content": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Nature's Intelligence Amplified"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Font Size",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_subtitle_size",
+      "label": "Mobile Font Size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Font Color",
+      "default": "#F28C65"
+    },
+    {
+      "type": "select",
+      "id": "subtitle_weight",
+      "label": "Font Weight",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "bold",
+          "label": "Bold"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "header",
+      "content": "Description"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "While others rely on conventional methods, we've channeled the Viking spirit of exploration to pioneer something extraordinary."
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_description_size",
+      "label": "Mobile Font Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Font Color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Product Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image"
+    },
+    {
+      "type": "header",
+      "content": "Feature Box Settings"
+    },
+    {
+      "type": "color",
+      "id": "box_background_color",
+      "label": "Box Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "box_border_color",
+      "label": "Box Border Color",
+      "default": "#F28C65"
+    },
+    {
+      "type": "range",
+      "id": "box_border_thickness",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Box Border Thickness",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "box_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Box Border Radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "box_title_size",
+      "label": "Box Title Font Size",
+      "min": 14,
+      "max": 30,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_box_title_size",
+      "label": "Mobile Box Title Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "box_title_color",
+      "label": "Box Title Color",
+      "default": "#F28C65"
+    },
+    {
+      "type": "select",
+      "id": "box_title_weight",
+      "label": "Box Title Font Weight",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "bold",
+          "label": "Bold"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "range",
+      "id": "box_subtitle_size",
+      "label": "Box Subtitle Font Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_box_subtitle_size",
+      "label": "Mobile Box Subtitle Font Size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "box_subtitle_color",
+      "label": "Box Subtitle Color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Statement"
+    },
+    {
+      "type": "textarea",
+      "id": "bottom_statement",
+      "label": "Bottom Statement",
+      "default": "This isn't incremental improvement—it's fundamental transformation."
+    },
+    {
+      "type": "range",
+      "id": "bottom_statement_size",
+      "label": "Font Size",
+      "min": 14,
+      "max": 30,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_bottom_statement_size",
+      "label": "Mobile Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "bottom_statement_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "select",
+      "id": "bottom_statement_weight",
+      "label": "Font Weight",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "bold",
+          "label": "Bold"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Get started now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button Background Color",
+      "default": "#F28C65"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Border Radius",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "select",
+      "id": "animation",
+      "label": "Animation",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "fadeIn",
+          "label": "Fade in"
+        },
+        {
+          "value": "fadeInDown",
+          "label": "Fade in down"
+        },
+        {
+          "value": "fadeInLeft",
+          "label": "Fade in left"
+        },
+        {
+          "value": "fadeInRight",
+          "label": "Fade in right"
+        },
+        {
+          "value": "slideInLeft",
+          "label": "Slide in left"
+        },
+        {
+          "value": "slideInRight",
+          "label": "Slide in right"
+        },
+        {
+          "value": "zoomIn",
+          "label": "Zoom in"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Advanced"
+    },
+    {
+      "type": "text",
+      "id": "css_class",
+      "label": "CSS Class"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_css",
+      "label": "Custom CSS"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_box",
+      "name": "Feature Box",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Box Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "subtitle",
+          "label": "Box Description",
+          "default": "Feature description goes here"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Boxes",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "feature_box",
+          "settings": {
+            "title": "Enzymatic Hydrolysis",
+            "subtitle": "Natural enzymes break down protein into its most powerful form"
+          }
+        },
+        {
+          "type": "feature_box",
+          "settings": {
+            "title": "World-Exclusive System",
+            "subtitle": "The only continuous hydrolysis process for poultry protein"
+          }
+        },
+        {
+          "type": "feature_box",
+          "settings": {
+            "title": "Zero-Waste Promise",
+            "subtitle": "Closed-loop system utilizes 100% of input materials"
+          }
+        },
+        {
+          "type": "feature_box",
+          "settings": {
+            "title": "Fresh Processing",
+            "subtitle": "Raw materials travel directly from farm to facility, maintaining ultimate purity"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

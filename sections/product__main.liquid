@@ -233,10 +233,16 @@
 {% endstyle %}
 
 {% liquid
+  # Set selected variant - default to second variant if no URL variant and multiple variants exist
   assign selected_variant = product.selected_variant
-
+  
   if product.variants.size == 1 or settings.select_first_available_variant
     assign selected_variant = product.selected_or_first_available_variant
+  elsif product.variants.size > 1
+    # If multiple variants and no specific variant in URL, use second variant
+    unless request.query_string contains 'variant='
+      assign selected_variant = product.variants[1]
+    endunless
   endif
 
   for block in section.blocks
@@ -248,6 +254,96 @@
     endif
   endfor
 %}
+
+{% if product.variants.size > 1 and request.query_string == blank %}
+<script>
+function setSecondVariant() {
+  const secondVariantId = '{{ product.variants[1].id }}';
+  const secondVariantOptions = {{ product.variants[1].options | json }};
+  
+  // Update main variant selectors
+  const variantSelects = document.querySelectorAll('[data-variants]');
+  variantSelects.forEach(select => {
+    if (select.value !== secondVariantId) {
+      select.value = secondVariantId;
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+      select.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  });
+  
+  // Update radio button inputs for variant options
+  secondVariantOptions.forEach((optionValue, index) => {
+    // Find the radio input for this option value
+    const radioInput = document.querySelector(`input[data-variant-option-value][data-variant-option-value-index="${index}"][value="${optionValue}"]`);
+    if (radioInput && !radioInput.checked) {
+      // Check the radio button
+      radioInput.checked = true;
+      
+      // Trigger change event
+      radioInput.dispatchEvent(new Event('change', { bubbles: true }));
+      radioInput.dispatchEvent(new Event('input', { bubbles: true }));
+      
+      // Update the parent swatch__options container
+      const swatchOptions = radioInput.closest('[data-variant-option]');
+      if (swatchOptions) {
+        swatchOptions.setAttribute('data-variant-option-chosen-value', optionValue);
+      }
+      
+      // Update the option name display
+      const optionNameElement = document.querySelector(`[data-variant-option-name][data-variant-option-choose-name*="${optionValue}"]`);
+      if (optionNameElement) {
+        // Update the displayed text to show the selected option
+        const optionTitle = optionNameElement.closest('fieldset')?.querySelector('legend .options-selection__option-name');
+        if (optionTitle) {
+          optionTitle.textContent = optionTitle.getAttribute('data-variant-option-name').replace('Choose', optionValue);
+        }
+      }
+    }
+  });
+  
+  // Update variant-selection element
+  const variantSelection = document.querySelector('[data-variant-selection]');
+  if (variantSelection) {
+    variantSelection.setAttribute('variant', secondVariantId);
+  }
+  
+  // Update URL to reflect second variant selection
+  const newUrl = new URL(window.location);
+  newUrl.searchParams.set('variant', secondVariantId);
+  history.replaceState(null, '', newUrl);
+  
+  // Debug: Check what we're actually setting
+  console.log('Set variant to:', secondVariantId, 'Options:', secondVariantOptions);
+  
+  // Debug radio inputs
+  secondVariantOptions.forEach((optionValue, index) => {
+    const radioInput = document.querySelector(`input[data-variant-option-value][data-variant-option-value-index="${index}"][value="${optionValue}"]`);
+    console.log(`Option ${index} (${optionValue}):`, {
+      radioFound: !!radioInput,
+      isChecked: radioInput ? radioInput.checked : 'N/A',
+      radioElement: radioInput
+    });
+    
+    // Also log all available radio inputs for this option index
+    const allRadios = document.querySelectorAll(`input[data-variant-option-value][data-variant-option-value-index="${index}"]`);
+    console.log(`All radios for option ${index}:`, Array.from(allRadios).map(radio => ({
+      value: radio.value,
+      checked: radio.checked
+    })));
+  });
+}
+
+// Run multiple times to ensure it sticks
+document.addEventListener('DOMContentLoaded', setSecondVariant);
+window.addEventListener('load', function() {
+  setSecondVariant();
+  setTimeout(setSecondVariant, 100);
+  setTimeout(setSecondVariant, 500);
+  setTimeout(setSecondVariant, 1000);
+  setTimeout(setSecondVariant, 2000);
+});
+</script>
+{% endif %}
 
 <section class="section
         {{ css_class }}
@@ -292,7 +388,7 @@
     "product": {{ product | json }},
     "section_id": {{ section.id | json }},
     "product_recommendation_limit": {{ product_recommendation_limit | json }},
-    "display_savings": {{ display_savings }},
+    "display_savings": {{ display_savings | json }},
     "gallery_arrows": {{ section.settings.gallery_arrows | json }},
     "thumbnail_arrows": {{ section.settings.gallery_arrows | json }},
     "enable_zoom": {{ section.settings.enable_zoom | json }},

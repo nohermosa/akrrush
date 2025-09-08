@@ -2,6 +2,7 @@
 <!doctype html>
 <html class="no-js no-touch" lang="{{ shop.locale }}">
 <head>
+ {%- render 'ecom_header' -%}
   <meta charset="utf-8">
   <meta http-equiv="cleartype" content="on">
   <meta name="robots" content="index,follow">
@@ -310,7 +311,7 @@
 
  <script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/8QQtExrfz6K13itCpdrXLqqTPxsjVhPgML9YdLXq" async></script>
      
-  </body>
+  {%- render "ecom_footer"-%}</body>
 </html>
 {% endcapture %}
 {% assign content = content | replace_first: '<!doctype', '!doctype' | split: ' <' %}

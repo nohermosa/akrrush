@@ -257,9 +257,26 @@
 
 {% if product.variants.size > 1 and request.query_string == blank %}
 <script>
+// Define allVariants globally so all functions can access it
+const allVariants = [
+  {% for variant in product.variants %}
+    {
+      id: {{ variant.id }},
+      title: {{ variant.title | json }},
+      options: {{ variant.options | json }},
+      metafields: {
+        custom: {
+          savings: {{ variant.metafields.custom.savings | json }}
+        }
+      }
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];
+
 function setSecondVariant() {
   const secondVariantId = '{{ product.variants[1].id }}';
   const secondVariantOptions = {{ product.variants[1].options | json }};
+  const secondVariantSavings = '{{ product.variants[1].metafields.custom.savings | escape }}';
   
   // Update main variant selectors
   const variantSelects = document.querySelectorAll('[data-variants]');
@@ -289,14 +306,15 @@ function setSecondVariant() {
         swatchOptions.setAttribute('data-variant-option-chosen-value', optionValue);
       }
       
-      // Update the option name display
-      const optionNameElement = document.querySelector(`[data-variant-option-name][data-variant-option-choose-name*="${optionValue}"]`);
-      if (optionNameElement) {
-        // Update the displayed text to show the selected option
-        const optionTitle = optionNameElement.closest('fieldset')?.querySelector('legend .options-selection__option-name');
-        if (optionTitle) {
-          optionTitle.textContent = optionTitle.getAttribute('data-variant-option-name').replace('Choose', optionValue);
-        }
+      // Update the option name display with metafield
+      const optionNameElement = document.querySelector(`[data-variant-option-name]`);
+      if (optionNameElement && secondVariantSavings) {
+        // Get the current text and add savings
+        const currentText = optionNameElement.textContent || optionNameElement.innerText;
+        const cleanText = currentText.replace(/ - .*$/, '');
+        const newContent = cleanText + '<span class="variant-savings"> - ' + secondVariantSavings + '</span>';
+        
+        optionNameElement.innerHTML = newContent;
       }
     }
   });
@@ -312,25 +330,7 @@ function setSecondVariant() {
   newUrl.searchParams.set('variant', secondVariantId);
   history.replaceState(null, '', newUrl);
   
-  // Debug: Check what we're actually setting
-  console.log('Set variant to:', secondVariantId, 'Options:', secondVariantOptions);
   
-  // Debug radio inputs
-  secondVariantOptions.forEach((optionValue, index) => {
-    const radioInput = document.querySelector(`input[data-variant-option-value][data-variant-option-value-index="${index}"][value="${optionValue}"]`);
-    console.log(`Option ${index} (${optionValue}):`, {
-      radioFound: !!radioInput,
-      isChecked: radioInput ? radioInput.checked : 'N/A',
-      radioElement: radioInput
-    });
-    
-    // Also log all available radio inputs for this option index
-    const allRadios = document.querySelectorAll(`input[data-variant-option-value][data-variant-option-value-index="${index}"]`);
-    console.log(`All radios for option ${index}:`, Array.from(allRadios).map(radio => ({
-      value: radio.value,
-      checked: radio.checked
-    })));
-  });
 }
 
 // Run multiple times to ensure it sticks
@@ -341,6 +341,138 @@ window.addEventListener('load', function() {
   setTimeout(setSecondVariant, 500);
   setTimeout(setSecondVariant, 1000);
   setTimeout(setSecondVariant, 2000);
+  
+  // Also run the metafield update after everything loads
+  setTimeout(updateMetafieldDisplay, 100);
+  setTimeout(updateMetafieldDisplay, 500);
+  setTimeout(updateMetafieldDisplay, 1000);
+  setTimeout(updateMetafieldDisplay, 2000);
+  setTimeout(updateMetafieldDisplay, 3000);
+});
+
+// Override the theme's _updateLabels function to include metafields
+function patchThemeUpdateLabels() {
+  if (typeof customElements !== 'undefined' && customElements.get('options-selection')) {
+    const optionsSelectionClass = customElements.get('options-selection');
+    const originalUpdateLabels = optionsSelectionClass.prototype._updateLabels;
+    
+    optionsSelectionClass.prototype._updateLabels = function() {
+      // Call the original function first
+      if (originalUpdateLabels) {
+        originalUpdateLabels.call(this);
+      }
+      
+      // Then add our metafield logic
+      const variantSelect = document.querySelector('[data-variants]');
+      const currentVariantId = variantSelect ? variantSelect.value : null;
+      const currentVariant = allVariants.find(v => v.id == currentVariantId);
+      
+      const optionNameElements = document.querySelectorAll('.options-selection__option-name');
+      
+      optionNameElements.forEach((element) => {
+        let currentHTML = element.innerHTML;
+        
+        // Clean existing metafield content
+        let cleanHTML = currentHTML;
+        cleanHTML = cleanHTML.replace(/<span class="variant-savings">.*?<\/span>/g, '');
+        cleanHTML = cleanHTML.replace(/ - \d+% savings per stick \+ Free Shipping/g, '');
+        cleanHTML = cleanHTML.replace(/ - [^<]*savings[^<]*?(?=<|$)/gi, '');
+        
+        if (currentVariant && currentVariant.metafields && currentVariant.metafields.custom && currentVariant.metafields.custom.savings) {
+          const newHTML = cleanHTML + '<span class="variant-savings"> - ' + currentVariant.metafields.custom.savings + '</span>';
+          element.innerHTML = newHTML;
+        } else {
+          element.innerHTML = cleanHTML;
+        }
+      });
+    };
+    
+    return true;
+  } else {
+    setTimeout(patchThemeUpdateLabels, 100);
+    return false;
+  }
+}
+
+// Fallback function for manual updates
+function updateMetafieldDisplay() {
+  const variantSelect = document.querySelector('[data-variants]');
+  const currentVariantId = variantSelect ? variantSelect.value : null;
+  const currentVariant = allVariants.find(v => v.id == currentVariantId);
+  
+  const optionNameElements = document.querySelectorAll('.options-selection__option-name');
+  
+  optionNameElements.forEach((element) => {
+    let currentHTML = element.innerHTML;
+    
+    // Clean existing metafield content
+    let cleanHTML = currentHTML;
+    cleanHTML = cleanHTML.replace(/<span class="variant-savings">.*?<\/span>/g, '');
+    cleanHTML = cleanHTML.replace(/ - \d+% savings per stick \+ Free Shipping/g, '');
+    cleanHTML = cleanHTML.replace(/ - [^<]*savings[^<]*?(?=<|$)/gi, '');
+    
+    if (currentVariant && currentVariant.metafields && currentVariant.metafields.custom && currentVariant.metafields.custom.savings) {
+      const newContent = cleanHTML + '<span class="variant-savings"> - ' + currentVariant.metafields.custom.savings + '</span>';
+      element.innerHTML = newContent;
+    } else {
+      element.innerHTML = cleanHTML;
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Patch the theme's update function - try multiple times
+  patchThemeUpdateLabels();
+  setTimeout(patchThemeUpdateLabels, 500);
+  setTimeout(patchThemeUpdateLabels, 1000);
+  setTimeout(patchThemeUpdateLabels, 2000);
+  
+  // Initial update - run multiple times to ensure it sticks
+  setTimeout(updateMetafieldDisplay, 100);
+  setTimeout(updateMetafieldDisplay, 300);
+  setTimeout(updateMetafieldDisplay, 500);
+  setTimeout(updateMetafieldDisplay, 1000);
+  
+  // Listen for radio button changes
+  const variantInputs = document.querySelectorAll('input[data-variant-option-value]');
+  
+  variantInputs.forEach(input => {
+    input.addEventListener('change', function() {
+      // Run multiple times to override theme interference
+      setTimeout(updateMetafieldDisplay, 50);
+      setTimeout(updateMetafieldDisplay, 100);
+      setTimeout(updateMetafieldDisplay, 200);
+      setTimeout(updateMetafieldDisplay, 500);
+      setTimeout(updateMetafieldDisplay, 1000);
+    });
+  });
+  
+  // Also listen for changes on the main variant selector
+  const variantSelect = document.querySelector('[data-variants]');
+  if (variantSelect) {
+    variantSelect.addEventListener('change', function() {
+      // Run multiple times to override theme interference
+      setTimeout(updateMetafieldDisplay, 50);
+      setTimeout(updateMetafieldDisplay, 100);
+      setTimeout(updateMetafieldDisplay, 200);
+      setTimeout(updateMetafieldDisplay, 500);
+      setTimeout(updateMetafieldDisplay, 1000);
+    });
+  }
+  
+  // Listen for custom variant change events that the theme might dispatch
+  document.addEventListener('variant-change', function() {
+    setTimeout(updateMetafieldDisplay, 50);
+    setTimeout(updateMetafieldDisplay, 100);
+    setTimeout(updateMetafieldDisplay, 200);
+    setTimeout(updateMetafieldDisplay, 500);
+  });
+  
+  // Additional event listeners for theme-specific events
+  document.addEventListener('variantChange', function() {
+    setTimeout(updateMetafieldDisplay, 50);
+    setTimeout(updateMetafieldDisplay, 200);
+  });
 });
 </script>
 {% endif %}

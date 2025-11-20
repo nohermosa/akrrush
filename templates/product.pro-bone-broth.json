@@ -1,0 +1,551 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "product__breadcrumb",
+      "disabled": true,
+      "settings": {
+        "width": "standard",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "sidebar": {
+      "type": "product__sidebar",
+      "disabled": true,
+      "settings": {
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "recommendations": {
+      "type": "product__recommendations",
+      "disabled": true,
+      "settings": {
+        "show_product_recommendations": false,
+        "product_recommendations_style": "grid",
+        "product_recommendations_heading": "You may also like",
+        "products_per": 3,
+        "recommended_products_limit": 6,
+        "align_height": false,
+        "collection_height": 200,
+        "width": "standard",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "animation": "slideInRight",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "main": {
+      "type": "product__main",
+      "blocks": {
+        "yotpo_product_reviews_star_rating_hF9yck": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "form": {
+          "type": "form",
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient_form": false
+          }
+        }
+      },
+      "block_order": [
+        "yotpo_product_reviews_star_rating_hF9yck",
+        "title",
+        "description",
+        "form"
+      ],
+      "settings": {
+        "start_color": "{{ product.metafields.custom.background_start_color.value }}",
+        "end_color": "{{ product.metafields.custom.background_end_color.value }}",
+        "position": "center left",
+        "font_color": "{{ product.metafields.custom.font_color.value }}",
+        "border_color": "{{ product.metafields.custom.image_border_color.value }}",
+        "form_border_color": "{{ product.metafields.custom.form_border_color.value }}",
+        "form_unselect_font_color": "{{ product.metafields.custom.form_unselected_font_color.value }}",
+        "form_select_font_color": "",
+        "bg_image": "shopify://shop_images/backgroundImage.png",
+        "bg_position": "center left",
+        "bg_size": "contain",
+        "bg_repeat": "no-repeat",
+        "bg_opacity": 10,
+        "product_images_position": "left",
+        "set_product_height": false,
+        "product_height": 500,
+        "video_looping": false,
+        "gallery_arrows": false,
+        "enable_zoom": false,
+        "enable_product_lightbox": true,
+        "slideshow_speed": 0,
+        "slideshow_transition": "fade",
+        "display_thumbnails": false,
+        "thumbnail_position": "bottom-thumbnails",
+        "enable_thumbnail_slider": false,
+        "width": "standard",
+        "padding_top": 60,
+        "padding_bottom": 20,
+        "animation": "none",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "image_with_text_and_icons_JePYXF": {
+      "type": "image-with-text-and-icons",
+      "blocks": {
+        "text_kdcWqF": {
+          "type": "text",
+          "settings": {
+            "title": "Superior protein  Superfood",
+            "heading_size": "large",
+            "text1": "<p></p>{{ product.metafields.custom.description_below | metafield_tag }}",
+            "text1_color": "{{ product.metafields.custom.product_color.value }}",
+            "text": "<p></p><p><strong>NON-GMO | NO Antibiotics | No Hormones | Freshest Norwegian poultry</strong></p><p></p>{{ product.metafields.custom.ingredients | metafield_tag }}<p></p><p>Product of Norway, packaged in USA</p>",
+            "alignment": "left",
+            "vertical_position": "center",
+            "show_icons": true,
+            "icon_image_1": "shopify://shop_images/norwayFlag.png",
+            "icon_text_1": "",
+            "icon_link_1": "",
+            "icon_text_2": "",
+            "icon_link_2": "",
+            "icon_text_3": "",
+            "icon_link_3": "",
+            "icon_text_4": "",
+            "icon_link_4": "",
+            "button_label": "",
+            "link": "",
+            "button_style": "button--primary",
+            "heading_color": "#ea7552",
+            "heading_font_size": 50,
+            "heading_font_weight": "700",
+            "mobile_heading_font_size": 40,
+            "background": "rgba(0,0,0,0)",
+            "text_color": "#7d6355",
+            "mobile_title": "",
+            "mobile_heading_size": "same_as_desktop",
+            "mobile_text": "",
+            "mobile_alignment": "same_as_desktop"
+          }
+        },
+        "image_exnTR6": {
+          "type": "image",
+          "settings": {
+            "image": "{{ product.metafields.custom.nutrition_facts.value }}",
+            "image_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_kdcWqF",
+        "image_exnTR6"
+      ],
+      "settings": {
+        "width": "standard",
+        "show_gutter": true,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "image_max_height": 800,
+        "mobile_image_max_height": 800,
+        "image_fit": "contain",
+        "animation": "none",
+        "icon_size": 120,
+        "mobile_icon_size": 120,
+        "mobile_text_position": "same_as_desktop",
+        "mobile_padding_top": 20,
+        "mobile_padding_bottom": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "tabbed_image_icons_EhVNDb": {
+      "type": "tabbed-image-icons",
+      "blocks": {
+        "text_Tgtyfa": {
+          "type": "text",
+          "settings": {
+            "tab_number": "1",
+            "title": "Savory Chicken Nutritionals",
+            "heading_size": "regular",
+            "text": "<h3>Superior protein Superfood</h3><p>Unlike traditional bone broth, åKrrush uses enzymatic hydrolysis for faster absorption & superior digestibility. </p><p><strong>Ingredients:<br/></strong>Hydrolyzed Protein (Chicken, Turkey), Chicken Broth Seasoning (Onion, Sugar, Yeast Extract, Natural Flavors, Lactic Acid [acidity regulator], Salt, Spice [Turmeric, Tarragon, Sage, Lovage]),  Salt, Natural Flavors.</p><p></p><p>Product of Norway, packaged in USA</p><p></p>",
+            "alignment": "left",
+            "vertical_position": "center",
+            "show_icons": true,
+            "icon_image_1": "shopify://shop_images/norwayFlag.png",
+            "icon_text_1": "",
+            "icon_link_1": "",
+            "icon_text_2": "",
+            "icon_link_2": "",
+            "icon_text_3": "",
+            "icon_link_3": "",
+            "icon_text_4": "",
+            "icon_link_4": "",
+            "button_label": "",
+            "link": "",
+            "button_style": "button--primary",
+            "heading_color": "#ea7552",
+            "heading_font_size": 40,
+            "heading_font_weight": "600",
+            "mobile_heading_font_size": 40,
+            "background": "rgba(0,0,0,0)",
+            "text_color": "#7d6355",
+            "mobile_title": "",
+            "mobile_heading_size": "same_as_desktop",
+            "mobile_text": "",
+            "mobile_alignment": "same_as_desktop"
+          }
+        },
+        "image_tKNVmn": {
+          "type": "image",
+          "settings": {
+            "tab_number": "1",
+            "image": "shopify://shop_images/nutritionalsSavoryChicken.png",
+            "image_link": ""
+          }
+        },
+        "text_eirCQD": {
+          "type": "text",
+          "settings": {
+            "tab_number": "2",
+            "title": "Ginger Ramen Nutritionals",
+            "heading_size": "regular",
+            "text": "<h3>Superior protein Superfood</h3><p>Unlike traditional bone broth, åKrrush uses enzymatic hydrolysis for faster absorption & superior digestibility. </p><p>With its bold <strong>ginger ramen flavor and bioavailable protein</strong>, åKrrush is next-level nutrition for performance, recovery, and everyday wellness.</p><p><strong>Ingredients: </strong><br/>Hydrolyzed Protein (Chicken, Turkey), Ramen Broth Seasoning (Sugar, Chili Pepper, Natural Flavors, Onion, Ginger, Paprika, Garlic, Leek, Spice, Salt, Mushroom), Vegetable Bouillon (Carrot, Onion, Tomato, Broccoli, Cabbage, Parsnip, Mushroom, Parsley), Silicon Dioxide (Anticaking Agent), Salt, Natural Flavors.</p><p></p><p>Product of Norway, packaged in USA</p>",
+            "alignment": "left",
+            "vertical_position": "center",
+            "show_icons": true,
+            "icon_image_1": "shopify://shop_images/norwayFlag.png",
+            "icon_text_1": "",
+            "icon_link_1": "",
+            "icon_text_2": "",
+            "icon_link_2": "",
+            "icon_text_3": "",
+            "icon_link_3": "",
+            "icon_text_4": "",
+            "icon_link_4": "",
+            "button_label": "",
+            "link": "",
+            "button_style": "button--primary",
+            "heading_color": "#ea7552",
+            "heading_font_size": 40,
+            "heading_font_weight": "600",
+            "mobile_heading_font_size": 40,
+            "background": "rgba(0,0,0,0)",
+            "text_color": "#7d6355",
+            "mobile_title": "",
+            "mobile_heading_size": "same_as_desktop",
+            "mobile_text": "",
+            "mobile_alignment": "same_as_desktop"
+          }
+        },
+        "image_9BeQqR": {
+          "type": "image",
+          "settings": {
+            "tab_number": "2",
+            "image": "shopify://shop_images/2025_7-22_aKrrush_web_nutritionals_ginger_ramen.png",
+            "image_link": ""
+          }
+        },
+        "text_BY8Qjc": {
+          "type": "text",
+          "settings": {
+            "tab_number": "3",
+            "title": "Chanterelle Mushroom Nutritionals",
+            "heading_size": "regular",
+            "text": "<h3>Superior protein Superfood</h3><p>Unlike traditional bone broth, åKrrush uses enzymatic hydrolysis for faster absorption & superior digestibility. </p><p><strong>Ingredients:</strong> <br/>Hydrolyzed Protein (Chicken, Turkey),  Mushroom Broth Seasoning (Onion, Mushroom, Sugar, Vegetable Bouillon [Salt, Carrot, Onion, Tomato, Broccoli, Cabbage, Parsnip, Mushroom, Parsley], Apple Powder, Lemon Juice Powder, Marjoram, Thyme, Natural Flavors, Garlic, Caramelized Sugar, Chanterelle, Spice [Turmeric], Maize Starch), Salt, Sugar, Natural Flavors. </p><p>Product of Norway, packaged in USA</p>",
+            "alignment": "left",
+            "vertical_position": "center",
+            "show_icons": true,
+            "icon_image_1": "shopify://shop_images/norwayFlag.png",
+            "icon_text_1": "",
+            "icon_link_1": "",
+            "icon_text_2": "",
+            "icon_link_2": "",
+            "icon_text_3": "",
+            "icon_link_3": "",
+            "icon_text_4": "",
+            "icon_link_4": "",
+            "button_label": "",
+            "link": "",
+            "button_style": "button--primary",
+            "heading_color": "#ea7552",
+            "heading_font_size": 40,
+            "heading_font_weight": "600",
+            "mobile_heading_font_size": 40,
+            "background": "rgba(0,0,0,0)",
+            "text_color": "#7d6355",
+            "mobile_title": "",
+            "mobile_heading_size": "same_as_desktop",
+            "mobile_text": "",
+            "mobile_alignment": "same_as_desktop"
+          }
+        },
+        "image_UDpJHf": {
+          "type": "image",
+          "settings": {
+            "tab_number": "3",
+            "image": "shopify://shop_images/2025_7-22_aKrrush_web_nutritionals_chanterelle_shroom.png",
+            "image_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_Tgtyfa",
+        "image_tKNVmn",
+        "text_eirCQD",
+        "image_9BeQqR",
+        "text_BY8Qjc",
+        "image_UDpJHf"
+      ],
+      "settings": {
+        "tab_title_1": "Savory Chicken",
+        "tab_title_2": "Ginger Ramen",
+        "tab_title_3": "Chanterelle Mushroom",
+        "width": "standard",
+        "show_gutter": true,
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "image_max_height": 800,
+        "mobile_image_max_height": 600,
+        "image_fit": "cover",
+        "animation": "none",
+        "icon_size": 120,
+        "mobile_icon_size": 120,
+        "mobile_text_position": "same_as_desktop",
+        "mobile_padding_top": 20,
+        "mobile_padding_bottom": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "ecom_why_akrrush_chart_section_aR8Q9Q": {
+      "type": "ecom-why-akrrush-chart-section",
+      "settings": {}
+    },
+    "qq_marquee_image_text_PGwGWK": {
+      "type": "QQ-MarqueeImageText",
+      "blocks": {
+        "image_LtmJU9": {
+          "type": "image",
+          "settings": {
+            "image": "{{ product.metafields.custom.icon_carousel_.value.icon_01.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_8QXgRU": {
+          "type": "image",
+          "settings": {
+            "image": "{{ product.metafields.custom.icon_carousel_.value.icon_02.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_FRVHyD": {
+          "type": "image",
+          "settings": {
+            "image": "{{ product.metafields.custom.icon_carousel_.value.icon_03.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_AA9HMJ": {
+          "type": "image",
+          "settings": {
+            "image": "{{ product.metafields.custom.icon_carousel_.value.icon_04.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_wA6ypY": {
+          "type": "image",
+          "settings": {
+            "image": "{{ product.metafields.custom.icon_carousel_.value.icon_05.value }}",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_LtmJU9",
+        "image_8QXgRU",
+        "image_FRVHyD",
+        "image_AA9HMJ",
+        "image_wA6ypY"
+      ],
+      "settings": {
+        "marquee_speed": 40,
+        "marquee_gap": 60,
+        "marquee_gap_mobile": 30,
+        "marquee_direction": "left",
+        "items_alignment": "center",
+        "section_background_color": "#ffffff",
+        "section_width": "fullwidth",
+        "content_max_width": 1280,
+        "section_border_color": "",
+        "section_border_top_width": 0,
+        "section_border_bottom_width": 0,
+        "section_margin_top": 0,
+        "section_margin_bottom": 0,
+        "section_padding_top": 20,
+        "section_padding_bottom": 20,
+        "section_margin_top_mobile": 0,
+        "section_margin_bottom_mobile": 0,
+        "section_padding_top_mobile": 0,
+        "section_padding_bottom_mobile": 0,
+        "media_width": 150,
+        "media_width_mobile": 100,
+        "underline_link": "none",
+        "underline_link_color": "",
+        "underline_link_hover_color": "",
+        "text_color": "",
+        "text_custom_font": false,
+        "text_font": "mono",
+        "text_font_name": "",
+        "text_font_weight": "default",
+        "text_font_size": 20,
+        "text_letter_spacing": 0,
+        "text_font_size_mobile": 16,
+        "text_letter_spacing_mobile": 0,
+        "section_class": ""
+      }
+    },
+    "ecom_meet_your_daily_ritual_section_BgyNPN": {
+      "type": "ecom-meet-your-daily-ritual-section",
+      "settings": {}
+    },
+    "1741800875611c2842": {
+      "type": "apps",
+      "blocks": {
+        "yotpo_product_reviews_reviews_dark83": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "yotpo_product_reviews_reviews_dark83"
+      ],
+      "settings": {
+        "width": "standard",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "css_class": "animate-on-scroll animate-up",
+        "custom_css": ""
+      }
+    },
+    "index_faq_LUEp3g": {
+      "type": "index__faq",
+      "blocks": {
+        "content_Ee8dzU": {
+          "type": "content",
+          "repeater": "{{ product.metafields.custom.faq_questions_and_answers.value }}",
+          "settings": {
+            "title": "{{ block.repeater.question_01.value }}",
+            "answer": "{{ block.repeater.answer_01 | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": [
+        "content_Ee8dzU"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "Your questions, answered.",
+        "question_color": "#7d6355",
+        "question_background_color": "#ffffff",
+        "alt_question_background_color": "#f5f5f5",
+        "toggle_icon_color": "#ea7552",
+        "toggle_icon_thickness": 1,
+        "answer_color": "#7d6355",
+        "heading_color": "#ea7552",
+        "heading_size": 40,
+        "heading_bottom_padding": 30,
+        "heading_alignment": "center",
+        "heading_size_mobile": 26,
+        "heading_bottom_padding_mobile": 15,
+        "width": "standard",
+        "custom_width": "1000",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "animation": "none",
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "index_featured_collection_NfcDFA": {
+      "type": "index__featured-collection",
+      "settings": {
+        "title": "You may also like",
+        "subtitle": "",
+        "collection": "bone-broth",
+        "products_per": 3,
+        "products_limit": 3,
+        "align_height": false,
+        "collection_height": 200,
+        "button_label": "",
+        "button_style": "button--primary",
+        "collection_style": "grid",
+        "width": "standard",
+        "show_gutter": true,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "animation": "none",
+        "collection_layout_mobile": "slider",
+        "mobile_products_per_row": "1",
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "ecom_chicken_pro_nutritionals_section_HXq8GA": {
+      "type": "ecom-chicken-pro-nutritionals-section",
+      "name": "Chicken Pro Nutritionals",
+      "settings": {}
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "sidebar",
+    "recommendations",
+    "main",
+    "ecom_chicken_pro_nutritionals_section_HXq8GA",
+    "image_with_text_and_icons_JePYXF",
+    "tabbed_image_icons_EhVNDb",
+    "ecom_why_akrrush_chart_section_aR8Q9Q",
+    "qq_marquee_image_text_PGwGWK",
+    "ecom_meet_your_daily_ritual_section_BgyNPN",
+    "1741800875611c2842",
+    "index_faq_LUEp3g",
+    "index_featured_collection_NfcDFA"
+  ]
+}

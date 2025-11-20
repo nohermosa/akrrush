@@ -116,73 +116,10 @@
         "custom_css": ""
       }
     },
-    "image_with_text_and_icons_JePYXF": {
-      "type": "image-with-text-and-icons",
-      "blocks": {
-        "text_kdcWqF": {
-          "type": "text",
-          "settings": {
-            "title": "Superior protein  Superfood",
-            "heading_size": "large",
-            "text1": "<p></p>{{ product.metafields.custom.description_below | metafield_tag }}",
-            "text1_color": "{{ product.metafields.custom.product_color.value }}",
-            "text": "<p></p><p><strong>NON-GMO | NO Antibiotics | No Hormones | Freshest Norwegian poultry</strong></p><p></p>{{ product.metafields.custom.ingredients | metafield_tag }}<p></p><p>Product of Norway, packaged in USA</p>",
-            "alignment": "left",
-            "vertical_position": "center",
-            "show_icons": true,
-            "icon_image_1": "shopify://shop_images/norwayFlag.png",
-            "icon_text_1": "",
-            "icon_link_1": "",
-            "icon_text_2": "",
-            "icon_link_2": "",
-            "icon_text_3": "",
-            "icon_link_3": "",
-            "icon_text_4": "",
-            "icon_link_4": "",
-            "button_label": "",
-            "link": "",
-            "button_style": "button--primary",
-            "heading_color": "#ea7552",
-            "heading_font_size": 50,
-            "heading_font_weight": "700",
-            "mobile_heading_font_size": 40,
-            "background": "rgba(0,0,0,0)",
-            "text_color": "#7d6355",
-            "mobile_title": "",
-            "mobile_heading_size": "same_as_desktop",
-            "mobile_text": "",
-            "mobile_alignment": "same_as_desktop"
-          }
-        },
-        "image_exnTR6": {
-          "type": "image",
-          "settings": {
-            "image": "{{ product.metafields.custom.nutrition_facts.value }}",
-            "image_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "text_kdcWqF",
-        "image_exnTR6"
-      ],
-      "settings": {
-        "width": "standard",
-        "show_gutter": true,
-        "padding_top": 60,
-        "padding_bottom": 60,
-        "image_max_height": 800,
-        "mobile_image_max_height": 800,
-        "image_fit": "contain",
-        "animation": "none",
-        "icon_size": 120,
-        "mobile_icon_size": 120,
-        "mobile_text_position": "same_as_desktop",
-        "mobile_padding_top": 20,
-        "mobile_padding_bottom": 20,
-        "css_class": "",
-        "custom_css": ""
-      }
+    "ecom_chicken_pro_nutritionals_section_HXq8GA": {
+      "type": "ecom-chicken-pro-nutritionals-section",
+      "name": "Chicken Pro Nutritionals",
+      "settings": {}
     },
     "tabbed_image_icons_EhVNDb": {
       "type": "tabbed-image-icons",
@@ -343,8 +280,14 @@
         "custom_css": ""
       }
     },
-    "ecom_why_akrrush_chart_section_aR8Q9Q": {
-      "type": "ecom-why-akrrush-chart-section",
+    "ecom_why_akrrush_pro_chart_section_eQnhkj": {
+      "type": "ecom-why-akrrush-pro-chart-section",
+      "name": "Why aKrrush Pro Chart",
+      "settings": {}
+    },
+    "ecom_akrrush_product_page_banner_section_VEXnme": {
+      "type": "ecom-akrrush-product-page-banner-section",
+      "name": "akrrush product page bann",
       "settings": {}
     },
     "qq_marquee_image_text_PGwGWK": {
@@ -398,6 +341,7 @@
         "image_AA9HMJ",
         "image_wA6ypY"
       ],
+      "disabled": true,
       "settings": {
         "marquee_speed": 40,
         "marquee_gap": 60,
@@ -437,6 +381,7 @@
     },
     "ecom_meet_your_daily_ritual_section_BgyNPN": {
       "type": "ecom-meet-your-daily-ritual-section",
+      "disabled": true,
       "settings": {}
     },
     "1741800875611c2842": {
@@ -453,7 +398,7 @@
         "yotpo_product_reviews_reviews_dark83"
       ],
       "settings": {
-        "width": "standard",
+        "width": "wide",
         "padding_top": 20,
         "padding_bottom": 20,
         "css_class": "animate-on-scroll animate-up",
@@ -506,17 +451,21 @@
       "settings": {
         "title": "You may also like",
         "subtitle": "",
-        "collection": "bone-broth",
+        "collection": "akrrush-pro",
         "products_per": 3,
         "products_limit": 3,
         "align_height": false,
         "collection_height": 200,
         "button_label": "",
         "button_style": "button--primary",
+        "background_color": "#000000",
+        "heading_color": "#ffffff",
+        "product_title_color": "#ffffff",
+        "product_price_color": "#ffffff",
         "collection_style": "grid",
         "width": "standard",
         "show_gutter": true,
-        "padding_top": 20,
+        "padding_top": 40,
         "padding_bottom": 20,
         "animation": "none",
         "collection_layout_mobile": "slider",
@@ -526,11 +475,6 @@
         "css_class": "",
         "custom_css": ""
       }
-    },
-    "ecom_chicken_pro_nutritionals_section_HXq8GA": {
-      "type": "ecom-chicken-pro-nutritionals-section",
-      "name": "Chicken Pro Nutritionals",
-      "settings": {}
     }
   },
   "order": [
@@ -539,9 +483,9 @@
     "recommendations",
     "main",
     "ecom_chicken_pro_nutritionals_section_HXq8GA",
-    "image_with_text_and_icons_JePYXF",
     "tabbed_image_icons_EhVNDb",
-    "ecom_why_akrrush_chart_section_aR8Q9Q",
+    "ecom_why_akrrush_pro_chart_section_eQnhkj",
+    "ecom_akrrush_product_page_banner_section_VEXnme",
     "qq_marquee_image_text_PGwGWK",
     "ecom_meet_your_daily_ritual_section_BgyNPN",
     "1741800875611c2842",

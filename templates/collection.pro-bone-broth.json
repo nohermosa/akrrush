@@ -1,0 +1,61 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "fallback_image_banner",
+      "disabled": true,
+      "settings": {
+        "image_darken": true,
+        "width": "wide",
+        "banner_height": "medium",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "ecom_collection_broth_banner_section_AJ8w9K": {
+      "type": "ecom-collection-broth-banner-section",
+      "settings": {}
+    },
+    "main": {
+      "type": "collection__main",
+      "settings": {
+        "collection_breadcrumb": true,
+        "collection_tags": false,
+        "collection_sort": false,
+        "show_sidebar": false,
+        "sidebar_position": "left",
+        "show_promo_banner": false,
+        "image_darken": true,
+        "promo_title": "Special sale on now!",
+        "promo_text": "<p>Description of promotion with lots of details.</p>",
+        "banner_height": "medium",
+        "align_height": false,
+        "collection_height": 200,
+        "products_per_row": 4,
+        "mobile_products_per_row": "1",
+        "pagination_limit": 48,
+        "pagination_type": "basic_pagination",
+        "width": "wide",
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "ecom_collection_broth_banner_section_AJ8w9K",
+    "main"
+  ]
+}

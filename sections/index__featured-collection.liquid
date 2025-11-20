@@ -49,11 +49,37 @@
   #shopify-section-{{ section.id }} {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
 
     {% if section.settings.width == 'wide' %}
       width: 100%;
     {% endif %}
   }
+
+  {% if section.settings.heading_color != blank and section.settings.heading_color != 'rgba(0,0,0,0)' %}
+  #shopify-section-{{ section.id }} .featured-collection__title,
+  #shopify-section-{{ section.id }} .featured-collection__title a {
+    color: {{ section.settings.heading_color }} !important;
+  }
+  {% endif %}
+
+  {% if section.settings.product_title_color != blank and section.settings.product_title_color != 'rgba(0,0,0,0)' %}
+  #shopify-section-{{ section.id }} .product-thumbnail__title,
+  #shopify-section-{{ section.id }} .product_name,
+  #shopify-section-{{ section.id }} .product_name a {
+    color: {{ section.settings.product_title_color }} !important;
+  }
+  {% endif %}
+
+  {% if section.settings.product_price_color != blank and section.settings.product_price_color != 'rgba(0,0,0,0)' %}
+  #shopify-section-{{ section.id }} .product-thumbnail__price,
+  #shopify-section-{{ section.id }} .product-thumbnail__price .money,
+  #shopify-section-{{ section.id }} .price,
+  #shopify-section-{{ section.id }} .product-price,
+  #shopify-section-{{ section.id }} .money {
+    color: {{ section.settings.product_price_color }} !important;
+  }
+  {% endif %}
 
   @media only screen and (max-width: 798px) {
     #shopify-section-{{ section.id }} {
@@ -339,6 +365,30 @@
       {
         "type": "header",
         "content": "Layout"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "transparent"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading color",
+        "default": "rgba(0,0,0,0)"
+      },
+      {
+        "type": "color",
+        "id": "product_title_color",
+        "label": "Product title color",
+        "default": "rgba(0,0,0,0)"
+      },
+      {
+        "type": "color",
+        "id": "product_price_color",
+        "label": "Product price color",
+        "default": "rgba(0,0,0,0)"
       },
       {
         "type": "radio",

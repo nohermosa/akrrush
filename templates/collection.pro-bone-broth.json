@@ -22,9 +22,9 @@
         "custom_css": ""
       }
     },
-    "ecom_akrrush_pro_collection_banner_section_dh8JT9": {
-      "type": "ecom-akrrush-pro-collection-banner-section",
-      "name": "aKrrush Pro Collection Ba",
+    "ecom_akrrush_pro_collection_page_ma_section_DBkhyi": {
+      "type": "ecom-akrrush-pro-collection-page-ma-section",
+      "name": "Akrrush Pro Collection Pa",
       "settings": {}
     },
     "qq_marquee_image_text_PiBzHE": {
@@ -466,15 +466,27 @@
         "css_class": "",
         "custom_css": ".section { background-color: black; }"
       }
+    },
+    "ecom_akrrush_product_page_banner_section_qdn9nh": {
+      "type": "ecom-akrrush-product-page-banner-section",
+      "name": "akrrush product page bann",
+      "settings": {}
+    },
+    "ecom_akrrush_skiing_banner_section_E7tTAU": {
+      "type": "ecom-akrrush-skiing-banner-section",
+      "name": "Akrrush Skiing Banner",
+      "settings": {}
     }
   },
   "order": [
     "banner",
-    "ecom_akrrush_pro_collection_banner_section_dh8JT9",
+    "ecom_akrrush_pro_collection_page_ma_section_DBkhyi",
     "qq_marquee_image_text_PiBzHE",
     "zz_positioned_callout_hB4x99",
     "index_featured_collection_6feTrX",
     "main",
-    "index_image_with_text_4nH94m"
+    "index_image_with_text_4nH94m",
+    "ecom_akrrush_skiing_banner_section_E7tTAU",
+    "ecom_akrrush_product_page_banner_section_qdn9nh"
   ]
 }

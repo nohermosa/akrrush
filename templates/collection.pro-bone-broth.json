@@ -121,8 +121,8 @@
         "callout_pNmPDm": {
           "type": "callout",
           "settings": {
-            "title": "Collagen peptides",
-            "text": "<p>Supports joint and gut recovery & repair</p>",
+            "title": "20g Hydrolyzed Protein",
+            "text": "<p>Delivers fast, usable fuel your body absorbs quickly.</p>",
             "extra_content": "",
             "position_x": 18,
             "position_y": 46,
@@ -146,8 +146,8 @@
         "callout_X9JUW8": {
           "type": "callout",
           "settings": {
-            "title": "Clean & sustainable",
-            "text": "<p>Norwegian-sourced<br/>NON-GMO <br/>No hormones</p>",
+            "title": "Protein + Electrolytes in One",
+            "text": "<p>Replenishes what you burn through in training while helping you stay hydrated and ready for more.</p>",
             "extra_content": "",
             "position_x": 23,
             "position_y": 66,
@@ -467,14 +467,14 @@
         "custom_css": ".section { background-color: black; }"
       }
     },
-    "ecom_akrrush_product_page_banner_section_qdn9nh": {
-      "type": "ecom-akrrush-product-page-banner-section",
-      "name": "akrrush product page bann",
-      "settings": {}
-    },
     "ecom_akrrush_skiing_banner_section_E7tTAU": {
       "type": "ecom-akrrush-skiing-banner-section",
       "name": "Akrrush Skiing Banner",
+      "settings": {}
+    },
+    "ecom_akrrush_product_page_banner_section_qdn9nh": {
+      "type": "ecom-akrrush-product-page-banner-section",
+      "name": "akrrush product page bann",
       "settings": {}
     }
   },

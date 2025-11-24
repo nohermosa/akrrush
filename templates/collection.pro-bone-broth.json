@@ -356,11 +356,11 @@
     "index_featured_collection_6feTrX": {
       "type": "index__featured-collection",
       "settings": {
-        "title": "You may also like",
+        "title": "",
         "subtitle": "",
         "collection": "akrrush-pro",
-        "products_per": 3,
-        "products_limit": 3,
+        "products_per": 4,
+        "products_limit": 4,
         "align_height": false,
         "collection_height": 200,
         "button_label": "",
@@ -370,7 +370,7 @@
         "product_title_color": "#ffffff",
         "product_price_color": "#ffffff",
         "collection_style": "grid",
-        "width": "standard",
+        "width": "wide",
         "show_gutter": true,
         "padding_top": 40,
         "padding_bottom": 20,

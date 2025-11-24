@@ -147,7 +147,7 @@
           "type": "callout",
           "settings": {
             "title": "Protein + Electrolytes in One",
-            "text": "<p>Replenishes what you burn through in training while helping you stay hydrated and ready for more.</p>",
+            "text": "<p>Replenishes what you <br/>burn through in training <br/>while helping you stay <br/>hydrated and ready for more.</p>",
             "extra_content": "",
             "position_x": 23,
             "position_y": 66,

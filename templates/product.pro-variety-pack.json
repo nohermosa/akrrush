@@ -470,6 +470,11 @@
         "css_class": "",
         "custom_css": ""
       }
+    },
+    "ecom_pro_variety_pack_nutritional_section_zXRtmk": {
+      "type": "ecom-pro-variety-pack-nutritional-section",
+      "name": "Pro Variety Pack Nutritio",
+      "settings": {}
     }
   },
   "order": [
@@ -477,6 +482,7 @@
     "sidebar",
     "recommendations",
     "main",
+    "ecom_pro_variety_pack_nutritional_section_zXRtmk",
     "tabbed_image_icons_EhVNDb",
     "ecom_why_akrrush_pro_chart_section_eQnhkj",
     "ecom_akrrush_product_page_banner_section_VEXnme",

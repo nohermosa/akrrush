@@ -122,7 +122,7 @@
           "type": "callout",
           "settings": {
             "title": "20g Hydrolyzed Protein",
-            "text": "<p>Delivers fast, usable fuel your body absorbs quickly.</p>",
+            "text": "<p>Fast, usable fuel for serious training.</p>",
             "extra_content": "",
             "position_x": 18,
             "position_y": 46,
@@ -146,8 +146,8 @@
         "callout_X9JUW8": {
           "type": "callout",
           "settings": {
-            "title": "Protein + Electrolytesin One",
-            "text": "<p>Replenishes what you <br/>burn through in training <br/>while helping you stay <br/>hydrated and ready for more.</p>",
+            "title": "Protein + Electrolytes in One",
+            "text": "<p>Hydrates and fuels every workout session.</p>",
             "extra_content": "",
             "position_x": 23,
             "position_y": 66,
@@ -171,8 +171,8 @@
         "callout_q3t3gf": {
           "type": "callout",
           "settings": {
-            "title": "Built for Recovery Days and Heavy Days",
-            "text": "<p>Bioactive peptides help your <br/>muscles bounce back quickly <br/>so you can keep your training <br/>volume high.</p>",
+            "title": "Clean Nordic Sourcing",
+            "text": "<p>Pure, trusted protein from Norwegian ingredients.</p>",
             "extra_content": "",
             "position_x": 25,
             "position_y": 83,
@@ -222,7 +222,7 @@
           "type": "callout",
           "settings": {
             "title": "Maximum Bioavailability",
-            "text": "<p>Your body puts nearly every gram to work for performance, not waste.</p>",
+            "text": "<p>Every gram goes straight to performance.</p>",
             "extra_content": "",
             "position_x": 80,
             "position_y": 53,
@@ -247,7 +247,7 @@
           "type": "callout",
           "settings": {
             "title": "Hot or Cold. Always Game-Ready",
-            "text": "<p>Fuel up however you train. Sip it hot for recovery or shake it cold for on-the-go hydration and protein.</p>",
+            "text": "<p>Fuel your body any way you train.</p>",
             "extra_content": "",
             "position_x": 83,
             "position_y": 73,

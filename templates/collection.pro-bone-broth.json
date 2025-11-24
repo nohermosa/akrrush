@@ -154,7 +154,7 @@
             "title_color": "",
             "text_color": "",
             "mobile_dot_color": "",
-            "width_override": 70,
+            "width_override": 0,
             "spacing_override": 0
           }
         },

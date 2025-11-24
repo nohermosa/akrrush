@@ -171,8 +171,8 @@
         "callout_q3t3gf": {
           "type": "callout",
           "settings": {
-            "title": "Incredible<br>savory taste",
-            "text": "",
+            "title": "Built for Recovery Days and Heavy Days",
+            "text": "<p>Bioactive peptides help your muscles bounce back quickly so you can keep your training volume high.</p>",
             "extra_content": "",
             "position_x": 25,
             "position_y": 83,
@@ -196,8 +196,8 @@
         "callout_pQ4fxq": {
           "type": "callout",
           "settings": {
-            "title": "Faster absorption than other leading brands",
-            "text": "<p>No bloating, just results</p>",
+            "title": "Clean Nordic Sourcing",
+            "text": "<p>Pure, high-support protein made from responsible Norwegian ingredients athletes can trust.</p>",
             "extra_content": "",
             "position_x": 80,
             "position_y": 34,
@@ -221,8 +221,8 @@
         "callout_KpL4yq": {
           "type": "callout",
           "settings": {
-            "title": "Muscle & gut health",
-            "text": "<p>Supports performance and recovery</p>",
+            "title": "Maximum Bioavailability",
+            "text": "<p>Your body puts nearly every gram to work for performance, not waste.</p>",
             "extra_content": "",
             "position_x": 80,
             "position_y": 53,
@@ -246,8 +246,8 @@
         "callout_HPwexP": {
           "type": "callout",
           "settings": {
-            "title": "Near 100% bioavailability",
-            "text": "<p>Every gram fuels you, nothing wasted</p>",
+            "title": "Hot or Cold. Always Game-Ready",
+            "text": "<p>Fuel up however you train. Sip it hot for recovery or shake it cold for on-the-go hydration and protein.</p>",
             "extra_content": "",
             "position_x": 83,
             "position_y": 73,

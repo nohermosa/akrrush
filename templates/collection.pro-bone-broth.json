@@ -172,7 +172,7 @@
           "type": "callout",
           "settings": {
             "title": "Built for Recovery Days and Heavy Days",
-            "text": "<p>Bioactive peptides help your muscles bounce back quickly so you can keep your training volume high.</p>",
+            "text": "<p>Bioactive peptides help your <br/>muscles bounce back quickly <br/>so you can keep your training <br/>volume high.</p>",
             "extra_content": "",
             "position_x": 25,
             "position_y": 83,

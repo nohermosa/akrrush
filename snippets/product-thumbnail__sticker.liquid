@@ -24,7 +24,8 @@
   collection_handles contains 'pre-order' or
   collection_handles contains 'staff-pick' or
   product_on_sale or
-  product.available == false
+  product.available == false or
+  always_show_sale_tag
 %}
   <div
     class="
@@ -106,6 +107,17 @@
 
       {% if context == 'thumbnail' %}
         {% if product.available and product_on_sale %}
+          <div
+            class="
+              thumbnail-sticker
+              thumbnail-sticker--sale
+            "
+          >
+            <span class="thumbnail-sticker__text">
+              {{ 'collections.general.sale' | t }}
+            </span>
+          </div>
+        {% elsif product.available and always_show_sale_tag %}
           <div
             class="
               thumbnail-sticker

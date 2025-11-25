@@ -172,6 +172,7 @@
           height: section.settings.collection_height,
           show_gutter: section.settings.show_gutter,
           featured_collection: section.settings.collection,
+          always_show_sale_tag: section.settings.always_show_sale_tag,
         %}
       {% elsif collection.all_products_count > 0 %}
         <div class="container {{ desktop_slider_classes }}">
@@ -184,6 +185,7 @@
             mobile_products_per_row: section.settings.mobile_products_per_row,
             align_height: section.settings.align_height,
             height: section.settings.collection_height,
+            always_show_sale_tag: section.settings.always_show_sale_tag,
           %}
         </div>
       {% endif %}
@@ -203,6 +205,7 @@
             height: section.settings.collection_height,
             show_gutter: section.settings.show_gutter,
             featured_collection: section.settings.collection,
+            always_show_sale_tag: section.settings.always_show_sale_tag,
           %}
         {% elsif collection_layout_mobile == 'grid' and collection.all_products_count > 0 %}
           <div class="container is-hidden-desktop-only">
@@ -215,6 +218,7 @@
               mobile_products_per_row: section.settings.mobile_products_per_row,
               align_height: section.settings.align_height,
               height: section.settings.collection_height,
+              always_show_sale_tag: section.settings.always_show_sale_tag,
             %}
           </div>
         {% endif %}
@@ -356,6 +360,13 @@
         "default": 200,
         "unit": "px",
         "info": "Applied when 'Align to height' is enabled. [Learn more](https://help.outofthesandbox.com/hc/en-us/articles/360022543913)"
+      },
+      {
+        "type": "checkbox",
+        "id": "always_show_sale_tag",
+        "label": "Always show sale tag",
+        "info": "Display the sale tag on all products even when not on sale",
+        "default": false
       },
       {
         "type": "header",

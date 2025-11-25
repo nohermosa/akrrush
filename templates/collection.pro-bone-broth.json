@@ -33,7 +33,7 @@
         "image_9QJDEQ": {
           "type": "image",
           "settings": {
-            "image": "{{ metaobjects.icon_carousel_[\"for-all-pages\"].icon_01.value }}",
+            "image": "shopify://shop_images/20G.png",
             "image_dimensions": "square",
             "image_border_radius": 0
           }
@@ -41,7 +41,7 @@
         "image_TdUHgx": {
           "type": "image",
           "settings": {
-            "image": "{{ metaobjects.icon_carousel_[\"for-all-pages\"].icon_02.value }}",
+            "image": "shopify://shop_images/USAbobsled.png",
             "image_dimensions": "square",
             "image_border_radius": 0
           }
@@ -49,7 +49,7 @@
         "image_8KrdJB": {
           "type": "image",
           "settings": {
-            "image": "{{ metaobjects.icon_carousel_[\"for-all-pages\"].icon_03.value }}",
+            "image": "shopify://shop_images/hydrationElectrolytes.png",
             "image_dimensions": "square",
             "image_border_radius": 0
           }
@@ -57,7 +57,7 @@
         "image_JQ9Fym": {
           "type": "image",
           "settings": {
-            "image": "{{ metaobjects.icon_carousel_[\"for-all-pages\"].icon_04.value }}",
+            "image": "shopify://shop_images/rapidAbsorbtion.png",
             "image_dimensions": "square",
             "image_border_radius": 0
           }
@@ -65,7 +65,23 @@
         "image_EqTT3J": {
           "type": "image",
           "settings": {
-            "image": "{{ metaobjects.icon_carousel_[\"for-all-pages\"].icon_05.value }}",
+            "image": "shopify://shop_images/realFood.png",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_CfwnMM": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/cageFree.png",
+            "image_dimensions": "square",
+            "image_border_radius": 0
+          }
+        },
+        "image_tLmDqa": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Nordic.png",
             "image_dimensions": "square",
             "image_border_radius": 0
           }
@@ -76,7 +92,9 @@
         "image_TdUHgx",
         "image_8KrdJB",
         "image_JQ9Fym",
-        "image_EqTT3J"
+        "image_EqTT3J",
+        "image_CfwnMM",
+        "image_tLmDqa"
       ],
       "settings": {
         "marquee_speed": 40,
@@ -113,6 +131,244 @@
         "text_font_size_mobile": 16,
         "text_letter_spacing_mobile": 0,
         "section_class": ""
+      }
+    },
+    "zz_positioned_callout_rMzY8F": {
+      "type": "zz-positioned-callout",
+      "blocks": {
+        "callout_GFWTPN": {
+          "type": "callout",
+          "settings": {
+            "title": "20g Hydrolyzed Protein",
+            "text": "<p>Fast, usable fuel for serious training.</p>",
+            "extra_content": "",
+            "position_x": 17,
+            "position_y": 37,
+            "title_color": "",
+            "text_color": "",
+            "mobile_dot_color": "",
+            "width_override": 0,
+            "spacing_override": 0
+          }
+        },
+        "ping_dot_JKMtxE": {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 32,
+            "position_y": 36,
+            "dot_color": "#fdb71c",
+            "dot_size": 20,
+            "ping_speed": 1
+          }
+        },
+        "callout_Qtdxdb": {
+          "type": "callout",
+          "settings": {
+            "title": "Protein + Electrolytes in One",
+            "text": "<p>Hydrates and fuels every workout session.</p>",
+            "extra_content": "",
+            "position_x": 16,
+            "position_y": 52,
+            "title_color": "",
+            "text_color": "",
+            "mobile_dot_color": "",
+            "width_override": 0,
+            "spacing_override": 0
+          }
+        },
+        "ping_dot_hQnrDi": {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 40,
+            "position_y": 51,
+            "dot_color": "#fdb71c",
+            "dot_size": 20,
+            "ping_speed": 1
+          }
+        },
+        "callout_i9PwgH": {
+          "type": "callout",
+          "settings": {
+            "title": "Clean Nordic Sourcing",
+            "text": "<p>Pure, trusted protein from Norwegian ingredients.</p>",
+            "extra_content": "",
+            "position_x": 18,
+            "position_y": 67,
+            "title_color": "",
+            "text_color": "",
+            "mobile_dot_color": "",
+            "width_override": 0,
+            "spacing_override": 0
+          }
+        },
+        "ping_dot_NTg6kY": {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 35,
+            "position_y": 65,
+            "dot_color": "#fdb71c",
+            "dot_size": 20,
+            "ping_speed": 1
+          }
+        },
+        "callout_teGdni": {
+          "type": "callout",
+          "settings": {
+            "title": "Built for Recovery Days and Heavy Days",
+            "text": "<p>Helps muscles rebound fast between sessions.</p>",
+            "extra_content": "",
+            "position_x": 84,
+            "position_y": 32,
+            "title_color": "",
+            "text_color": "",
+            "mobile_dot_color": "",
+            "width_override": 0,
+            "spacing_override": 0
+          }
+        },
+        "ping_dot_yXMCND": {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 73,
+            "position_y": 36,
+            "dot_color": "#fdb71c",
+            "dot_size": 20,
+            "ping_speed": 1
+          }
+        },
+        "callout_WpWEMg": {
+          "type": "callout",
+          "settings": {
+            "title": "Maximum Bioavailability",
+            "text": "<p>Every gram goes straight to performance.</p>",
+            "extra_content": "",
+            "position_x": 84,
+            "position_y": 51,
+            "title_color": "",
+            "text_color": "",
+            "mobile_dot_color": "",
+            "width_override": 0,
+            "spacing_override": 0
+          }
+        },
+        "ping_dot_6PNfz3": {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 65,
+            "position_y": 51,
+            "dot_color": "#fdb71c",
+            "dot_size": 20,
+            "ping_speed": 1
+          }
+        },
+        "callout_mM6icp": {
+          "type": "callout",
+          "settings": {
+            "title": "Hot or Cold. Always Game-Ready",
+            "text": "<p>Fuel your body any way you train.</p>",
+            "extra_content": "",
+            "position_x": 84,
+            "position_y": 67,
+            "title_color": "",
+            "text_color": "",
+            "mobile_dot_color": "",
+            "width_override": 0,
+            "spacing_override": 0
+          }
+        },
+        "ping_dot_d9Qrgx": {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 70,
+            "position_y": 65,
+            "dot_color": "#fdb71c",
+            "dot_size": 20,
+            "ping_speed": 1
+          }
+        }
+      },
+      "block_order": [
+        "callout_GFWTPN",
+        "ping_dot_JKMtxE",
+        "callout_Qtdxdb",
+        "ping_dot_hQnrDi",
+        "callout_i9PwgH",
+        "ping_dot_NTg6kY",
+        "callout_teGdni",
+        "ping_dot_yXMCND",
+        "callout_WpWEMg",
+        "ping_dot_6PNfz3",
+        "callout_mM6icp",
+        "ping_dot_d9Qrgx"
+      ],
+      "settings": {
+        "heading": "REAL FOOD.",
+        "subheading": "<p>REAL NUTRITION.</p>",
+        "background_image": "shopify://shop_images/proCallOuts3.jpg",
+        "mobile_background": "shopify://shop_images/mobileForSection4.jpg",
+        "enable_mobile_background": true,
+        "mobile_background_color": "#000000",
+        "mobile_background_gradient_enabled": true,
+        "mobile_background_color_2": "#000000",
+        "mobile_gradient_direction": 90,
+        "heading_h_alignment": "left",
+        "heading_v_alignment": "top",
+        "heading_h_padding": 100,
+        "heading_v_padding": 100,
+        "heading_max_width": 950,
+        "heading_background_color": "rgba(0,0,0,0)",
+        "heading_background_opacity": 85,
+        "heading_padding": 20,
+        "heading_border_radius": 8,
+        "heading_text_shadow": false,
+        "heading_mobile_h_alignment": "left",
+        "heading_mobile_v_alignment": "top",
+        "heading_mobile_h_padding": 20,
+        "heading_mobile_v_padding": 10,
+        "enable_mobile_pulse_dots": true,
+        "mobile_dot_color": "#3498db",
+        "mobile_dot_active_color": "#e74c3c",
+        "mobile_dot_size": 12,
+        "mobile_dot_speed": 2,
+        "heading_size_mobile": 40,
+        "subheading_size_mobile": 40,
+        "title_size_mobile": 20,
+        "text_size_mobile": 16,
+        "button_size_mobile": 14,
+        "heading_alignment": "center",
+        "heading_color": "#ffffff",
+        "heading_size": 60,
+        "heading_weight": 700,
+        "heading_subheading_spacing": 30,
+        "subheading_color": "#ffffff",
+        "subheading_size": 60,
+        "subheading_weight": 600,
+        "button_text": "Shop Now",
+        "button_url": "",
+        "button_background_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_radius": 4,
+        "button_size": 16,
+        "section_width": "max",
+        "custom_width": 1800,
+        "callout_width": 200,
+        "callout_background": "",
+        "callout_padding": 0,
+        "callout_border_radius": 0,
+        "title_color": "#ffffff",
+        "title_size": 26,
+        "title_weight": 500,
+        "title_text_spacing": 5,
+        "text_color": "#ffffff",
+        "text_size": 20,
+        "text_weight": 400,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 20,
+        "animation": "none",
+        "css_class": "",
+        "custom_css": ""
       }
     },
     "zz_positioned_callout_hB4x99": {
@@ -283,6 +539,7 @@
         "callout_HPwexP",
         "ping_dot_TLRGyc"
       ],
+      "disabled": true,
       "settings": {
         "heading": "REAL FOOD.",
         "subheading": "<p>REAL NUTRITION.</p>",
@@ -365,6 +622,7 @@
         "products_limit": 4,
         "align_height": false,
         "collection_height": 200,
+        "always_show_sale_tag": true,
         "button_label": "",
         "button_style": "button--primary",
         "background_color": "#000000",
@@ -374,9 +632,9 @@
         "collection_style": "grid",
         "width": "wide",
         "show_gutter": true,
-        "padding_top": 40,
-        "padding_bottom": 20,
-        "animation": "none",
+        "padding_top": 0,
+        "padding_bottom": 40,
+        "animation": "slideInRight",
         "collection_layout_mobile": "slider",
         "mobile_products_per_row": "1",
         "padding_top_mobile": 20,
@@ -461,7 +719,7 @@
         "show_gutter": true,
         "padding_top": 0,
         "padding_bottom": 0,
-        "animation": "none",
+        "animation": "fadeInDown",
         "mobile_text_position": "same_as_desktop",
         "mobile_padding_top": 0,
         "mobile_padding_bottom": 0,
@@ -484,6 +742,7 @@
     "banner",
     "ecom_akrrush_pro_collection_page_ma_section_DBkhyi",
     "qq_marquee_image_text_PiBzHE",
+    "zz_positioned_callout_rMzY8F",
     "zz_positioned_callout_hB4x99",
     "index_featured_collection_6feTrX",
     "main",

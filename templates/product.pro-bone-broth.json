@@ -282,106 +282,13 @@
     },
     "ecom_why_akrrush_pro_chart_section_eQnhkj": {
       "type": "ecom-why-akrrush-pro-chart-section",
+      "disabled": true,
       "name": "Why aKrrush Pro Chart",
       "settings": {}
     },
     "ecom_akrrush_product_page_banner_section_VEXnme": {
       "type": "ecom-akrrush-product-page-banner-section",
       "name": "akrrush product page bann",
-      "settings": {}
-    },
-    "qq_marquee_image_text_PGwGWK": {
-      "type": "QQ-MarqueeImageText",
-      "blocks": {
-        "image_LtmJU9": {
-          "type": "image",
-          "settings": {
-            "image": "{{ product.metafields.custom.icon_carousel_.value.icon_01.value }}",
-            "image_dimensions": "square",
-            "image_border_radius": 0
-          }
-        },
-        "image_8QXgRU": {
-          "type": "image",
-          "settings": {
-            "image": "{{ product.metafields.custom.icon_carousel_.value.icon_02.value }}",
-            "image_dimensions": "square",
-            "image_border_radius": 0
-          }
-        },
-        "image_FRVHyD": {
-          "type": "image",
-          "settings": {
-            "image": "{{ product.metafields.custom.icon_carousel_.value.icon_03.value }}",
-            "image_dimensions": "square",
-            "image_border_radius": 0
-          }
-        },
-        "image_AA9HMJ": {
-          "type": "image",
-          "settings": {
-            "image": "{{ product.metafields.custom.icon_carousel_.value.icon_04.value }}",
-            "image_dimensions": "square",
-            "image_border_radius": 0
-          }
-        },
-        "image_wA6ypY": {
-          "type": "image",
-          "settings": {
-            "image": "{{ product.metafields.custom.icon_carousel_.value.icon_05.value }}",
-            "image_dimensions": "square",
-            "image_border_radius": 0
-          }
-        }
-      },
-      "block_order": [
-        "image_LtmJU9",
-        "image_8QXgRU",
-        "image_FRVHyD",
-        "image_AA9HMJ",
-        "image_wA6ypY"
-      ],
-      "disabled": true,
-      "settings": {
-        "marquee_speed": 40,
-        "marquee_gap": 60,
-        "marquee_gap_mobile": 30,
-        "marquee_direction": "left",
-        "items_alignment": "center",
-        "section_background_color": "#ffffff",
-        "section_width": "fullwidth",
-        "content_max_width": 1280,
-        "section_border_color": "",
-        "section_border_top_width": 0,
-        "section_border_bottom_width": 0,
-        "section_margin_top": 0,
-        "section_margin_bottom": 0,
-        "section_padding_top": 20,
-        "section_padding_bottom": 20,
-        "section_margin_top_mobile": 0,
-        "section_margin_bottom_mobile": 0,
-        "section_padding_top_mobile": 0,
-        "section_padding_bottom_mobile": 0,
-        "media_width": 150,
-        "media_width_mobile": 100,
-        "underline_link": "none",
-        "underline_link_color": "",
-        "underline_link_hover_color": "",
-        "text_color": "",
-        "text_custom_font": false,
-        "text_font": "mono",
-        "text_font_name": "",
-        "text_font_weight": "default",
-        "text_font_size": 20,
-        "text_letter_spacing": 0,
-        "text_font_size_mobile": 16,
-        "text_letter_spacing_mobile": 0,
-        "section_class": ""
-      }
-    },
-    "ecom_meet_your_daily_ritual_section_BgyNPN": {
-      "type": "ecom-meet-your-daily-ritual-section",
-      "disabled": true,
       "settings": {}
     },
     "1741800875611c2842": {
@@ -451,11 +358,14 @@
       "settings": {
         "title": "You may also like",
         "subtitle": "",
+        "section_id": "",
+        "scroll_padding": 100,
         "collection": "akrrush-pro",
         "products_per": 3,
         "products_limit": 3,
         "align_height": false,
         "collection_height": 200,
+        "always_show_sale_tag": true,
         "button_label": "",
         "button_style": "button--primary",
         "background_color": "#000000",
@@ -486,8 +396,6 @@
     "tabbed_image_icons_EhVNDb",
     "ecom_why_akrrush_pro_chart_section_eQnhkj",
     "ecom_akrrush_product_page_banner_section_VEXnme",
-    "qq_marquee_image_text_PGwGWK",
-    "ecom_meet_your_daily_ritual_section_BgyNPN",
     "1741800875611c2842",
     "index_faq_LUEp3g",
     "index_featured_collection_NfcDFA"

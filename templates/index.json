@@ -101,17 +101,17 @@
         "section_class": ""
       }
     },
-    "zz_positioned_callout_yzwVMf": {
+    "zz_positioned_callout_6BGdbh": {
       "type": "zz-positioned-callout",
       "blocks": {
-        "callout_ApYxMY": {
+        "callout_3QwLET": {
           "type": "callout",
           "settings": {
             "title": "Collagen peptides",
             "text": "<p>Supports joint and gut recovery & repair</p>",
             "extra_content": "",
-            "position_x": 18,
-            "position_y": 46,
+            "position_x": 13,
+            "position_y": 45,
             "title_color": "",
             "text_color": "",
             "mobile_dot_color": "",
@@ -119,7 +119,7 @@
             "spacing_override": 0
           }
         },
-        "ping_dot_eBGdff": {
+        "ping_dot_TrLXeG": {
           "type": "ping_dot",
           "settings": {
             "position_x": 45,
@@ -129,14 +129,14 @@
             "ping_speed": 1
           }
         },
-        "callout_djg94A": {
+        "callout_AMqkdy": {
           "type": "callout",
           "settings": {
             "title": "Clean & sustainable",
             "text": "<p>Norwegian-sourced<br/>NON-GMO <br/>No hormones</p>",
             "extra_content": "",
-            "position_x": 23,
-            "position_y": 66,
+            "position_x": 22,
+            "position_y": 62,
             "title_color": "",
             "text_color": "",
             "mobile_dot_color": "",
@@ -144,7 +144,7 @@
             "spacing_override": 0
           }
         },
-        "ping_dot_8cmrKq": {
+        "ping_dot_wnnTBt": {
           "type": "ping_dot",
           "settings": {
             "position_x": 41,
@@ -154,14 +154,14 @@
             "ping_speed": 1
           }
         },
-        "callout_JBYHbB": {
+        "callout_f8Wfxi": {
           "type": "callout",
           "settings": {
-            "title": "Incredible<br>savory taste",
+            "title": "Incredible savory taste",
             "text": "",
             "extra_content": "",
-            "position_x": 25,
-            "position_y": 83,
+            "position_x": 24,
+            "position_y": 82,
             "title_color": "",
             "text_color": "",
             "mobile_dot_color": "",
@@ -169,7 +169,7 @@
             "spacing_override": 0
           }
         },
-        "ping_dot_wGcYe3": {
+        "ping_dot_MiPVnt": {
           "type": "ping_dot",
           "settings": {
             "position_x": 41,
@@ -179,7 +179,7 @@
             "ping_speed": 1
           }
         },
-        "callout_r8ynJ4": {
+        "callout_tzr8QX": {
           "type": "callout",
           "settings": {
             "title": "Faster absorption than other leading brands",
@@ -194,7 +194,7 @@
             "spacing_override": 0
           }
         },
-        "ping_dot_AphLkX": {
+        "ping_dot_p8amxq": {
           "type": "ping_dot",
           "settings": {
             "position_x": 57,
@@ -204,14 +204,14 @@
             "ping_speed": 1
           }
         },
-        "callout_Abxbj6": {
+        "callout_t6kyKq": {
           "type": "callout",
           "settings": {
             "title": "Muscle & gut health",
             "text": "<p>Supports performance and recovery</p>",
             "extra_content": "",
             "position_x": 80,
-            "position_y": 53,
+            "position_y": 54,
             "title_color": "",
             "text_color": "",
             "mobile_dot_color": "",
@@ -219,7 +219,7 @@
             "spacing_override": 0
           }
         },
-        "ping_dot_Xqygkc": {
+        "ping_dot_nf87Kr": {
           "type": "ping_dot",
           "settings": {
             "position_x": 53,
@@ -229,14 +229,14 @@
             "ping_speed": 1
           }
         },
-        "callout_QmGGzQ": {
+        "callout_8pC6ki": {
           "type": "callout",
           "settings": {
             "title": "Near 100% bioavailability",
             "text": "<p>Every gram fuels you, nothing wasted</p>",
             "extra_content": "",
-            "position_x": 83,
-            "position_y": 73,
+            "position_x": 84,
+            "position_y": 70,
             "title_color": "",
             "text_color": "",
             "mobile_dot_color": "",
@@ -244,7 +244,7 @@
             "spacing_override": 0
           }
         },
-        "ping_dot_TjmBhV": {
+        "ping_dot_jQETnH": {
           "type": "ping_dot",
           "settings": {
             "position_x": 58,
@@ -256,18 +256,18 @@
         }
       },
       "block_order": [
-        "callout_ApYxMY",
-        "ping_dot_eBGdff",
-        "callout_djg94A",
-        "ping_dot_8cmrKq",
-        "callout_JBYHbB",
-        "ping_dot_wGcYe3",
-        "callout_r8ynJ4",
-        "ping_dot_AphLkX",
-        "callout_Abxbj6",
-        "ping_dot_Xqygkc",
-        "callout_QmGGzQ",
-        "ping_dot_TjmBhV"
+        "callout_3QwLET",
+        "ping_dot_TrLXeG",
+        "callout_AMqkdy",
+        "ping_dot_wnnTBt",
+        "callout_f8Wfxi",
+        "ping_dot_MiPVnt",
+        "callout_tzr8QX",
+        "ping_dot_p8amxq",
+        "callout_t6kyKq",
+        "ping_dot_nf87Kr",
+        "callout_8pC6ki",
+        "ping_dot_jQETnH"
       ],
       "settings": {
         "heading": "Superior protein",
@@ -339,18 +339,264 @@
         "custom_css": ""
       }
     },
-    "index_featured_collection_aUban4": {
+    "zz_positioned_callout_yzwVMf": {
+      "type": "zz-positioned-callout",
+      "blocks": {
+        "callout_ApYxMY": {
+          "type": "callout",
+          "settings": {
+            "title": "Collagen peptides",
+            "text": "<p>Supports joint and gut recovery & repair</p>",
+            "extra_content": "",
+            "position_x": 14,
+            "position_y": 37,
+            "title_color": "",
+            "text_color": "",
+            "mobile_dot_color": "",
+            "width_override": 0,
+            "spacing_override": 0
+          }
+        },
+        "ping_dot_eBGdff": {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 29,
+            "position_y": 36,
+            "dot_color": "#fdb71c",
+            "dot_size": 20,
+            "ping_speed": 1
+          }
+        },
+        "callout_djg94A": {
+          "type": "callout",
+          "settings": {
+            "title": "Clean & sustainable",
+            "text": "<p>Norwegian-sourced<br/>NON-GMO <br/>No hormones</p>",
+            "extra_content": "",
+            "position_x": 13,
+            "position_y": 52,
+            "title_color": "",
+            "text_color": "",
+            "mobile_dot_color": "",
+            "width_override": 0,
+            "spacing_override": 0
+          }
+        },
+        "ping_dot_8cmrKq": {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 38,
+            "position_y": 52,
+            "dot_color": "#fdb71c",
+            "dot_size": 20,
+            "ping_speed": 1
+          }
+        },
+        "callout_JBYHbB": {
+          "type": "callout",
+          "settings": {
+            "title": "Incrediblesavory taste",
+            "text": "",
+            "extra_content": "",
+            "position_x": 16,
+            "position_y": 67,
+            "title_color": "",
+            "text_color": "",
+            "mobile_dot_color": "",
+            "width_override": 0,
+            "spacing_override": 0
+          }
+        },
+        "ping_dot_wGcYe3": {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 33,
+            "position_y": 67,
+            "dot_color": "#fdb71c",
+            "dot_size": 20,
+            "ping_speed": 1
+          }
+        },
+        "callout_r8ynJ4": {
+          "type": "callout",
+          "settings": {
+            "title": "Faster absorption than other leading brands",
+            "text": "<p>No bloating, just results</p>",
+            "extra_content": "",
+            "position_x": 85,
+            "position_y": 34,
+            "title_color": "",
+            "text_color": "",
+            "mobile_dot_color": "",
+            "width_override": 0,
+            "spacing_override": 0
+          }
+        },
+        "ping_dot_AphLkX": {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 74,
+            "position_y": 36,
+            "dot_color": "#fdb71c",
+            "dot_size": 20,
+            "ping_speed": 1
+          }
+        },
+        "callout_Abxbj6": {
+          "type": "callout",
+          "settings": {
+            "title": "Muscle & gut health",
+            "text": "<p>Supports performance and recovery</p>",
+            "extra_content": "",
+            "position_x": 85,
+            "position_y": 53,
+            "title_color": "",
+            "text_color": "",
+            "mobile_dot_color": "",
+            "width_override": 0,
+            "spacing_override": 0
+          }
+        },
+        "ping_dot_TjmBhV": {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 65,
+            "position_y": 52,
+            "dot_color": "#fdb71c",
+            "dot_size": 20,
+            "ping_speed": 1
+          }
+        },
+        "callout_QmGGzQ": {
+          "type": "callout",
+          "settings": {
+            "title": "Near 100% bioavailability",
+            "text": "<p>Every gram fuels you, nothing wasted</p>",
+            "extra_content": "",
+            "position_x": 85,
+            "position_y": 73,
+            "title_color": "",
+            "text_color": "",
+            "mobile_dot_color": "",
+            "width_override": 0,
+            "spacing_override": 0
+          }
+        },
+        "ping_dot_Xqygkc": {
+          "type": "ping_dot",
+          "settings": {
+            "position_x": 71,
+            "position_y": 67,
+            "dot_color": "#fdb71c",
+            "dot_size": 20,
+            "ping_speed": 1
+          }
+        }
+      },
+      "block_order": [
+        "callout_ApYxMY",
+        "ping_dot_eBGdff",
+        "callout_djg94A",
+        "ping_dot_8cmrKq",
+        "callout_JBYHbB",
+        "ping_dot_wGcYe3",
+        "callout_r8ynJ4",
+        "ping_dot_AphLkX",
+        "callout_Abxbj6",
+        "ping_dot_TjmBhV",
+        "callout_QmGGzQ",
+        "ping_dot_Xqygkc"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Superior protein",
+        "subheading": "<p>Superfood</p>",
+        "background_image": "shopify://shop_images/proCallOuts2.jpg",
+        "mobile_background": "shopify://shop_images/mobileForSection3.jpg",
+        "enable_mobile_background": true,
+        "mobile_background_color": "#ca573e",
+        "mobile_background_gradient_enabled": true,
+        "mobile_background_color_2": "#ed874c",
+        "mobile_gradient_direction": 90,
+        "heading_h_alignment": "left",
+        "heading_v_alignment": "top",
+        "heading_h_padding": 100,
+        "heading_v_padding": 100,
+        "heading_max_width": 950,
+        "heading_background_color": "rgba(0,0,0,0)",
+        "heading_background_opacity": 85,
+        "heading_padding": 20,
+        "heading_border_radius": 8,
+        "heading_text_shadow": false,
+        "heading_mobile_h_alignment": "left",
+        "heading_mobile_v_alignment": "top",
+        "heading_mobile_h_padding": 20,
+        "heading_mobile_v_padding": 10,
+        "enable_mobile_pulse_dots": true,
+        "mobile_dot_color": "#3498db",
+        "mobile_dot_active_color": "#e74c3c",
+        "mobile_dot_size": 12,
+        "mobile_dot_speed": 2,
+        "heading_size_mobile": 40,
+        "subheading_size_mobile": 40,
+        "title_size_mobile": 20,
+        "text_size_mobile": 16,
+        "button_size_mobile": 14,
+        "heading_alignment": "center",
+        "heading_color": "#ffffff",
+        "heading_size": 60,
+        "heading_weight": 700,
+        "heading_subheading_spacing": 30,
+        "subheading_color": "#ffffff",
+        "subheading_size": 60,
+        "subheading_weight": 600,
+        "button_text": "Shop Now",
+        "button_url": "",
+        "button_background_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_radius": 4,
+        "button_size": 16,
+        "section_width": "max",
+        "custom_width": 1800,
+        "callout_width": 200,
+        "callout_background": "",
+        "callout_padding": 0,
+        "callout_border_radius": 0,
+        "title_color": "#ffffff",
+        "title_size": 30,
+        "title_weight": 500,
+        "title_text_spacing": 5,
+        "text_color": "#ffffff",
+        "text_size": 20,
+        "text_weight": 400,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 20,
+        "animation": "none",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "index_featured_collection_Q8AyBg": {
       "type": "index__featured-collection",
       "settings": {
-        "title": "",
+        "title": "PRO Bone Broth",
         "subtitle": "",
-        "collection": "bone-broth",
+        "section_id": "featured",
+        "scroll_padding": 100,
+        "collection": "akrrush-pro",
         "products_per": 4,
         "products_limit": 4,
         "align_height": false,
         "collection_height": 400,
+        "always_show_sale_tag": true,
         "button_label": "",
         "button_style": "button--primary",
+        "background_color": "#000000",
+        "heading_color": "#ffffff",
+        "product_title_color": "#ffffff",
+        "product_price_color": "#ffffff",
         "collection_style": "slider",
         "width": "wide",
         "show_gutter": true,
@@ -362,7 +608,40 @@
         "padding_top_mobile": 30,
         "padding_bottom_mobile": 0,
         "css_class": "",
-        "custom_css": ".heading-wrapper-subtitle {\nmargin-bottom: 40px;\n}\n.heading-wrapper {\nmargin-bottom: 10px;\n}\n\n.featured-collection {\npadding-right: 3%;\nmargin-left: 3%;\n}"
+        "custom_css": ".heading-wrapper-subtitle {\nmargin-bottom: 40px;\n}\n.heading-wrapper {\nmargin-bottom: 40px;\n}\n\n.featured-collection {\npadding-right: 3%;\nmargin-left: 3%;\n}"
+      }
+    },
+    "index_featured_collection_aUban4": {
+      "type": "index__featured-collection",
+      "settings": {
+        "title": "Classic Bone Broth",
+        "subtitle": "",
+        "section_id": "",
+        "scroll_padding": 100,
+        "collection": "bone-broth",
+        "products_per": 4,
+        "products_limit": 4,
+        "align_height": false,
+        "collection_height": 400,
+        "always_show_sale_tag": true,
+        "button_label": "",
+        "button_style": "button--primary",
+        "background_color": "rgba(0,0,0,0)",
+        "heading_color": "#7d6355",
+        "product_title_color": "#7d6355",
+        "product_price_color": "#7d6355",
+        "collection_style": "slider",
+        "width": "wide",
+        "show_gutter": true,
+        "padding_top": 60,
+        "padding_bottom": 20,
+        "animation": "slideInLeft",
+        "collection_layout_mobile": "grid",
+        "mobile_products_per_row": "2",
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 0,
+        "css_class": "",
+        "custom_css": ".heading-wrapper-subtitle {\nmargin-bottom: 40px;\n}\n.heading-wrapper {\nmargin-bottom: 40px;\n}\n\n.featured-collection {\npadding-right: 3%;\nmargin-left: 3%;\n}"
       }
     },
     "ecom_clean_nutrition_02_section_zjGHdE": {
@@ -402,7 +681,9 @@
   "order": [
     "ecom_main_video_banner_section_h6FEQ9",
     "qq_marquee_image_text_8DeHKh",
+    "zz_positioned_callout_6BGdbh",
     "zz_positioned_callout_yzwVMf",
+    "index_featured_collection_Q8AyBg",
     "index_featured_collection_aUban4",
     "ecom_clean_nutrition_02_section_zjGHdE",
     "ecom_the_proof_is_in_the_protein_section_pLQrRt",

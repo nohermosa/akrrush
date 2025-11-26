@@ -20,8 +20,8 @@
         "image_XHH3MR": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/aKrrush_PRO_web_home_page_banner_1920x810_809ceebe-0b0a-4938-aa30-9413e9490c1e.png",
-            "mobile_image": "shopify://shop_images/aKrrush_PRO_web_home_page_banner_MOBILE_810x1900_6d09fc75-47ed-4524-86ef-231968108e84.png",
+            "image": "shopify://shop_images/aKrrush_PRO_web_home_page_banner_1920x810_aa1ab9bb-04cd-4cc8-b335-9c292f9447c2.jpg",
+            "mobile_image": "shopify://shop_images/aKrrush_PRO_web_home_page_banner_MOBILE_810x1900_460c326d-0c3c-4e90-807e-7ac9871cb956.jpg",
             "link": "shopify://collections/akrrush-pro",
             "pretext": "",
             "title": "",
@@ -54,8 +54,8 @@
         "image_wWUPKq": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/aKrrush_Classic_web_home_page_banner_1920x810_6d2e0e60-8fdb-497c-9e5d-df0966b61d4e.png",
-            "mobile_image": "shopify://shop_images/aKrrush_Classic_web_home_page_banner_MOBILE_810x1170_6de463af-3229-429d-beb4-3e7aee73ae2d.png",
+            "image": "shopify://shop_images/aKrrush_Classic_web_home_page_banner_1920x810_6d2e0e60-8fdb-497c-9e5d-df0966b61d4e.jpg",
+            "mobile_image": "shopify://shop_images/aKrrush_Classic_web_home_page_banner_MOBILE_810x1170_6de463af-3229-429d-beb4-3e7aee73ae2d.jpg",
             "link": "shopify://collections/bone-broth",
             "pretext": "",
             "title": "",

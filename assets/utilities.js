@@ -548,7 +548,7 @@ window.PXUTheme.mobileMenu = {
     
     // Close mobile menu when clicking anchor links
     $('.mobile-menu a[href*="#"]').on('click', function() {
-      window.PXUTheme.mobileMenu.close();
+      window.PXUTheme.mobileMenu.close(true); // Skip scroll-back for anchor links
     });
     
     if (window.PXUTheme.jsHeader.enable_sticky === true) {
@@ -584,12 +584,15 @@ window.PXUTheme.mobileMenu = {
       $('body').addClass('mobile-menu--opened');
     }, 10);
   },
-  close: function () {
+  close: function (skipScrollBack) {
     $('body').removeClass('mobile-menu--opened');
 
     // Once mobile menu is closed, return back to previous position on page
-    let lastScrollPosition = $('body').data('current-position');
-    window.scrollTo(0, lastScrollPosition);
+    // Skip this when closing from an anchor link click
+    if (!skipScrollBack) {
+      let lastScrollPosition = $('body').data('current-position');
+      window.scrollTo(0, lastScrollPosition);
+    }
     this.$mobileMenuIcon.removeClass('is-active');
     $('[data-show-mobile-menu]').attr('data-show-mobile-menu', false);
   },

@@ -85,12 +85,12 @@ window.PXUTheme.theme_settings.customer_logged_in = {% if customer and customer.
 ================================================== */ {% endcomment %}
 window.PXUTheme.media_queries = {};
 window.PXUTheme.media_queries.small = window.matchMedia( "(max-width: 480px)" );
-window.PXUTheme.media_queries.medium = window.matchMedia( "(max-width: 798px)" );
-window.PXUTheme.media_queries.large = window.matchMedia( "(min-width: 799px)" );
-window.PXUTheme.media_queries.larger = window.matchMedia( "(min-width: 960px)" );
-window.PXUTheme.media_queries.xlarge = window.matchMedia( "(min-width: 1200px)" );
+window.PXUTheme.media_queries.medium = window.matchMedia( "(max-width: 798px), (min-width: 799px) and (max-width: 1100px)" );
+window.PXUTheme.media_queries.large = window.matchMedia( "(min-width: 1101px)" );
+window.PXUTheme.media_queries.larger = window.matchMedia( "(min-width: 1200px)" );
+window.PXUTheme.media_queries.xlarge = window.matchMedia( "(min-width: 1400px)" );
 window.PXUTheme.media_queries.ie10 = window.matchMedia( "all and (-ms-high-contrast: none), (-ms-high-contrast: active)" );
-window.PXUTheme.media_queries.tablet = window.matchMedia( "only screen and (min-width: 799px) and (max-width: 1024px)" );
+window.PXUTheme.media_queries.tablet = window.matchMedia( "only screen and (min-width: 799px) and (max-width: 1100px)" );
 
 {% comment %} /* # Translation
 ================================================== */ {% endcomment %}

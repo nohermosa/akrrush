@@ -545,6 +545,12 @@ window.PXUTheme.mobileMenu = {
     $('body').on('click', '[data-show-mobile-menu="true"]', function () {
       window.PXUTheme.mobileMenu.close();
     });
+    
+    // Close mobile menu when clicking anchor links
+    $('.mobile-menu a[href*="#"]').on('click', function() {
+      window.PXUTheme.mobileMenu.close();
+    });
+    
     if (window.PXUTheme.jsHeader.enable_sticky === true) {
       this.enableSticky();
     }

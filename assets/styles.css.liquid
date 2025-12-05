@@ -13000,6 +13000,30 @@ shopify-payment-terms {
   width: 100%;
   position: absolute;
 }
+
+/* Hide announcement bar AND top bar on laptop screens */
+@media only screen and (min-width: 799px) and (max-width: 1100px) {
+  .announcement-bar,
+  .announcement-bar__container,
+  .announcement-container,
+  .jsAnnouncementBar,
+  #announcement-bar,
+  .announcement-bar__shadow,
+  .top-bar,
+  [class*="header_top_bar"],
+  [id*="header_top_bar"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  /* Hide the Shopify section wrapper for announcement */
+  section.announcement-container,
+  [class*="announcement"] {
+    display: none !important;
+  }
+}
 .announcement-bar.is-small {
   font-size: 0.75rem;
 }
@@ -15045,6 +15069,13 @@ shopify-payment-terms {
   }
 }
 
+/* Hide desktop header on laptop screens too */
+@media only screen and (min-width: 799px) and (max-width: 1100px) {
+  header.header {
+    display: none;
+  }
+}
+
 .header,
 .mobile-header {
   font-family: {{ settings.nav__font.family }}, {{ settings.nav__font.fallback_families }};
@@ -15923,12 +15954,12 @@ h1.header__logo-text > a:hover,
 
 .mobile-header {
   position: relative;
-  z-index: 10;
+  z-index: 9998;
   width: 100%;
   background-color: {{ settings.header_background }};
   transition: background-color 0.3s linear, height 0.2s linear;
 }
-@media only screen and (min-width: 799px) {
+@media only screen and (min-width: 1101px) {
   .mobile-header {
     display: none;
   }
@@ -16114,7 +16145,7 @@ h1.header__logo-text > a:hover,
   top: 100%;
   transition: left 0.3s ease-in-out;
   width: 100%;
-  z-index: 40;
+  z-index: 9999;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -16308,6 +16339,13 @@ h1.header__logo-text > a:hover,
   left: initial;
 }
 @media only screen and (max-width: 798px) {
+  .mobile-menu__toggle-button {
+    display: block;
+  }
+}
+
+/* Show mobile menu toggle button on laptop screens too */
+@media only screen and (min-width: 799px) and (max-width: 1100px) {
   .mobile-menu__toggle-button {
     display: block;
   }

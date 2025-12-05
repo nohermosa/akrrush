@@ -314,7 +314,7 @@
         "heading_h_alignment": "left",
         "heading_v_alignment": "top",
         "heading_h_padding": 100,
-        "heading_v_padding": 100,
+        "heading_v_padding": 30,
         "heading_max_width": 950,
         "heading_background_color": "rgba(0,0,0,0)",
         "heading_background_opacity": 85,

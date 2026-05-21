@@ -28,6 +28,29 @@
   margin: 0 auto;
 }
 
+/* Force-override Enkel on all akr section elements */
+.akr-ing-section *,
+.akr-benefits-section *,
+.akr-faq-section * {
+  font-family: Arial, sans-serif !important;
+}
+.akr-ing-heading,
+.akr-ing-heading em,
+.akr-ing-card-body h4,
+.akr-benefits-heading,
+.akr-benefits-heading em,
+.akr-benefit-name,
+.akr-benefits-text-heading,
+.akr-benefits-text-heading em,
+.akr-faq-heading,
+.akr-faq-question-text {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+}
+.akr-ing-clean-note,
+.akr-ing-gram-note {
+  font-family: 'Caveat', cursive !important;
+}
+
 /* Heading block */
 .akr-ing-heading-outer {
   text-align: center;
@@ -138,7 +161,8 @@
   line-height: 1;
 }
 
-/* Nutrition Facts card */
+/* Nutrition Facts card — override Flex theme's Enkel font-family on all children */
+.akr-nf * { font-family: Arial, sans-serif !important; color: #2c1a10 !important; }
 .akr-nf {
   background: #fff !important;
   border: 2.5px solid #2c1a10 !important;

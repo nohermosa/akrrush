@@ -1,0 +1,340 @@
+{{ 'akr-product.css' | asset_url | stylesheet_tag }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  unless request.query_string contains 'variant='
+    if product.variants.size > 1
+      assign selected_variant = product.variants[1]
+    endif
+  endunless
+  assign best_idx = section.settings.best_value_index | minus: 1
+-%}
+
+<section class="akr-hero-section" id="akr-hero">
+  <div class="akr-hero-inner">
+
+    <!-- ===== LEFT: Gallery ===== -->
+    <div class="akr-hero-gallery-col">
+
+      <div class="akr-hero-main-wrap">
+
+        <!-- Badge: Protein (top-left) -->
+        <div class="akr-hero-badge akr-hero-badge--protein">
+          <div class="akr-hero-badge-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="9" cy="9" r="8" stroke="#2c1a10" stroke-width="1.5"/>
+              <path d="M6 9.5L8 11.5L12 7" stroke="#2c1a10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <strong class="akr-hero-badge-title">{{ section.settings.badge_protein_title }}</strong>
+            <small class="akr-hero-badge-sub">{{ section.settings.badge_protein_sub }}</small>
+          </div>
+        </div>
+
+        <!-- Badge: Non-GMO (top-right) -->
+        <div class="akr-hero-badge akr-hero-badge--nongmo">
+          <div class="akr-hero-badge-check">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <circle cx="7" cy="7" r="6" fill="rgba(255,255,255,.18)"/>
+              <path d="M3.5 7L6 9.5L10.5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <strong class="akr-hero-badge-title">{{ section.settings.badge_nongmo_title }}</strong>
+            <small class="akr-hero-badge-sub">{{ section.settings.badge_nongmo_sub }}</small>
+          </div>
+        </div>
+
+        <!-- Main product image -->
+        <img class="akr-hero-main-img" id="akrMainImg"
+             src="{{ product.featured_image | img_url: '800x' }}"
+             alt="{{ product.title | escape }}"
+             loading="eager">
+
+        <!-- Norway stamp badge (bottom-right) -->
+        <div class="akr-hero-norway">
+          <svg viewBox="0 0 110 110" width="110" height="110" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <path id="akrNorwayArc" d="M 55,55 m -43,0 a 43,43 0 1,1 86,0 a 43,43 0 1,1 -86,0"/>
+            </defs>
+            <circle cx="55" cy="55" r="52" fill="white"/>
+            <circle cx="55" cy="55" r="50" fill="white" stroke="#c8102e" stroke-width="2"/>
+            <circle cx="55" cy="55" r="44" fill="none" stroke="#c8102e" stroke-width="0.8" stroke-dasharray="2.5 2"/>
+            <!-- Norwegian flag (simplified) -->
+            <g transform="translate(27,32)">
+              <rect width="56" height="35" rx="3" fill="#EF2B2D"/>
+              <rect y="12.5" width="56" height="10" fill="white"/>
+              <rect x="15.5" width="10" height="35" fill="white"/>
+              <rect y="14" width="56" height="7" fill="#002868"/>
+              <rect x="17" width="7" height="35" fill="#002868"/>
+            </g>
+            <text font-size="6.2" font-weight="800" fill="#2c1a10" font-family="Arial,sans-serif" letter-spacing="0.9">
+              <textPath href="#akrNorwayArc" startOffset="5%">PRODUCT OF NORWAY · NORDIC POULTRY ·</textPath>
+            </text>
+          </svg>
+        </div>
+
+      </div><!-- /main-wrap -->
+
+      <!-- Thumbnails -->
+      <div class="akr-hero-thumbs">
+        {%- for image in product.images -%}
+          <div class="akr-hero-thumb{% if forloop.first %} active{% endif %}"
+               data-img="{{ image | img_url: '800x' }}">
+            <img src="{{ image | img_url: '160x160' }}"
+                 alt="{{ image.alt | default: product.title | escape }}"
+                 loading="lazy">
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <a href="#" class="akr-hero-view-nf js-akr-view-nf">View Nutrition Label</a>
+
+    </div><!-- /gallery-col -->
+
+    <!-- ===== RIGHT: Info ===== -->
+    <div class="akr-hero-info-col">
+
+      <!-- Yotpo stars (first @app block renders here) -->
+      {%- assign akr_app_count = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' and akr_app_count == 0 -%}
+          {%- assign akr_app_count = 1 -%}
+          <div class="akr-hero-yotpo">{% render block %}</div>
+        {%- endif -%}
+      {%- endfor -%}
+
+      <!-- Eyebrow -->
+      <p class="akr-hero-eyebrow">{{ section.settings.eyebrow }}</p>
+
+      <!-- Title -->
+      <h1 class="akr-hero-title">{{ product.title }}</h1>
+
+      <!-- Short description -->
+      {%- if section.settings.short_desc != blank -%}
+        <p class="akr-hero-short-desc">{{ section.settings.short_desc }}</p>
+      {%- endif -%}
+
+      <!-- Feature bullets -->
+      {%- assign has_features = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'feature_point' -%}{%- assign has_features = true -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if has_features -%}
+        <ul class="akr-hero-bullets">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'feature_point' -%}
+              <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      <hr class="akr-hero-divider">
+
+      <!-- Flavor selector -->
+      {%- assign has_flavors = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'flavor_link' -%}{%- assign has_flavors = true -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if has_flavors -%}
+        <p class="akr-hero-flavor-label">SELECT FLAVOR:</p>
+        <div class="akr-hero-flavor-row">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'flavor_link' -%}
+              <a class="akr-hero-flavor-item{% if block.settings.is_current %} active{% endif %}"
+                 href="{{ block.settings.url | default: '#' }}"
+                 {{ block.shopify_attributes }}>
+                <div class="akr-hero-flavor-thumb">
+                  {%- if block.settings.image_asset != blank -%}
+                    <img src="{{ block.settings.image_asset | asset_url }}"
+                         alt="{{ block.settings.name | escape }}" loading="lazy">
+                  {%- elsif block.settings.image != blank -%}
+                    <img src="{{ block.settings.image | img_url: '200x' }}"
+                         alt="{{ block.settings.name | escape }}" loading="lazy">
+                  {%- endif -%}
+                </div>
+                <span class="akr-hero-flavor-name">{{ block.settings.name }}</span>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <!-- Product form: pack heading + pack buttons + Appstle -->
+      {%- form 'product', product, id: 'akr-product-form', novalidate: 'novalidate', class: 'akr-product-form' -%}
+
+        <!-- Hidden variant select (Shopify / Appstle read this) -->
+        <select name="id" data-variants style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true">
+          {%- for variant in product.variants -%}
+            <option value="{{ variant.id }}"{% if variant.id == selected_variant.id %} selected{% endif %}>
+              {{ variant.title }}
+            </option>
+          {%- endfor -%}
+        </select>
+
+        <!-- Pack heading -->
+        <div class="akr-hero-pack-head">
+          <h2 class="akr-hero-pack-heading">
+            {{ section.settings.pack_heading_before }}
+            <em>{{ section.settings.pack_heading_italic }}<svg class="akr-hero-strong-underline" viewBox="0 0 172 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 9 Q30 2 58 8 Q86 14 114 8 Q142 2 169 8" stroke="#ea7552" stroke-width="3" stroke-linecap="round"/></svg></em>
+          </h2>
+          <div class="akr-hero-pack-subrow">
+            <p class="akr-hero-pack-desc">{{ section.settings.pack_desc }}</p>
+            <span class="akr-hero-most-popular">{{ section.settings.most_popular_text }}</span>
+          </div>
+        </div>
+
+        <!-- Pack size buttons (from product.variants) -->
+        <div class="akr-hero-pack-btns" id="akrPackBtns">
+          {%- for variant in product.variants -%}
+            {%- assign is_best = false -%}
+            {%- if forloop.index0 == best_idx -%}{%- assign is_best = true -%}{%- endif -%}
+            <button type="button"
+                    class="akr-hero-pack-btn{% if is_best %} akr-hero-pack-btn--best{% endif %}{% if variant.id == selected_variant.id %} active{% endif %}"
+                    data-variant-id="{{ variant.id }}">
+              {%- if is_best -%}<span class="akr-hero-best-label">BEST VALUE</span>{%- endif -%}
+              <div class="akr-hero-pack-name">{{ variant.title }}</div>
+              <div class="akr-hero-pack-price">{{ variant.price | money_without_trailing_zeros }}/mo</div>
+            </button>
+          {%- endfor -%}
+        </div>
+
+        <!-- Appstle subscription widget (all @app blocks after the first) -->
+        <div class="akr-hero-appstle-area">
+          {%- assign akr_app_count2 = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == '@app' -%}
+              {%- assign akr_app_count2 = akr_app_count2 | plus: 1 -%}
+              {%- if akr_app_count2 >= 2 -%}
+                {%- render block -%}
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+      {%- endform -%}
+
+      <!-- Trust note -->
+      {%- if section.settings.trust_note != blank -%}
+        <p class="akr-hero-trust">{{ section.settings.trust_note }}</p>
+      {%- endif -%}
+
+    </div><!-- /info-col -->
+
+  </div><!-- /hero-inner -->
+</section>
+
+<script>
+(function() {
+  // Thumbnail gallery switching
+  var thumbs = document.querySelectorAll('.akr-hero-thumb');
+  var mainImg = document.getElementById('akrMainImg');
+  thumbs.forEach(function(th) {
+    th.addEventListener('click', function() {
+      thumbs.forEach(function(t) { t.classList.remove('active'); });
+      th.classList.add('active');
+      if (mainImg) mainImg.src = th.dataset.img;
+    });
+  });
+
+  // Pack variant selection
+  var packBtns = document.querySelectorAll('.akr-hero-pack-btn');
+  var variantSelect = document.querySelector('#akr-product-form [data-variants]');
+
+  function akrSelectPack(btn) {
+    packBtns.forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var vid = btn.getAttribute('data-variant-id');
+    if (variantSelect) {
+      variantSelect.value = vid;
+      ['change','input'].forEach(function(e) {
+        variantSelect.dispatchEvent(new Event(e, { bubbles: true }));
+      });
+    }
+    // Flex theme web component
+    var vs = document.querySelector('[data-variant-selection]');
+    if (vs) {
+      vs.setAttribute('variant', vid);
+      vs.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    // Update main image to variant's image if available
+    var variantImgMap = {{ product.variants | map: 'featured_image' | json }};
+    // handled by Shopify JS if present
+  }
+
+  packBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() { akrSelectPack(this); });
+  });
+
+  // View Nutrition Label — scroll to ingredients section
+  var viewNf = document.querySelector('.js-akr-view-nf');
+  if (viewNf) {
+    viewNf.addEventListener('click', function(e) {
+      var ing = document.querySelector('.akr-ing-section');
+      if (ing) { e.preventDefault(); ing.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "åKr Hero",
+  "tag": "div",
+  "class": "akr-hero-wrapper",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "NORWEGIAN BONE BROTH · STICK PACKS" },
+    { "type": "textarea", "id": "short_desc", "label": "Short description", "default": "13g protein per stick. 99%+ Norwegian sourced. No prep, no mess — tear open, stir into hot water, drink." },
+    { "type": "text", "id": "badge_protein_title", "label": "Badge Protein title", "default": "13G PROTEIN" },
+    { "type": "text", "id": "badge_protein_sub",   "label": "Badge Protein subtitle", "default": "Per single-serve stick" },
+    { "type": "text", "id": "badge_nongmo_title",  "label": "Badge Non-GMO title", "default": "NON-GMO" },
+    { "type": "text", "id": "badge_nongmo_sub",    "label": "Badge Non-GMO subtitle", "default": "No hormones · No antibiotics" },
+    { "type": "text", "id": "pack_heading_before", "label": "Pack heading before italic", "default": "Your weekly dose of" },
+    { "type": "text", "id": "pack_heading_italic", "label": "Pack heading italic word", "default": "strong" },
+    { "type": "textarea", "id": "pack_desc", "label": "Pack description", "default": "Save more, ship less, and keep your daily ritual on repeat — with perks that make it feel extra good." },
+    { "type": "text", "id": "most_popular_text", "label": "Most popular label", "default": "most popular" },
+    { "type": "range", "id": "best_value_index", "label": "Best Value variant position (1=first)", "min": 1, "max": 10, "step": 1, "default": 2 },
+    { "type": "text", "id": "trust_note", "label": "Trust note", "default": "30-day money-back guarantee · Free shipping · Cancel anytime" }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "feature_point",
+      "name": "Feature Point",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Replaces protein powder + collagen supplement" }
+      ]
+    },
+    {
+      "type": "flavor_link",
+      "name": "Flavor Option",
+      "settings": [
+        { "type": "text",         "id": "name",        "label": "Flavor name",            "default": "Savory Chicken" },
+        { "type": "text",         "id": "image_asset", "label": "Image asset filename (e.g. akr-flavor-chicken.png)" },
+        { "type": "image_picker", "id": "image",       "label": "Flavor image (upload)" },
+        { "type": "url",          "id": "url",         "label": "Product URL" },
+        { "type": "checkbox",     "id": "is_current",  "label": "This is the current product", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "åKr Hero",
+      "blocks": [
+        { "type": "feature_point", "settings": { "text": "Replaces protein powder + collagen supplement" } },
+        { "type": "feature_point", "settings": { "text": "~100% protein bioavailability (enzymatic hydrolysis)" } },
+        { "type": "feature_point", "settings": { "text": "USDA & FDA Approved · Produced in Norway" } },
+        { "type": "feature_point", "settings": { "text": "30-day money-back guarantee" } },
+        { "type": "flavor_link", "settings": { "name": "Savory Chicken",  "image_asset": "akr-flavor-chicken.png",     "is_current": true } },
+        { "type": "flavor_link", "settings": { "name": "Ginger Ramen",    "image_asset": "akr-flavor-ramen.png" } },
+        { "type": "flavor_link", "settings": { "name": "Chanterelle",     "image_asset": "akr-flavor-chanterelle.png" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

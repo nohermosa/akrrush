@@ -1,0 +1,88 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product__main",
+      "blocks": {
+        "star_rating": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "form": {
+          "type": "form",
+          "settings": {
+            "show_payment_button": false
+          }
+        }
+      },
+      "block_order": [
+        "star_rating",
+        "title",
+        "description",
+        "form"
+      ],
+      "settings": {
+        "width": "standard",
+        "padding_top": 60,
+        "padding_bottom": 20,
+        "animation": "none",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "akr_ingredients": {
+      "type": "akr-ingredients",
+      "blocks": {
+        "card_collagen": {
+          "type": "ingredient_card",
+          "settings": {
+            "title": "Hydrolyzed Collagen Peptides",
+            "description": "Broken into tiny peptides for near-100% bioavailability. Free-range Nordic poultry, cleanly sourced for fast absorption."
+          }
+        },
+        "card_chicken": {
+          "type": "ingredient_card",
+          "settings": {
+            "title": "Norwegian Chicken & Turkey",
+            "description": "Free-range Nordic poultry, cleanly sourced for fast absorption."
+          }
+        }
+      },
+      "block_order": [
+        "card_collagen",
+        "card_chicken"
+      ],
+      "settings": {
+        "eyebrow": "How we stack up",
+        "heading_before": "Meet the",
+        "heading_italic": "ingredients",
+        "clean_note": "Absolutely clean",
+        "photo_badge": "Lab tested · 100% traceable",
+        "gram_note": "Every gram tracked →",
+        "ingredients_text": "Ingredients: (Chicken, Turkey), Chicken Broth Seasoning, Natural Herbs & Spices."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "akr_ingredients"
+  ]
+}

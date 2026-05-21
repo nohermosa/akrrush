@@ -140,24 +140,28 @@
 
 /* Nutrition Facts card */
 .akr-nf {
-  background: #fff;
-  border: 2.5px solid var(--akr-dark);
+  background: #fff !important;
+  border: 2.5px solid #2c1a10 !important;
   border-radius: 12px;
   padding: 24px 26px;
-  font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif !important;
+  color: #2c1a10 !important;
   margin-bottom: 28px;
   box-shadow: 9px 15px 15px rgba(190,190,190,.25);
 }
 .akr-nf-title {
-  font-size: 28px;
-  font-weight: 900;
-  line-height: 1;
+  font-size: 28px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  color: #2c1a10 !important;
+  font-family: Arial, sans-serif !important;
   margin-bottom: 2px;
 }
 .akr-nf-serving {
-  font-size: 10px;
+  font-size: 10px !important;
+  color: #2c1a10 !important;
   padding-bottom: 6px;
-  border-bottom: 8px solid var(--akr-dark);
+  border-bottom: 8px solid #2c1a10 !important;
   margin-bottom: 4px;
 }
 .akr-nf-cal-row {
@@ -165,27 +169,28 @@
   align-items: baseline;
   justify-content: space-between;
   padding: 3px 0;
-  border-bottom: 4px solid var(--akr-dark);
+  border-bottom: 4px solid #2c1a10 !important;
   margin-bottom: 3px;
 }
-.akr-nf-cal-label { font-size: 14px; font-weight: 700; }
-.akr-nf-cal-num   { font-size: 40px; font-weight: 900; line-height: 1; }
+.akr-nf-cal-label { font-size: 14px !important; font-weight: 700 !important; color: #2c1a10 !important; }
+.akr-nf-cal-num   { font-size: 40px !important; font-weight: 900 !important; line-height: 1 !important; color: #2c1a10 !important; }
 .akr-nf-row {
   display: flex;
   justify-content: space-between;
-  font-size: 10.5px;
+  font-size: 10.5px !important;
+  color: #2c1a10 !important;
   padding: 2.5px 0;
-  border-bottom: .5px solid #ccc;
+  border-bottom: .5px solid #ccc !important;
 }
-.akr-nf-row:last-of-type { border-bottom: none; }
-.akr-nf-row b  { font-weight: 700; }
+.akr-nf-row:last-of-type { border-bottom: none !important; }
+.akr-nf-row b  { font-weight: 700 !important; color: #2c1a10 !important; }
 .akr-nf-indent { padding-left: 14px; }
-.akr-nf-thick  { border-top: 4px solid var(--akr-dark); margin: 3px 0; }
+.akr-nf-thick  { border-top: 4px solid #2c1a10 !important; margin: 3px 0; }
 .akr-nf-footnote {
-  font-size: 9px;
-  color: #555;
+  font-size: 9px !important;
+  color: #555 !important;
   margin-top: 6px;
-  border-top: .5px solid #ccc;
+  border-top: .5px solid #ccc !important;
   padding-top: 4px;
 }
 

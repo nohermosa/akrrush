@@ -13,6 +13,16 @@
   assign best_idx = section.settings.best_value_index | minus: 1
 -%}
 
+<script type="application/json" data-section-id="{{ section.id }}" data-section-data>
+{
+  "product": {{ product | json }},
+  "section_id": {{ section.id | json }},
+  "variant_id": {{ selected_variant.id }},
+  "enable_video_looping": false,
+  "image_zoom": "disabled"
+}
+</script>
+
 <section class="akr-hero-section" id="akr-hero">
   <div class="akr-hero-inner">
 
@@ -205,7 +215,7 @@
         </div>
 
         <!-- Appstle subscription widget (all @app blocks after the first) -->
-        <div class="akr-hero-appstle-area">
+        <div class="akr-hero-appstle-area" data-product-id="{{ product.id }}">
           {%- assign akr_app_count2 = 0 -%}
           {%- for block in section.blocks -%}
             {%- if block.type == '@app' -%}
@@ -228,6 +238,19 @@
 
   </div><!-- /hero-inner -->
 </section>
+
+<script src="{{ 'z__jsProduct.js' | asset_url }}" defer></script>
+<script>
+// Initialize Flex theme product module for Appstle + variant JS
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.$ && window.PXUTheme && window.PXUTheme.jsProduct) {
+    var $section = $('#shopify-section-{{ section.id }}');
+    if ($section.length) {
+      window.PXUTheme.jsProduct.init($section);
+    }
+  }
+});
+</script>
 
 <script>
 (function() {
@@ -286,7 +309,7 @@
 {
   "name": "åKr Hero",
   "tag": "div",
-  "class": "akr-hero-wrapper",
+  "class": "akr-hero-wrapper product-template",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "NORWEGIAN BONE BROTH · STICK PACKS" },
     { "type": "textarea", "id": "short_desc", "label": "Short description", "default": "13g protein per stick. 99%+ Norwegian sourced. No prep, no mess — tear open, stir into hot water, drink." },

@@ -676,7 +676,7 @@
    ============================================================= */
 .akr-hero-section {
   background: var(--akr-cream);
-  padding: 40px;
+  padding: 80px 40px 40px;
 }
 .akr-hero-inner {
   max-width: 1440px;

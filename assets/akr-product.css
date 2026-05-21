@@ -1090,6 +1090,27 @@
   border-color: var(--akr-border) !important;
 }
 
+/* Fallback ATC button */
+.akr-hero-atc-btn {
+  display: block !important;
+  width: 100% !important;
+  background: var(--akr-orange) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 100px !important;
+  padding: 18px 32px !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  font-family: Arial, sans-serif !important;
+  cursor: pointer !important;
+  margin-top: 14px !important;
+  letter-spacing: 0.3px;
+  transition: background 0.18s;
+}
+.akr-hero-atc-btn:hover {
+  background: var(--akr-orange2) !important;
+}
+
 /* Trust note */
 .akr-hero-trust {
   font-size: 12px !important;

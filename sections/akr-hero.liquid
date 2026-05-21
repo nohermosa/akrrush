@@ -227,6 +227,11 @@
           {%- endfor -%}
         </div>
 
+        <!-- Fallback ATC — hidden by JS if Appstle renders its own button -->
+        <button type="submit" name="add" id="akrAtcFallback" class="akr-hero-atc-btn">
+          Add to Cart
+        </button>
+
       {%- endform -%}
 
       <!-- Trust note -->
@@ -239,18 +244,7 @@
   </div><!-- /hero-inner -->
 </section>
 
-<script src="{{ 'z__jsProduct.js' | asset_url }}" defer></script>
-<script>
-// Initialize Flex theme product module for Appstle + variant JS
-document.addEventListener('DOMContentLoaded', function() {
-  if (window.$ && window.PXUTheme && window.PXUTheme.jsProduct) {
-    var $section = $('#shopify-section-{{ section.id }}');
-    if ($section.length) {
-      window.PXUTheme.jsProduct.init($section);
-    }
-  }
-});
-</script>
+<script src="{{ 'z__jsProduct.js' | asset_url }}" data-theme-editor-load-script></script>
 
 <script>
 (function() {
@@ -302,6 +296,17 @@ document.addEventListener('DOMContentLoaded', function() {
       if (ing) { e.preventDefault(); ing.scrollIntoView({ behavior: 'smooth' }); }
     });
   }
+
+  // Hide fallback ATC if Appstle rendered its own UI
+  var appstleArea = document.querySelector('.akr-hero-appstle-area');
+  var atcFallback = document.getElementById('akrAtcFallback');
+  if (appstleArea && atcFallback) {
+    setTimeout(function() {
+      if (appstleArea.children.length > 0 || appstleArea.innerHTML.trim().length > 30) {
+        atcFallback.style.display = 'none';
+      }
+    }, 800);
+  }
 })();
 </script>
 
@@ -309,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function() {
 {
   "name": "åKr Hero",
   "tag": "div",
-  "class": "akr-hero-wrapper product-template",
+  "class": "akr-hero-wrapper product-template jsProduct",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "NORWEGIAN BONE BROTH · STICK PACKS" },
     { "type": "textarea", "id": "short_desc", "label": "Short description", "default": "13g protein per stick. 99%+ Norwegian sourced. No prep, no mess — tear open, stir into hot water, drink." },

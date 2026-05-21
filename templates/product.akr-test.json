@@ -54,6 +54,7 @@
         "card_collagen": {
           "type": "ingredient_card",
           "settings": {
+            "icon_asset": "akr-icon-collagen.png",
             "title": "Hydrolyzed Collagen Peptides",
             "description": "Broken into tiny peptides for near-100% bioavailability. Free-range Nordic poultry, cleanly sourced for fast absorption."
           }
@@ -61,6 +62,7 @@
         "card_chicken": {
           "type": "ingredient_card",
           "settings": {
+            "icon_asset": "akr-icon-nordic.png",
             "title": "Norwegian Chicken & Turkey",
             "description": "Free-range Nordic poultry, cleanly sourced for fast absorption."
           }
@@ -80,9 +82,40 @@
         "ingredients_text": "Ingredients: (Chicken, Turkey), Chicken Broth Seasoning, Natural Herbs & Spices."
       }
     }
+    ,
+    "akr_benefits": {
+      "type": "akr-benefits",
+      "blocks": {
+        "circle_protein":  { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-protein.png",  "circle_color": "#feb595", "name": "Protein",  "desc": "13g per stick" } },
+        "circle_collagen": { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-collagen2.png","circle_color": "#fbdabe", "name": "Collagen", "desc": "Skin & joints" } },
+        "circle_joints":   { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-joints.png",   "circle_color": "#fdc85c", "name": "Joints",   "desc": "Reduced ache" } },
+        "circle_gut":      { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-gut.png",      "circle_color": "#cbd9c1", "name": "Gut",      "desc": "Better digestion" } },
+        "circle_energy":   { "type": "benefit_circle", "settings": { "icon_asset": "Hot Cup icon.svg",      "circle_color": "#fce3b4", "name": "Energy",   "desc": "No crash" } },
+        "circle_nordic":   { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-nordic.png",   "circle_color": "#a1cccf", "name": "Nordic",   "desc": "100% Norwegian" } },
+        "point_1": { "type": "benefit_point", "settings": { "text": "13g hydrolyzed protein your body absorbs in minutes" } },
+        "point_2": { "type": "benefit_point", "settings": { "text": "Zero artificial fillers, sweeteners, or preservatives" } },
+        "point_3": { "type": "benefit_point", "settings": { "text": "Made from Norwegian chicken & turkey bones — sourced from cage-free Nordic farms" } }
+      },
+      "block_order": [
+        "circle_protein", "circle_collagen", "circle_joints",
+        "circle_gut", "circle_energy", "circle_nordic",
+        "point_1", "point_2", "point_3"
+      ],
+      "settings": {
+        "heading_before": "Real benefits",
+        "heading_italic": "inside",
+        "heading_after": "every stick",
+        "subheading": "Six science-backed reasons to make åKrrush your daily ritual.",
+        "text_heading_line1": "Real broth,",
+        "text_heading_orange": "real",
+        "text_heading_line2": "fuel.",
+        "text_desc": "Slow-simmered Norwegian poultry, pure hydrolyzed protein, and the comforting taste of real broth — bottled into a 30-second morning ritual."
+      }
+    }
   },
   "order": [
     "main",
-    "akr_ingredients"
+    "akr_ingredients",
+    "akr_benefits"
   ]
 }

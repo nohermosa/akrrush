@@ -1,0 +1,212 @@
+{{ 'akr-product.css' | asset_url | stylesheet_tag }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+
+<section class="akr-benefits-section">
+  <div class="akr-benefits-inner">
+
+    <!-- Heading -->
+    <h2 class="akr-benefits-heading">
+      {{ section.settings.heading_before }}
+      <em>{{ section.settings.heading_italic }}
+        <svg class="akr-benefits-inside-underline" viewBox="0 0 172 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 9 Q30 2 58 8 Q86 14 114 8 Q142 2 169 8" stroke="#ea7552" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </em>
+      {{ section.settings.heading_after }}
+    </h2>
+    <p class="akr-benefits-sub">{{ section.settings.subheading }}</p>
+
+    <!-- Benefit circles row -->
+    <div class="akr-benefits-icons-row">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'benefit_circle' -%}
+          <div class="akr-benefit-item" {{ block.shopify_attributes }}>
+            <div class="akr-benefit-circle" style="background:{{ block.settings.circle_color }}">
+              {%- if block.settings.icon_asset != blank -%}
+                <img src="{{ block.settings.icon_asset | asset_url }}"
+                     alt="{{ block.settings.name | escape }}"
+                     loading="lazy" width="104" height="104">
+              {%- elsif block.settings.icon != blank -%}
+                <img src="{{ block.settings.icon | img_url: '200x' }}"
+                     alt="{{ block.settings.name | escape }}"
+                     loading="lazy" width="104" height="104">
+              {%- endif -%}
+            </div>
+            <div class="akr-benefit-name">{{ block.settings.name }}</div>
+            <div class="akr-benefit-desc">{{ block.settings.desc }}</div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <!-- Bottom: photo + text -->
+    <div class="akr-benefits-bottom">
+      <div class="akr-benefits-photo">
+        {%- if section.settings.photo != blank -%}
+          <img src="{{ section.settings.photo | img_url: '960x' }}"
+               srcset="{{ section.settings.photo | img_url: '480x' }} 480w,
+                       {{ section.settings.photo | img_url: '960x' }} 960w"
+               sizes="(max-width:768px) 100vw, 480px"
+               alt="{{ section.settings.photo.alt | escape }}"
+               loading="lazy" width="480">
+        {%- else -%}
+          <img src="{{ 'akr-benefits-photo.jpg' | asset_url }}"
+               alt="Real broth, real fuel"
+               loading="lazy" width="480">
+        {%- endif -%}
+      </div>
+
+      <div class="akr-benefits-text">
+        <h3 class="akr-benefits-text-heading">
+          {{ section.settings.text_heading_line1 }}<br>
+          <em><span style="color:#ea7552">{{ section.settings.text_heading_orange }}</span> {{ section.settings.text_heading_line2 }}</em>
+        </h3>
+        <p class="akr-benefits-text-desc">{{ section.settings.text_desc }}</p>
+        <ul class="akr-benefits-points">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'benefit_point' -%}
+              <li {{ block.shopify_attributes }}>
+                <span class="akr-benefits-check">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M2.25 6L5.25 9L9.75 3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                {{ block.settings.text }}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "åKr Benefits",
+  "tag": "div",
+  "class": "akr-benefits-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_before",
+      "label": "Heading — before italic",
+      "default": "Real benefits"
+    },
+    {
+      "type": "text",
+      "id": "heading_italic",
+      "label": "Heading — italic word",
+      "default": "inside"
+    },
+    {
+      "type": "text",
+      "id": "heading_after",
+      "label": "Heading — after italic",
+      "default": "every stick"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Six science-backed reasons to make åKrrush your daily ritual."
+    },
+    {
+      "type": "image_picker",
+      "id": "photo",
+      "label": "Bottom photo"
+    },
+    {
+      "type": "text",
+      "id": "text_heading_line1",
+      "label": "Text heading line 1",
+      "default": "Real broth,"
+    },
+    {
+      "type": "text",
+      "id": "text_heading_orange",
+      "label": "Text heading — orange word",
+      "default": "real"
+    },
+    {
+      "type": "text",
+      "id": "text_heading_line2",
+      "label": "Text heading line 2",
+      "default": "fuel."
+    },
+    {
+      "type": "textarea",
+      "id": "text_desc",
+      "label": "Text description",
+      "default": "Slow-simmered Norwegian poultry, pure hydrolyzed protein, and the comforting taste of real broth — bottled into a 30-second morning ritual."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit_circle",
+      "name": "Benefit Circle",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_asset",
+          "label": "Icon asset filename (e.g. akr-icon-protein.png)"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image (upload)"
+        },
+        {
+          "type": "color",
+          "id": "circle_color",
+          "label": "Circle background color",
+          "default": "#feb595"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Protein"
+        },
+        {
+          "type": "text",
+          "id": "desc",
+          "label": "Description",
+          "default": "13g per stick"
+        }
+      ]
+    },
+    {
+      "type": "benefit_point",
+      "name": "Bullet Point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Point text",
+          "default": "13g hydrolyzed protein your body absorbs in minutes"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "åKr Benefits",
+      "blocks": [
+        { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-protein.png", "circle_color": "#feb595", "name": "Protein", "desc": "13g per stick" } },
+        { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-collagen2.png", "circle_color": "#fbdabe", "name": "Collagen", "desc": "Skin & joints" } },
+        { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-joints.png", "circle_color": "#fdc85c", "name": "Joints", "desc": "Reduced ache" } },
+        { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-gut.png", "circle_color": "#cbd9c1", "name": "Gut", "desc": "Better digestion" } },
+        { "type": "benefit_circle", "settings": { "icon_asset": "Hot Cup icon.svg", "circle_color": "#fce3b4", "name": "Energy", "desc": "No crash" } },
+        { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-nordic.png", "circle_color": "#a1cccf", "name": "Nordic", "desc": "100% Norwegian" } },
+        { "type": "benefit_point", "settings": { "text": "13g hydrolyzed protein your body absorbs in minutes" } },
+        { "type": "benefit_point", "settings": { "text": "Zero artificial fillers, sweeteners, or preservatives" } },
+        { "type": "benefit_point", "settings": { "text": "Made from Norwegian chicken & turkey bones — sourced from cage-free Nordic farms" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

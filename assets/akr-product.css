@@ -1,0 +1,685 @@
+/* =============================================================
+   åKrrush — Custom Product Page Styles
+   Sections: akr-ingredients, akr-benefits, akr-faq
+   ============================================================= */
+
+/* Design tokens */
+:root {
+  --akr-cream:  #fffbf2;
+  --akr-cream2: #fff9f0;
+  --akr-dark:   #2c1a10;
+  --akr-mid:    #6f5138;
+  --akr-orange: #ea7552;
+  --akr-orange2:#e55a2d;
+  --akr-teal:   #47b1b4;
+  --akr-amber:  #ffc03c;
+  --akr-border: #e8d5c4;
+}
+
+/* =============================================================
+   SECTION: MEET THE INGREDIENTS
+   ============================================================= */
+.akr-ing-section {
+  background: var(--akr-cream);
+  padding: 88px 40px;
+}
+.akr-ing-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* Heading block */
+.akr-ing-heading-outer {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.akr-ing-eyebrow {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akr-orange);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+}
+.akr-ing-heading-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.akr-ing-heading {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 68px;
+  color: var(--akr-dark);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+}
+.akr-ing-heading em {
+  font-style: italic;
+}
+.akr-ing-branch {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.akr-ing-clean-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 14px;
+}
+.akr-ing-clean-note {
+  font-family: 'Caveat', cursive !important;
+  font-size: 28px;
+  color: var(--akr-orange2);
+  display: inline-block;
+  transform: rotate(-5deg);
+}
+
+/* Layout: photo left, NF card right */
+.akr-ing-layout {
+  display: flex;
+  gap: 150px;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+}
+.akr-ing-photo-col {
+  flex: none;
+  width: 480px;
+  position: relative;
+}
+.akr-ing-nf-col {
+  flex: none;
+  width: 480px;
+  position: relative;
+}
+.akr-ing-photo-wrap {
+  position: relative;
+  border-radius: 40px;
+  overflow: hidden;
+}
+.akr-ing-photo-wrap img {
+  width: 100%;
+  display: block;
+}
+.akr-ing-photo-badge {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  background: rgba(255,255,255,.92);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--akr-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(8px);
+}
+.akr-ing-gram-note {
+  font-family: 'Caveat', cursive !important;
+  font-size: 24px;
+  color: var(--akr-orange2);
+  position: absolute;
+  left: -110px;
+  top: 60%;
+  transform: rotate(-15.1deg);
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* Nutrition Facts card */
+.akr-nf {
+  background: #fff;
+  border: 2.5px solid var(--akr-dark);
+  border-radius: 12px;
+  padding: 24px 26px;
+  font-family: Arial, sans-serif;
+  margin-bottom: 28px;
+  box-shadow: 9px 15px 15px rgba(190,190,190,.25);
+}
+.akr-nf-title {
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.akr-nf-serving {
+  font-size: 10px;
+  padding-bottom: 6px;
+  border-bottom: 8px solid var(--akr-dark);
+  margin-bottom: 4px;
+}
+.akr-nf-cal-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 3px 0;
+  border-bottom: 4px solid var(--akr-dark);
+  margin-bottom: 3px;
+}
+.akr-nf-cal-label { font-size: 14px; font-weight: 700; }
+.akr-nf-cal-num   { font-size: 40px; font-weight: 900; line-height: 1; }
+.akr-nf-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10.5px;
+  padding: 2.5px 0;
+  border-bottom: .5px solid #ccc;
+}
+.akr-nf-row:last-of-type { border-bottom: none; }
+.akr-nf-row b  { font-weight: 700; }
+.akr-nf-indent { padding-left: 14px; }
+.akr-nf-thick  { border-top: 4px solid var(--akr-dark); margin: 3px 0; }
+.akr-nf-footnote {
+  font-size: 9px;
+  color: #555;
+  margin-top: 6px;
+  border-top: .5px solid #ccc;
+  padding-top: 4px;
+}
+
+/* Ingredient cards row */
+.akr-ing-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 44px;
+  flex-wrap: wrap;
+}
+.akr-ing-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 9px 15px 15px rgba(190,190,190,.25);
+  width: 450px;
+  flex-shrink: 0;
+}
+.akr-ing-card-icon-wrap {
+  width: 86px;
+  height: 86px;
+  border-radius: 100px;
+  background: var(--akr-cream2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.akr-ing-card-icon {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+}
+.akr-ing-card-body h4 {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 18px;
+  color: var(--akr-dark);
+  margin-bottom: 6px;
+  margin-top: 0;
+}
+.akr-ing-card-body p {
+  font-size: 14px;
+  color: var(--akr-mid);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =============================================================
+   SECTION: REAL BENEFITS
+   ============================================================= */
+.akr-benefits-section {
+  background: var(--akr-cream);
+  padding: 88px 40px;
+}
+.akr-benefits-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.akr-benefits-heading {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 68px;
+  color: var(--akr-dark);
+  text-align: center;
+  margin-bottom: 14px;
+  line-height: 1.05;
+}
+.akr-benefits-heading em {
+  font-style: italic;
+  position: relative;
+  display: inline-block;
+}
+.akr-benefits-inside-underline {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.akr-benefits-sub {
+  text-align: center;
+  font-size: 18px;
+  color: var(--akr-mid);
+  margin-bottom: 64px;
+}
+.akr-benefits-icons-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 80px;
+}
+.akr-benefit-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 165px;
+}
+.akr-benefit-circle {
+  width: 165px;
+  height: 165px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.akr-benefit-circle img {
+  width: 104px;
+  height: 104px;
+  object-fit: contain;
+}
+.akr-benefit-name {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--akr-dark);
+  text-align: center;
+  line-height: 1.2;
+}
+.akr-benefit-desc {
+  font-size: 14px;
+  color: var(--akr-mid);
+  text-align: center;
+  margin-top: -8px;
+}
+.akr-benefits-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+.akr-benefits-photo {
+  border-radius: 40px;
+  overflow: hidden;
+  background: #e1cbb2;
+}
+.akr-benefits-photo img {
+  width: 100%;
+  display: block;
+}
+.akr-benefits-text-heading {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 60px;
+  color: var(--akr-dark);
+  line-height: 1.1;
+  margin-bottom: 18px;
+  margin-top: 0;
+}
+.akr-benefits-text-heading em { font-style: italic; }
+.akr-benefits-text-desc {
+  font-size: 18px;
+  color: var(--akr-mid);
+  line-height: 1.65;
+  margin-bottom: 28px;
+}
+.akr-benefits-points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0;
+  margin: 0;
+}
+.akr-benefits-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 16px;
+  color: var(--akr-mid);
+  line-height: 1.55;
+}
+.akr-benefits-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  background: var(--akr-orange);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* =============================================================
+   SECTION: FAQ
+   ============================================================= */
+.akr-faq-section {
+  background: var(--akr-cream);
+  padding: 88px 40px;
+}
+.akr-faq-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 603px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.akr-faq-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.akr-faq-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: Arial, sans-serif;
+  border: none;
+}
+.akr-faq-tab-nutrition   { background: var(--akr-orange); color: #fff; }
+.akr-faq-tab-howto       { background: var(--akr-teal);   color: #fff; }
+.akr-faq-tab-sub         { background: var(--akr-amber);  color: var(--akr-dark); }
+.akr-faq-heading {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 60px;
+  color: var(--akr-dark);
+  line-height: 1.15;
+  margin-bottom: 14px;
+  margin-top: 0;
+}
+.akr-faq-heading em { font-style: italic; }
+.akr-faq-actually {
+  font-style: italic;
+  color: var(--akr-orange);
+  position: relative;
+  display: inline-block;
+}
+.akr-faq-actually-underline {
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.akr-faq-sub {
+  font-size: 18px;
+  color: var(--akr-mid);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+.akr-faq-social-proof {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.akr-faq-avatars { display: flex; }
+.akr-faq-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--akr-cream);
+  flex-shrink: 0;
+  margin-left: -10px;
+}
+.akr-faq-avatars .akr-faq-avatar:first-child { margin-left: 0; }
+.akr-faq-social-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--akr-dark);
+  font-family: Arial, sans-serif;
+}
+.akr-faq-list {
+  border-top: .5px solid #e4c6bd;
+}
+.akr-faq-item {
+  border-bottom: .5px solid #e4c6bd;
+}
+.akr-faq-q {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px 0;
+  cursor: pointer;
+  list-style: none;
+}
+.akr-faq-num {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 15px;
+  color: var(--akr-orange);
+  font-style: italic;
+  flex-shrink: 0;
+  margin-top: 2px;
+  width: 20px;
+}
+.akr-faq-q-text {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 16px;
+  color: var(--akr-dark);
+  flex: 1;
+  line-height: 1.45;
+}
+.akr-faq-toggle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akr-orange);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.akr-faq-a {
+  font-size: 14px;
+  color: var(--akr-mid);
+  line-height: 1.7;
+  padding: 0 0 18px 32px;
+  display: none;
+}
+.akr-faq-a.is-open { display: block; }
+.akr-faq-still-curious {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--akr-border);
+}
+.akr-btn-chat {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  background: var(--akr-orange);
+  border-radius: 9999px;
+  padding: 16px 24px;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+}
+.akr-btn-chat:hover { opacity: .9; color: #fff; }
+
+/* Right col — rotated photo card */
+.akr-faq-right {
+  position: relative;
+  padding-right: 55px;
+  padding-bottom: 55px;
+}
+.akr-faq-card-container {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.akr-faq-photo-card {
+  background: #fff;
+  border-radius: 40px;
+  padding: 14px 14px 16px;
+  box-shadow: 0px 20px 24px rgba(26,20,17,.18);
+  transform: rotate(-3deg);
+  transform-origin: center center;
+}
+.akr-faq-photo-inner {
+  background: #cbb38a;
+  border-radius: 24px;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 3/4;
+}
+.akr-faq-photo-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+.akr-faq-quote-overlay {
+  position: absolute;
+  bottom: -40px;
+  right: -37px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: 0px 20px 20px rgba(26,20,17,.12);
+  transform: rotate(5deg);
+  width: 250px;
+  z-index: 5;
+}
+.akr-faq-quote-stars {
+  font-size: 13px;
+  color: var(--akr-orange);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.akr-faq-quote-text {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 20px;
+  color: var(--akr-dark);
+  line-height: 1.3;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+.akr-faq-quote-attribution {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.akr-faq-quote-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #ea7552, #ffc03c);
+}
+.akr-faq-quote-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--akr-dark);
+}
+.akr-faq-quote-loc {
+  font-size: 12px;
+  color: var(--akr-mid);
+}
+.akr-faq-pill {
+  position: absolute;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: Arial, sans-serif;
+  white-space: nowrap;
+  z-index: 10;
+}
+.akr-faq-pill-orange {
+  background: var(--akr-orange);
+  color: #fff;
+  top: -18px;
+  right: -28px;
+  transform: rotate(14.76deg);
+}
+.akr-faq-pill-teal {
+  background: var(--akr-teal);
+  color: #fff;
+  bottom: 150px;
+  left: -24px;
+  transform: rotate(-15deg);
+}
+
+/* =============================================================
+   RESPONSIVE
+   ============================================================= */
+@media (max-width: 1100px) {
+  .akr-ing-layout {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+  }
+  .akr-ing-photo-col,
+  .akr-ing-nf-col {
+    width: 100%;
+    max-width: 560px;
+  }
+  .akr-ing-gram-note { display: none; }
+  .akr-benefits-bottom {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .akr-faq-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .akr-faq-quote-overlay,
+  .akr-faq-pill { display: none; }
+  .akr-faq-right { padding-right: 0; padding-bottom: 0; }
+}
+@media (max-width: 768px) {
+  .akr-ing-section,
+  .akr-benefits-section,
+  .akr-faq-section {
+    padding: 56px 16px;
+  }
+  .akr-ing-heading { font-size: 40px; }
+  .akr-benefits-heading { font-size: 40px; }
+  .akr-benefits-text-heading { font-size: 36px; }
+  .akr-faq-heading { font-size: 36px; }
+  .akr-ing-cards { flex-direction: column; align-items: center; }
+  .akr-ing-card { width: 100%; }
+  .akr-benefits-icons-row { gap: 8px; }
+  .akr-benefit-item { width: 100px; }
+  .akr-benefit-circle { width: 100px; height: 100px; }
+  .akr-benefit-circle img { width: 64px; height: 64px; }
+  .akr-faq-tabs { overflow-x: auto; padding-bottom: 4px; flex-wrap: nowrap; }
+}

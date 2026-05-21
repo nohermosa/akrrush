@@ -38,7 +38,9 @@
                  alt="{{ section.settings.photo.alt | escape }}"
                  loading="lazy" width="480">
           {%- else -%}
-            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            <img src="{{ 'akr-ing-photo.jpg' | asset_url }}"
+                 alt="åKrrush ingredients"
+                 loading="lazy" width="480">
           {%- endif -%}
           <div class="akr-ing-photo-badge">🌿 {{ section.settings.photo_badge }}</div>
         </div>
@@ -86,6 +88,11 @@
               {%- if block.settings.icon != blank -%}
                 <img class="akr-ing-card-icon"
                      src="{{ block.settings.icon | img_url: '136x' }}"
+                     alt="{{ block.settings.title | escape }}"
+                     loading="lazy" width="68" height="68">
+              {%- elsif block.settings.icon_asset != blank -%}
+                <img class="akr-ing-card-icon"
+                     src="{{ block.settings.icon_asset | asset_url }}"
                      alt="{{ block.settings.title | escape }}"
                      loading="lazy" width="68" height="68">
               {%- endif -%}
@@ -174,7 +181,12 @@
         {
           "type": "image_picker",
           "id": "icon",
-          "label": "Icon image"
+          "label": "Icon image (upload)"
+        },
+        {
+          "type": "text",
+          "id": "icon_asset",
+          "label": "Icon asset filename (e.g. akr-icon-collagen.png)"
         },
         {
           "type": "text",

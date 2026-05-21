@@ -1,0 +1,216 @@
+{{ 'akr-product.css' | asset_url | stylesheet_tag }}
+{{ 'https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Caveat:wght@400;700&display=swap' | stylesheet_tag }}
+
+<section class="akr-ing-section">
+  <div class="akr-ing-inner">
+
+    <!-- Heading -->
+    <div class="akr-ing-heading-outer">
+      <p class="akr-ing-eyebrow">{{ section.settings.eyebrow }}</p>
+      <div class="akr-ing-heading-wrap">
+        <h2 class="akr-ing-heading">
+          {{ section.settings.heading_before }}
+          <span class="akr-ing-branch">
+            <img src="{{ 'Hot Cup icon.svg' | asset_url }}" width="49" height="62" alt="" aria-hidden="true" style="vertical-align:middle">
+          </span>
+          <em>{{ section.settings.heading_italic }}</em>
+        </h2>
+      </div>
+      <div class="akr-ing-clean-row">
+        <span class="akr-ing-clean-note">{{ section.settings.clean_note }}</span>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" style="transform:rotate(-5deg);flex-shrink:0">
+          <path d="M10 1L12.3 6.9L18.5 7L13.8 11.4L15.5 17.6L10 14.2L4.5 17.6L6.2 11.4L1.5 7L7.7 6.9L10 1Z" fill="#ea7552" opacity="0.75"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Photo + NF layout -->
+    <div class="akr-ing-layout">
+
+      <!-- Left: Photo -->
+      <div class="akr-ing-photo-col">
+        <div class="akr-ing-photo-wrap">
+          {%- if section.settings.photo != blank -%}
+            <img src="{{ section.settings.photo | img_url: '960x' }}"
+                 srcset="{{ section.settings.photo | img_url: '480x' }} 480w,
+                         {{ section.settings.photo | img_url: '960x' }} 960w"
+                 sizes="(max-width:768px) 100vw, 480px"
+                 alt="{{ section.settings.photo.alt | escape }}"
+                 loading="lazy" width="480">
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+          <div class="akr-ing-photo-badge">🌿 {{ section.settings.photo_badge }}</div>
+        </div>
+      </div>
+
+      <!-- Right: Gram note + Nutrition Facts -->
+      <div class="akr-ing-nf-col">
+        <div class="akr-ing-gram-note">{{ section.settings.gram_note }}</div>
+
+        <div class="akr-nf">
+          <div class="akr-nf-title">Nutrition Facts</div>
+          <div class="akr-nf-serving">Serv. size: 1 packet (18g) &middot; Servings Per Container: Varies by pack size</div>
+          <div class="akr-nf-cal-row">
+            <span class="akr-nf-cal-label">Calories</span>
+            <span class="akr-nf-cal-num">60</span>
+          </div>
+          <div style="font-size:10px;text-align:right;padding-bottom:2px">% Daily Value*</div>
+          <div class="akr-nf-row"><span><b>Total Fat</b> 0g</span><span><b>0%</b></span></div>
+          <div class="akr-nf-row akr-nf-indent"><span>Saturated Fat 0g</span><span>0%</span></div>
+          <div class="akr-nf-row akr-nf-indent"><span><i>Trans</i> Fat 0g</span><span></span></div>
+          <div class="akr-nf-row"><span><b>Cholesterol</b> 0mg</span><span><b>0%</b></span></div>
+          <div class="akr-nf-row"><span><b>Sodium</b> 380mg</span><span><b>17%</b></span></div>
+          <div class="akr-nf-row"><span><b>Total Carbohydrate</b> 1g</span><span><b>0%</b></span></div>
+          <div class="akr-nf-row akr-nf-indent"><span>Dietary Fiber 0g</span><span>0%</span></div>
+          <div class="akr-nf-row akr-nf-indent"><span>Total Sugars 0g</span><span></span></div>
+          <div class="akr-nf-row"><span><b>Protein</b> 13g</span><span></span></div>
+          <div class="akr-nf-thick"></div>
+          <div class="akr-nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+          <div class="akr-nf-row"><span>Calcium 30mg</span><span>2%</span></div>
+          <div class="akr-nf-row"><span>Iron 0.5mg</span><span>2%</span></div>
+          <div class="akr-nf-row"><span>Potassium 100mg</span><span>2%</span></div>
+          <div class="akr-nf-footnote">*Percent Daily Values are based on a 2,000 calorie diet.</div>
+          <p style="font-size:11px;color:#6f5138;margin-top:8px">{{ section.settings.ingredients_text }}</p>
+          <p style="font-size:11px;font-weight:700;color:#2c1a10;margin-top:4px">Product of Norway, packaged in USA</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ingredient cards -->
+    <div class="akr-ing-cards">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'ingredient_card' -%}
+          <div class="akr-ing-card" {{ block.shopify_attributes }}>
+            <div class="akr-ing-card-icon-wrap">
+              {%- if block.settings.icon != blank -%}
+                <img class="akr-ing-card-icon"
+                     src="{{ block.settings.icon | img_url: '136x' }}"
+                     alt="{{ block.settings.title | escape }}"
+                     loading="lazy" width="68" height="68">
+              {%- endif -%}
+            </div>
+            <div class="akr-ing-card-body">
+              <h4>{{ block.settings.title }}</h4>
+              <p>{{ block.settings.description }}</p>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Lazy-load Caveat if not already present
+  if (!document.querySelector('link[href*="Caveat"]')) {
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap';
+    document.head.appendChild(l);
+  }
+</script>
+
+{% schema %}
+{
+  "name": "åKr Ingredients",
+  "tag": "div",
+  "class": "akr-ingredients-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "How we stack up"
+    },
+    {
+      "type": "text",
+      "id": "heading_before",
+      "label": "Heading — before icon",
+      "default": "Meet the"
+    },
+    {
+      "type": "text",
+      "id": "heading_italic",
+      "label": "Heading — italic word",
+      "default": "ingredients"
+    },
+    {
+      "type": "text",
+      "id": "clean_note",
+      "label": "Handwritten note",
+      "default": "Absolutely clean"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo",
+      "label": "Photo (left column)"
+    },
+    {
+      "type": "text",
+      "id": "photo_badge",
+      "label": "Photo badge text",
+      "default": "Lab tested · 100% traceable"
+    },
+    {
+      "type": "text",
+      "id": "gram_note",
+      "label": "Handwritten gram note",
+      "default": "Every gram tracked →"
+    },
+    {
+      "type": "textarea",
+      "id": "ingredients_text",
+      "label": "Ingredients list text",
+      "default": "Ingredients: (Chicken, Turkey), Chicken Broth Seasoning, Natural Herbs & Spices."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient_card",
+      "name": "Ingredient Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Hydrolyzed Collagen Peptides"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Broken into tiny peptides for near-100% bioavailability."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "åKr Ingredients",
+      "blocks": [
+        {
+          "type": "ingredient_card",
+          "settings": {
+            "title": "Hydrolyzed Collagen Peptides",
+            "description": "Broken into tiny peptides for near-100% bioavailability. Free-range Nordic poultry, cleanly sourced for fast absorption."
+          }
+        },
+        {
+          "type": "ingredient_card",
+          "settings": {
+            "title": "Norwegian Chicken & Turkey",
+            "description": "Free-range Nordic poultry, cleanly sourced for fast absorption."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

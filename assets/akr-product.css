@@ -183,7 +183,9 @@
   border-bottom: .5px solid #ccc !important;
 }
 .akr-nf-row:last-of-type { border-bottom: none !important; }
+.akr-nf-row span { color: #2c1a10 !important; font-size: 10.5px !important; }
 .akr-nf-row b  { font-weight: 700 !important; color: #2c1a10 !important; }
+.akr-nf-row i  { color: #2c1a10 !important; }
 .akr-nf-indent { padding-left: 14px; }
 .akr-nf-thick  { border-top: 4px solid #2c1a10 !important; margin: 3px 0; }
 .akr-nf-footnote {
@@ -193,6 +195,7 @@
   border-top: .5px solid #ccc !important;
   padding-top: 4px;
 }
+.akr-nf p { color: inherit !important; }
 
 /* Ingredient cards row */
 .akr-ing-cards {
@@ -216,8 +219,9 @@
 .akr-ing-card-icon-wrap {
   width: 86px;
   height: 86px;
+  min-width: 86px;
   border-radius: 100px;
-  background: var(--akr-cream2);
+  background: #fff9f0 !important;
   display: flex;
   align-items: center;
   justify-content: center;

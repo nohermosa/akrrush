@@ -3,6 +3,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
 
+<style>
+/* Appstle scoped overrides (mirrors product__main.liquid) */
+#shopify-section-{{ section.id }} .appstle_subscription_wrapper { display: block; }
+#shopify-section-{{ section.id }} .WIDGET_TYPE_7 .appstle_select option { font-family: Arial, sans-serif; }
+#shopify-section-{{ section.id }} .appstle_subscription_wrapper .appstle-active-option label { color: #ea7552; }
+#shopify-section-{{ section.id }} .appstle_subscription_wrapper label { font-family: Arial, sans-serif; }
+#shopify-section-{{ section.id }} .appstle-active-option .appstle_circle,
+#shopify-section-{{ section.id }} #appstle_subscription_widget0 .appstle_circle { border-color: #ea7552 !important; }
+#shopify-section-{{ section.id }} .WIDGET_TYPE_7 .appstle_subscription_wrapper_option { border-color: #e8d5c4; border-radius: 10px; }
+</style>
+
 {%- liquid
   assign selected_variant = product.selected_or_first_available_variant
   unless request.query_string contains 'variant='
@@ -175,7 +186,47 @@
         </div>
       {%- endif -%}
 
-      <!-- Product form: pack heading + pack buttons + Appstle -->
+      <!-- Pack heading -->
+      <div class="akr-hero-pack-head">
+        <h2 class="akr-hero-pack-heading">
+          {{ section.settings.pack_heading_before }}
+          <em>{{ section.settings.pack_heading_italic }}<svg class="akr-hero-strong-underline" viewBox="0 0 172 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 9 Q30 2 58 8 Q86 14 114 8 Q142 2 169 8" stroke="#ea7552" stroke-width="3" stroke-linecap="round"/></svg></em>
+        </h2>
+        <div class="akr-hero-pack-subrow">
+          <p class="akr-hero-pack-desc">{{ section.settings.pack_desc }}</p>
+          <span class="akr-hero-most-popular">{{ section.settings.most_popular_text }}</span>
+        </div>
+      </div>
+
+      <!-- Pack size buttons (variant selector — outside form so Appstle can read the select) -->
+      <div class="akr-hero-pack-btns" id="akrPackBtns">
+        {%- for variant in product.variants -%}
+          {%- assign is_best = false -%}
+          {%- if forloop.index0 == best_idx -%}{%- assign is_best = true -%}{%- endif -%}
+          <button type="button"
+                  class="akr-hero-pack-btn{% if is_best %} akr-hero-pack-btn--best{% endif %}{% if variant.id == selected_variant.id %} active{% endif %}"
+                  data-variant-id="{{ variant.id }}">
+            {%- if is_best -%}<span class="akr-hero-best-label">BEST VALUE</span>{%- endif -%}
+            <div class="akr-hero-pack-name">{{ variant.title }}</div>
+            <div class="akr-hero-pack-price">{{ variant.price | money_without_trailing_zeros }}/mo</div>
+          </button>
+        {%- endfor -%}
+      </div>
+
+      <!-- Appstle subscription widget rendered OUTSIDE the form (same as product.liquid) -->
+      <div class="akr-hero-appstle-area product-app" data-product-id="{{ product.id }}">
+        {%- assign akr_app_count2 = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}
+            {%- assign akr_app_count2 = akr_app_count2 | plus: 1 -%}
+            {%- if akr_app_count2 >= 2 -%}
+              {%- render block -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <!-- Product form: hidden variant select + standard ATC button -->
       {%- form 'product', product, id: 'akr-product-form', novalidate: 'novalidate', class: 'akr-product-form' -%}
 
         <!-- Hidden variant select (Shopify / Appstle read this) -->
@@ -187,50 +238,15 @@
           {%- endfor -%}
         </select>
 
-        <!-- Pack heading -->
-        <div class="akr-hero-pack-head">
-          <h2 class="akr-hero-pack-heading">
-            {{ section.settings.pack_heading_before }}
-            <em>{{ section.settings.pack_heading_italic }}<svg class="akr-hero-strong-underline" viewBox="0 0 172 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 9 Q30 2 58 8 Q86 14 114 8 Q142 2 169 8" stroke="#ea7552" stroke-width="3" stroke-linecap="round"/></svg></em>
-          </h2>
-          <div class="akr-hero-pack-subrow">
-            <p class="akr-hero-pack-desc">{{ section.settings.pack_desc }}</p>
-            <span class="akr-hero-most-popular">{{ section.settings.most_popular_text }}</span>
-          </div>
+        <div class="purchase-details__buttons purchase-details__spb--false">
+          <button type="submit" name="add"
+                  class="akr-hero-atc-btn action_button button--add-to-cart ajax-submit"
+                  data-label="Add to Cart"
+                  data-add-to-cart-trigger
+                  id="akrAtcFallback">
+            <span class="text">Add to Cart</span>
+          </button>
         </div>
-
-        <!-- Pack size buttons (from product.variants) -->
-        <div class="akr-hero-pack-btns" id="akrPackBtns">
-          {%- for variant in product.variants -%}
-            {%- assign is_best = false -%}
-            {%- if forloop.index0 == best_idx -%}{%- assign is_best = true -%}{%- endif -%}
-            <button type="button"
-                    class="akr-hero-pack-btn{% if is_best %} akr-hero-pack-btn--best{% endif %}{% if variant.id == selected_variant.id %} active{% endif %}"
-                    data-variant-id="{{ variant.id }}">
-              {%- if is_best -%}<span class="akr-hero-best-label">BEST VALUE</span>{%- endif -%}
-              <div class="akr-hero-pack-name">{{ variant.title }}</div>
-              <div class="akr-hero-pack-price">{{ variant.price | money_without_trailing_zeros }}/mo</div>
-            </button>
-          {%- endfor -%}
-        </div>
-
-        <!-- Appstle subscription widget (all @app blocks after the first) -->
-        <div class="akr-hero-appstle-area" data-product-id="{{ product.id }}">
-          {%- assign akr_app_count2 = 0 -%}
-          {%- for block in section.blocks -%}
-            {%- if block.type == '@app' -%}
-              {%- assign akr_app_count2 = akr_app_count2 | plus: 1 -%}
-              {%- if akr_app_count2 >= 2 -%}
-                {%- render block -%}
-              {%- endif -%}
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-
-        <!-- Fallback ATC — hidden by JS if Appstle renders its own button -->
-        <button type="submit" name="add" id="akrAtcFallback" class="akr-hero-atc-btn">
-          Add to Cart
-        </button>
 
       {%- endform -%}
 
@@ -259,7 +275,7 @@
     });
   });
 
-  // Pack variant selection
+  // Pack variant selection — syncs the hidden select inside the form
   var packBtns = document.querySelectorAll('.akr-hero-pack-btn');
   var variantSelect = document.querySelector('#akr-product-form [data-variants]');
 
@@ -269,19 +285,12 @@
     var vid = btn.getAttribute('data-variant-id');
     if (variantSelect) {
       variantSelect.value = vid;
-      ['change','input'].forEach(function(e) {
-        variantSelect.dispatchEvent(new Event(e, { bubbles: true }));
+      ['change','input'].forEach(function(ev) {
+        variantSelect.dispatchEvent(new Event(ev, { bubbles: true }));
       });
     }
-    // Flex theme web component
-    var vs = document.querySelector('[data-variant-selection]');
-    if (vs) {
-      vs.setAttribute('variant', vid);
-      vs.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-    // Update main image to variant's image if available
-    var variantImgMap = {{ product.variants | map: 'featured_image' | json }};
-    // handled by Shopify JS if present
+    // Also dispatch variant-change so Appstle picks up the new variant
+    document.dispatchEvent(new CustomEvent('variantChange', { bubbles: true, detail: { variant: { id: parseInt(vid) } } }));
   }
 
   packBtns.forEach(function(btn) {
@@ -297,15 +306,17 @@
     });
   }
 
-  // Hide fallback ATC if Appstle rendered its own UI
-  var appstleArea = document.querySelector('.akr-hero-appstle-area');
+  // Hide fallback ATC once Appstle injects its own UI (poll briefly)
   var atcFallback = document.getElementById('akrAtcFallback');
-  if (appstleArea && atcFallback) {
-    setTimeout(function() {
-      if (appstleArea.children.length > 0 || appstleArea.innerHTML.trim().length > 30) {
-        atcFallback.style.display = 'none';
+  if (atcFallback) {
+    var appstleCheck = setInterval(function() {
+      var appstleBtn = document.querySelector('.appstle_subscription_wrapper, .WIDGET_TYPE_7, [id^="appstle_subscription_widget"]');
+      if (appstleBtn) {
+        atcFallback.closest('.purchase-details__buttons').style.display = 'none';
+        clearInterval(appstleCheck);
       }
-    }, 800);
+    }, 300);
+    setTimeout(function() { clearInterval(appstleCheck); }, 5000);
   }
 })();
 </script>

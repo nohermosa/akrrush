@@ -996,12 +996,12 @@
   color: var(--akr-mid) !important;
   line-height: 1.5 !important;
   margin: 0 !important;
-  padding-right: 28%;
+  padding-right: 42%;
 }
 .akr-hero-most-popular {
   position: absolute;
-  top: -4px;
-  right: 22%;
+  top: 0;
+  right: 8%;
   font-family: 'Caveat', cursive !important;
   font-size: 20px !important;
   color: var(--akr-orange) !important;

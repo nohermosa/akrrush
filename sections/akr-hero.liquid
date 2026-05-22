@@ -34,7 +34,16 @@
   font-family: Arial, sans-serif !important;
 }
 #product-form-{{ product.id }} .button--add-to-cart:hover { background: #4a2e1e !important; }
-#product-form-{{ product.id }} .button--add-to-cart svg.checkmark { display: none !important; }
+/* Hide the plus icon SVG and checkmark; show only the text span */
+#product-form-{{ product.id }} .button--add-to-cart svg { display: none !important; }
+#product-form-{{ product.id }} .button--add-to-cart .icon { display: none !important; }
+#product-form-{{ product.id }} .button--add-to-cart .text {
+  display: inline-block !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+}
 
 /* ── Appstle scoped overrides ── */
 #shopify-section-{{ section.id }} .appstle_subscription_wrapper { display: block !important; }

@@ -120,12 +120,10 @@
     <!-- ===== RIGHT: Info ===== -->
     <div class="akr-hero-info-col">
 
-      <!-- Yotpo stars (first @app block renders here) -->
-      {%- assign akr_app_count = 0 -%}
+      <!-- Yotpo stars -->
       {%- for block in section.blocks -%}
-        {%- if block.type == '@app' and akr_app_count == 0 -%}
-          {%- assign akr_app_count = 1 -%}
-          <div class="akr-hero-yotpo">{% render block %}</div>
+        {%- if block.type == '@app' and block.id == 'yotpo_stars' -%}
+          <div class="akr-hero-yotpo" {{ block.shopify_attributes }}>{% render block %}</div>
         {%- endif -%}
       {%- endfor -%}
 
@@ -250,18 +248,14 @@
             </select>
           </variant-selection>
 
-          <!-- Appstle subscription widget — inside the form (Appstle needs form context) -->
-          <div class="akr-hero-appstle-area product-app">
-            {%- assign akr_app_count2 = 0 -%}
-            {%- for block in section.blocks -%}
-              {%- if block.type == '@app' -%}
-                {%- assign akr_app_count2 = akr_app_count2 | plus: 1 -%}
-                {%- if akr_app_count2 >= 2 -%}
-                  {%- render block -%}
-                {%- endif -%}
-              {%- endif -%}
-            {%- endfor -%}
-          </div>
+          <!-- Appstle subscription widget -->
+          {%- for block in section.blocks -%}
+            {%- if block.type == '@app' and block.id == 'appstle_widget' -%}
+              <div class="akr-hero-appstle-area product-app" {{ block.shopify_attributes }}>
+                {%- render block -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
 
           <div class="purchase-details__buttons purchase-details__spb--false">
             <button type="submit" name="add"

@@ -226,29 +226,42 @@
         {%- endfor -%}
       </div>
 
-      <!-- Product form: hidden variant select + standard ATC button -->
-      {%- form 'product', product, id: 'akr-product-form', novalidate: 'novalidate', class: 'akr-product-form' -%}
+      <!-- Product form wrapper — data attrs needed by Appstle JS -->
+      <div class="product_form init"
+           id="product-form-{{ product.id }}"
+           data-product-form
+           data-product-id="{{ product.id }}"
+           data-money-format="{{ shop.money_format | strip_html }}"
+           data-shop-currency="{{ shop.currency }}"
+           data-select-id="product-select-{{ product.id }}">
 
-        <!-- Hidden variant select (Shopify / Appstle read this) -->
-        <select name="id" data-variants style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true">
-          {%- for variant in product.variants -%}
-            <option value="{{ variant.id }}"{% if variant.id == selected_variant.id %} selected{% endif %}>
-              {{ variant.title }}
-            </option>
-          {%- endfor -%}
-        </select>
+        {%- form 'product', product, id: 'akr-product-form', novalidate: 'novalidate', class: 'akr-product-form' -%}
 
-        <div class="purchase-details__buttons purchase-details__spb--false">
-          <button type="submit" name="add"
-                  class="akr-hero-atc-btn action_button button--add-to-cart ajax-submit"
-                  data-label="Add to Cart"
-                  data-add-to-cart-trigger
-                  id="akrAtcFallback">
-            <span class="text">Add to Cart</span>
-          </button>
-        </div>
+          <!-- Hidden variant select (Appstle reads this) -->
+          <select name="id" id="product-select-{{ product.id }}" data-variants
+                  style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true">
+            {%- for variant in product.variants -%}
+              <option value="{{ variant.id }}"
+                      data-selling-plan-allocation="{{ variant.selling_plan_allocations | map: 'selling_plan' | map: 'id' | first }}"
+                      {% if variant.id == selected_variant.id %} selected{% endif %}>
+                {{ variant.title }}
+              </option>
+            {%- endfor -%}
+          </select>
 
-      {%- endform -%}
+          <div class="purchase-details__buttons purchase-details__spb--false">
+            <button type="submit" name="add"
+                    class="akr-hero-atc-btn action_button button--add-to-cart ajax-submit"
+                    data-label="Add to Cart"
+                    data-add-to-cart-trigger
+                    id="akrAtcFallback">
+              <span class="text">Add to Cart</span>
+            </button>
+          </div>
+
+        {%- endform -%}
+
+      </div><!-- /product_form -->
 
       <!-- Trust note -->
       {%- if section.settings.trust_note != blank -%}
@@ -277,7 +290,7 @@
 
   // Pack variant selection — syncs the hidden select inside the form
   var packBtns = document.querySelectorAll('.akr-hero-pack-btn');
-  var variantSelect = document.querySelector('#akr-product-form [data-variants]');
+  var variantSelect = document.querySelector('[data-product-id="{{ product.id }}"] [data-variants]');
 
   function akrSelectPack(btn) {
     packBtns.forEach(function(b) { b.classList.remove('active'); });

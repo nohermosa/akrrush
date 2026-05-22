@@ -1,0 +1,232 @@
+{{ 'akr-product.css' | asset_url | stylesheet_tag }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<section class="akr-faq-section" id="akr-faq">
+  <div class="akr-faq-inner">
+
+    <!-- ===== LEFT: Questions ===== -->
+    <div class="akr-faq-left">
+
+      <!-- Topic tabs (decorative) -->
+      <div class="akr-faq-tabs">
+        <div class="akr-faq-tab akr-faq-tab-nutrition">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 7L5.5 10.5L12 3.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Nutrition
+        </div>
+        <div class="akr-faq-tab akr-faq-tab-howto">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <rect x="2" y="4" width="10" height="8" rx="1" stroke="white" stroke-width="1.5"/>
+            <path d="M5 4V3a2 2 0 0 1 4 0v1" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          How to Use
+        </div>
+        <div class="akr-faq-tab akr-faq-tab-sub">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M7 1L8.5 5H13L9.5 7.5L11 11.5L7 9L3 11.5L4.5 7.5L1 5H5.5L7 1Z" stroke="#2c1a10" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+          </svg>
+          Subscriptions
+        </div>
+      </div>
+
+      <!-- Heading -->
+      <h2 class="akr-faq-heading">
+        {{ section.settings.heading_line1 }}<br>
+        <span class="akr-faq-actually">{{ section.settings.heading_italic
+          }}<svg class="akr-faq-actually-underline" viewBox="0 0 120 12" fill="none" aria-hidden="true">
+            <path d="M2 8Q20 2 40 7Q60 12 80 7Q100 2 118 7" stroke="#ea7552" stroke-width="2.5" stroke-linecap="round"/>
+          </svg></span> {{ section.settings.heading_suffix }}
+      </h2>
+
+      <p class="akr-faq-sub">{{ section.settings.subheading }}</p>
+
+      <!-- Social proof -->
+      <div class="akr-faq-social-proof">
+        <div class="akr-faq-avatars">
+          <img class="akr-faq-avatar" src="{{ 'akr-faq-avatar-1.png' | asset_url }}" alt="Verified customer" loading="lazy">
+          <img class="akr-faq-avatar" src="{{ 'akr-faq-avatar-2.png' | asset_url }}" alt="Verified customer" loading="lazy">
+          <img class="akr-faq-avatar" src="{{ 'akr-faq-avatar-3.png' | asset_url }}" alt="Verified customer" loading="lazy">
+        </div>
+        <div class="akr-faq-social-text">{{ section.settings.social_text }}</div>
+      </div>
+
+      <!-- FAQ accordion -->
+      <div class="akr-faq-list" id="akrFaqList">
+        {%- assign faq_idx = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'faq_item' -%}
+            {%- assign faq_idx = faq_idx | plus: 1 -%}
+            <div class="akr-faq-item" {{ block.shopify_attributes }}>
+              <div class="akr-faq-q" role="button" tabindex="0" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+                <span class="akr-faq-num">{{ faq_idx }}.</span>
+                <span class="akr-faq-q-text">{{ block.settings.question }}</span>
+                <span class="akr-faq-toggle">{% if forloop.first %}−{% else %}+{% endif %}</span>
+              </div>
+              <div class="akr-faq-a{% if forloop.first %} is-open{% endif %}">{{ block.settings.answer }}</div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <!-- CTA -->
+      <div class="akr-faq-still-curious">
+        <a href="{{ section.settings.chat_url | default: '/pages/contact' }}" class="akr-btn-chat">
+          {{ section.settings.chat_label }}
+        </a>
+      </div>
+
+    </div><!-- /faq-left -->
+
+    <!-- ===== RIGHT: Photo card ===== -->
+    <div class="akr-faq-right">
+      <div class="akr-faq-card-container">
+
+        <!-- Floating pills -->
+        <div class="akr-faq-pill akr-faq-pill-orange">{{ section.settings.pill_orange }}</div>
+        <div class="akr-faq-pill akr-faq-pill-teal">{{ section.settings.pill_teal }}</div>
+
+        <!-- Main photo card -->
+        <div class="akr-faq-photo-card">
+          <div class="akr-faq-photo-inner">
+            {%- if section.settings.photo != blank -%}
+              <img src="{{ section.settings.photo | img_url: '800x' }}"
+                   srcset="{{ section.settings.photo | img_url: '480x' }} 480w,
+                           {{ section.settings.photo | img_url: '800x' }} 800w"
+                   sizes="(max-width: 768px) 100vw, 480px"
+                   alt="{{ section.settings.photo.alt | escape }}"
+                   loading="lazy">
+            {%- else -%}
+              <img src="{{ 'akr-faq-photo.png' | asset_url }}"
+                   alt="åKrrush lifestyle"
+                   loading="lazy">
+            {%- endif -%}
+          </div>
+        </div>
+
+        <!-- Quote overlay -->
+        <div class="akr-faq-quote-overlay">
+          <div class="akr-faq-quote-stars">★★★★★</div>
+          <div class="akr-faq-quote-text">"{{ section.settings.quote_text }}"</div>
+          <div class="akr-faq-quote-attribution">
+            <img class="akr-faq-quote-avatar" src="{{ 'akr-faq-reviewer.png' | asset_url }}" alt="{{ section.settings.quote_author }}" loading="lazy">
+            <div>
+              <div class="akr-faq-quote-name">{{ section.settings.quote_author }}</div>
+              <div class="akr-faq-quote-loc">{{ section.settings.quote_location }}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /faq-right -->
+
+  </div><!-- /faq-inner -->
+</section>
+
+<script>
+(function() {
+  var list = document.getElementById('akrFaqList');
+  if (!list) return;
+  list.addEventListener('click', function(e) {
+    var q = e.target.closest('.akr-faq-q');
+    if (!q) return;
+    var item   = q.parentElement;
+    var answer = item.querySelector('.akr-faq-a');
+    var toggle = q.querySelector('.akr-faq-toggle');
+    var isOpen = answer.classList.contains('is-open');
+    answer.classList.toggle('is-open', !isOpen);
+    if (toggle) toggle.textContent = isOpen ? '+' : '−';
+    q.setAttribute('aria-expanded', String(!isOpen));
+  });
+  list.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      var q = e.target.closest('.akr-faq-q');
+      if (q) { e.preventDefault(); q.click(); }
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "åKr FAQ",
+  "tag": "div",
+  "class": "akr-faq-wrapper",
+  "settings": [
+    { "type": "text",    "id": "heading_line1",  "label": "Heading line 1",        "default": "Everything you" },
+    { "type": "text",    "id": "heading_italic",  "label": "Heading italic word",   "default": "actually" },
+    { "type": "text",    "id": "heading_suffix",  "label": "Heading suffix",        "default": "want to know." },
+    { "type": "textarea","id": "subheading",      "label": "Subheading",            "default": "From bone-broth science to subscription perks — we've got you covered." },
+    { "type": "text",    "id": "social_text",     "label": "Social proof text",     "default": "From 2,800+ verified åKrrush drinkers" },
+    { "type": "url",     "id": "chat_url",        "label": "Chat CTA URL" },
+    { "type": "text",    "id": "chat_label",      "label": "Chat CTA label",        "default": "STILL CURIOUS? — CHAT WITH US →" },
+    { "type": "text",    "id": "pill_orange",     "label": "Orange pill text",      "default": "Nordic Source" },
+    { "type": "text",    "id": "pill_teal",       "label": "Teal pill text",        "default": "13g Protein" },
+    { "type": "image_picker", "id": "photo",      "label": "Photo card image" },
+    { "type": "text",    "id": "quote_text",      "label": "Quote text",            "default": "The ritual I never skip." },
+    { "type": "text",    "id": "quote_author",    "label": "Quote author",          "default": "Sarah M." },
+    { "type": "text",    "id": "quote_location",  "label": "Quote location/tag",    "default": "Verified · Austin, TX" }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        { "type": "text",     "id": "question", "label": "Question", "default": "How is åKrrush different from regular bone broth?" },
+        { "type": "textarea", "id": "answer",   "label": "Answer",   "default": "Every batch is third-party tested for heavy metals, contaminants, and microbial safety. USDA approved, FDA compliant." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "åKr FAQ",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How is åKrrush different from regular bone broth?",
+            "answer": "Every batch is third-party tested for heavy metals, contaminants, and microbial safety. USDA approved, FDA compliant. We use enzymatic hydrolysis — a cold-process that breaks collagen into small peptides your body absorbs 1.5× faster than traditionally boiled broth."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I mix it with food or just drink it?",
+            "answer": "Both! åKrrush dissolves instantly in hot water for drinking, but it also works beautifully stirred into soups, sauces, oatmeal, or smoothies. Many subscribers add it to recipes for a clean protein boost without affecting the flavor."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do subscriptions work?",
+            "answer": "Choose your pack size (12, 24, or 36 sticks) and delivery frequency (30, 45, or 60 days). You save 10% automatically. Skip, pause, swap flavors, or cancel any time — no lock-in, no penalty. Manage everything from your customer account."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is åKrrush suitable for keto, paleo, or Whole30?",
+            "answer": "Yes to all three. åKrrush has 0g sugar, 0g net carbs, no grains, no dairy, no legumes. It's gluten-free, non-GMO, and contains no artificial anything. Perfect for elimination protocols and clean eating."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "When will I see results?",
+            "answer": "Most subscribers notice improved energy and digestion within the first week. Joint and skin improvements typically appear after 3–6 weeks of daily use, as collagen peptides accumulate in connective tissue. 87% of subscribers reorder — that tells the story."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where is åKrrush made?",
+            "answer": "åKrrush is a Product of Norway, packaged in the USA. 99%+ of our ingredients are sourced from Norway — free-range Nordic poultry, clean herbs and spices. We're USDA and FDA approved for the US market."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

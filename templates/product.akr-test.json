@@ -90,7 +90,32 @@
         "text_heading_line2": "fuel.",
         "text_desc": "Slow-simmered Norwegian poultry, pure hydrolyzed protein, and the comforting taste of real broth — bottled into a 30-second morning ritual."
       }
+    },
+    "akr_faq": {
+      "type": "akr-faq",
+      "blocks": {
+        "faq_1": { "type": "faq_item", "settings": { "question": "How is åKrrush different from regular bone broth?", "answer": "Every batch is third-party tested for heavy metals, contaminants, and microbial safety. USDA approved, FDA compliant. We use enzymatic hydrolysis — a cold-process that breaks collagen into small peptides your body absorbs 1.5× faster than traditionally boiled broth." } },
+        "faq_2": { "type": "faq_item", "settings": { "question": "Can I mix it with food or just drink it?", "answer": "Both! åKrrush dissolves instantly in hot water for drinking, but it also works beautifully stirred into soups, sauces, oatmeal, or smoothies. Many subscribers add it to recipes for a clean protein boost without affecting the flavor." } },
+        "faq_3": { "type": "faq_item", "settings": { "question": "How do subscriptions work?", "answer": "Choose your pack size (12, 24, or 36 sticks) and delivery frequency (30, 45, or 60 days). You save 10% automatically. Skip, pause, swap flavors, or cancel any time — no lock-in, no penalty. Manage everything from your customer account." } },
+        "faq_4": { "type": "faq_item", "settings": { "question": "Is åKrrush suitable for keto, paleo, or Whole30?", "answer": "Yes to all three. åKrrush has 0g sugar, 0g net carbs, no grains, no dairy, no legumes. It's gluten-free, non-GMO, and contains no artificial anything. Perfect for elimination protocols and clean eating." } },
+        "faq_5": { "type": "faq_item", "settings": { "question": "When will I see results?", "answer": "Most subscribers notice improved energy and digestion within the first week. Joint and skin improvements typically appear after 3–6 weeks of daily use, as collagen peptides accumulate in connective tissue. 87% of subscribers reorder — that tells the story." } },
+        "faq_6": { "type": "faq_item", "settings": { "question": "Where is åKrrush made?", "answer": "åKrrush is a Product of Norway, packaged in the USA. 99%+ of our ingredients are sourced from Norway — free-range Nordic poultry, clean herbs and spices. We're USDA and FDA approved for the US market." } }
+      },
+      "block_order": ["faq_1","faq_2","faq_3","faq_4","faq_5","faq_6"],
+      "settings": {
+        "heading_line1": "Everything you",
+        "heading_italic": "actually",
+        "heading_suffix": "want to know.",
+        "subheading": "From bone-broth science to subscription perks — we've got you covered.",
+        "social_text": "From 2,800+ verified åKrrush drinkers",
+        "chat_label": "STILL CURIOUS? — CHAT WITH US →",
+        "pill_orange": "Nordic Source",
+        "pill_teal": "13g Protein",
+        "quote_text": "The ritual I never skip.",
+        "quote_author": "Sarah M.",
+        "quote_location": "Verified · Austin, TX"
+      }
     }
   },
-  "order": ["akr_hero", "akr_ingredients", "akr_benefits"]
+  "order": ["akr_hero", "akr_ingredients", "akr_benefits", "akr_faq"]
 }

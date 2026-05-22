@@ -965,51 +965,20 @@
 
 /* Pack heading */
 .akr-hero-pack-head { margin-bottom: 14px; }
-.akr-hero-pack-heading {
-  font-family: 'DM Serif Display', 'Georgia', serif !important;
-  font-size: 34px !important;
-  font-weight: 400 !important;
-  color: var(--akr-dark) !important;
-  line-height: 1.1 !important;
-  margin: 0 0 6px !important;
-}
-.akr-hero-pack-heading em {
-  font-style: italic;
-  position: relative;
-  display: inline-block;
-}
-.akr-hero-strong-underline {
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
-.akr-hero-pack-subrow {
-  position: relative;
-  margin-bottom: 4px;
-}
 .akr-hero-pack-desc {
-  font-size: 13px !important;
-  font-family: Arial, sans-serif !important;
-  color: var(--akr-mid) !important;
-  line-height: 1.5 !important;
-  margin: 0 !important;
-  padding-right: 42%;
+  font-size: 13px;
+  font-family: Arial, sans-serif;
+  color: var(--akr-mid);
+  line-height: 1.5;
+  margin: 0;
+  padding-right: 48%;
 }
-.akr-hero-most-popular {
-  position: absolute;
-  top: 0;
-  right: 8%;
-  font-family: 'Caveat', cursive !important;
-  font-size: 20px !important;
-  color: var(--akr-orange) !important;
-  line-height: 1.2;
-  white-space: nowrap;
-  transform: rotate(-8deg);
-  display: inline-block;
-  pointer-events: none;
+.akr-most-popular-svg {
+  display: block;
+}
+@media (max-width: 640px) {
+  .akr-most-popular-svg { display: none; }
+  .akr-hero-pack-desc { padding-right: 0; }
 }
 
 /* Pack size buttons */
@@ -1125,14 +1094,6 @@
   font-family: Arial, sans-serif !important;
 }
 .akr-hero-title,
-.akr-hero-pack-heading,
-.akr-hero-pack-heading em {
-  font-family: 'DM Serif Display', 'Georgia', serif !important;
-}
-.akr-hero-most-popular {
-  font-family: 'Caveat', cursive !important;
-}
-
 /* Hero responsive */
 @media (max-width: 1100px) {
   .akr-hero-inner {
@@ -1153,7 +1114,6 @@
 @media (max-width: 640px) {
   .akr-hero-section { padding: 24px 16px; }
   .akr-hero-title { font-size: 36px !important; }
-  .akr-hero-pack-heading { font-size: 26px !important; }
   .akr-hero-flavor-row { flex-wrap: wrap; }
   .akr-hero-thumb { height: 80px; }
 }

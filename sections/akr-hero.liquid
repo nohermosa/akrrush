@@ -196,13 +196,22 @@
 
       <!-- Pack heading -->
       <div class="akr-hero-pack-head">
-        <h2 class="akr-hero-pack-heading">
-          {{ section.settings.pack_heading_before }}
-          <em>{{ section.settings.pack_heading_italic }}<svg class="akr-hero-strong-underline" viewBox="0 0 172 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 9 Q30 2 58 8 Q86 14 114 8 Q142 2 169 8" stroke="#ea7552" stroke-width="3" stroke-linecap="round"/></svg></em>
-        </h2>
-        <div class="akr-hero-pack-subrow">
-          <p class="akr-hero-pack-desc">{{ section.settings.pack_desc }}</p>
-          <span class="akr-hero-most-popular">{{ section.settings.most_popular_text }}</span>
+        <!-- Heading SVG — exact 1:1 with mockup -->
+        <div style="position:relative;margin-bottom:10px">
+          <img src="{{ 'akr-heading-strong.svg' | asset_url }}"
+               alt="Your weekly dose of strong"
+               style="width:100%;height:auto;display:block;position:relative;z-index:2">
+          <img src="{{ 'akr-underline-strong.svg' | asset_url }}"
+               aria-hidden="true" alt=""
+               style="position:absolute;bottom:-5px;left:63%;width:22%;height:auto;pointer-events:none;z-index:1">
+        </div>
+        <!-- Description + most-popular SVG — exact 1:1 with mockup -->
+        <div style="position:relative;margin-bottom:16px">
+          <div class="akr-hero-pack-desc">{{ section.settings.pack_desc }}</div>
+          <img src="{{ 'akr-most-popular.svg' | asset_url }}"
+               aria-hidden="true" alt=""
+               class="akr-most-popular-svg"
+               style="position:absolute;top:-8px;right:28%;width:64px;height:84px;pointer-events:none;z-index:3">
         </div>
       </div>
 

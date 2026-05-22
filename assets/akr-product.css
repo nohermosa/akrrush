@@ -987,21 +987,18 @@
   pointer-events: none;
 }
 .akr-hero-pack-subrow {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
   position: relative;
+  overflow: hidden;
 }
 .akr-hero-pack-desc {
   font-size: 13px !important;
   font-family: Arial, sans-serif !important;
   color: var(--akr-mid) !important;
   line-height: 1.5 !important;
-  flex: 1;
   margin: 0 !important;
-  max-width: 60%;
 }
 .akr-hero-most-popular {
+  float: right;
   font-family: 'Caveat', cursive !important;
   font-size: 20px !important;
   color: var(--akr-orange) !important;
@@ -1009,7 +1006,8 @@
   white-space: nowrap;
   transform: rotate(-5deg);
   display: inline-block;
-  margin-top: -4px;
+  margin-left: 10px;
+  margin-top: 2px;
 }
 
 /* Pack size buttons */

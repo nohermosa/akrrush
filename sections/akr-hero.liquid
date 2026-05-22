@@ -80,32 +80,10 @@
 
         <!-- Main product image -->
         <img class="akr-hero-main-img" id="akrMainImg"
-             src="{{ product.featured_image | img_url: '800x' }}"
+             src="{{ 'akr-savory-chicken-hero.jpg' | asset_url }}"
              alt="{{ product.title | escape }}"
              loading="eager">
 
-        <!-- Norway stamp badge (bottom-right) -->
-        <div class="akr-hero-norway">
-          <svg viewBox="0 0 110 110" width="110" height="110" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <path id="akrNorwayArc" d="M 55,55 m -43,0 a 43,43 0 1,1 86,0 a 43,43 0 1,1 -86,0"/>
-            </defs>
-            <circle cx="55" cy="55" r="52" fill="white"/>
-            <circle cx="55" cy="55" r="50" fill="white" stroke="#c8102e" stroke-width="2"/>
-            <circle cx="55" cy="55" r="44" fill="none" stroke="#c8102e" stroke-width="0.8" stroke-dasharray="2.5 2"/>
-            <!-- Norwegian flag (simplified) -->
-            <g transform="translate(27,32)">
-              <rect width="56" height="35" rx="3" fill="#EF2B2D"/>
-              <rect y="12.5" width="56" height="10" fill="white"/>
-              <rect x="15.5" width="10" height="35" fill="white"/>
-              <rect y="14" width="56" height="7" fill="#002868"/>
-              <rect x="17" width="7" height="35" fill="#002868"/>
-            </g>
-            <text font-size="6.2" font-weight="800" fill="#2c1a10" font-family="Arial,sans-serif" letter-spacing="0.9">
-              <textPath href="#akrNorwayArc" startOffset="5%">PRODUCT OF NORWAY · NORDIC POULTRY ·</textPath>
-            </text>
-          </svg>
-        </div>
 
       </div><!-- /main-wrap -->
 

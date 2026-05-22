@@ -988,7 +988,7 @@
 }
 .akr-hero-pack-subrow {
   position: relative;
-  overflow: hidden;
+  margin-bottom: 4px;
 }
 .akr-hero-pack-desc {
   font-size: 13px !important;
@@ -996,18 +996,20 @@
   color: var(--akr-mid) !important;
   line-height: 1.5 !important;
   margin: 0 !important;
+  padding-right: 28%;
 }
 .akr-hero-most-popular {
-  float: right;
+  position: absolute;
+  top: -4px;
+  right: 22%;
   font-family: 'Caveat', cursive !important;
   font-size: 20px !important;
   color: var(--akr-orange) !important;
   line-height: 1.2;
   white-space: nowrap;
-  transform: rotate(-5deg);
+  transform: rotate(-8deg);
   display: inline-block;
-  margin-left: 10px;
-  margin-top: 2px;
+  pointer-events: none;
 }
 
 /* Pack size buttons */

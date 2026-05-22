@@ -211,14 +211,22 @@
         {%- endfor -%}
       </div>
 
-      <!-- Product form: Appstle block + ATC inside the form -->
+      <!-- Product form wrapper (data-product-form needed by Appstle) -->
       <div class="product_form init"
            id="product-form-{{ product.id }}"
            data-product-form
            data-product-id="{{ product.id }}"
            data-money-format="{{ shop.money_format | strip_html }}"
-           data-shop-currency="{{ shop.currency }}"
-           data-select-id="product-select-{{ product.id }}">
+           data-shop-currency="{{ shop.currency }}">
+
+        <!-- Appstle block OUTSIDE the form, INSIDE product_form wrapper (mirrors product.liquid) -->
+        {%- for block in section.blocks -%}
+          {%- if block.type == '@app' and block.id == 'appstle_widget' -%}
+            <div class="akr-hero-appstle-area product-app" {{ block.shopify_attributes }}>
+              {%- render block -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
 
         {%- form 'product', product, id: 'akr-product-form', novalidate: 'novalidate', class: 'akr-product-form' -%}
 
@@ -239,23 +247,13 @@
               style="display:none">
               <option value="not-selected" disabled>Choose variant</option>
               {%- for variant in product.variants -%}
-                <option
-                  value="{{ variant.id }}"
+                <option value="{{ variant.id }}"
                   {% if selected_variant and selected_variant.id == variant.id %}selected{% endif %}>
                   {{ variant.title }}
                 </option>
               {%- endfor -%}
             </select>
           </variant-selection>
-
-          <!-- Appstle subscription widget -->
-          {%- for block in section.blocks -%}
-            {%- if block.type == '@app' and block.id == 'appstle_widget' -%}
-              <div class="akr-hero-appstle-area product-app" {{ block.shopify_attributes }}>
-                {%- render block -%}
-              </div>
-            {%- endif -%}
-          {%- endfor -%}
 
           <div class="purchase-details__buttons purchase-details__spb--false">
             <button type="submit" name="add"

@@ -14,45 +14,12 @@
 #product-form-{{ product.id }} .surface-pick-up__modal { display: none !important; }
 #product-form-{{ product.id }} .clearfix { overflow: visible !important; }
 
-/* ── Style native ATC button to match design ── */
-#product-form-{{ product.id }} .purchase-details { margin-top: 0 !important; padding-top: 0 !important; }
-#product-form-{{ product.id }} .purchase-details__buttons { margin-top: 0 !important; }
-#product-form-{{ product.id }} .button--add-to-cart {
-  display: block !important;
-  width: 100% !important;
-  padding: 18px 24px !important;
-  background: #2c1a10 !important;
-  color: #fff !important;
-  border: none !important;
-  border-radius: 50px !important;
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  letter-spacing: .04em !important;
-  cursor: pointer !important;
-  text-align: center !important;
-  transition: background .2s !important;
-  font-family: Arial, sans-serif !important;
-}
-#product-form-{{ product.id }} .button--add-to-cart:hover { background: #4a2e1e !important; }
-/* Hide the plus icon SVG and checkmark; show only the text span */
-#product-form-{{ product.id }} .button--add-to-cart svg { display: none !important; }
-#product-form-{{ product.id }} .button--add-to-cart .icon { display: none !important; }
-#product-form-{{ product.id }} .button--add-to-cart .text {
-  display: inline-block !important;
-  color: #fff !important;
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  letter-spacing: .04em !important;
-}
+/* ── Hide native purchase buttons — replaced by custom CTA ── */
+#product-form-{{ product.id }} .purchase-details { display: none !important; }
 
-/* ── Appstle scoped overrides ── */
-#shopify-section-{{ section.id }} .appstle_subscription_wrapper { display: block !important; }
-#shopify-section-{{ section.id }} .WIDGET_TYPE_7 .appstle_select option { font-family: Arial, sans-serif; }
-#shopify-section-{{ section.id }} .appstle_subscription_wrapper .appstle-active-option label { color: #ea7552; }
-#shopify-section-{{ section.id }} .appstle_subscription_wrapper label { font-family: Arial, sans-serif; }
-#shopify-section-{{ section.id }} .appstle-active-option .appstle_circle,
-#shopify-section-{{ section.id }} #appstle_subscription_widget0 .appstle_circle { border-color: #ea7552 !important; }
-#shopify-section-{{ section.id }} .WIDGET_TYPE_7 .appstle_subscription_wrapper_option { border-color: #e8d5c4; border-radius: 10px; }
+/* ── Hide Appstle visual widget — keep in DOM for selling_plan injection ── */
+#shopify-section-{{ section.id }} .appstle_subscription_wrapper { display: none !important; }
+#shopify-section-{{ section.id }} .product-app { height: 0 !important; overflow: hidden !important; }
 </style>
 
 {%- liquid
@@ -254,6 +221,69 @@
         {%- endfor -%}
       </div>
 
+      <!-- ── Subscription pricing data ── -->
+      {%- assign akr_discount_pct = 10 -%}
+      {%- for spg in product.selling_plan_groups -%}
+        {%- for sp in spg.selling_plans -%}
+          {%- for pa in sp.price_adjustments -%}
+            {%- if pa.value_type == 'percentage' -%}{%- assign akr_discount_pct = pa.value -%}{%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endfor -%}
+      {%- assign akr_sub_mult = 100 | minus: akr_discount_pct -%}
+      {%- assign akr_sub_cents = selected_variant.price | times: akr_sub_mult | divided_by: 100 -%}
+
+      <script type="application/json" id="akrVariantPrices">
+      [{%- for v in product.variants -%}{%- assign vc = v.price | times: akr_sub_mult | divided_by: 100 -%}{"id":{{ v.id }},"price":{{ v.price }},"sub_price":{{ vc }}}{% unless forloop.last %},{% endunless %}{%- endfor -%}]
+      </script>
+
+      <!-- ── Custom subscription card UI ── -->
+      <div class="akr-sub-wrap">
+
+        <!-- Subscribe card -->
+        <div class="akr-sub-card akr-sub-card--selected" id="akrSubCard" role="button" tabindex="0">
+          <div class="akr-sub-stamp">BEST<br>VALUE</div>
+          <div class="akr-sub-card-header">
+            <div class="akr-sub-radio-dot"></div>
+            <span class="akr-sub-card-label">Subscribe &amp; Save — {{ akr_discount_pct }}% off</span>
+          </div>
+          <div class="akr-sub-card-body">
+            <div class="akr-sub-price-row">
+              <span class="akr-sub-price-main" id="akrSubPrice">{{ akr_sub_cents | money }}</span>
+              <span class="akr-sub-price-period">/mo ·</span>
+              <span class="akr-sub-price-compare" id="akrSubCompare">{{ selected_variant.price | money }}</span>
+            </div>
+            <div class="akr-sub-billing" id="akrSubBilling">Billed {{ akr_sub_cents | money }} every 4 weeks</div>
+            <div class="akr-sub-perks">
+              <div class="akr-sub-perk">Free <em>Welcome Pack</em> with 1st order</div>
+              <div class="akr-sub-perk"><em>Cancel or pause</em> anytime</div>
+              <div class="akr-sub-perk"><em>Maximum savings</em> — lowest price per stick</div>
+              <div class="akr-sub-perk"><em>Swap flavors</em> between shipments</div>
+              <div class="akr-sub-perk"><em>Free</em> shipping every order</div>
+              <div class="akr-sub-perk"><em>Priority</em> customer support</div>
+            </div>
+            <div class="akr-delivery-row">
+              <span class="akr-delivery-label">Delivery every</span>
+              <div class="akr-delivery-btns" id="akrDeliveryBtns">
+                <button type="button" class="akr-delivery-btn active" data-days="30">30 Days</button>
+                <button type="button" class="akr-delivery-btn" data-days="45">45 Days</button>
+                <button type="button" class="akr-delivery-btn" data-days="60">60 Days</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- One-time option -->
+        <div class="akr-one-time" id="akrOneTime" role="button" tabindex="0">
+          <div class="akr-one-time-radio"></div>
+          <div class="akr-one-time-text">
+            <div class="akr-one-time-label">One-Time Purchase</div>
+            <div class="akr-one-time-price" id="akrOneTimePrice">{{ selected_variant.price | money }} · Free shipping over $50 · No commitment</div>
+          </div>
+        </div>
+
+      </div><!-- /akr-sub-wrap -->
+
       <!-- Product form — use the real snippet so Appstle can attach to it -->
       {%
         render 'product__form',
@@ -280,6 +310,12 @@
         {%- endif -%}
       {%- endfor -%}
 
+      <!-- Custom CTA button (triggers Appstle-injected form) -->
+      <button type="button" class="akr-cta-btn" id="akrCtaBtn"
+              data-form-id="product-form-{{ product.id }}">
+        SUBSCRIBE &amp; SAVE — ADD TO CART · {{ akr_sub_cents | money }}/mo
+      </button>
+
       <!-- Trust note -->
       {%- if section.settings.trust_note != blank -%}
         <p class="akr-hero-trust">{{ section.settings.trust_note }}</p>
@@ -294,7 +330,8 @@
 
 <script>
 (function() {
-  // Thumbnail gallery switching
+
+  // ── Thumbnail gallery ──
   var thumbs = document.querySelectorAll('.akr-hero-thumb');
   var mainImg = document.getElementById('akrMainImg');
   thumbs.forEach(function(th) {
@@ -305,14 +342,13 @@
     });
   });
 
-  // Pack variant selection — syncs the hidden select inside product__form
+  // ── Pack variant selection ──
   var packBtns = document.querySelectorAll('.akr-hero-pack-btn');
 
   function akrSelectPack(btn) {
     packBtns.forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
     var vid = btn.getAttribute('data-variant-id');
-    // Use [data-variants] — the selector product__form uses on its select
     var variantSelect = document.querySelector('[data-variants]');
     if (variantSelect) {
       variantSelect.value = vid;
@@ -320,18 +356,16 @@
         variantSelect.dispatchEvent(new Event(ev, { bubbles: true }));
       });
     }
-    // Also update the variant-selection web component attribute directly
     var vs = document.querySelector('[data-variant-selection]');
-    if (vs) {
-      vs.setAttribute('variant', vid);
-    }
+    if (vs) { vs.setAttribute('variant', vid); }
+    setTimeout(akrUpdateSubPrices, 0);
   }
 
   packBtns.forEach(function(btn) {
     btn.addEventListener('click', function() { akrSelectPack(this); });
   });
 
-  // View Nutrition Label — scroll to ingredients section
+  // ── View Nutrition Label ──
   var viewNf = document.querySelector('.js-akr-view-nf');
   if (viewNf) {
     viewNf.addEventListener('click', function(e) {
@@ -339,6 +373,145 @@
       if (ing) { e.preventDefault(); ing.scrollIntoView({ behavior: 'smooth' }); }
     });
   }
+
+  // ── Subscription card ──
+  var isSubscribeMode = true;
+  var priceData = [];
+  var priceEl = document.getElementById('akrVariantPrices');
+  if (priceEl) {
+    try { priceData = JSON.parse(priceEl.textContent || priceEl.innerText); } catch(e) {}
+  }
+
+  var subCard        = document.getElementById('akrSubCard');
+  var oneTime        = document.getElementById('akrOneTime');
+  var ctaBtn         = document.getElementById('akrCtaBtn');
+  var subPriceEl     = document.getElementById('akrSubPrice');
+  var subCompareEl   = document.getElementById('akrSubCompare');
+  var subBillingEl   = document.getElementById('akrSubBilling');
+  var oneTimePriceEl = document.getElementById('akrOneTimePrice');
+
+  function fmtMoney(cents) {
+    return '$' + (cents / 100).toFixed(2);
+  }
+
+  function akrUpdateSubPrices() {
+    var activePackBtn = document.querySelector('.akr-hero-pack-btn.active');
+    if (!activePackBtn) return;
+    var vid = activePackBtn.getAttribute('data-variant-id');
+    var vd = null;
+    for (var i = 0; i < priceData.length; i++) {
+      if (String(priceData[i].id) === String(vid)) { vd = priceData[i]; break; }
+    }
+    if (!vd) return;
+
+    var subP  = fmtMoney(vd.sub_price);
+    var fullP = fmtMoney(vd.price);
+
+    if (subPriceEl)     subPriceEl.textContent     = subP;
+    if (subCompareEl)   subCompareEl.textContent   = fullP;
+    if (subBillingEl)   subBillingEl.textContent   = 'Billed ' + subP + ' every 4 weeks';
+    if (oneTimePriceEl) oneTimePriceEl.textContent = fullP + ' · Free shipping over $50 · No commitment';
+    if (ctaBtn) {
+      ctaBtn.textContent = isSubscribeMode
+        ? 'SUBSCRIBE & SAVE — ADD TO CART · ' + subP + '/mo'
+        : 'ADD TO CART · ' + fullP;
+    }
+  }
+
+  function akrSyncAppstle(subscribe) {
+    var wrapper = document.querySelector('.appstle_subscription_wrapper');
+    if (!wrapper) return;
+    var radios = wrapper.querySelectorAll('input[type="radio"]');
+    radios.forEach(function(r) {
+      // Subscribe radios have a non-empty selling plan ID as value
+      var isSubRadio = r.value && r.value !== '' && r.value !== '0';
+      if (subscribe && isSubRadio)  { r.click(); }
+      if (!subscribe && !isSubRadio) { r.click(); }
+    });
+  }
+
+  function akrSetMode(subscribe) {
+    isSubscribeMode = subscribe;
+    if (subCard) subCard.classList.toggle('akr-sub-card--selected', subscribe);
+    if (oneTime) oneTime.classList.toggle('akr-one-time--selected', !subscribe);
+    akrSyncAppstle(subscribe);
+    akrUpdateSubPrices();
+  }
+
+  // Auto-select subscribe when Appstle finishes rendering
+  function akrTryAutoSubscribe() {
+    var wrapper = document.querySelector('.appstle_subscription_wrapper');
+    if (!wrapper) return false;
+    var radios = wrapper.querySelectorAll('input[type="radio"]');
+    if (radios.length === 0) return false;
+    var clicked = false;
+    radios.forEach(function(r) {
+      if (r.value && r.value !== '' && r.value !== '0') {
+        r.click(); clicked = true;
+      }
+    });
+    return clicked;
+  }
+
+  if (!akrTryAutoSubscribe()) {
+    var obs = new MutationObserver(function() {
+      if (akrTryAutoSubscribe()) obs.disconnect();
+    });
+    obs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(function() { obs.disconnect(); akrTryAutoSubscribe(); }, 6000);
+  }
+
+  // Card / one-time click handlers
+  if (subCard) {
+    subCard.addEventListener('click', function() { akrSetMode(true); });
+    subCard.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); akrSetMode(true); }
+    });
+  }
+  if (oneTime) {
+    oneTime.addEventListener('click', function() { akrSetMode(false); });
+    oneTime.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); akrSetMode(false); }
+    });
+  }
+
+  // Delivery frequency buttons
+  var deliveryBtns = document.querySelectorAll('#akrDeliveryBtns .akr-delivery-btn');
+  deliveryBtns.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation(); // don't bubble to card click
+      deliveryBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      // Attempt to sync with matching Appstle selling plan
+      var days = btn.getAttribute('data-days');
+      document.querySelectorAll('.appstle_subscription_wrapper select').forEach(function(sel) {
+        sel.querySelectorAll('option').forEach(function(opt) {
+          if (opt.textContent.includes(days) || opt.value.includes(days)) {
+            sel.value = opt.value;
+            sel.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        });
+      });
+    });
+  });
+
+  // CTA: click the hidden native ATC button (Appstle has already injected selling_plan)
+  if (ctaBtn) {
+    ctaBtn.addEventListener('click', function() {
+      var formId = ctaBtn.getAttribute('data-form-id');
+      // Try native ATC button (hidden via CSS but still clickable)
+      var nativeBtn = formId ? document.querySelector('#' + formId + ' .button--add-to-cart') : null;
+      if (nativeBtn) { nativeBtn.click(); return; }
+      // Fallback: any submit inside product form
+      var anySubmit = document.querySelector('form[action*="cart/add"] [type="submit"]');
+      if (anySubmit) { anySubmit.click(); return; }
+      // Last resort: submit form
+      var form = document.querySelector('form[action*="cart/add"]');
+      if (form) { form.submit(); }
+    });
+  }
+
+  akrUpdateSubPrices();
 
 })();
 </script>

@@ -213,20 +213,7 @@
         {%- endfor -%}
       </div>
 
-      <!-- Appstle subscription widget rendered OUTSIDE the form (same as product.liquid) -->
-      <div class="akr-hero-appstle-area product-app" data-product-id="{{ product.id }}">
-        {%- assign akr_app_count2 = 0 -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == '@app' -%}
-            {%- assign akr_app_count2 = akr_app_count2 | plus: 1 -%}
-            {%- if akr_app_count2 >= 2 -%}
-              {%- render block -%}
-            {%- endif -%}
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-
-      <!-- Product form wrapper — data attrs needed by Appstle JS -->
+      <!-- Product form: Appstle block + ATC inside the form -->
       <div class="product_form init"
            id="product-form-{{ product.id }}"
            data-product-form
@@ -237,24 +224,37 @@
 
         {%- form 'product', product, id: 'akr-product-form', novalidate: 'novalidate', class: 'akr-product-form' -%}
 
-          <!-- Hidden variant select (Appstle reads this) -->
+          <div style="display:none" data-shop-pay-installments-template>{{ form | payment_terms }}</div>
+
+          <!-- Variant select -->
           <select name="id" id="product-select-{{ product.id }}" data-variants
                   style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true">
             {%- for variant in product.variants -%}
               <option value="{{ variant.id }}"
-                      data-selling-plan-allocation="{{ variant.selling_plan_allocations | map: 'selling_plan' | map: 'id' | first }}"
                       {% if variant.id == selected_variant.id %} selected{% endif %}>
                 {{ variant.title }}
               </option>
             {%- endfor -%}
           </select>
 
+          <!-- Appstle subscription widget — inside the form (Appstle needs form context) -->
+          <div class="akr-hero-appstle-area product-app">
+            {%- assign akr_app_count2 = 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == '@app' -%}
+                {%- assign akr_app_count2 = akr_app_count2 | plus: 1 -%}
+                {%- if akr_app_count2 >= 2 -%}
+                  {%- render block -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
           <div class="purchase-details__buttons purchase-details__spb--false">
             <button type="submit" name="add"
                     class="akr-hero-atc-btn action_button button--add-to-cart ajax-submit"
                     data-label="Add to Cart"
-                    data-add-to-cart-trigger
-                    id="akrAtcFallback">
+                    data-add-to-cart-trigger>
               <span class="text">Add to Cart</span>
             </button>
           </div>
@@ -290,7 +290,7 @@
 
   // Pack variant selection — syncs the hidden select inside the form
   var packBtns = document.querySelectorAll('.akr-hero-pack-btn');
-  var variantSelect = document.querySelector('[data-product-id="{{ product.id }}"] [data-variants]');
+  var variantSelect = document.getElementById('product-select-{{ product.id }}');
 
   function akrSelectPack(btn) {
     packBtns.forEach(function(b) { b.classList.remove('active'); });

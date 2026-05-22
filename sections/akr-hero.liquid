@@ -4,13 +4,40 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-/* Hide duplicate Yotpo stars in the appstle/form area */
-.akr-hero-appstle-area .yotpo-sr-bottom-line,
-.akr-hero-appstle-area [class*="yotpo-sr"],
-.akr-hero-appstle-area [class*="yotpo_"] { display: none !important; }
+/* ── Native product__form: hide elements we replace with custom UI ── */
+#product-form-{{ product.id }} options-selection,
+#product-form-{{ product.id }} .options-selection { display: none !important; }
+#product-form-{{ product.id }} .same-collection-products { display: none !important; }
+#product-form-{{ product.id }} .purchase-details__quantity { display: none !important; }
+#product-form-{{ product.id }} .cart-warning { display: none !important; }
+#product-form-{{ product.id }} .surface-pick-up,
+#product-form-{{ product.id }} .surface-pick-up__modal { display: none !important; }
+#product-form-{{ product.id }} .clearfix { overflow: visible !important; }
 
-/* Appstle scoped overrides (mirrors product__main.liquid) */
-#shopify-section-{{ section.id }} .appstle_subscription_wrapper { display: block; }
+/* ── Style native ATC button to match design ── */
+#product-form-{{ product.id }} .purchase-details { margin-top: 0 !important; padding-top: 0 !important; }
+#product-form-{{ product.id }} .purchase-details__buttons { margin-top: 0 !important; }
+#product-form-{{ product.id }} .button--add-to-cart {
+  display: block !important;
+  width: 100% !important;
+  padding: 18px 24px !important;
+  background: #2c1a10 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 50px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  transition: background .2s !important;
+  font-family: Arial, sans-serif !important;
+}
+#product-form-{{ product.id }} .button--add-to-cart:hover { background: #4a2e1e !important; }
+#product-form-{{ product.id }} .button--add-to-cart svg.checkmark { display: none !important; }
+
+/* ── Appstle scoped overrides ── */
+#shopify-section-{{ section.id }} .appstle_subscription_wrapper { display: block !important; }
 #shopify-section-{{ section.id }} .WIDGET_TYPE_7 .appstle_select option { font-family: Arial, sans-serif; }
 #shopify-section-{{ section.id }} .appstle_subscription_wrapper .appstle-active-option label { color: #ea7552; }
 #shopify-section-{{ section.id }} .appstle_subscription_wrapper label { font-family: Arial, sans-serif; }
@@ -218,62 +245,31 @@
         {%- endfor -%}
       </div>
 
-      <!-- Product form wrapper (data-product-form needed by Appstle) -->
-      <div class="product_form init"
-           id="product-form-{{ product.id }}"
-           data-product-form
-           data-product-id="{{ product.id }}"
-           data-money-format="{{ shop.money_format | strip_html }}"
-           data-shop-currency="{{ shop.currency }}">
+      <!-- Product form — use the real snippet so Appstle can attach to it -->
+      {%
+        render 'product__form',
+        context: 'product',
+        product: product,
+        sold_out_options: 'disabled',
+        selected_variant: selected_variant,
+        show_payment_button: false,
+        collection_handles: product.collections | map: 'handle'
+      %}
 
-        <!-- All @app blocks rendered here; CSS hides any duplicate Yotpo stars -->
-        {%- for block in section.blocks -%}
-          {%- if block.type == '@app' -%}
-            <div class="akr-hero-appstle-area product-app" {{ block.shopify_attributes }}>
+      <!-- @app blocks (Appstle subscription widget) rendered after the form,
+           matching the live product page structure: Appstle JS searches the
+           document for form[action*="cart/add"] and injects before the ATC btn -->
+      {%- assign akr_app_idx = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}
+          {%- assign akr_app_idx = akr_app_idx | plus: 1 -%}
+          {%- if akr_app_idx > 1 -%}
+            <div class="product-app" {{ block.shopify_attributes }}>
               {%- render block -%}
             </div>
           {%- endif -%}
-        {%- endfor -%}
-
-        {%- form 'product', product, id: 'akr-product-form', novalidate: 'novalidate', class: 'akr-product-form' -%}
-
-          <div style="display:none" data-shop-pay-installments-template>{{ form | payment_terms }}</div>
-
-          <!-- variant-selection web component (required by z__jsProduct.js + Appstle) -->
-          <variant-selection
-            class="variant-selection"
-            product-url="{{ product.url }}.js"
-            variant="{{ selected_variant.id }}"
-            data-variant-selection
-            style="display:none">
-            <select
-              class="variant-selection__variants"
-              name="id"
-              id="product-select-{{ product.id }}"
-              data-variants
-              style="display:none">
-              <option value="not-selected" disabled>Choose variant</option>
-              {%- for variant in product.variants -%}
-                <option value="{{ variant.id }}"
-                  {% if selected_variant and selected_variant.id == variant.id %}selected{% endif %}>
-                  {{ variant.title }}
-                </option>
-              {%- endfor -%}
-            </select>
-          </variant-selection>
-
-          <div class="purchase-details__buttons purchase-details__spb--false">
-            <button type="submit" name="add"
-                    class="akr-hero-atc-btn action_button button--add-to-cart ajax-submit"
-                    data-label="Add to Cart"
-                    data-add-to-cart-trigger>
-              <span class="text">Add to Cart</span>
-            </button>
-          </div>
-
-        {%- endform -%}
-
-      </div><!-- /product_form -->
+        {%- endif -%}
+      {%- endfor -%}
 
       <!-- Trust note -->
       {%- if section.settings.trust_note != blank -%}
@@ -300,25 +296,25 @@
     });
   });
 
-  // Pack variant selection — syncs the hidden select inside the form
+  // Pack variant selection — syncs the hidden select inside product__form
   var packBtns = document.querySelectorAll('.akr-hero-pack-btn');
-  var variantSelect = document.getElementById('product-select-{{ product.id }}');
 
   function akrSelectPack(btn) {
     packBtns.forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
     var vid = btn.getAttribute('data-variant-id');
+    // Use [data-variants] — the selector product__form uses on its select
+    var variantSelect = document.querySelector('[data-variants]');
     if (variantSelect) {
       variantSelect.value = vid;
       ['change','input'].forEach(function(ev) {
         variantSelect.dispatchEvent(new Event(ev, { bubbles: true }));
       });
     }
-    // Update variant-selection web component attribute (triggers Appstle + z__jsProduct)
+    // Also update the variant-selection web component attribute directly
     var vs = document.querySelector('[data-variant-selection]');
     if (vs) {
       vs.setAttribute('variant', vid);
-      vs.dispatchEvent(new CustomEvent('variant-change', { bubbles: true, detail: { variant: { id: parseInt(vid) } } }));
     }
   }
 
@@ -335,18 +331,6 @@
     });
   }
 
-  // Hide fallback ATC once Appstle injects its own UI (poll briefly)
-  var atcFallback = document.getElementById('akrAtcFallback');
-  if (atcFallback) {
-    var appstleCheck = setInterval(function() {
-      var appstleBtn = document.querySelector('.appstle_subscription_wrapper, .WIDGET_TYPE_7, [id^="appstle_subscription_widget"]');
-      if (appstleBtn) {
-        atcFallback.closest('.purchase-details__buttons').style.display = 'none';
-        clearInterval(appstleCheck);
-      }
-    }, 300);
-    setTimeout(function() { clearInterval(appstleCheck); }, 5000);
-  }
 })();
 </script>
 

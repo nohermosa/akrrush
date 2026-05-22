@@ -4,6 +4,11 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
+/* Hide duplicate Yotpo stars in the appstle/form area */
+.akr-hero-appstle-area .yotpo-sr-bottom-line,
+.akr-hero-appstle-area [class*="yotpo-sr"],
+.akr-hero-appstle-area [class*="yotpo_"] { display: none !important; }
+
 /* Appstle scoped overrides (mirrors product__main.liquid) */
 #shopify-section-{{ section.id }} .appstle_subscription_wrapper { display: block; }
 #shopify-section-{{ section.id }} .WIDGET_TYPE_7 .appstle_select option { font-family: Arial, sans-serif; }
@@ -120,10 +125,12 @@
     <!-- ===== RIGHT: Info ===== -->
     <div class="akr-hero-info-col">
 
-      <!-- Yotpo stars -->
+      <!-- Yotpo stars (first @app block) -->
+      {%- assign akr_yotpo_done = false -%}
       {%- for block in section.blocks -%}
-        {%- if block.type == '@app' and block.id == 'yotpo_stars' -%}
-          <div class="akr-hero-yotpo" {{ block.shopify_attributes }}>{% render block %}</div>
+        {%- if block.type == '@app' and akr_yotpo_done == false -%}
+          {%- assign akr_yotpo_done = true -%}
+          <div class="akr-hero-yotpo">{% render block %}</div>
         {%- endif -%}
       {%- endfor -%}
 
@@ -219,9 +226,9 @@
            data-money-format="{{ shop.money_format | strip_html }}"
            data-shop-currency="{{ shop.currency }}">
 
-        <!-- Appstle block OUTSIDE the form, INSIDE product_form wrapper (mirrors product.liquid) -->
+        <!-- All @app blocks rendered here; CSS hides any duplicate Yotpo stars -->
         {%- for block in section.blocks -%}
-          {%- if block.type == '@app' and block.id == 'appstle_widget' -%}
+          {%- if block.type == '@app' -%}
             <div class="akr-hero-appstle-area product-app" {{ block.shopify_attributes }}>
               {%- render block -%}
             </div>

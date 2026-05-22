@@ -226,16 +226,29 @@
 
           <div style="display:none" data-shop-pay-installments-template>{{ form | payment_terms }}</div>
 
-          <!-- Variant select -->
-          <select name="id" id="product-select-{{ product.id }}" data-variants
-                  style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px" aria-hidden="true">
-            {%- for variant in product.variants -%}
-              <option value="{{ variant.id }}"
-                      {% if variant.id == selected_variant.id %} selected{% endif %}>
-                {{ variant.title }}
-              </option>
-            {%- endfor -%}
-          </select>
+          <!-- variant-selection web component (required by z__jsProduct.js + Appstle) -->
+          <variant-selection
+            class="variant-selection"
+            product-url="{{ product.url }}.js"
+            variant="{{ selected_variant.id }}"
+            data-variant-selection
+            style="display:none">
+            <select
+              class="variant-selection__variants"
+              name="id"
+              id="product-select-{{ product.id }}"
+              data-variants
+              style="display:none">
+              <option value="not-selected" disabled>Choose variant</option>
+              {%- for variant in product.variants -%}
+                <option
+                  value="{{ variant.id }}"
+                  {% if selected_variant and selected_variant.id == variant.id %}selected{% endif %}>
+                  {{ variant.title }}
+                </option>
+              {%- endfor -%}
+            </select>
+          </variant-selection>
 
           <!-- Appstle subscription widget — inside the form (Appstle needs form context) -->
           <div class="akr-hero-appstle-area product-app">
@@ -302,8 +315,12 @@
         variantSelect.dispatchEvent(new Event(ev, { bubbles: true }));
       });
     }
-    // Also dispatch variant-change so Appstle picks up the new variant
-    document.dispatchEvent(new CustomEvent('variantChange', { bubbles: true, detail: { variant: { id: parseInt(vid) } } }));
+    // Update variant-selection web component attribute (triggers Appstle + z__jsProduct)
+    var vs = document.querySelector('[data-variant-selection]');
+    if (vs) {
+      vs.setAttribute('variant', vid);
+      vs.dispatchEvent(new CustomEvent('variant-change', { bubbles: true, detail: { variant: { id: parseInt(vid) } } }));
+    }
   }
 
   packBtns.forEach(function(btn) {

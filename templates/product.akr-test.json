@@ -14,15 +14,58 @@
       "blocks": {
         "yotpo_stars": {
           "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-          "settings": { "product": "{{product}}" }
+          "settings": {
+            "product": "{{product}}"
+          }
         },
-        "feature_1": { "type": "feature_point", "settings": { "text": "Replaces protein powder + collagen supplement" } },
-        "feature_2": { "type": "feature_point", "settings": { "text": "~100% protein bioavailability (enzymatic hydrolysis)" } },
-        "feature_3": { "type": "feature_point", "settings": { "text": "USDA & FDA Approved · Produced in Norway" } },
-        "feature_4": { "type": "feature_point", "settings": { "text": "30-day money-back guarantee" } },
-        "flavor_chicken":    { "type": "flavor_link", "settings": { "name": "Savory Chicken",  "image_asset": "akr-flavor-chicken.png",     "is_current": true } },
-        "flavor_ramen":      { "type": "flavor_link", "settings": { "name": "Ginger Ramen",    "image_asset": "akr-flavor-ramen.png",       "is_current": false } },
-        "flavor_chanterelle":{ "type": "flavor_link", "settings": { "name": "Chanterelle",     "image_asset": "akr-flavor-chanterelle.png", "is_current": false } },
+        "feature_1": {
+          "type": "feature_point",
+          "settings": {
+            "text": "Replaces protein powder + collagen supplement"
+          }
+        },
+        "feature_2": {
+          "type": "feature_point",
+          "settings": {
+            "text": "~100% protein bioavailability (enzymatic hydrolysis)"
+          }
+        },
+        "feature_3": {
+          "type": "feature_point",
+          "settings": {
+            "text": "USDA & FDA Approved · Produced in Norway"
+          }
+        },
+        "feature_4": {
+          "type": "feature_point",
+          "settings": {
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "flavor_chicken": {
+          "type": "flavor_link",
+          "settings": {
+            "name": "Savory Chicken",
+            "image_asset": "akr-flavor-chicken.png",
+            "is_current": true
+          }
+        },
+        "flavor_ramen": {
+          "type": "flavor_link",
+          "settings": {
+            "name": "Ginger Ramen",
+            "image_asset": "akr-flavor-ramen.png",
+            "is_current": false
+          }
+        },
+        "flavor_chanterelle": {
+          "type": "flavor_link",
+          "settings": {
+            "name": "Chanterelle",
+            "image_asset": "akr-flavor-chanterelle.png",
+            "is_current": false
+          }
+        },
         "appstle_widget": {
           "type": "shopify://apps/appstle-subscription/blocks/appstle-subscription-helper/fe257d39-6f88-4f35-ab08-bd437e3aa94e",
           "settings": {}
@@ -30,8 +73,13 @@
       },
       "block_order": [
         "yotpo_stars",
-        "feature_1", "feature_2", "feature_3", "feature_4",
-        "flavor_chicken", "flavor_ramen", "flavor_chanterelle",
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4",
+        "flavor_chicken",
+        "flavor_ramen",
+        "flavor_chanterelle",
         "appstle_widget"
       ],
       "settings": {
@@ -52,34 +100,125 @@
     "akr_ingredients": {
       "type": "akr-ingredients",
       "blocks": {
-        "card_collagen": { "type": "ingredient_card", "settings": { "icon_asset": "akr-icon-collagen.png", "title": "Hydrolyzed Collagen Peptides", "description": "Broken into tiny peptides for near-100% bioavailability. Free-range Nordic poultry, cleanly sourced for fast absorption." } },
-        "card_chicken":  { "type": "ingredient_card", "settings": { "icon_asset": "akr-icon-nordic.png",   "title": "Norwegian Chicken & Turkey",  "description": "Free-range Nordic poultry, cleanly sourced for fast absorption." } }
+        "card_collagen": {
+          "type": "ingredient_card",
+          "settings": {
+            "icon_key": "collagen",
+            "circle_color": "#fbdabe",
+            "title": "Hydrolyzed Collagen Peptides",
+            "description": "Broken into tiny peptides for near-100% bioavailability."
+          }
+        },
+        "card_chicken": {
+          "type": "ingredient_card",
+          "settings": {
+            "icon_key": "chicken",
+            "circle_color": "#cbd9c1",
+            "title": "Norwegian Chicken & Turkey",
+            "description": "Free-range Nordic poultry, cleanly sourced for fast absorption."
+          }
+        }
       },
-      "block_order": ["card_collagen", "card_chicken"],
+      "block_order": [
+        "card_collagen",
+        "card_chicken"
+      ],
       "settings": {
         "eyebrow": "How we stack up",
         "heading_before": "Meet the",
         "heading_italic": "ingredients",
         "clean_note": "Absolutely clean",
-        "photo_badge": "Lab tested · 100% traceable",
-        "gram_note": "Every gram tracked →",
+        "photo_badge": "Lab-tested · 100% bioavailable",
         "ingredients_text": "Ingredients: (Chicken, Turkey), Chicken Broth Seasoning, Natural Herbs & Spices."
       }
     },
     "akr_benefits": {
       "type": "akr-benefits",
       "blocks": {
-        "circle_protein":  { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-protein.png",   "circle_color": "#feb595", "name": "Protein",  "desc": "13g per stick" } },
-        "circle_collagen": { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-collagen2.png", "circle_color": "#fbdabe", "name": "Collagen", "desc": "Skin & joints" } },
-        "circle_joints":   { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-joints.png",    "circle_color": "#fdc85c", "name": "Joints",   "desc": "Reduced ache" } },
-        "circle_gut":      { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-gut.png",       "circle_color": "#cbd9c1", "name": "Gut",      "desc": "Better digestion" } },
-        "circle_energy":   { "type": "benefit_circle", "settings": { "icon_asset": "Hot Cup icon.svg",       "circle_color": "#fce3b4", "name": "Energy",   "desc": "No crash" } },
-        "circle_nordic":   { "type": "benefit_circle", "settings": { "icon_asset": "akr-icon-nordic.png",    "circle_color": "#a1cccf", "name": "Nordic",   "desc": "100% Norwegian" } },
-        "point_1": { "type": "benefit_point", "settings": { "text": "13g hydrolyzed protein your body absorbs in minutes" } },
-        "point_2": { "type": "benefit_point", "settings": { "text": "Zero artificial fillers, sweeteners, or preservatives" } },
-        "point_3": { "type": "benefit_point", "settings": { "text": "Made from Norwegian chicken & turkey bones — sourced from cage-free Nordic farms" } }
+        "circle_protein": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-icon-protein.png",
+            "circle_color": "#feb595",
+            "name": "Protein",
+            "desc": "13g per stick"
+          }
+        },
+        "circle_collagen": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-icon-collagen2.png",
+            "circle_color": "#fbdabe",
+            "name": "Collagen",
+            "desc": "Skin & joints"
+          }
+        },
+        "circle_joints": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-icon-joints.png",
+            "circle_color": "#fdc85c",
+            "name": "Joints",
+            "desc": "Reduced ache"
+          }
+        },
+        "circle_gut": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-icon-gut.png",
+            "circle_color": "#cbd9c1",
+            "name": "Gut",
+            "desc": "Better digestion"
+          }
+        },
+        "circle_energy": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "Hot Cup icon.svg",
+            "circle_color": "#fce3b4",
+            "name": "Energy",
+            "desc": "No crash"
+          }
+        },
+        "circle_nordic": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-icon-nordic.png",
+            "circle_color": "#a1cccf",
+            "name": "Nordic",
+            "desc": "100% Norwegian"
+          }
+        },
+        "point_1": {
+          "type": "benefit_point",
+          "settings": {
+            "text": "13g hydrolyzed protein your body absorbs in minutes"
+          }
+        },
+        "point_2": {
+          "type": "benefit_point",
+          "settings": {
+            "text": "Zero artificial fillers, sweeteners, or preservatives"
+          }
+        },
+        "point_3": {
+          "type": "benefit_point",
+          "settings": {
+            "text": "Made from Norwegian chicken & turkey bones — sourced from cage-free Nordic farms"
+          }
+        }
       },
-      "block_order": ["circle_protein","circle_collagen","circle_joints","circle_gut","circle_energy","circle_nordic","point_1","point_2","point_3"],
+      "block_order": [
+        "circle_protein",
+        "circle_collagen",
+        "circle_joints",
+        "circle_gut",
+        "circle_energy",
+        "circle_nordic",
+        "point_1",
+        "point_2",
+        "point_3"
+      ],
       "settings": {
         "heading_before": "Real benefits",
         "heading_italic": "inside",
@@ -94,14 +233,57 @@
     "akr_faq": {
       "type": "akr-faq",
       "blocks": {
-        "faq_1": { "type": "faq_item", "settings": { "question": "How is åKrrush different from regular bone broth?", "answer": "Every batch is third-party tested for heavy metals, contaminants, and microbial safety. USDA approved, FDA compliant. We use enzymatic hydrolysis — a cold-process that breaks collagen into small peptides your body absorbs 1.5× faster than traditionally boiled broth." } },
-        "faq_2": { "type": "faq_item", "settings": { "question": "Can I mix it with food or just drink it?", "answer": "Both! åKrrush dissolves instantly in hot water for drinking, but it also works beautifully stirred into soups, sauces, oatmeal, or smoothies. Many subscribers add it to recipes for a clean protein boost without affecting the flavor." } },
-        "faq_3": { "type": "faq_item", "settings": { "question": "How do subscriptions work?", "answer": "Choose your pack size (12, 24, or 36 sticks) and delivery frequency (30, 45, or 60 days). You save 10% automatically. Skip, pause, swap flavors, or cancel any time — no lock-in, no penalty. Manage everything from your customer account." } },
-        "faq_4": { "type": "faq_item", "settings": { "question": "Is åKrrush suitable for keto, paleo, or Whole30?", "answer": "Yes to all three. åKrrush has 0g sugar, 0g net carbs, no grains, no dairy, no legumes. It's gluten-free, non-GMO, and contains no artificial anything. Perfect for elimination protocols and clean eating." } },
-        "faq_5": { "type": "faq_item", "settings": { "question": "When will I see results?", "answer": "Most subscribers notice improved energy and digestion within the first week. Joint and skin improvements typically appear after 3–6 weeks of daily use, as collagen peptides accumulate in connective tissue. 87% of subscribers reorder — that tells the story." } },
-        "faq_6": { "type": "faq_item", "settings": { "question": "Where is åKrrush made?", "answer": "åKrrush is a Product of Norway, packaged in the USA. 99%+ of our ingredients are sourced from Norway — free-range Nordic poultry, clean herbs and spices. We're USDA and FDA approved for the US market." } }
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How is åKrrush different from regular bone broth?",
+            "answer": "Every batch is third-party tested for heavy metals, contaminants, and microbial safety. USDA approved, FDA compliant. We use enzymatic hydrolysis — a cold-process that breaks collagen into small peptides your body absorbs 1.5× faster than traditionally boiled broth."
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I mix it with food or just drink it?",
+            "answer": "Both! åKrrush dissolves instantly in hot water for drinking, but it also works beautifully stirred into soups, sauces, oatmeal, or smoothies. Many subscribers add it to recipes for a clean protein boost without affecting the flavor."
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do subscriptions work?",
+            "answer": "Choose your pack size (12, 24, or 36 sticks) and delivery frequency (30, 45, or 60 days). You save 10% automatically. Skip, pause, swap flavors, or cancel any time — no lock-in, no penalty. Manage everything from your customer account."
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is åKrrush suitable for keto, paleo, or Whole30?",
+            "answer": "Yes to all three. åKrrush has 0g sugar, 0g net carbs, no grains, no dairy, no legumes. It's gluten-free, non-GMO, and contains no artificial anything. Perfect for elimination protocols and clean eating."
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "When will I see results?",
+            "answer": "Most subscribers notice improved energy and digestion within the first week. Joint and skin improvements typically appear after 3–6 weeks of daily use, as collagen peptides accumulate in connective tissue. 87% of subscribers reorder — that tells the story."
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where is åKrrush made?",
+            "answer": "åKrrush is a Product of Norway, packaged in the USA. 99%+ of our ingredients are sourced from Norway — free-range Nordic poultry, clean herbs and spices. We're USDA and FDA approved for the US market."
+          }
+        }
       },
-      "block_order": ["faq_1","faq_2","faq_3","faq_4","faq_5","faq_6"],
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6"
+      ],
       "settings": {
         "heading_line1": "Everything you",
         "heading_italic": "actually",
@@ -117,5 +299,10 @@
       }
     }
   },
-  "order": ["akr_hero", "akr_ingredients", "akr_benefits", "akr_faq"]
+  "order": [
+    "akr_hero",
+    "akr_ingredients",
+    "akr_benefits",
+    "akr_faq"
+  ]
 }

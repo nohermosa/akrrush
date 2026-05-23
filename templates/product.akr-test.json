@@ -132,6 +132,14 @@
         "ingredients_text": "Ingredients: (Chicken, Turkey), Chicken Broth Seasoning, Natural Herbs & Spices."
       }
     },
+    "akr_why": {
+      "type": "akr-why",
+      "settings": {
+        "cta_url": "/products/bone-broth",
+        "cta_label": "TASTE THE DIFFERENCE — SHOP NOW →",
+        "trust_text": "Free shipping over $50 · 30-day money-back guarantee"
+      }
+    },
     "akr_benefits": {
       "type": "akr-benefits",
       "blocks": {
@@ -302,6 +310,7 @@
   "order": [
     "akr_hero",
     "akr_ingredients",
+    "akr_why",
     "akr_benefits",
     "akr_faq"
   ]

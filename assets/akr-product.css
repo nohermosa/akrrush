@@ -177,33 +177,21 @@
   box-shadow: 0 4px 16px rgba(44,26,16,.12);
 }
 
-/* "Every gram tracked" — Figma Frame62: left calc(50%-52px) in 1200px inner, top 490.5px, translateY(-50%) */
-/* Photo(480) + gap(150) + NF(480) = 1110px, centered → midpoint at 555px from content edge */
-/* Layout justify-content:center so mid = 50% of layout. Same formula works. */
+/* "Every gram tracked" — SVG asset, Figma Frame62: left calc(50%-49px), top 490.5px */
 .akr-ing-gram-outer {
   position: absolute;
-  left: calc(50% - 52px);
+  left: calc(50% - 49px);
   top: 490.5px;
-  width: 104px;
-  height: 79px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 98px;
+  height: 75px;
   transform: translateY(-50%);
   pointer-events: none;
   z-index: 10;
 }
-.akr-ing-gram-note {
-  font-family: 'Caveat', cursive !important;
-  font-size: 24px;
-  color: #e55a2d;
-  transform: rotate(-15.1deg);
-  line-height: 0.8;
-  white-space: nowrap;
-}
-.akr-ing-gram-note p {
-  margin: 0;
-  line-height: 0.8;
+.akr-ing-gram-svg {
+  display: block;
+  width: 98px;
+  height: 75px;
 }
 
 /* ── Nutrition Facts card ── */

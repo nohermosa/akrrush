@@ -439,10 +439,14 @@
   overflow: hidden;
   flex-shrink: 0;
 }
-.akr-benefit-circle img {
-  width: 104px;
-  height: 104px;
+.akr-benefit-circle img,
+.akr-benefit-circle-icon {
+  width: auto;
+  height: auto;
+  max-width: 62%;
+  max-height: 62%;
   object-fit: contain;
+  display: block;
 }
 .akr-benefit-name {
   font-family: 'DM Serif Display', 'Georgia', serif !important;
@@ -469,9 +473,11 @@
   overflow: hidden;
   background: #e1cbb2;
 }
-.akr-benefits-photo img {
+.akr-benefits-photo img,
+.akr-benefits-photo-img {
   width: 100%;
   display: block;
+  border-radius: 40px;
 }
 .akr-benefits-text-heading {
   font-family: 'DM Serif Display', 'Georgia', serif !important;
@@ -482,6 +488,7 @@
   margin-top: 0;
 }
 .akr-benefits-text-heading em { font-style: italic; }
+.akr-benefits-text-orange { color: #ea7552; font-style: italic; }
 .akr-benefits-text-desc {
   font-size: 18px;
   color: var(--akr-mid);
@@ -1278,7 +1285,8 @@
   .akr-benefits-icons-row { gap: 8px; }
   .akr-benefit-item { width: 100px; }
   .akr-benefit-circle { width: 100px; height: 100px; }
-  .akr-benefit-circle img { width: 64px; height: 64px; }
+  .akr-benefit-circle img,
+  .akr-benefit-circle-icon { max-width: 60%; max-height: 60%; }
   .akr-faq-tabs { overflow-x: auto; padding-bottom: 4px; flex-wrap: nowrap; }
 }
 @media (max-width: 480px) {

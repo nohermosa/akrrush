@@ -138,7 +138,7 @@
         "circle_protein": {
           "type": "benefit_circle",
           "settings": {
-            "icon_asset": "akr-icon-protein.png",
+            "icon_asset": "akr-ben-icon-protein.svg",
             "circle_color": "#feb595",
             "name": "Protein",
             "desc": "13g per stick"
@@ -147,7 +147,7 @@
         "circle_collagen": {
           "type": "benefit_circle",
           "settings": {
-            "icon_asset": "akr-icon-collagen2.png",
+            "icon_asset": "akr-ben-icon-collagen2.svg",
             "circle_color": "#fbdabe",
             "name": "Collagen",
             "desc": "Skin & joints"
@@ -156,7 +156,7 @@
         "circle_joints": {
           "type": "benefit_circle",
           "settings": {
-            "icon_asset": "akr-icon-joints.png",
+            "icon_asset": "akr-ben-icon-joints.svg",
             "circle_color": "#fdc85c",
             "name": "Joints",
             "desc": "Reduced ache"
@@ -165,7 +165,7 @@
         "circle_gut": {
           "type": "benefit_circle",
           "settings": {
-            "icon_asset": "akr-icon-gut.png",
+            "icon_asset": "akr-ben-icon-gut.svg",
             "circle_color": "#cbd9c1",
             "name": "Gut",
             "desc": "Better digestion"
@@ -174,7 +174,7 @@
         "circle_energy": {
           "type": "benefit_circle",
           "settings": {
-            "icon_asset": "Hot Cup icon.svg",
+            "icon_asset": "akr-ben-icon-energy.svg",
             "circle_color": "#fce3b4",
             "name": "Energy",
             "desc": "No crash"
@@ -183,7 +183,7 @@
         "circle_nordic": {
           "type": "benefit_circle",
           "settings": {
-            "icon_asset": "akr-icon-nordic.png",
+            "icon_asset": "akr-ben-icon-nordic.svg",
             "circle_color": "#a1cccf",
             "name": "Nordic",
             "desc": "100% Norwegian"

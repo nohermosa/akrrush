@@ -1,0 +1,86 @@
+{{ 'akr-product.css' | asset_url | stylesheet_tag }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+
+<section class="akr-num-section" id="akr-numbers">
+  <div class="akr-num-inner">
+
+    <!-- LEFT STICK -->
+    <div class="akr-num-side akr-num-side-left">
+      <img class="akr-num-stick-img" src="{{ 'akr-stick-savory-chicken.png' | asset_url }}" alt="Savory Chicken stick">
+      <span class="akr-num-float-hp">Hydrolyzed Protein</span>
+      <svg class="akr-num-deco-squiggle" width="72" height="18" viewBox="0 0 72 18" fill="none" aria-hidden="true">
+        <path d="M2 9 Q10 2 18 9 Q26 16 34 9 Q42 2 50 9 Q58 16 70 9" stroke="#ffc03c" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <svg class="akr-num-deco-asterisk" width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <line x1="13" y1="1" x2="13" y2="25" stroke="#ea7552" stroke-width="2" stroke-linecap="round"/>
+        <line x1="1" y1="13" x2="25" y2="13" stroke="#ea7552" stroke-width="2" stroke-linecap="round"/>
+        <line x1="4.5" y1="4.5" x2="21.5" y2="21.5" stroke="#ea7552" stroke-width="2" stroke-linecap="round"/>
+        <line x1="21.5" y1="4.5" x2="4.5" y2="21.5" stroke="#ea7552" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <!-- CENTER CONTENT -->
+    <div class="akr-num-center">
+      <img src="{{ 'akr-badge-teal-kos.svg' | asset_url }}" class="akr-num-kos-badge" alt="kos">
+      <div class="akr-num-eyebrow">NORWEGIAN QUALITY · THIRD-PARTY TESTED</div>
+      <h2 class="akr-num-heading">Numbers don't <em class="akr-num-lie">lie<img src="{{ 'akr-underline-strong.svg' | asset_url }}" class="akr-num-lie-underline" alt=""></em>.</h2>
+
+      <div class="akr-num-stats-box">
+        <div class="akr-num-lab-note">← lab tested</div>
+        <div class="akr-num-stats">
+          <div class="akr-num-stat">
+            <div class="akr-num-value">13g</div>
+            <div class="akr-num-label">PROTEIN PER SERVING</div>
+            <div class="akr-num-desc">vs. 10g industry average</div>
+          </div>
+          <div class="akr-num-stat">
+            <div class="akr-num-value">0g</div>
+            <div class="akr-num-label">ADDED SUGAR</div>
+            <div class="akr-num-desc">Clean label, every batch</div>
+          </div>
+          <div class="akr-num-stat">
+            <div class="akr-num-value">99%</div>
+            <div class="akr-num-label">NORWEGIAN POULTRY</div>
+            <div class="akr-num-desc">USDA &amp; FDA approved</div>
+          </div>
+          <div class="akr-num-stat">
+            <div class="akr-num-value">30-day</div>
+            <div class="akr-num-label">MONEY-BACK GUARANTEE</div>
+            <div class="akr-num-desc">Shop with confidence</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="akr-num-below-row">
+        <span class="akr-num-badge akr-num-badge-amber">Norwegian Sourced</span>
+        <a href="{{ section.settings.cta_url }}" class="akr-btn-lab">{{ section.settings.cta_label }}</a>
+        <span class="akr-num-badge akr-num-badge-outline">Cage-Free</span>
+      </div>
+    </div>
+
+    <!-- RIGHT STICK -->
+    <div class="akr-num-side akr-num-side-right">
+      <img class="akr-num-stick-img" src="{{ 'akr-stick-ginger-ramen.png' | asset_url }}" alt="Ginger Ramen stick">
+      <span class="akr-num-float-13g">13g Per Stick</span>
+      <img src="{{ 'akr-spark-orange.svg' | asset_url }}" class="akr-num-deco-sun" aria-hidden="true" alt="">
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "åKr Numbers",
+  "tag": "div",
+  "class": "akr-numbers-wrapper",
+  "settings": [
+    { "type": "url",  "id": "cta_url",   "label": "CTA button URL" },
+    { "type": "text", "id": "cta_label", "label": "CTA button label", "default": "VIEW LAB RESULTS →" }
+  ],
+  "presets": [
+    { "name": "åKr Numbers" }
+  ]
+}
+{% endschema %}

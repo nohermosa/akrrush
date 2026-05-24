@@ -1932,7 +1932,7 @@
 /* Heading — left-aligned, DM Serif Display */
 .akr-social-heading-block { position: relative; width: 100%; text-align: center; }
 .akr-social-heading {
-  font-family: 'DM Serif Display', 'Georgia', serif;
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
   font-size: 68px;
   font-weight: 700;
   font-style: normal;
@@ -1946,8 +1946,9 @@
   display: inline-block;
 }
 .akr-social-heading-orange {
-  font-style: italic;
+  font-style: italic !important;
   color: #ea7552;
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
 }
 .akr-social-real-underline {
   position: absolute;
@@ -1993,9 +1994,9 @@
 }
 .akr-social-stat:last-child { padding-right: 0; }
 .akr-social-stat-val {
-  font-family: 'DM Serif Display', 'Georgia', serif;
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
   font-size: clamp(36px, 4vw, 48px);
-  font-weight: 400;
+  font-weight: 700;
   color: #2c1a10;
   line-height: 1;
 }
@@ -2178,7 +2179,7 @@
   color: #fff;
   border-radius: 14px;
   padding: 10px 16px;
-  font-family: 'DM Serif Display', Georgia, serif;
+  font-family: 'DM Serif Display', Georgia, serif !important;
   font-size: 24px;
   font-weight: 400;
   text-align: center;

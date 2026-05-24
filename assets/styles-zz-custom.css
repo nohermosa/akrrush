@@ -87,6 +87,17 @@ p, div, span,
   font-family: 'Enkel', sans-serif !important;
 }
 
+/* Allow custom akr sections to use their own fonts */
+[class*="akr-"],
+[class*="akr-"] h1,
+[class*="akr-"] h2,
+[class*="akr-"] h3,
+[class*="akr-"] p,
+[class*="akr-"] span,
+[class*="akr-"] div {
+  font-family: inherit !important;
+}
+
 /* =============================================
    2. Typography
    ============================================= */

@@ -647,6 +647,128 @@
   box-shadow: 0 14px 30px rgba(44,26,16,0.13);
 }
 
+
+/* -------- BENEFIT ICON ANIMATIONS -------- */
+.akr-benefit-item {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.akr-benefit-item.akr-ben-anim-ready {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.akr-benefit-item.akr-ben-anim-ready.akr-ben-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+.akr-protein-body, .akr-protein-smile,
+.akr-collagen-mol,
+.akr-joint-lower, .akr-joint-upper,
+.akr-gut-n1, .akr-gut-n2, .akr-gut-n3, .akr-gut-n4,
+.akr-energy-bolt, .akr-energy-rays,
+.akr-nordic-water {
+  transform-box: fill-box;
+  transform-origin: center center;
+}
+/* 1. PROTEIN — flex bounce */
+@keyframes akr-ben-protein-bounce {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-7px); }
+  65% { transform: translateY(-4px); }
+}
+.akr-protein-body {
+  animation: akr-ben-protein-bounce 2.2s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.akr-ben-animate .akr-protein-body { animation-play-state: running; }
+/* 2. COLLAGEN — slow rotate */
+@keyframes akr-ben-collagen-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.akr-collagen-mol {
+  animation: akr-ben-collagen-rotate 9s linear infinite;
+  animation-play-state: paused;
+}
+.akr-ben-animate .akr-collagen-mol { animation-play-state: running; }
+/* 3. JOINTS — knee bend */
+@keyframes akr-ben-joints-bend {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(-16deg); }
+  60% { transform: rotate(-10deg); }
+  80% { transform: rotate(-3deg); }
+}
+.akr-joint-lower {
+  transform-origin: center top !important;
+  animation: akr-ben-joints-bend 2.6s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.akr-ben-animate .akr-joint-lower { animation-play-state: running; }
+/* 4. GUT — peristalsis stagger */
+@keyframes akr-ben-gut-pulse {
+  0%, 80%, 100% { transform: scale(1); }
+  40% { transform: scale(1.28); }
+}
+.akr-gut-n1 { animation: akr-ben-gut-pulse 2s ease-in-out 0s infinite; animation-play-state: paused; }
+.akr-gut-n2 { animation: akr-ben-gut-pulse 2s ease-in-out 0.25s infinite; animation-play-state: paused; }
+.akr-gut-n3 { animation: akr-ben-gut-pulse 2s ease-in-out 0.5s infinite; animation-play-state: paused; }
+.akr-gut-n4 { animation: akr-ben-gut-pulse 2s ease-in-out 0.75s infinite; animation-play-state: paused; }
+.akr-ben-animate .akr-gut-n1,
+.akr-ben-animate .akr-gut-n2,
+.akr-ben-animate .akr-gut-n3,
+.akr-ben-animate .akr-gut-n4 { animation-play-state: running; }
+/* 5. ENERGY — rays pulse + bolt blink */
+@keyframes akr-ben-energy-rays {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.14); opacity: 0.65; }
+}
+@keyframes akr-ben-energy-bolt {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.15; }
+  55% { opacity: 1; }
+}
+.akr-energy-rays {
+  animation: akr-ben-energy-rays 1.8s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.akr-energy-bolt {
+  animation: akr-ben-energy-bolt 1.8s ease-in-out 0.3s infinite;
+  animation-play-state: paused;
+}
+.akr-ben-animate .akr-energy-rays { animation-play-state: running; }
+.akr-ben-animate .akr-energy-bolt { animation-play-state: running; }
+/* 6. NORDIC — water drift */
+@keyframes akr-ben-nordic-water {
+  0%, 100% { transform: translateX(0); }
+  33% { transform: translateX(5px); }
+  66% { transform: translateX(-4px); }
+}
+.akr-nordic-water {
+  animation: akr-ben-nordic-water 3s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.akr-ben-animate .akr-nordic-water { animation-play-state: running; }
+/* Hover acceleration */
+.akr-benefit-item:hover .akr-protein-body,
+.akr-benefit-item:hover .akr-collagen-mol,
+.akr-benefit-item:hover .akr-joint-lower,
+.akr-benefit-item:hover .akr-gut-n1,
+.akr-benefit-item:hover .akr-gut-n2,
+.akr-benefit-item:hover .akr-gut-n3,
+.akr-benefit-item:hover .akr-gut-n4,
+.akr-benefit-item:hover .akr-energy-rays,
+.akr-benefit-item:hover .akr-energy-bolt,
+.akr-benefit-item:hover .akr-nordic-water {
+  will-change: transform;
+  animation-duration: 0.7s;
+}
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .akr-benefit-item.akr-ben-anim-ready { opacity: 1; transform: none; transition: none; }
+  .akr-protein-body, .akr-collagen-mol, .akr-joint-lower,
+  .akr-gut-n1, .akr-gut-n2, .akr-gut-n3, .akr-gut-n4,
+  .akr-energy-rays, .akr-energy-bolt, .akr-nordic-water { animation: none !important; }
+}
+
 /* =============================================================
    SECTION: FAQ
    ============================================================= */

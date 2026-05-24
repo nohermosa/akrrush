@@ -46,6 +46,12 @@
 .akr-faq-q-text {
   font-family: 'DM Serif Display', 'Georgia', serif !important;
 }
+.akr-ing-heading,
+.akr-benefits-heading,
+.akr-benefits-text-heading,
+.akr-faq-heading {
+  font-weight: 700 !important;
+}
 .akr-ing-clean-note {
   font-family: 'Caveat', cursive !important;
 }
@@ -75,6 +81,7 @@
 }
 .akr-ing-heading {
   font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-weight: 700 !important;
   font-size: 68px;
   color: var(--akr-dark);
   line-height: 1;
@@ -1641,7 +1648,7 @@
 /* Center content */
 .akr-num-center { padding: 28px 40px 36px; text-align: center; position: relative; }
 .akr-num-eyebrow { font-family: Arial, sans-serif; font-size: 12px; font-weight: 600; color: var(--akr-dark); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 14px; opacity: .55; }
-.akr-num-heading { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(48px, 5.5vw, 84px); color: var(--akr-dark); text-align: center; margin-bottom: 32px; line-height: 1; font-weight: 700; }
+.akr-num-heading { font-family: 'DM Serif Display', Georgia, serif !important; font-size: clamp(48px, 5.5vw, 84px); color: var(--akr-dark); text-align: center; margin-bottom: 32px; line-height: 1; font-weight: 700 !important; }
 .akr-num-lie { font-style: italic; position: relative; display: inline-block; }
 .akr-num-lie-underline { position: absolute; bottom: -8px; left: 0; width: 100%; height: auto; display: block; pointer-events: none; }
 /* Stats box */

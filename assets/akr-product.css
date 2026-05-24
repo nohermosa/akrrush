@@ -480,7 +480,7 @@
   border-radius: 40px;
   overflow: hidden;
   background: #e1cbb2;
-  aspect-ratio: 4/5;
+  aspect-ratio: 5/4;
 }
 .akr-benefits-photo img,
 .akr-benefits-photo-img {
@@ -488,7 +488,7 @@
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 15%;
   border-radius: 40px;
 }
 .akr-benefits-text-heading {

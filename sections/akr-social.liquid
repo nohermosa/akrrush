@@ -77,7 +77,7 @@
     </div><!-- /akr-social-left -->
 
     <!-- ===== RIGHT: phone mockup ===== -->
-    <div class="akr-social-phone-wrap">
+    <button class="akr-social-phone-wrap" aria-label="Watch the full ritual video" onclick="document.getElementById('akr-video-modal').classList.add('akr-vm-open')">
       <!-- Glow behind phone (Figma Group32: two blurred orange ellipses) -->
       <div class="akr-social-phone-glow" aria-hidden="true"></div>
       <!-- Inner clip frame — exactly 468×729 as in Figma "image 14" container -->
@@ -89,10 +89,44 @@
           loading="lazy"
         >
       </div>
-    </div>
+    </button>
 
   </div><!-- /akr-social-inner -->
 </section>
+
+<!-- ===== Video lightbox ===== -->
+<div id="akr-video-modal" class="akr-vm" role="dialog" aria-modal="true" aria-label="Thalia's ritual video">
+  <div class="akr-vm-backdrop" onclick="document.getElementById('akr-video-modal').classList.remove('akr-vm-open'); document.getElementById('akr-vm-vid').pause();"></div>
+  <div class="akr-vm-box">
+    <button class="akr-vm-close" aria-label="Close video" onclick="document.getElementById('akr-video-modal').classList.remove('akr-vm-open'); document.getElementById('akr-vm-vid').pause();">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M2 2L18 18M18 2L2 18" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <video
+      id="akr-vm-vid"
+      class="akr-vm-video"
+      src="{{ 'akr-thalia-ritual.mp4' | asset_url }}"
+      controls
+      playsinline
+      preload="none"
+    ></video>
+  </div>
+</div>
+
+<script>
+  document.getElementById('akr-video-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.classList.remove('akr-vm-open');
+      document.getElementById('akr-vm-vid').pause();
+    }
+  });
+  document.getElementById('akr-video-modal').addEventListener('transitionend', function() {
+    if (this.classList.contains('akr-vm-open')) {
+      document.getElementById('akr-vm-vid').play();
+    }
+  });
+</script>
 
 {% schema %}
 {

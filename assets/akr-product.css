@@ -2013,56 +2013,170 @@
   white-space: nowrap;
 }
 .akr-social-btn:hover { background: #d65e35; color: white; }
-/* RIGHT: phone mockup — outer wrapper matches Figma Group9 (545×748) */
-.akr-social-phone-wrap {
+/* ===== RIGHT: CSS-built phone frame (mockup style) ===== */
+.akr-phone-side {
   position: relative;
-  width: 545px;
-  height: 748px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   flex-shrink: 0;
-  /* no overflow:hidden here — glow must bleed outside */
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: block;
 }
-/* poster img transition on play */
-.akr-social-phone-img { transition: opacity 0.3s ease; }
-/* Glow behind phone: approximates Figma Group32 two blurred orange ellipses */
-.akr-social-phone-glow {
+/* Radial orange glow behind phone */
+.akr-phone-glow {
   position: absolute;
-  /* inset mirrors Figma inset-[-53.96%_-72.24%] relative to 545×748 parent */
-  top: -54%;
-  bottom: -54%;
-  left: -72%;
-  right: -72%;
-  border-radius: 50%;
-  background:
-    radial-gradient(ellipse 36% 46% at 50% 52%, rgba(242,99,58,0.55) 0%, rgba(242,99,58,0) 65%),
-    radial-gradient(ellipse 26% 37% at 50% 52%, rgba(242,99,58,0.45) 0%, rgba(242,99,58,0) 55%);
-  filter: blur(60px);
-  pointer-events: none;
+  inset: -80px;
+  background: radial-gradient(ellipse 70% 80% at 60% 50%, rgba(234,117,82,0.35) 0%, rgba(234,117,82,0.1) 50%, transparent 75%);
   z-index: 0;
+  pointer-events: none;
 }
-/* Inner clip frame — exactly 468×729 as Figma "image 14" container, offset ml=52.81 mt=9.25 */
-.akr-social-phone-inner {
-  position: absolute;
-  left: 52.81px;
-  top: 9.25px;
-  width: 468px;
-  height: 729px;
-  overflow: hidden;
+/* Phone tilt — matches mockup rotate(5.9deg) */
+.akr-phone-outer {
+  position: relative;
+  width: 280px;
+  flex-shrink: 0;
+  transform: rotate(5.9deg);
+  transform-origin: center bottom;
   z-index: 1;
 }
-/* Image percentages relative to phone-inner (468×729) — matches Figma exactly, preserves 1.93:1 ratio */
-.akr-social-phone-img {
+/* Dark phone chassis */
+.akr-phone-frame {
+  background: #111;
+  border-radius: 52px;
+  padding: 10px;
+  box-shadow: 0 32px 80px rgba(44,26,16,0.32), 0 0 0 1px rgba(0,0,0,0.18);
+}
+/* Screen area — 9:19.5 ratio, clips video/poster */
+.akr-phone-screen {
+  border-radius: 44px;
+  overflow: hidden;
+  aspect-ratio: 9 / 19.5;
+  position: relative;
+  background: #000;
+  cursor: pointer;
+}
+/* Play button overlay — centered */
+.akr-phone-play-btn {
   position: absolute;
-  width: 333.33%;
-  height: 110.91%;
-  left: -203.43%;
-  top: -6.16%;
-  max-width: none;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  pointer-events: none;
+}
+.akr-phone-play-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.32);
+}
+.akr-phone-play-circle svg { margin-left: 4px; }
+/* TikTok right sidebar */
+.akr-phone-likes {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  z-index: 2;
+}
+.akr-phone-like-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+}
+/* TikTok bottom bar */
+.akr-phone-tiktok-ui {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 14px;
+  background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 100%);
+  z-index: 2;
+}
+.akr-phone-user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+.akr-phone-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--akr-orange);
+  border: 1.5px solid #fff;
+  flex-shrink: 0;
+}
+.akr-phone-username {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+.akr-phone-verified {
+  font-size: 9px;
+  color: #fff;
+  background: rgba(255,255,255,0.25);
+  border-radius: 3px;
+  padding: 2px 6px;
+  margin-left: 2px;
+  font-family: Arial, sans-serif;
+}
+.akr-phone-song {
+  font-size: 10px;
+  color: rgba(255,255,255,0.8);
+  font-family: Arial, sans-serif;
+}
+/* 240K views badge — bottom-right, rotated */
+.akr-phone-views-badge {
+  position: absolute;
+  bottom: -18px;
+  right: -24px;
+  background: var(--akr-teal);
+  color: #fff;
+  border-radius: 16px;
+  padding: 12px 18px;
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 6px 24px rgba(44,26,16,0.18);
+  transform: rotate(-4deg);
+  line-height: 1;
+  z-index: 4;
+  min-width: 96px;
+}
+.akr-phone-views-badge small {
   display: block;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  margin-top: 4px;
+}
+.akr-phone-views-spark {
+  position: absolute;
+  top: 6px;
+  right: -44px;
+  width: 32px;
+  height: auto;
+  transform: rotate(-90deg);
+  z-index: 5;
 }
 /* Responsive */
 @media (max-width: 1200px) {
@@ -2070,19 +2184,12 @@
   .akr-social-left { width: 520px; }
   .akr-social-heading { font-size: 56px; }
   .akr-social-stat-val { font-size: 40px; }
-  /* Scale phone-wrap proportionally (Figma ratio 545:748) */
-  .akr-social-phone-wrap { width: 420px; height: 576px; }
-  .akr-social-phone-inner { left: 41px; top: 7px; width: 360px; height: 561px; }
 }
 @media (max-width: 900px) {
   .akr-social-section { padding: 64px 32px; }
   .akr-social-inner { flex-direction: column; gap: 48px; }
   .akr-social-left { width: 100%; }
-  /* At tablet, show image naturally (no crop) — full image is self-contained */
-  .akr-social-phone-wrap { width: 100%; max-width: 480px; height: auto; }
-  .akr-social-phone-inner { position: relative; left: auto; top: auto; width: 100%; height: auto; overflow: visible; }
-  .akr-social-phone-img { position: relative; width: 100%; height: auto; left: auto; top: auto; }
-  .akr-social-phone-glow { display: none; }
+  .akr-phone-outer { width: 300px; }
 }
 @media (max-width: 600px) {
   .akr-social-section { padding: 48px 20px; }
@@ -2090,63 +2197,8 @@
   .akr-social-stat-val { font-size: 32px; }
   .akr-social-stat { padding: 12px 16px; }
   .akr-social-sub { font-size: 16px; }
+  .akr-phone-outer { width: 260px; }
 }
-
-/* Inline phone video */
-.akr-social-phone-vid {
-  display: none;
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 2;
-  border-radius: inherit;
-}
-/* Phone inner: show rounded border when video playing */
-.akr-phone-playing {
-  border-radius: 28px;
-  box-shadow: 0 0 0 6px #1a1a1a, 0 16px 48px rgba(0,0,0,0.35);
-}
-/* Play button — centered over phone */
-.akr-social-phone-playbtn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.92);
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-  transition: transform 0.15s ease, background 0.15s ease;
-}
-.akr-social-phone-playbtn:hover { transform: translate(-50%, -50%) scale(1.08); background: white; }
-.akr-social-phone-playbtn svg { margin-left: 3px; }
-/* Stop button — top-right corner inside phone */
-.akr-social-phone-stop {
-  display: none;
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 4;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.55);
-  border: none;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(4px);
-}
-.akr-social-phone-stop:hover { background: rgba(0,0,0,0.8); }
 
 /* =============================================================
    SECTION: NUMBERS DON'T LIE (v9-figma 1:1)

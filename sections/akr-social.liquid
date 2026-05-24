@@ -4,13 +4,11 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
 <section class="akr-social-section" id="akr-social">
-
   <div class="akr-social-inner">
 
-    <!-- ===== LEFT: text content ===== -->
+    <!-- ===== LEFT ===== -->
     <div class="akr-social-left">
 
-      <!-- Pills -->
       <div class="akr-social-pills">
         <span class="akr-social-pill akr-social-pill-orange">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -26,7 +24,6 @@
         </span>
       </div>
 
-      <!-- Heading -->
       <div class="akr-social-heading-block">
         <h2 class="akr-social-heading">
           Real ritual.
@@ -40,10 +37,8 @@
         </h2>
       </div>
 
-      <!-- Subtext -->
       <p class="akr-social-sub">Watch Thalia's morning ritual in 60 seconds — one stick, real broth, real fuel. Posted to TikTok, loved by 240K+ Nordics.</p>
 
-      <!-- Stats -->
       <div class="akr-social-stats">
         <div class="akr-social-stat">
           <div class="akr-social-stat-val">240K+</div>
@@ -59,14 +54,13 @@
         </div>
       </div>
 
-      <!-- CTA -->
       <div class="akr-social-cta-row">
         <svg class="akr-social-arrow akr-social-arrow-l" width="15" height="31" viewBox="0 0 15.0002 30.6003" fill="none" aria-hidden="true">
           <path d="M1.00017 7.50017L12.2585 1.00017" stroke="#EA7552" stroke-width="2" stroke-linecap="round"/>
           <path d="M1.00017 15.3002H14.0002" stroke="#EA7552" stroke-width="2" stroke-linecap="round"/>
           <path d="M1.00017 23.1002L12.2585 29.6002" stroke="#EA7552" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        <a href="{{ section.settings.cta_url }}" class="akr-social-btn">{{ section.settings.cta_label }}</a>
+        <a href="{{ section.settings.cta_url }}" class="akr-social-btn" id="akr-watch-btn">{{ section.settings.cta_label }}</a>
         <svg class="akr-social-arrow akr-social-arrow-r" width="15" height="31" viewBox="0 0 15.0002 30.6003" fill="none" aria-hidden="true">
           <path d="M1.00017 7.50017L12.2585 1.00017" stroke="#EA7552" stroke-width="2" stroke-linecap="round"/>
           <path d="M1.00017 15.3002H14.0002" stroke="#EA7552" stroke-width="2" stroke-linecap="round"/>
@@ -74,88 +68,102 @@
         </svg>
       </div>
 
-    </div><!-- /akr-social-left -->
+    </div><!-- /left -->
 
-    <!-- ===== RIGHT: phone mockup with inline video ===== -->
-    <div class="akr-social-phone-wrap" id="akr-phone-wrap">
+    <!-- ===== RIGHT: CSS-built phone frame ===== -->
+    <div class="akr-phone-side">
 
-      <!-- Glow behind phone (Figma Group32) -->
-      <div class="akr-social-phone-glow" aria-hidden="true"></div>
+      <!-- Orange glow blob behind phone -->
+      <div class="akr-phone-glow" aria-hidden="true"></div>
 
-      <!-- Inner clip frame: 468×729 matching Figma "image 14" container -->
-      <div class="akr-social-phone-inner" id="akr-phone-inner">
+      <div class="akr-phone-outer">
+        <div class="akr-phone-frame">
+          <div class="akr-phone-screen" id="akr-phone-screen">
 
-        <!-- Poster: static phone PNG (shown by default) -->
-        <img
-          id="akr-phone-poster"
-          src="{{ 'akr-social-phone.png' | asset_url }}"
-          alt="Thalia's åKrrush morning ritual on TikTok — 240K views"
-          class="akr-social-phone-img"
-          loading="lazy"
-        >
+            <!-- Video with poster still -->
+            <video
+              id="akr-ritual-video"
+              src="{{ 'akr-thalia-ritual.mp4' | asset_url }}"
+              poster="{{ 'akr-thalia-poster.png' | asset_url }}"
+              playsinline
+              loop
+              preload="none"
+              style="width:100%;height:100%;object-fit:cover;display:block"
+            ></video>
 
-        <!-- Video: hidden until play clicked -->
-        <video
-          id="akr-phone-vid"
-          class="akr-social-phone-vid"
-          src="{{ 'akr-thalia-ritual.mp4' | asset_url }}"
-          playsinline
-          loop
-          preload="none"
-        ></video>
+            <!-- Play button overlay -->
+            <div class="akr-phone-play-btn" id="akr-play-btn">
+              <div class="akr-phone-play-circle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#2c1a10" aria-hidden="true">
+                  <polygon points="5,3 19,12 5,21"/>
+                </svg>
+              </div>
+            </div>
 
-        <!-- Stop button (shown when video plays) -->
-        <button id="akr-phone-stop" class="akr-social-phone-stop" aria-label="Stop video">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M2 2L14 14M14 2L2 14" stroke="white" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
+            <!-- TikTok right sidebar -->
+            <div class="akr-phone-likes">
+              <div class="akr-phone-like-item">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                12.4K
+              </div>
+              <div class="akr-phone-like-item">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                Share
+              </div>
+            </div>
 
-      </div><!-- /phone-inner -->
+            <!-- TikTok bottom bar -->
+            <div class="akr-phone-tiktok-ui">
+              <div class="akr-phone-user">
+                <div class="akr-phone-avatar"></div>
+                <span class="akr-phone-username">@thaliafitlife</span>
+                <span class="akr-phone-verified">✓ Verified</span>
+              </div>
+              <div class="akr-phone-song">♪ original sound</div>
+            </div>
 
-      <!-- Play button overlay (shown when poster is visible) -->
-      <button id="akr-phone-play" class="akr-social-phone-playbtn" aria-label="Watch the ritual video">
-        <svg width="20" height="24" viewBox="0 0 20 24" fill="none" aria-hidden="true">
-          <path d="M2 2L18 12L2 22V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
-        </svg>
-      </button>
+          </div><!-- /screen -->
+        </div><!-- /frame -->
 
-    </div><!-- /phone-wrap -->
+        <!-- 240K views badge -->
+        <div class="akr-phone-views-badge">
+          240K<small>views</small>
+          <img src="{{ 'akr-spark-orange.svg' | asset_url }}" class="akr-phone-views-spark" aria-hidden="true" alt="">
+        </div>
 
-  </div><!-- /akr-social-inner -->
+      </div><!-- /phone-outer -->
+    </div><!-- /phone-side -->
+
+  </div><!-- /inner -->
 </section>
 
 <script>
 (function() {
-  var playBtn  = document.getElementById('akr-phone-play');
-  var stopBtn  = document.getElementById('akr-phone-stop');
-  var poster   = document.getElementById('akr-phone-poster');
-  var vid      = document.getElementById('akr-phone-vid');
-  var inner    = document.getElementById('akr-phone-inner');
+  var screen  = document.getElementById('akr-phone-screen');
+  var vid     = document.getElementById('akr-ritual-video');
+  var playBtn = document.getElementById('akr-play-btn');
+  var watchBtn = document.getElementById('akr-watch-btn');
 
-  function startVideo() {
-    poster.style.opacity = '0';
-    poster.style.pointerEvents = 'none';
-    vid.style.display = 'block';
-    playBtn.style.display = 'none';
-    stopBtn.style.display = 'flex';
-    inner.classList.add('akr-phone-playing');
-    vid.play();
+  function toggle() {
+    if (vid.paused) {
+      vid.play();
+      playBtn.style.display = 'none';
+    } else {
+      vid.pause();
+      playBtn.style.display = 'flex';
+    }
   }
 
-  function stopVideo() {
-    vid.pause();
-    vid.currentTime = 0;
-    vid.style.display = 'none';
-    poster.style.opacity = '1';
-    poster.style.pointerEvents = '';
-    playBtn.style.display = 'flex';
-    stopBtn.style.display = 'none';
-    inner.classList.remove('akr-phone-playing');
-  }
+  screen.addEventListener('click', toggle);
 
-  playBtn.addEventListener('click', startVideo);
-  stopBtn.addEventListener('click', stopVideo);
+  // "Watch the full ritual" button also triggers play
+  if (watchBtn) {
+    watchBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (vid.paused) { vid.play(); playBtn.style.display = 'none'; }
+      document.getElementById('akr-social').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
 })();
 </script>
 

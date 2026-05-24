@@ -189,8 +189,104 @@
   .akr-pro-brand__img-wrap { width: 570px; flex-shrink: 0; border-radius: 40px; overflow: hidden; height: 473px; }
   .akr-pro-brand__img { width: 100%; height: 100%; object-fit: cover; }
 
+  /* ── DARK FEATURES SECTION (ProductV) ── */
+  .akr-pro-darkfeats {
+    background: #000;
+    position: relative;
+    height: 778px;
+    overflow: hidden;
+  }
+  .akr-pro-darkfeats__bg {
+    position: absolute;
+    left: 344px; top: 0;
+    width: 1086px; height: 634px;
+    pointer-events: none;
+    object-fit: cover;
+    object-position: center;
+  }
+  .akr-pro-darkfeats__fade-top {
+    position: absolute;
+    left: 344px; top: 0;
+    width: 1087px; height: 246px;
+    background: linear-gradient(to bottom, rgba(1,1,1,0) 0%, #010101 100%);
+    transform: rotate(180deg);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .akr-pro-darkfeats__fade-bot {
+    position: absolute;
+    left: 344px; top: 411px;
+    width: 1087px; height: 301px;
+    background: linear-gradient(to bottom, rgba(1,1,1,0) 0%, #010101 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .akr-pro-darkfeats__panel {
+    position: absolute;
+    top: 50%; left: 0;
+    transform: translateY(-50%);
+    width: 720px;
+    height: 777px;
+    background: linear-gradient(90deg, #020101 0%, rgba(2,1,1,0) 102.58%);
+    backdrop-filter: blur(13.25px);
+    -webkit-backdrop-filter: blur(13.25px);
+    overflow: hidden;
+    border-radius: 16px;
+    padding: 60px 100px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    z-index: 5;
+  }
+  .akr-pro-darkfeats__cols {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+  .akr-pro-darkfeats__col {
+    flex: 1 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+  }
+  .akr-pro-darkfeats__feat {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .akr-pro-darkfeats__divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.2);
+  }
+  .akr-pro-darkfeats__feat-icon {
+    flex-shrink: 0;
+  }
+  .akr-pro-darkfeats__feat-title {
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: normal;
+    color: #fff;
+    margin: 0 0 4px;
+  }
+  .akr-pro-darkfeats__feat-body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.8);
+    margin: 0;
+  }
+
   /* ── MOBILE ── */
   @media (max-width: 768px) {
+    .akr-pro-darkfeats { height: auto; min-height: 500px; }
+    .akr-pro-darkfeats__bg { left: 0; width: 100%; top: 0; height: 100%; opacity: 0.3; }
+    .akr-pro-darkfeats__fade-top, .akr-pro-darkfeats__fade-bot { display: none; }
+    .akr-pro-darkfeats__panel { position: relative; top: auto; left: auto; transform: none; width: 100%; height: auto; padding: 40px 20px; border-radius: 0; }
+    .akr-pro-darkfeats__cols { flex-direction: column; gap: 32px; }
     .akr-pro-hero { height: auto; min-height: 560px; }
     .akr-pro-hero::before { width: 100%; }
     .akr-pro-hero__content { position: relative; top: auto; left: auto; transform: none; width: 100%; padding: 60px 20px 40px; }
@@ -225,7 +321,7 @@
 
   {%- comment -%} ── SECTION 1: HERO ── {%- endcomment -%}
   <div class="akr-pro-hero">
-    <img class="akr-pro-hero__bg" src="{{ 'akr-pro-hero-bg.png' | asset_url }}" alt="åKrrush PRO" loading="eager">
+    <img class="akr-pro-hero__bg" src="{{ 'akr-pro-hero-athlete.png' | asset_url }}" alt="åKrrush PRO" loading="eager">
 
     <div class="akr-pro-hero__content">
       <p class="akr-pro-hero__label">ÅKRRUSH PRO</p>
@@ -265,6 +361,72 @@
     <p>HYDROLYZED</p>
     <span class="akr-pro-strip__dot">·</span>
     <p>NO ADDITIVES</p>
+  </div>
+
+  {%- comment -%} ── DARK FEATURES SECTION (ProductV) ── {%- endcomment -%}
+  <div class="akr-pro-darkfeats">
+    <img class="akr-pro-darkfeats__bg" src="{{ 'akr-pro-hero-bg.png' | asset_url }}" alt="" loading="lazy">
+    <div class="akr-pro-darkfeats__fade-top"></div>
+    <div class="akr-pro-darkfeats__fade-bot"></div>
+    <div class="akr-pro-darkfeats__panel">
+      <div class="akr-pro-darkfeats__cols">
+
+        {%- comment -%} Left column {%- endcomment -%}
+        <div class="akr-pro-darkfeats__col">
+          <div class="akr-pro-darkfeats__feat">
+            <svg class="akr-pro-darkfeats__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none"><rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/><circle cx="13" cy="13" r="5" fill="#D76C4C"/></svg>
+            <div>
+              <p class="akr-pro-darkfeats__feat-title">20g Hydrolyzed Protein</p>
+              <p class="akr-pro-darkfeats__feat-body">Fast, usable fuel for serious training.</p>
+            </div>
+          </div>
+          <div class="akr-pro-darkfeats__divider"></div>
+          <div class="akr-pro-darkfeats__feat">
+            <svg class="akr-pro-darkfeats__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none"><rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/><circle cx="13" cy="13" r="5" fill="#D76C4C"/></svg>
+            <div>
+              <p class="akr-pro-darkfeats__feat-title">Protein + Electrolytes in One</p>
+              <p class="akr-pro-darkfeats__feat-body">Hydrates and fuels every workout session.</p>
+            </div>
+          </div>
+          <div class="akr-pro-darkfeats__divider"></div>
+          <div class="akr-pro-darkfeats__feat">
+            <svg class="akr-pro-darkfeats__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none"><rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/><circle cx="13" cy="13" r="5" fill="#D76C4C"/></svg>
+            <div>
+              <p class="akr-pro-darkfeats__feat-title">Clean Nordic Sourcing</p>
+              <p class="akr-pro-darkfeats__feat-body">Pure, trusted protein from Norwegian ingredients.</p>
+            </div>
+          </div>
+        </div>
+
+        {%- comment -%} Right column {%- endcomment -%}
+        <div class="akr-pro-darkfeats__col">
+          <div class="akr-pro-darkfeats__feat">
+            <svg class="akr-pro-darkfeats__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none"><rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/><circle cx="13" cy="13" r="5" fill="#D76C4C"/></svg>
+            <div>
+              <p class="akr-pro-darkfeats__feat-title">Built for Recovery Days and Heavy Days</p>
+              <p class="akr-pro-darkfeats__feat-body">Helps muscles rebound fast between sessions.</p>
+            </div>
+          </div>
+          <div class="akr-pro-darkfeats__divider"></div>
+          <div class="akr-pro-darkfeats__feat">
+            <svg class="akr-pro-darkfeats__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none"><rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/><circle cx="13" cy="13" r="5" fill="#D76C4C"/></svg>
+            <div>
+              <p class="akr-pro-darkfeats__feat-title">Hot or Cold. Always Game-Ready</p>
+              <p class="akr-pro-darkfeats__feat-body">Fuel your body any way you train.</p>
+            </div>
+          </div>
+          <div class="akr-pro-darkfeats__divider"></div>
+          <div class="akr-pro-darkfeats__feat">
+            <svg class="akr-pro-darkfeats__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none"><rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/><circle cx="13" cy="13" r="5" fill="#D76C4C"/></svg>
+            <div>
+              <p class="akr-pro-darkfeats__feat-title">60 Calories Per Stick</p>
+              <p class="akr-pro-darkfeats__feat-body">High performance, low calorie burden.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 
   {%- comment -%} ── PRODUCT CARDS ── {%- endcomment -%}

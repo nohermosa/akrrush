@@ -1897,7 +1897,7 @@
 .akr-social-left {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 28px;
   min-width: 0;
   flex: 1;
@@ -1930,15 +1930,15 @@
 .akr-social-pill-teal   { background: #47b1b4; }
 
 /* Heading — left-aligned, DM Serif Display */
-.akr-social-heading-block { position: relative; width: 100%; }
+.akr-social-heading-block { position: relative; width: 100%; text-align: center; }
 .akr-social-heading {
   font-family: 'DM Serif Display', 'Georgia', serif;
-  font-size: clamp(48px, 5.5vw, 72px);
+  font-size: 68px;
   font-weight: 700;
   font-style: normal;
   color: #2c1a10;
-  line-height: 1.05;
-  text-align: left;
+  line-height: 1.1;
+  text-align: center;
   margin: 0;
 }
 .akr-social-real-wrap {
@@ -1965,10 +1965,10 @@
   font-size: 17px;
   font-weight: 400;
   color: #6f5138;
-  text-align: left;
+  text-align: center;
   line-height: 1.65;
   margin: 0;
-  max-width: 46ch;
+  max-width: 52ch;
 }
 
 /* Stats — editorial, no boxes */

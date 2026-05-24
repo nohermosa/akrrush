@@ -92,8 +92,10 @@
   .akr-cl-card__info { position: absolute; bottom: -0.33px; left: 0; width: 100%; padding: 32px; background: linear-gradient(to top, rgba(28,14,8,0.9), rgba(28,14,8,0)); z-index: 2; }
   .akr-cl-card__name { font-family: Arial, sans-serif; font-weight: 700; font-size: 24px; line-height: 1.2; color: #fff; margin: 0 0 16px; }
   .akr-cl-card__price { font-family: Arial, sans-serif; font-weight: 700; font-size: 24px; color: #fff; margin: 0; }
-  .akr-cl-card__overlay { position: absolute; inset: 0; background: rgba(44,26,16,0.7); z-index: 3; }
-  .akr-cl-card__cta { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: #ea7552; border-radius: 9999px; padding: 16px 32px; font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #fff; text-transform: uppercase; text-decoration: none; white-space: nowrap; z-index: 4; }
+  .akr-cl-card__overlay { position: absolute; inset: 0; background: rgba(44,26,16,0.7); z-index: 3; opacity: 0; transition: opacity 0.25s; }
+  .akr-cl-card__cta { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: #ea7552; border-radius: 9999px; padding: 16px 32px; font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #fff; text-transform: uppercase; text-decoration: none; white-space: nowrap; z-index: 4; opacity: 0; transition: opacity 0.25s; }
+  .akr-cl-card:hover .akr-cl-card__overlay { opacity: 1; }
+  .akr-cl-card:hover .akr-cl-card__cta { opacity: 1; }
   .akr-cl-card__cta:hover { background: #d4644a; color: #fff; }
 
   /* Bundle */

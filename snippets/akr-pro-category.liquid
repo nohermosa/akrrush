@@ -137,15 +137,17 @@
 
   /* ── PRODUCT CARDS ── */
   .akr-pro-cards { background: #fffbf2; padding: 100px; box-sizing: border-box; }
-  .akr-pro-cards__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; width: 1240px; max-width: 100%; }
+  .akr-pro-cards__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; width: 100%; }
   .akr-pro-card { height: 381px; border-radius: 24px; position: relative; overflow: hidden; }
   .akr-pro-card__img { position: absolute; left: 50%; top: 50%; transform: translate(-50%, calc(-50% + 1px)); width: 292px; height: 389px; object-fit: cover; pointer-events: none; }
   .akr-pro-card__badge { background: #ea7552; border-radius: 100px; padding: 8px 16px; font-family: Arial, sans-serif; font-size: 16px; color: #fff; text-transform: uppercase; letter-spacing: 0.6px; display: inline-flex; align-items: center; position: absolute; top: 24px; left: 24px; z-index: 2; }
   .akr-pro-card__info { position: absolute; bottom: 0; left: 0; width: 292px; padding: 24px; background: linear-gradient(to top, rgba(28,14,8,0.9), rgba(28,14,8,0)); z-index: 2; box-sizing: border-box; }
   .akr-pro-card__name { font-family: Arial, sans-serif; font-weight: 700; font-size: 20px; line-height: 1.2; color: #fff; margin: 0 0 16px; }
   .akr-pro-card__price { font-family: Arial, sans-serif; font-weight: 700; font-size: 20px; color: #fff; margin: 0; line-height: 21.6px; }
-  .akr-pro-card__overlay { position: absolute; inset: 0; background: rgba(44,26,16,0.7); z-index: 3; }
-  .akr-pro-card__cta { position: absolute; top: 50%; left: 50%; transform: translate(calc(-50% - 0.67px), calc(-50% + 1.05px)); background: #ea7552; border-radius: 9999px; padding: 16px 32px; font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #fff; text-transform: uppercase; text-decoration: none; white-space: nowrap; z-index: 4; }
+  .akr-pro-card__overlay { position: absolute; inset: 0; background: rgba(44,26,16,0.7); z-index: 3; opacity: 0; transition: opacity 0.25s; }
+  .akr-pro-card__cta { position: absolute; top: 50%; left: 50%; transform: translate(calc(-50% - 0.67px), calc(-50% + 1.05px)); background: #ea7552; border-radius: 9999px; padding: 16px 32px; font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #fff; text-transform: uppercase; text-decoration: none; white-space: nowrap; z-index: 4; opacity: 0; transition: opacity 0.25s; }
+  .akr-pro-card:hover .akr-pro-card__overlay { opacity: 1; }
+  .akr-pro-card:hover .akr-pro-card__cta { opacity: 1; }
   .akr-pro-card__cta:hover { background: #d4644a; color: #fff; }
 
   /* ── FEATURE SECTION ── */
@@ -279,6 +281,20 @@
     color: rgba(255,255,255,0.8);
     margin: 0;
   }
+  .akr-pro-darkfeats__athlete {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 331px;
+    height: 443px;
+    object-fit: contain;
+    object-position: bottom center;
+    z-index: 2;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to top, black 55%, transparent 100%);
+    mask-image: linear-gradient(to top, black 55%, transparent 100%);
+    transform: scaleX(-1);
+  }
 
   /* ── MOBILE ── */
   @media (max-width: 768px) {
@@ -368,6 +384,7 @@
     <img class="akr-pro-darkfeats__bg" src="{{ 'akr-pro-hero-bg.png' | asset_url }}" alt="" loading="lazy">
     <div class="akr-pro-darkfeats__fade-top"></div>
     <div class="akr-pro-darkfeats__fade-bot"></div>
+    <img class="akr-pro-darkfeats__athlete" src="{{ 'akr-pro-darkfeats-athlete.png' | asset_url }}" alt="" loading="lazy">
     <div class="akr-pro-darkfeats__panel">
       <div class="akr-pro-darkfeats__cols">
 

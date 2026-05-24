@@ -1,0 +1,323 @@
+{% comment %} AKrrush PRO Category Page — Snippet v1.0 {% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Newsreader:ital,wght@0,400;0,500;0,700;1,700&display=swap" rel="stylesheet">
+
+<style>
+  .akr-pro { font-family: Arial, sans-serif; }
+  .akr-pro-hero { background: #000; position: relative; overflow: hidden; min-height: 778px; }
+  .akr-pro-hero__bg-img { position: absolute; top: 0; right: 0; width: 75%; height: 100%; object-fit: cover; }
+  .akr-pro-hero__vignette-top { position: absolute; top: 0; right: 0; width: 75%; height: 38%; background: linear-gradient(to bottom, #010101, rgba(1,1,1,0)); }
+  .akr-pro-hero__vignette-bot { position: absolute; bottom: 0; right: 0; width: 75%; height: 45%; background: linear-gradient(to top, #010101, rgba(1,1,1,0)); }
+  .akr-pro-hero__panel {
+    position: absolute; top: 50%; left: 0; transform: translateY(-50%);
+    width: 720px; height: 777px;
+    background: linear-gradient(90deg, #020101 0%, rgba(2,1,1,0) 102.58%);
+    backdrop-filter: blur(13px);
+    border-radius: 16px;
+    display: flex; align-items: center;
+    padding: 60px 100px;
+  }
+  .akr-pro-hero__label { font-family: Arial, sans-serif; font-size: 13px; color: #ea7552; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 24px; }
+  .akr-pro-hero__heading { font-family: 'Newsreader', serif; font-weight: 500; font-size: 80px; line-height: 1.1; color: #fff; margin: 0 0 24px; width: 100%; }
+  .akr-pro-hero__heading em { font-weight: 700; font-style: italic; color: #c56446; }
+  .akr-pro-hero__body { font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #fff; max-width: 439px; margin-bottom: 32px; }
+  .akr-pro-hero__features { display: flex; flex-direction: column; gap: 16px; }
+  .akr-pro-hero__feat { display: flex; align-items: center; gap: 13px; font-family: Arial, sans-serif; font-size: 16px; color: #fff; white-space: nowrap; }
+  .akr-pro-hero__feat-icon { width: 20px; height: 20px; flex-shrink: 0; }
+  .akr-pro-hero__feat-col { display: flex; gap: 60px; width: 100%; }
+  .akr-pro-hero__divider { border: none; border-top: 0.5px solid rgba(255,255,255,0.2); margin: 4px 0; }
+
+  /* Product Cards */
+  .akr-pro-cards { background: #fffbf2; padding: 100px; }
+  .akr-pro-cards__grid { display: flex; gap: 24px; max-width: 1240px; }
+  .akr-pro-card { flex: 1; height: 381px; border-radius: 24px; position: relative; overflow: hidden; min-width: 0; }
+  .akr-pro-card--teal { background: #47b1b4; }
+  .akr-pro-card--yellow { background: #ffc03c; }
+  .akr-pro-card--coral { background: #ea7552; }
+  .akr-pro-card__inner { display: flex; flex-direction: column; justify-content: space-between; padding: 24px; height: 100%; position: relative; }
+  .akr-pro-card__img { position: absolute; width: 100%; height: calc(100% + 14px); left: 0; top: -7px; object-fit: cover; }
+  .akr-pro-card__badge { background: #ea7552; border-radius: 100px; padding: 8px 16px; font-family: Arial, sans-serif; font-size: 16px; color: #fff; text-transform: uppercase; letter-spacing: 0.6px; display: inline-flex; align-items: center; position: relative; z-index: 2; }
+  .akr-pro-card__info { position: absolute; bottom: 0; left: 0; width: 100%; padding: 24px; background: linear-gradient(to top, rgba(28,14,8,0.9), rgba(28,14,8,0)); z-index: 2; }
+  .akr-pro-card__name { font-family: Arial, sans-serif; font-weight: 700; font-size: 20px; line-height: 1.2; color: #fff; margin: 0 0 16px; }
+  .akr-pro-card__price { font-family: Arial, sans-serif; font-weight: 700; font-size: 20px; color: #fff; margin: 0; }
+  .akr-pro-card__overlay { position: absolute; inset: 0; background: rgba(44,26,16,0.7); z-index: 3; }
+  .akr-pro-card__cta { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: #ea7552; border-radius: 9999px; padding: 16px 32px; font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #fff; text-transform: uppercase; text-decoration: none; white-space: nowrap; z-index: 4; }
+  .akr-pro-card__cta:hover { background: #d4644a; color: #fff; }
+
+  /* Feature section 1 */
+  .akr-pro-feature { background: #fffbf2; padding: 100px; }
+  .akr-pro-feature__inner { display: flex; gap: 100px; align-items: center; max-width: 1400px; }
+  .akr-pro-feature__img-wrap { width: 570px; flex-shrink: 0; border-radius: 40px; overflow: hidden; height: 464px; }
+  .akr-pro-feature__img { width: 100%; height: 100%; object-fit: cover; }
+  .akr-pro-feature__text { flex: 1; }
+  .akr-pro-feature__label { font-family: Arial, sans-serif; font-size: 13px; color: #ea7552; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 16px; }
+  .akr-pro-feature__heading { font-family: 'DM Serif Display', serif; font-size: 40px; color: #1a0f08; margin: 0 0 24px; line-height: 1.2; }
+  .akr-pro-feature__subheading { font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #1a0f08; margin-bottom: 12px; }
+  .akr-pro-feature__body { font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #1a0f08; }
+
+  /* Testimonial section */
+  .akr-pro-testimonial { background: #020101; padding: 100px; position: relative; overflow: hidden; }
+  .akr-pro-testimonial__inner { display: flex; gap: 60px; align-items: flex-start; max-width: 1240px; }
+  .akr-pro-testimonial__card { background: #2c1a10; border-radius: 24px; padding: 40px; width: 555px; flex-shrink: 0; }
+  .akr-pro-testimonial__usabobsled { width: 100%; height: 149px; object-fit: contain; margin-bottom: 24px; }
+  .akr-pro-testimonial__quote { font-family: Arial, sans-serif; font-size: 18px; line-height: 1.5; color: #fff; }
+  .akr-pro-testimonial__right { flex: 1; display: flex; flex-direction: column; gap: 24px; }
+  .akr-pro-quote-card { background: #fff; border-radius: 16px; padding: 22px 24px; box-shadow: 0 20px 20px rgba(26,20,17,0.12); }
+  .akr-pro-quote-card__text { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 32px; line-height: 1.1; color: #2c1a10; margin: 0; }
+  .akr-pro-quote-card__text span { color: #ea7552; }
+  .akr-pro-quote-card__reviewer { display: flex; gap: 10px; align-items: center; padding-top: 15px; margin-top: 16px; border-top: 1px solid rgba(26,20,17,0.07); }
+  .akr-pro-quote-card__avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .akr-pro-quote-card__name { font-family: Arial, sans-serif; font-weight: 700; font-size: 14px; color: #1a1411; }
+  .akr-pro-quote-card__location { font-family: Arial, sans-serif; font-size: 12px; color: #6e5f52; }
+  .akr-pro-quote-card__stars { font-family: Inter, sans-serif; font-size: 13px; color: #e55a2d; }
+  .akr-pro-tag { background: #47b1b4; border-radius: 999px; padding: 12px 18px; display: inline-flex; gap: 8px; align-items: center; font-family: Arial, sans-serif; font-size: 16px; color: #fff; border: 2px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.25); margin-top: 8px; }
+  .akr-pro-tag svg { width: 16px; height: 16px; }
+
+  /* Brand section */
+  .akr-pro-brand { background: #fffbf2; padding: 100px; overflow: hidden; position: relative; }
+  .akr-pro-brand__inner { display: flex; gap: 100px; align-items: center; max-width: 1400px; }
+  .akr-pro-brand__text { flex: 1; }
+  .akr-pro-brand__label { font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #ea7552; text-transform: uppercase; letter-spacing: 1.92px; margin-bottom: 24px; }
+  .akr-pro-brand__heading { font-family: 'DM Serif Display', serif; font-size: 68px; color: #2c1a10; margin: 0 0 24px; line-height: 1.1; }
+  .akr-pro-brand__heading em { font-style: italic; color: #ea7552; }
+  .akr-pro-brand__body { font-family: Arial, sans-serif; font-size: 18px; line-height: 1.5; color: #6f5138; }
+  .akr-pro-brand__highlight { font-weight: 700; color: #ea7552; }
+  .akr-pro-brand__img-wrap { width: 570px; flex-shrink: 0; border-radius: 40px; overflow: hidden; height: 473px; }
+  .akr-pro-brand__img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .akr-pro-hero__panel { width: 100%; height: auto; position: relative; top: auto; transform: none; padding: 40px 20px; border-radius: 0; }
+    .akr-pro-hero__bg-img { width: 100%; opacity: 0.3; }
+    .akr-pro-hero { min-height: auto; }
+    .akr-pro-hero__heading { font-size: 40px; }
+    .akr-pro-cards { padding: 40px 20px; }
+    .akr-pro-cards__grid { flex-direction: column; }
+    .akr-pro-card { height: 340px; }
+    .akr-pro-feature { padding: 40px 20px; }
+    .akr-pro-feature__inner { flex-direction: column; gap: 40px; }
+    .akr-pro-feature__img-wrap { width: 100%; }
+    .akr-pro-testimonial { padding: 40px 20px; }
+    .akr-pro-testimonial__inner { flex-direction: column; }
+    .akr-pro-testimonial__card { width: 100%; }
+    .akr-pro-brand { padding: 40px 20px; }
+    .akr-pro-brand__inner { flex-direction: column; gap: 40px; }
+    .akr-pro-brand__img-wrap { width: 100%; }
+    .akr-pro-brand__heading { font-size: 48px; }
+  }
+</style>
+
+{% assign pro_cards = collection.products | slice: 0, 4 %}
+{% assign card_colors = '#47b1b4,#ffc03c,#ea7552,#ea7552' | split: ',' %}
+{% assign card_images = 'akr-pro-card-variety.png,akr-pro-card-chicken.png,akr-pro-card-ginger.png,akr-pro-card-mushroom.png' | split: ',' %}
+
+<div class="akr-pro">
+
+  {%- comment -%} ── SECTION 1: HERO ── {%- endcomment -%}
+  <div class="akr-pro-hero">
+    <img
+      class="akr-pro-hero__bg-img"
+      src="{{ 'akr-pro-hero-bg.png' | asset_url }}"
+      alt="åKrrush PRO athlete"
+      loading="eager"
+    >
+    <div class="akr-pro-hero__vignette-top"></div>
+    <div class="akr-pro-hero__vignette-bot"></div>
+
+    <div class="akr-pro-hero__panel">
+      <div style="display:flex;flex-direction:column;gap:24px;width:100%;">
+        <p class="akr-pro-hero__label">ÅKRRUSH PRO</p>
+
+        <h1 class="akr-pro-hero__heading">
+          Protein meets hydration-&nbsp;Built for <em>performance</em>&nbsp;athletes
+        </h1>
+
+        <p class="akr-pro-hero__body">
+          20 grams of hydrolyzed Norwegian poultry protein and a generous serving of electrolytes in one easy&#8209;to&#8209;mix stick. No more juggling shakes and sports drinks. åKrrush Pro dissolves quickly in hot or cold water, delivering both nourishment and hydration when you need it most.
+        </p>
+
+        <div class="akr-pro-hero__features">
+          <div class="akr-pro-hero__feat-col">
+            <div style="display:flex;flex-direction:column;gap:16px;flex:1;">
+              <div class="akr-pro-hero__feat">
+                <svg class="akr-pro-hero__feat-icon" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="9" stroke="#EA7552" stroke-width="1.5"/>
+                  <path d="M7 10l2 2 4-4" stroke="#EA7552" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>20G PROTEIN</span>
+              </div>
+              <div class="akr-pro-hero__feat">
+                <svg class="akr-pro-hero__feat-icon" viewBox="0 0 20 20" fill="none">
+                  <path d="M10 2C6 2 3 5 3 9c0 3 2 5.5 4 6.5V17h6v-1.5C15 14.5 17 12 17 9c0-4-3-7-7-7z" stroke="#EA7552" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+                <span>ELECTROLYTES</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px;flex:1;">
+              <div class="akr-pro-hero__feat">
+                <svg class="akr-pro-hero__feat-icon" viewBox="0 0 20 20" fill="none">
+                  <path d="M10 3v14M3 10h14" stroke="#EA7552" stroke-width="1.5" stroke-linecap="round"/>
+                  <circle cx="10" cy="10" r="8" stroke="#EA7552" stroke-width="1.5"/>
+                </svg>
+                <span>TRAINING &amp; HYDRATION</span>
+              </div>
+              <div class="akr-pro-hero__feat">
+                <svg class="akr-pro-hero__feat-icon" viewBox="0 0 20 20" fill="none">
+                  <path d="M5 10.5C5 7 7 4.5 10 4C13 3.5 16 5 15.5 8.5C15 11 13 13 10 14.5C7 13 5 11 5 10.5z" stroke="#EA7552" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+                <span>RECOVERY SUPPORT</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ── SECTION 2: PRODUCT CARDS ── {%- endcomment -%}
+  <div class="akr-pro-cards">
+    <div class="akr-pro-cards__grid">
+      {%- for product in pro_cards -%}
+        {%- assign idx = forloop.index0 -%}
+        {%- assign bg_color = card_colors[idx] -%}
+        {%- assign fallback_img = card_images[idx] | asset_url -%}
+        <div class="akr-pro-card" style="background:{{ bg_color }};">
+          {%- if product.featured_image -%}
+            <img
+              class="akr-pro-card__img"
+              src="{{ product.featured_image | image_url: width: 400 }}"
+              alt="{{ product.title | escape }}"
+              loading="lazy"
+            >
+          {%- else -%}
+            <img
+              class="akr-pro-card__img"
+              src="{{ fallback_img }}"
+              alt="{{ product.title | escape }}"
+              loading="lazy"
+            >
+          {%- endif -%}
+
+          <div class="akr-pro-card__inner">
+            <div style="position:relative;z-index:2;">
+              <span class="akr-pro-card__badge">Sale</span>
+            </div>
+            <div style="height:0;"></div>
+          </div>
+
+          <div class="akr-pro-card__info">
+            <p class="akr-pro-card__name">{{ product.title }}</p>
+            <p class="akr-pro-card__price">{{ product.price | money }}</p>
+          </div>
+
+          {%- if forloop.index == 2 -%}
+            <div class="akr-pro-card__overlay"></div>
+            <a href="{{ product.url }}" class="akr-pro-card__cta">SHOP NOW</a>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          {%- assign idx = forloop.index0 -%}
+          {%- assign bg_color = card_colors[idx] -%}
+          <div class="akr-pro-card" style="background:{{ bg_color }};"></div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- comment -%} ── SECTION 3: FEATURE — BIOAVAILABILITY ── {%- endcomment -%}
+  <div class="akr-pro-feature">
+    <div class="akr-pro-feature__inner">
+      <div class="akr-pro-feature__img-wrap">
+        <img
+          class="akr-pro-feature__img"
+          src="{{ 'akr-pro-feature-1.png' | asset_url }}"
+          alt="åKrrush PRO product"
+          loading="lazy"
+        >
+      </div>
+      <div class="akr-pro-feature__text">
+        <p class="akr-pro-feature__label">WHY åKRRUSH PRO</p>
+        <h2 class="akr-pro-feature__heading">Clean nutrition, extraordinary taste</h2>
+        <p class="akr-pro-feature__subheading" style="font-family:Arial,sans-serif;font-weight:700;font-size:16px;color:#1a0f08;margin-bottom:8px;">Your body constantly needs protein– more importantly, it needs protein it can use</p>
+        <p class="akr-pro-feature__body">
+          Most supplements force your digestive system to do all the work, leading to slow absorption, bloating and wasted nutrients.<br><br>
+          We break protein down into bioactive peptides– small, powerful molecules that your body absorbs instantly.<br><br>
+          Near 100% Bioavailability– every gram fuels your performance. Super Fast Recovery– say goodbye to soreness. Easy Digestion– no bloating, no gut strain.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ── SECTION 4: TESTIMONIAL ── {%- endcomment -%}
+  <div class="akr-pro-testimonial">
+    <div class="akr-pro-testimonial__inner" style="max-width:1240px;margin:0 auto;">
+
+      <div class="akr-pro-testimonial__card">
+        <img
+          class="akr-pro-testimonial__usabobsled"
+          src="{{ 'akr-pro-usabobsled.png' | asset_url }}"
+          alt="USA Bobsled & Skeleton Team"
+          loading="lazy"
+        >
+        <p class="akr-pro-testimonial__quote">
+          We're honored to partner with the USA Bobsled &amp; Skeleton Team. This collaboration reflects our shared commitment to quality and perseverance.
+        </p>
+      </div>
+
+      <div class="akr-pro-testimonial__right">
+        <div class="akr-pro-quote-card">
+          <p class="akr-pro-quote-card__text">
+            "The ritual<br>I never <span>skip.</span>"
+          </p>
+          <div class="akr-pro-quote-card__reviewer">
+            <img
+              class="akr-pro-quote-card__avatar"
+              src="{{ 'akr-avatar-sarah.png' | asset_url }}"
+              alt="Sarah M."
+              loading="lazy"
+            >
+            <div>
+              <div class="akr-pro-quote-card__name">— Sarah M.,</div>
+              <div class="akr-pro-quote-card__location">Verified · Austin, TX</div>
+              <div class="akr-pro-quote-card__stars">★★★★★</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="akr-pro-tag">
+            <svg viewBox="0 0 15 16" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 0L14 4v8l-6.5 4L1 12V4z" fill="white"/></svg>
+            20g Protein
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {%- comment -%} ── SECTION 5: BRAND / USAGE ── {%- endcomment -%}
+  <div class="akr-pro-brand">
+    <div class="akr-pro-brand__inner" style="margin:0 auto;">
+      <div class="akr-pro-brand__text">
+        <p class="akr-pro-brand__label">NORWEGIAN BONE BROTH</p>
+        <h2 class="akr-pro-brand__heading">åKrrush <em>PRO</em></h2>
+        <p class="akr-pro-brand__body">
+          Meet your daily ritual. Everyday nutrition– on the fly<br><br>
+          <span class="akr-pro-brand__highlight">Ready-to-go dry mix</span><br><br>
+          Suggested Use: Add one åKrrush PRO stick to 10oz hot water, mix until dissolved. Adjust temperature or flavor by adding ice or more water. Enjoy Hot or Cold!
+        </p>
+      </div>
+      <div class="akr-pro-brand__img-wrap">
+        <img
+          class="akr-pro-brand__img"
+          src="{{ 'akr-pro-feature-2.png' | asset_url }}"
+          alt="åKrrush PRO lifestyle"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  </div>
+
+</div>

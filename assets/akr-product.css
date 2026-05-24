@@ -488,7 +488,7 @@
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: center 15%;
+  object-position: 68% 15%;
   border-radius: 40px;
 }
 .akr-benefits-text-heading {

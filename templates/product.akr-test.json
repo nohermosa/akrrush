@@ -132,6 +132,13 @@
         "ingredients_text": "Ingredients: (Chicken, Turkey), Chicken Broth Seasoning, Natural Herbs & Spices."
       }
     },
+    "akr_social": {
+      "type": "akr-social",
+      "settings": {
+        "cta_url": "/products/bone-broth",
+        "cta_label": "WATCH THE FULL RITUAL  →"
+      }
+    },
     "akr_numbers": {
       "type": "akr-numbers",
       "settings": {
@@ -317,6 +324,7 @@
   "order": [
     "akr_hero",
     "akr_ingredients",
+    "akr_social",
     "akr_numbers",
     "akr_why",
     "akr_benefits",

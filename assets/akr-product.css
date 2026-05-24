@@ -1856,6 +1856,202 @@
 }
 
 /* =============================================================
+   SECTION: SOCIAL PROOF (Real ritual. Real results.)
+   ============================================================= */
+.akr-social-wrapper { background: var(--akr-cream); }
+.akr-social-section {
+  background: var(--akr-cream);
+  position: relative;
+  overflow: hidden;
+  padding: 100px;
+}
+/* orange glow blob — top-left, per Figma */
+.akr-social-section::before {
+  content: '';
+  position: absolute;
+  left: -206px;
+  top: -205px;
+  width: 408px;
+  height: 408px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(242,99,58,0.35) 0%, rgba(242,99,58,0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+.akr-social-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+/* LEFT column */
+.akr-social-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 603px;
+  flex-shrink: 0;
+}
+/* Pills */
+.akr-social-pills {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.akr-social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: white;
+  line-height: 1;
+  white-space: nowrap;
+}
+.akr-social-pill svg { flex-shrink: 0; }
+.akr-social-pill-orange { background: #ea7552; }
+.akr-social-pill-teal   { background: #47b1b4; }
+/* Heading */
+.akr-social-heading-block { position: relative; width: 100%; text-align: center; }
+.akr-social-heading {
+  font-family: 'DM Serif Display', 'Georgia', serif;
+  font-size: 68px;
+  font-weight: 400;
+  font-style: normal;
+  color: #2c1a10;
+  line-height: 1.1;
+  text-align: center;
+  margin: 0;
+}
+.akr-social-real-wrap {
+  position: relative;
+  display: inline-block;
+}
+.akr-social-heading-orange {
+  font-style: italic;
+  color: #ea7451;
+  font-family: 'DM Serif Display', 'Georgia', serif;
+}
+.akr-social-real-underline {
+  position: absolute;
+  bottom: -6px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: 9px;
+  overflow: visible;
+  display: block;
+}
+/* Subtext */
+.akr-social-sub {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  color: #6f5138;
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+  min-width: 100%;
+}
+/* Stats */
+.akr-social-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+}
+.akr-social-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 16px 24px;
+  border: 1px solid #e4c6bd;
+  border-radius: 12px;
+  flex: 1;
+}
+.akr-social-stat-val {
+  font-family: 'DM Serif Display', 'Georgia', serif;
+  font-size: 50px;
+  color: #100807;
+  line-height: 1.1;
+  text-align: center;
+}
+.akr-social-star { color: #ea7451; }
+.akr-social-stat-lbl {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #6f5138;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+}
+/* CTA row */
+.akr-social-cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.akr-social-arrow-l { transform: scaleX(-1); }
+.akr-social-btn {
+  display: inline-block;
+  background: #ea7552;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 24px;
+  border-radius: 9999px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.akr-social-btn:hover { background: #d65e35; color: white; }
+/* RIGHT: phone mockup */
+.akr-social-phone-wrap {
+  position: relative;
+  width: 545px;
+  height: 730px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.akr-social-phone-img {
+  position: absolute;
+  width: 333.33%;
+  height: 110.91%;
+  left: -203.43%;
+  top: -6.16%;
+  max-width: none;
+  display: block;
+}
+/* Responsive */
+@media (max-width: 1200px) {
+  .akr-social-section { padding: 80px 48px; }
+  .akr-social-left { width: 520px; }
+  .akr-social-heading { font-size: 56px; }
+  .akr-social-stat-val { font-size: 40px; }
+  .akr-social-phone-wrap { width: 460px; height: 620px; }
+}
+@media (max-width: 900px) {
+  .akr-social-section { padding: 64px 32px; }
+  .akr-social-inner { flex-direction: column; gap: 48px; }
+  .akr-social-left { width: 100%; }
+  .akr-social-phone-wrap { width: 100%; max-width: 480px; height: 520px; }
+}
+@media (max-width: 600px) {
+  .akr-social-section { padding: 48px 20px; }
+  .akr-social-heading { font-size: 42px; }
+  .akr-social-stat-val { font-size: 32px; }
+  .akr-social-stat { padding: 12px 16px; }
+  .akr-social-sub { font-size: 16px; }
+}
+
+/* =============================================================
    SECTION: NUMBERS DON'T LIE (v9-figma 1:1)
    ============================================================= */
 .akr-num-section { background: var(--akr-cream); padding: 48px 0 88px; position: relative; overflow: visible; z-index: 2; }

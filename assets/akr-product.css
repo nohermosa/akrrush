@@ -2026,8 +2026,8 @@
   cursor: pointer;
   display: block;
 }
-.akr-social-phone-wrap:focus-visible { outline: 2px solid #ea7552; outline-offset: 4px; border-radius: 8px; }
-.akr-social-phone-wrap:hover .akr-social-phone-inner { transform: scale(1.015); transition: transform 0.3s ease; }
+/* poster img transition on play */
+.akr-social-phone-img { transition: opacity 0.3s ease; }
 /* Glow behind phone: approximates Figma Group32 two blurred orange ellipses */
 .akr-social-phone-glow {
   position: absolute;
@@ -2092,51 +2092,61 @@
   .akr-social-sub { font-size: 16px; }
 }
 
-/* Video lightbox */
-.akr-vm {
+/* Inline phone video */
+.akr-social-phone-vid {
   display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  align-items: center;
-  justify-content: center;
-}
-.akr-vm.akr-vm-open { display: flex; }
-.akr-vm-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.85);
-  animation: akr-vm-fade 0.2s ease;
-}
-@keyframes akr-vm-fade { from { opacity: 0; } to { opacity: 1; } }
-.akr-vm-box {
-  position: relative;
-  z-index: 1;
-  width: min(90vw, 480px);
-  border-radius: 16px;
-  overflow: hidden;
-  animation: akr-vm-scale 0.25s ease;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
-}
-@keyframes akr-vm-scale { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-.akr-vm-video { display: block; width: 100%; height: auto; aspect-ratio: 9/16; background: #000; }
-.akr-vm-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   z-index: 2;
-  background: rgba(0,0,0,0.5);
-  border: none;
+  border-radius: inherit;
+}
+/* Phone inner: show rounded border when video playing */
+.akr-phone-playing {
+  border-radius: 28px;
+  box-shadow: 0 0 0 6px #1a1a1a, 0 16px 48px rgba(0,0,0,0.35);
+}
+/* Play button — centered over phone */
+.akr-social-phone-playbtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  background: rgba(255,255,255,0.92);
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.akr-social-phone-playbtn:hover { transform: translate(-50%, -50%) scale(1.08); background: white; }
+.akr-social-phone-playbtn svg { margin-left: 3px; }
+/* Stop button — top-right corner inside phone */
+.akr-social-phone-stop {
+  display: none;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 4;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  border: none;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
   backdrop-filter: blur(4px);
 }
-.akr-vm-close:hover { background: rgba(0,0,0,0.75); }
+.akr-social-phone-stop:hover { background: rgba(0,0,0,0.8); }
 
 /* =============================================================
    SECTION: NUMBERS DON'T LIE (v9-figma 1:1)

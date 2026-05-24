@@ -1,0 +1,356 @@
+{% comment %} AKrrush Classic Category Page — Custom Liquid Section v1.0 {% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  .akr-cl { font-family: Arial, sans-serif; }
+
+  /* Hero */
+  .akr-cl-hero {
+    position: relative;
+    height: 806px;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #b62309, #fdc693);
+  }
+  .akr-cl-hero__bg {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: auto;
+    max-width: none;
+    pointer-events: none;
+  }
+  .akr-cl-hero__panel {
+    position: absolute;
+    top: 50%; left: 100px;
+    transform: translateY(calc(-50% - 50.5px));
+    width: 507px;
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .akr-cl-hero__label {
+    font-family: Arial, sans-serif;
+    font-size: 13px; color: #ea7552;
+    text-transform: uppercase; letter-spacing: 0.6px;
+  }
+  .akr-cl-hero__heading {
+    font-size: 0; margin: 0;
+    line-height: 0;
+  }
+  .akr-cl-hero__heading .serif { font-family: 'DM Serif Display', serif; font-size: 80px; line-height: 1.1; font-style: normal; color: #1a0f08; }
+  .akr-cl-hero__heading .serif-italic { font-family: 'DM Serif Display', serif; font-size: 80px; line-height: 1.1; font-style: italic; color: #ea7552; }
+  .akr-cl-hero__body { font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #1a0f08; }
+  .akr-cl-hero__features { display: flex; flex-direction: column; gap: 16px; }
+  .akr-cl-hero__feat { display: flex; align-items: center; gap: 13px; font-family: Arial, sans-serif; font-size: 16px; color: #1a0f08; white-space: nowrap; }
+  .akr-cl-hero__feat-icon { width: 20px; height: 20px; flex-shrink: 0; }
+  .akr-cl-hero__cta {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: #ea7552; border-radius: 9999px;
+    padding: 16px 32px;
+    font-family: Arial, sans-serif; font-weight: 700; font-size: 16px;
+    color: #fff; text-transform: uppercase; text-decoration: none;
+    width: fit-content;
+  }
+  .akr-cl-hero__cta:hover { background: #d4644a; color: #fff; }
+
+  /* Info strip */
+  .akr-cl-strip {
+    display: flex; gap: 24px; align-items: center; justify-content: center;
+    padding: 12px 28px;
+    background: linear-gradient(90deg, rgba(234,117,82,0) 0%, #ea7552 25%, #ea7552 75%, rgba(234,117,82,0) 100%);
+  }
+  .akr-cl-strip p { font-family: Arial, sans-serif; font-weight: 700; font-size: 13px; color: #fff; text-transform: uppercase; letter-spacing: 0.6px; margin: 0; white-space: nowrap; }
+  .akr-cl-strip__dot { font-family: Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.7); }
+
+  /* Filter bar */
+  .akr-cl-filter { padding: 24px 100px; display: flex; align-items: center; justify-content: space-between; background: #fffbf2; }
+  .akr-cl-filter__left { display: flex; gap: 40px; align-items: center; }
+  .akr-cl-filter__label { font-family: Arial, sans-serif; font-weight: 700; font-size: 14px; color: #100807; text-transform: uppercase; letter-spacing: 0.6px; }
+  .akr-cl-filter__btn { display: flex; gap: 6px; align-items: center; opacity: 0.7; cursor: pointer; }
+  .akr-cl-filter__btn span { font-family: Arial, sans-serif; font-size: 14px; color: #100807; text-transform: uppercase; letter-spacing: 0.6px; }
+  .akr-cl-filter__btn .arr { font-family: Arial, sans-serif; font-size: 8px; color: #100807; opacity: 0.5; }
+  .akr-cl-filter__right { display: flex; gap: 40px; align-items: center; }
+
+  /* Quote section */
+  .akr-cl-quote { background: #fffbf2; padding: 80px 100px; display: flex; flex-direction: column; align-items: center; }
+  .akr-cl-quote__icon { width: 44px; height: 35px; margin-bottom: 24px; opacity: 0.1; }
+  .akr-cl-quote__text { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 40px; line-height: 1.3; color: #1a0f08; text-align: center; max-width: 896px; margin: 0 0 24px; }
+  .akr-cl-quote__text span { color: #ea7552; }
+  .akr-cl-quote__attribution { font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #ea7552; text-transform: uppercase; letter-spacing: 0.6px; text-align: center; }
+
+  /* Product cards */
+  .akr-cl-cards { background: #fffbf2; padding: 0 100px 100px; }
+  .akr-cl-cards__grid { display: flex; gap: 24px; max-width: 1240px; }
+  .akr-cl-card { flex: 1; height: 442.67px; border-radius: 24px; position: relative; overflow: hidden; min-width: 0; }
+  .akr-cl-card--teal { background: #47b1b4; }
+  .akr-cl-card--yellow { background: #ffc03c; }
+  .akr-cl-card--coral { background: #ea7552; }
+  .akr-cl-card__inner { display: flex; flex-direction: column; justify-content: space-between; padding: 32px; height: 100%; position: relative; }
+  .akr-cl-card__img { position: absolute; width: 100%; height: calc(100% + 14px); left: 0; top: -7px; object-fit: cover; }
+  .akr-cl-card__badge { background: #ea7552; border-radius: 100px; padding: 8px 16px; font-family: Arial, sans-serif; font-size: 16px; color: #fff; text-transform: uppercase; letter-spacing: 0.6px; display: inline-flex; align-items: center; position: relative; z-index: 2; }
+  .akr-cl-card__info { position: absolute; bottom: -0.33px; left: 0; width: 100%; padding: 32px; background: linear-gradient(to top, rgba(28,14,8,0.9), rgba(28,14,8,0)); z-index: 2; }
+  .akr-cl-card__name { font-family: Arial, sans-serif; font-weight: 700; font-size: 24px; line-height: 1.2; color: #fff; margin: 0 0 16px; }
+  .akr-cl-card__price { font-family: Arial, sans-serif; font-weight: 700; font-size: 24px; color: #fff; margin: 0; }
+  .akr-cl-card__overlay { position: absolute; inset: 0; background: rgba(44,26,16,0.7); z-index: 3; }
+  .akr-cl-card__cta { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: #ea7552; border-radius: 9999px; padding: 16px 32px; font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #fff; text-transform: uppercase; text-decoration: none; white-space: nowrap; z-index: 4; }
+  .akr-cl-card__cta:hover { background: #d4644a; color: #fff; }
+
+  /* Bundle */
+  .akr-cl-bundle { padding: 0 100px 100px; background: #fffbf2; }
+  .akr-cl-bundle__card { background: #fdeee2; border: 1px solid #ea7552; border-radius: 24px; position: relative; overflow: hidden; }
+  .akr-cl-bundle__inner { display: flex; align-items: center; justify-content: space-between; padding: 41px; }
+  .akr-cl-bundle__bg { position: absolute; height: 535px; right: 0; top: -105.67px; width: 958px; object-fit: cover; }
+  .akr-cl-bundle__fade { position: absolute; height: 400px; left: 480px; top: 0; width: 333px; background: linear-gradient(to right, #fdeee2, rgba(253,238,226,0)); }
+  .akr-cl-bundle__content { position: relative; z-index: 2; max-width: 510px; }
+  .akr-cl-bundle__eyebrow { font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #ea7552; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 32px; }
+  .akr-cl-bundle__heading { font-family: 'DM Serif Display', serif; font-size: 68px; line-height: 1.05; color: #2c1a10; margin: 0 0 16px; }
+  .akr-cl-bundle__heading em { font-style: italic; color: #ea7552; }
+  .akr-cl-bundle__sub { font-family: Arial, sans-serif; font-size: 16px; color: #7d6355; line-height: 1.5; margin-bottom: 32px; max-width: 491px; }
+  .akr-cl-bundle__actions { display: flex; align-items: center; gap: 24px; }
+  .akr-cl-bundle__price { font-family: Arial, sans-serif; font-weight: 700; font-size: 24px; color: #ea7552; }
+  .akr-cl-bundle__btn { background: #ea7552; border-radius: 1000px; padding: 16px 20px; font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #fff; text-decoration: none; letter-spacing: 0.6px; display: inline-flex; }
+  .akr-cl-bundle__btn:hover { background: #d4644a; color: #fff; }
+
+  /* Stats section */
+  .akr-cl-stats { padding: 80px 100px; background: #fffbf2; }
+  .akr-cl-stats__card { background: rgba(255,192,60,0.1); border: 1px solid #ffc03c; border-radius: 24px; padding: 33px; }
+  .akr-cl-stats__label { font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #ffc03c; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 24px; }
+  .akr-cl-stats__heading { font-family: 'DM Serif Display', serif; font-size: 40px; color: #2c1a10; margin-bottom: 24px; }
+  .akr-cl-stats__heading em { font-style: italic; color: #ea7552; }
+  .akr-cl-stats__grid { display: flex; justify-content: space-between; }
+  .akr-cl-stats__item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .akr-cl-stats__value { font-family: 'DM Serif Display', serif; font-size: 32px; color: #ffc03c; letter-spacing: 1.344px; }
+  .akr-cl-stats__sublabel { font-family: Arial, sans-serif; font-size: 12px; color: #1a0f08; text-transform: uppercase; letter-spacing: 0.54px; opacity: 0.5; }
+
+  /* Testimonial */
+  .akr-cl-review { padding: 0 100px 80px; background: #fffbf2; }
+  .akr-cl-review__card { background: rgba(234,117,82,0.1); border: 1px solid #ea7552; border-radius: 24px; padding: 33px; }
+  .akr-cl-review__quote { font-family: Arial, sans-serif; font-size: 18px; line-height: 1.5; color: #7d6355; margin: 0 0 32px; }
+  .akr-cl-review__attribution { font-family: Arial, sans-serif; font-size: 12px; color: #7d6355; text-transform: uppercase; letter-spacing: 0.54px; }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .akr-cl-hero { height: auto; min-height: 600px; }
+    .akr-cl-hero__bg { width: 100%; opacity: 0.4; }
+    .akr-cl-hero__panel { position: relative; top: auto; left: auto; transform: none; width: 100%; padding: 40px 20px; }
+    .akr-cl-hero__heading .serif, .akr-cl-hero__heading .serif-italic { font-size: 44px; }
+    .akr-cl-filter { padding: 24px 20px; flex-wrap: wrap; gap: 16px; }
+    .akr-cl-quote { padding: 60px 20px; }
+    .akr-cl-quote__text { font-size: 28px; }
+    .akr-cl-cards { padding: 0 20px 60px; }
+    .akr-cl-cards__grid { flex-direction: column; }
+    .akr-cl-card { height: 340px; }
+    .akr-cl-bundle { padding: 0 20px 60px; }
+    .akr-cl-bundle__inner { flex-direction: column; }
+    .akr-cl-bundle__heading { font-size: 44px; }
+    .akr-cl-bundle__bg { display: none; }
+    .akr-cl-stats { padding: 60px 20px; }
+    .akr-cl-review { padding: 0 20px 60px; }
+  }
+</style>
+
+{% assign classic_cards = collection.products | slice: 0, 3 %}
+{% assign cl_card_colors = '#47b1b4,#ffc03c,#ea7552' | split: ',' %}
+{% assign cl_card_images = 'akr-classic-card-ramen.png,akr-classic-card-chanterelle.png,akr-classic-card-chicken.png' | split: ',' %}
+
+<div class="akr-cl">
+
+  {%- comment -%} ── SECTION 1: HERO ── {%- endcomment -%}
+  <div class="akr-cl-hero">
+    <img
+      class="akr-cl-hero__bg"
+      src="{{ 'akr-classic-hero-bg.jpg' | asset_url }}"
+      alt="åKrrush Classic"
+      loading="eager"
+    >
+
+    <div class="akr-cl-hero__panel">
+      <p class="akr-cl-hero__label">ÅKRRUSH CLASSIC</p>
+
+      <h1 class="akr-cl-hero__heading">
+        <span class="serif">Three </span><span class="serif-italic">flavors</span><span class="serif" style="color:#ea7552;">.</span><span class="serif"> One method.</span>
+      </h1>
+
+      <p class="akr-cl-hero__body">
+        Each stick begins with Norwegian bones, slow-simmered for eighteen hours. What remains is pure — 13 grams of hydrolyzed protein, 60 calories, and a flavor worth returning to daily.
+      </p>
+
+      <div class="akr-cl-hero__features">
+        <div class="akr-cl-hero__feat">
+          <svg class="akr-cl-hero__feat-icon" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="9" stroke="#EA7552" stroke-width="1.5"/>
+            <path d="M7 10l2 2 4-4" stroke="#EA7552" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>13G PROTEIN</span>
+        </div>
+        <div class="akr-cl-hero__feat">
+          <svg class="akr-cl-hero__feat-icon" viewBox="0 0 20 20" fill="none">
+            <path d="M4 14 Q6 4 10 3 Q14 4 16 14" stroke="#EA7552" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M4 14 Q10 16 16 14" stroke="#EA7552" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+          <span>60 CALORIES</span>
+        </div>
+        <div class="akr-cl-hero__feat">
+          <svg class="akr-cl-hero__feat-icon" viewBox="0 0 20 20" fill="none">
+            <path d="M3 10 Q3 4 10 3 Q17 4 17 10 Q17 16 10 17 Q3 16 3 10z" stroke="#EA7552" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M7 10 Q10 7 13 10 Q10 13 7 10z" stroke="#EA7552" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+          <span>3 COMFORTING FLAVORS</span>
+        </div>
+      </div>
+
+      <a href="#akr-cl-products" class="akr-cl-hero__cta">SHOP CLASSIC</a>
+    </div>
+  </div>
+
+  {%- comment -%} ── INFO STRIP ── {%- endcomment -%}
+  <div class="akr-cl-strip">
+    <p>13G PROTEIN</p>
+    <span class="akr-cl-strip__dot">·</span>
+    <p>60 CAL</p>
+    <span class="akr-cl-strip__dot">·</span>
+    <p>100% NORWEGIAN POULTRY</p>
+    <span class="akr-cl-strip__dot">·</span>
+    <p>HYDROLYZED</p>
+    <span class="akr-cl-strip__dot">·</span>
+    <p>NO ADDITIVES</p>
+  </div>
+
+  {%- comment -%} ── FILTER BAR ── {%- endcomment -%}
+  <div class="akr-cl-filter">
+    <div class="akr-cl-filter__left">
+      <span class="akr-cl-filter__label">FILTER</span>
+      <div class="akr-cl-filter__btn"><span>FLAVOR</span><span class="arr">▼</span></div>
+      <div class="akr-cl-filter__btn"><span>USE CASE</span><span class="arr">▼</span></div>
+      <div class="akr-cl-filter__btn"><span>PACK SIZE</span><span class="arr">▼</span></div>
+    </div>
+    <div class="akr-cl-filter__right">
+      <span class="akr-cl-filter__label">SORT</span>
+      <div class="akr-cl-filter__btn"><span>Featured</span><span class="arr">▼</span></div>
+    </div>
+  </div>
+
+  {%- comment -%} ── QUOTE ── {%- endcomment -%}
+  <div class="akr-cl-quote">
+    <svg class="akr-cl-quote__icon" viewBox="0 0 44 35" fill="none" aria-hidden="true">
+      <path d="M0 35 Q0 20 10 14 Q16 10 20 12 Q16 18 18 24 Q20 30 14 35 Z M22 35 Q22 20 32 14 Q38 10 42 12 Q38 18 40 24 Q42 30 36 35 Z" fill="#1A0F08"/>
+    </svg>
+    <p class="akr-cl-quote__text">
+      "Each broth begins with the same <span>Norwegian bones</span> — and ends in a different ritual."
+    </p>
+    <p class="akr-cl-quote__attribution">— THE METHOD · 2026</p>
+  </div>
+
+  {%- comment -%} ── PRODUCT CARDS ── {%- endcomment -%}
+  <div class="akr-cl-cards" id="akr-cl-products">
+    <div class="akr-cl-cards__grid">
+      {%- for product in classic_cards -%}
+        {%- assign idx = forloop.index0 -%}
+        {%- assign bg_color = cl_card_colors[idx] -%}
+        {%- assign fallback_img = cl_card_images[idx] | asset_url -%}
+        <div class="akr-cl-card" style="background:{{ bg_color }};">
+          {%- if product.featured_image -%}
+            <img
+              class="akr-cl-card__img"
+              src="{{ product.featured_image | image_url: width: 450 }}"
+              alt="{{ product.title | escape }}"
+              loading="lazy"
+            >
+          {%- else -%}
+            <img
+              class="akr-cl-card__img"
+              src="{{ fallback_img }}"
+              alt="{{ product.title | escape }}"
+              loading="lazy"
+            >
+          {%- endif -%}
+
+          <div class="akr-cl-card__inner">
+            <div style="position:relative;z-index:2;"></div>
+            <div style="height:0;"></div>
+          </div>
+
+          <div class="akr-cl-card__info">
+            <p class="akr-cl-card__name">{{ product.title }}</p>
+            <p class="akr-cl-card__price">{{ product.price | money }}</p>
+          </div>
+
+          <span class="akr-cl-card__badge" style="position:absolute;bottom:32px;right:32px;z-index:3;">Sale</span>
+
+          {%- if forloop.index == 2 -%}
+            <div class="akr-cl-card__overlay"></div>
+            <a href="{{ product.url }}" class="akr-cl-card__cta">SHOP NOW</a>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        {%- for i in (1..3) -%}
+          {%- assign idx = forloop.index0 -%}
+          {%- assign bg_color = cl_card_colors[idx] -%}
+          <div class="akr-cl-card" style="background:{{ bg_color }};"></div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- comment -%} ── BUNDLE SECTION ── {%- endcomment -%}
+  <div class="akr-cl-bundle">
+    <div class="akr-cl-bundle__card">
+      <div class="akr-cl-bundle__inner">
+        <img class="akr-cl-bundle__bg" src="{{ 'akr-classic-bundle-bg.png' | asset_url }}" alt="" loading="lazy" aria-hidden="true">
+        <div class="akr-cl-bundle__fade"></div>
+        <div class="akr-cl-bundle__content">
+          <p class="akr-cl-bundle__eyebrow">BUNDLE · THE COMPLETE RITUAL</p>
+          <h2 class="akr-cl-bundle__heading">All <em>three flavors</em>. One ritual.</h2>
+          <p class="akr-cl-bundle__sub">FL·01 + FL·02 + FL·03 · 90 sticks total. Discover your ritual before committing to one.</p>
+          <div class="akr-cl-bundle__actions">
+            <span class="akr-cl-bundle__price">$18</span>
+            <a href="{{ collection.url }}" class="akr-cl-bundle__btn">Choose Your Flavor →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ── STATS SECTION ── {%- endcomment -%}
+  <div class="akr-cl-stats">
+    <div class="akr-cl-stats__card">
+      <p class="akr-cl-stats__label">INGREDIENT SPOTLIGHT</p>
+      <h3 class="akr-cl-stats__heading">Norwegian <em>Bones</em></h3>
+      <div class="akr-cl-stats__grid">
+        <div class="akr-cl-stats__item">
+          <span class="akr-cl-stats__value">94%</span>
+          <span class="akr-cl-stats__sublabel">ABSORPTION</span>
+        </div>
+        <div class="akr-cl-stats__item">
+          <span class="akr-cl-stats__value">13g</span>
+          <span class="akr-cl-stats__sublabel">PER STICK</span>
+        </div>
+        <div class="akr-cl-stats__item">
+          <span class="akr-cl-stats__value">18h</span>
+          <span class="akr-cl-stats__sublabel">SIMMER TIME</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ── CUSTOMER REVIEW ── {%- endcomment -%}
+  <div class="akr-cl-review">
+    <div class="akr-cl-review__card">
+      <p class="akr-cl-review__quote">
+        The Chanterelle flavor tastes like something a grandmother in Telemark would have simmered all day. Except it's in a stick. Remarkable.
+      </p>
+      <p class="akr-cl-review__attribution">MAJA H. · BERGEN · APR 2026</p>
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Classic Category Page",
+  "settings": [],
+  "presets": [
+    { "name": "Classic Category Page" }
+  ]
+}
+{% endschema %}

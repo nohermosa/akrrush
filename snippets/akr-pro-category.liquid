@@ -281,6 +281,16 @@
     color: rgba(255,255,255,0.8);
     margin: 0;
   }
+  @keyframes akr-athlete-enter {
+    from {
+      transform: scaleX(-1) translateX(-80px);
+      opacity: 0;
+    }
+    to {
+      transform: scaleX(-1) translateX(0);
+      opacity: 1;
+    }
+  }
   .akr-pro-darkfeats__athlete {
     position: absolute;
     right: 76px;
@@ -291,7 +301,11 @@
     pointer-events: none;
     -webkit-mask-image: linear-gradient(to top, black 70%, transparent 100%);
     mask-image: linear-gradient(to top, black 70%, transparent 100%);
-    transform: scaleX(-1);
+    transform: scaleX(-1) translateX(-80px);
+    opacity: 0;
+  }
+  .akr-pro-darkfeats__athlete.akr-athlete-visible {
+    animation: akr-athlete-enter 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   /* ── MOBILE ── */
@@ -537,3 +551,17 @@
   </div>
 
 </div>
+
+<script>
+(function() {
+  var athlete = document.querySelector('.akr-pro-darkfeats__athlete');
+  if (!athlete) return;
+  var observer = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting) {
+      athlete.classList.add('akr-athlete-visible');
+      observer.disconnect();
+    }
+  }, { threshold: 0.2 });
+  observer.observe(athlete);
+})();
+</script>

@@ -38,23 +38,24 @@
   }
   .akr-pro-hero__panel {
     position: absolute;
-    top: 50%; left: 0;
-    transform: translateY(calc(-50% + 0.5px));
+    top: 0.5px; left: 0;
     width: 720px; height: 777px;
     background: linear-gradient(90deg, #020101 0%, rgba(2,1,1,0) 102.58%);
     backdrop-filter: blur(13.25px);
     border-radius: 16px;
     overflow: hidden;
     display: flex;
-    align-items: center;
-    padding: 60px 100px;
+    align-items: flex-end;
+    padding: 0 100px 60px;
     box-sizing: border-box;
   }
-  .akr-pro-hero__panel-inner {
+  .akr-pro-hero__text {
+    position: absolute;
+    top: 78px; left: 100px;
+    width: 1062px; z-index: 5;
     display: flex;
     flex-direction: column;
     gap: 24px;
-    width: 100%;
   }
   .akr-pro-hero__label {
     font-family: Arial, sans-serif;
@@ -164,8 +165,8 @@
 
   /* ── PRODUCT CARDS ── */
   .akr-pro-cards { background: #fffbf2; padding: 100px; box-sizing: border-box; }
-  .akr-pro-cards__grid { display: flex; gap: 24px; width: 1240px; max-width: 100%; }
-  .akr-pro-card { flex: 1 0 0; height: 381px; border-radius: 24px; position: relative; overflow: hidden; min-width: 0; }
+  .akr-pro-cards__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; width: 1240px; max-width: 100%; }
+  .akr-pro-card { height: 381px; border-radius: 24px; position: relative; overflow: hidden; }
   .akr-pro-card__img { position: absolute; left: 50%; top: 50%; transform: translate(-50%, calc(-50% + 1px)); width: 292px; height: 389px; object-fit: cover; pointer-events: none; }
   .akr-pro-card__badge { background: #ea7552; border-radius: 100px; padding: 8px 16px; font-family: Arial, sans-serif; font-size: 16px; color: #fff; text-transform: uppercase; letter-spacing: 0.6px; display: inline-flex; align-items: center; position: absolute; top: 24px; left: 24px; z-index: 2; }
   .akr-pro-card__info { position: absolute; bottom: 0; left: 0; width: 292px; padding: 24px; background: linear-gradient(to top, rgba(28,14,8,0.9), rgba(28,14,8,0)); z-index: 2; box-sizing: border-box; }
@@ -221,12 +222,13 @@
     .akr-pro-hero { height: auto; min-height: 500px; }
     .akr-pro-hero__bg { left: 0; top: 0; width: 100%; height: 100%; opacity: 0.3; }
     .akr-pro-hero__vignette-top, .akr-pro-hero__vignette-bot { left: 0; width: 100%; }
-    .akr-pro-hero__panel { position: relative; top: auto; transform: none; width: 100%; height: auto; border-radius: 0; padding: 40px 20px; }
+    .akr-pro-hero__text { position: relative; top: auto; left: auto; width: 100%; padding: 40px 20px 0; }
+    .akr-pro-hero__panel { position: relative; top: auto; width: 100%; height: auto; border-radius: 0; padding: 20px; align-items: flex-start; }
     .akr-pro-hero__heading { font-size: 40px; }
     .akr-pro-hero__feats { flex-direction: column; gap: 24px; }
     .akr-pro-strip { flex-wrap: wrap; }
     .akr-pro-cards { padding: 40px 20px; }
-    .akr-pro-cards__grid { flex-direction: column; width: 100%; }
+    .akr-pro-cards__grid { grid-template-columns: 1fr; width: 100%; }
     .akr-pro-card { height: 340px; }
     .akr-pro-card__img { width: 100%; height: calc(100% + 14px); left: 0; top: -7px; transform: none; }
     .akr-pro-card__info { width: 100%; }
@@ -246,6 +248,8 @@
 {% assign pro_cards = collection.products | slice: 0, 4 %}
 {% assign card_colors = '#47b1b4,#ffc03c,#ea7552,#ea7552' | split: ',' %}
 {% assign card_images = 'akr-pro-card-variety.png,akr-pro-card-chicken.png,akr-pro-card-ginger.png,akr-pro-card-mushroom.png' | split: ',' %}
+{% assign card_names = 'åKrrush PRO Variety Pack,Bold Chicken PRO,Ginger åKrrush PRO,Max Mushroom PRO' | split: ',' %}
+{% assign card_prices = '$39.99,$39.99,$39.99,$39.99' | split: ',' %}
 
 <div class="akr-pro">
 
@@ -255,89 +259,85 @@
     <div class="akr-pro-hero__vignette-top"></div>
     <div class="akr-pro-hero__vignette-bot"></div>
 
+    <div class="akr-pro-hero__text">
+      <p class="akr-pro-hero__label">ÅKRRUSH PRO</p>
+      <h1 class="akr-pro-hero__heading">Protein meets hydration—<br>Built for <em>performance</em> athletes</h1>
+      <p class="akr-pro-hero__body">20 grams of hydrolyzed Norwegian poultry protein and a generous serving of electrolytes in one easy&#8209;to&#8209;mix stick. No more juggling shakes and sports drinks.</p>
+    </div>
+
     <div class="akr-pro-hero__panel">
-      <div class="akr-pro-hero__panel-inner">
-
-        <p class="akr-pro-hero__label">ÅKRRUSH PRO</p>
-
-        <h1 class="akr-pro-hero__heading">Protein meets hydration- Built for <em>performance</em> athletes</h1>
-
-        <p class="akr-pro-hero__body">20 grams of hydrolyzed Norwegian poultry protein and a generous serving of electrolytes in one easy&#8209;to&#8209;mix stick No more juggling shakes and sports drinks. åKrrush Pro dissolves quickly in hot or cold water, delivering both nourishment and hydration when you need it most.</p>
-
-        <div class="akr-pro-hero__feats">
-          {%- comment -%} Left column {%- endcomment -%}
-          <div class="akr-pro-hero__feats-col">
-            <div class="akr-pro-hero__feat">
-              <div class="akr-pro-hero__feat-header">
-                <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                  <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
-                  <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
-                </svg>
-                <span class="akr-pro-hero__feat-title">20g Hydrolyzed Protein</span>
-              </div>
-              <p class="akr-pro-hero__feat-desc">Fast, usable fuel for serious training.</p>
+      <div class="akr-pro-hero__feats">
+        {%- comment -%} Left column {%- endcomment -%}
+        <div class="akr-pro-hero__feats-col">
+          <div class="akr-pro-hero__feat">
+            <div class="akr-pro-hero__feat-header">
+              <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
+                <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
+              </svg>
+              <span class="akr-pro-hero__feat-title">20g Hydrolyzed Protein</span>
             </div>
-            <div class="akr-pro-hero__divider"></div>
-            <div class="akr-pro-hero__feat">
-              <div class="akr-pro-hero__feat-header">
-                <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                  <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
-                  <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
-                </svg>
-                <span class="akr-pro-hero__feat-title">Protein + Electrolytes in One</span>
-              </div>
-              <p class="akr-pro-hero__feat-desc">Hydrates and fuels every workout session.</p>
-            </div>
-            <div class="akr-pro-hero__divider"></div>
-            <div class="akr-pro-hero__feat">
-              <div class="akr-pro-hero__feat-header">
-                <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                  <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
-                  <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
-                </svg>
-                <span class="akr-pro-hero__feat-title">Clean Nordic Sourcing</span>
-              </div>
-              <p class="akr-pro-hero__feat-desc">Pure, trusted protein from Norwegian ingredients.</p>
-            </div>
+            <p class="akr-pro-hero__feat-desc">Fast, usable fuel for serious training.</p>
           </div>
-
-          {%- comment -%} Right column {%- endcomment -%}
-          <div class="akr-pro-hero__feats-col">
-            <div class="akr-pro-hero__feat">
-              <div class="akr-pro-hero__feat-header">
-                <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                  <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
-                  <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
-                </svg>
-                <span class="akr-pro-hero__feat-title">Built for Recovery Days and Heavy Days</span>
-              </div>
-              <p class="akr-pro-hero__feat-desc">Helps muscles rebound fast between sessions.</p>
+          <div class="akr-pro-hero__divider"></div>
+          <div class="akr-pro-hero__feat">
+            <div class="akr-pro-hero__feat-header">
+              <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
+                <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
+              </svg>
+              <span class="akr-pro-hero__feat-title">Protein + Electrolytes in One</span>
             </div>
-            <div class="akr-pro-hero__divider"></div>
-            <div class="akr-pro-hero__feat">
-              <div class="akr-pro-hero__feat-header">
-                <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                  <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
-                  <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
-                </svg>
-                <span class="akr-pro-hero__feat-title">Hot or Cold. Always Game-Ready</span>
-              </div>
-              <p class="akr-pro-hero__feat-desc">Fuel your body any way you train.</p>
+            <p class="akr-pro-hero__feat-desc">Hydrates and fuels every workout session.</p>
+          </div>
+          <div class="akr-pro-hero__divider"></div>
+          <div class="akr-pro-hero__feat">
+            <div class="akr-pro-hero__feat-header">
+              <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
+                <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
+              </svg>
+              <span class="akr-pro-hero__feat-title">Clean Nordic Sourcing</span>
             </div>
-            <div class="akr-pro-hero__divider"></div>
-            <div class="akr-pro-hero__feat">
-              <div class="akr-pro-hero__feat-header">
-                <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                  <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
-                  <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
-                </svg>
-                <span class="akr-pro-hero__feat-title">Clean Nordic Sourcing</span>
-              </div>
-              <p class="akr-pro-hero__feat-desc">Pure, trusted protein from Norwegian ingredients.</p>
-            </div>
+            <p class="akr-pro-hero__feat-desc">Pure, trusted protein from Norwegian ingredients.</p>
           </div>
         </div>
 
+        {%- comment -%} Right column {%- endcomment -%}
+        <div class="akr-pro-hero__feats-col">
+          <div class="akr-pro-hero__feat">
+            <div class="akr-pro-hero__feat-header">
+              <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
+                <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
+              </svg>
+              <span class="akr-pro-hero__feat-title">Built for Recovery Days and Heavy Days</span>
+            </div>
+            <p class="akr-pro-hero__feat-desc">Helps muscles rebound fast between sessions.</p>
+          </div>
+          <div class="akr-pro-hero__divider"></div>
+          <div class="akr-pro-hero__feat">
+            <div class="akr-pro-hero__feat-header">
+              <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
+                <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
+              </svg>
+              <span class="akr-pro-hero__feat-title">Hot or Cold. Always Game-Ready</span>
+            </div>
+            <p class="akr-pro-hero__feat-desc">Fuel your body any way you train.</p>
+          </div>
+          <div class="akr-pro-hero__divider"></div>
+          <div class="akr-pro-hero__feat">
+            <div class="akr-pro-hero__feat-header">
+              <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
+                <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
+              </svg>
+              <span class="akr-pro-hero__feat-title">No Artificial Additives</span>
+            </div>
+            <p class="akr-pro-hero__feat-desc">Pure, trusted protein from Norwegian ingredients.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -358,39 +358,35 @@
   {%- comment -%} ── PRODUCT CARDS ── {%- endcomment -%}
   <div class="akr-pro-cards">
     <div class="akr-pro-cards__grid">
-      {%- for product in pro_cards -%}
+      {%- for i in (1..4) -%}
         {%- assign idx = forloop.index0 -%}
+        {%- assign product = pro_cards[idx] -%}
         {%- assign bg_color = card_colors[idx] -%}
         {%- assign fallback_img = card_images[idx] | asset_url -%}
         <div class="akr-pro-card" style="background:{{ bg_color }};">
-          {%- if product.featured_image -%}
+          {%- if product -%}
             <img class="akr-pro-card__img" src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
+            <span class="akr-pro-card__badge">Sale</span>
+            <div class="akr-pro-card__info">
+              <p class="akr-pro-card__name">{{ product.title }}</p>
+              <p class="akr-pro-card__price">{{ product.price | money }}</p>
+            </div>
           {%- else -%}
-            <img class="akr-pro-card__img" src="{{ fallback_img }}" alt="{{ product.title | escape }}" loading="lazy">
+            <img class="akr-pro-card__img" src="{{ fallback_img }}" alt="{{ card_names[idx] }}" loading="lazy">
+            <div class="akr-pro-card__info">
+              <p class="akr-pro-card__name">{{ card_names[idx] }}</p>
+              <p class="akr-pro-card__price">{{ card_prices[idx] }}</p>
+            </div>
           {%- endif -%}
-          <span class="akr-pro-card__badge">Sale</span>
-          <div class="akr-pro-card__info">
-            <p class="akr-pro-card__name">{{ product.title }}</p>
-            <p class="akr-pro-card__price">{{ product.price | money }}</p>
-          </div>
           {%- if forloop.index == 2 -%}
             <div class="akr-pro-card__overlay"></div>
-            <a href="{{ product.url }}" class="akr-pro-card__cta">SHOP NOW</a>
-          {%- endif -%}
-        </div>
-      {%- else -%}
-        {%- for i in (1..4) -%}
-          {%- assign idx = forloop.index0 -%}
-          {%- assign bg_color = card_colors[idx] -%}
-          {%- assign fallback_img = card_images[idx] | asset_url -%}
-          <div class="akr-pro-card" style="background:{{ bg_color }};">
-            <img class="akr-pro-card__img" src="{{ fallback_img }}" alt="åKrrush PRO" loading="lazy">
-            {%- if forloop.index == 2 -%}
-              <div class="akr-pro-card__overlay"></div>
+            {%- if product -%}
+              <a href="{{ product.url }}" class="akr-pro-card__cta">SHOP NOW</a>
+            {%- else -%}
               <span class="akr-pro-card__cta" style="cursor:default;">SHOP NOW</span>
             {%- endif -%}
-          </div>
-        {%- endfor -%}
+          {%- endif -%}
+        </div>
       {%- endfor -%}
     </div>
   </div>

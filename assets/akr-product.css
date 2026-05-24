@@ -1922,7 +1922,7 @@
 .akr-social-heading {
   font-family: 'DM Serif Display', 'Georgia', serif;
   font-size: 68px;
-  font-weight: 700;
+  font-weight: 400;
   font-style: normal;
   color: #2c1a10;
   line-height: 1.1;
@@ -1978,7 +1978,7 @@
 .akr-social-stat-val {
   font-family: 'DM Serif Display', 'Georgia', serif;
   font-size: 50px;
-  font-weight: 700;
+  font-weight: 400;
   color: #100807;
   line-height: 1.1;
   text-align: center;
@@ -2013,14 +2013,41 @@
   white-space: nowrap;
 }
 .akr-social-btn:hover { background: #d65e35; color: white; }
-/* RIGHT: phone mockup */
+/* RIGHT: phone mockup — outer wrapper matches Figma Group9 (545×748) */
 .akr-social-phone-wrap {
   position: relative;
   width: 545px;
-  height: 730px;
-  overflow: hidden;
+  height: 748px;
   flex-shrink: 0;
+  /* no overflow:hidden here — glow must bleed outside */
 }
+/* Glow behind phone: approximates Figma Group32 two blurred orange ellipses */
+.akr-social-phone-glow {
+  position: absolute;
+  /* inset mirrors Figma inset-[-53.96%_-72.24%] relative to 545×748 parent */
+  top: -54%;
+  bottom: -54%;
+  left: -72%;
+  right: -72%;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse 36% 46% at 50% 52%, rgba(242,99,58,0.55) 0%, rgba(242,99,58,0) 65%),
+    radial-gradient(ellipse 26% 37% at 50% 52%, rgba(242,99,58,0.45) 0%, rgba(242,99,58,0) 55%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+/* Inner clip frame — exactly 468×729 as Figma "image 14" container, offset ml=52.81 mt=9.25 */
+.akr-social-phone-inner {
+  position: absolute;
+  left: 52.81px;
+  top: 9.25px;
+  width: 468px;
+  height: 729px;
+  overflow: hidden;
+  z-index: 1;
+}
+/* Image percentages relative to phone-inner (468×729) — matches Figma exactly, preserves 1.93:1 ratio */
 .akr-social-phone-img {
   position: absolute;
   width: 333.33%;
@@ -2036,13 +2063,19 @@
   .akr-social-left { width: 520px; }
   .akr-social-heading { font-size: 56px; }
   .akr-social-stat-val { font-size: 40px; }
-  .akr-social-phone-wrap { width: 460px; height: 620px; }
+  /* Scale phone-wrap proportionally (Figma ratio 545:748) */
+  .akr-social-phone-wrap { width: 420px; height: 576px; }
+  .akr-social-phone-inner { left: 41px; top: 7px; width: 360px; height: 561px; }
 }
 @media (max-width: 900px) {
   .akr-social-section { padding: 64px 32px; }
   .akr-social-inner { flex-direction: column; gap: 48px; }
   .akr-social-left { width: 100%; }
-  .akr-social-phone-wrap { width: 100%; max-width: 480px; height: 520px; }
+  /* At tablet, show image naturally (no crop) — full image is self-contained */
+  .akr-social-phone-wrap { width: 100%; max-width: 480px; height: auto; }
+  .akr-social-phone-inner { position: relative; left: auto; top: auto; width: 100%; height: auto; overflow: visible; }
+  .akr-social-phone-img { position: relative; width: 100%; height: auto; left: auto; top: auto; }
+  .akr-social-phone-glow { display: none; }
 }
 @media (max-width: 600px) {
   .akr-social-section { padding: 48px 20px; }

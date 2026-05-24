@@ -78,12 +78,17 @@
 
     <!-- ===== RIGHT: phone mockup ===== -->
     <div class="akr-social-phone-wrap">
-      <img
-        src="{{ 'akr-social-phone.png' | asset_url }}"
-        alt="Thalia's åKrrush morning ritual on TikTok — 240K views"
-        class="akr-social-phone-img"
-        loading="lazy"
-      >
+      <!-- Glow behind phone (Figma Group32: two blurred orange ellipses) -->
+      <div class="akr-social-phone-glow" aria-hidden="true"></div>
+      <!-- Inner clip frame — exactly 468×729 as in Figma "image 14" container -->
+      <div class="akr-social-phone-inner">
+        <img
+          src="{{ 'akr-social-phone.png' | asset_url }}"
+          alt="Thalia's åKrrush morning ritual on TikTok — 240K views"
+          class="akr-social-phone-img"
+          loading="lazy"
+        >
+      </div>
     </div>
 
   </div><!-- /akr-social-inner -->

@@ -7,18 +7,19 @@
   <div class="akr-benefits-inner">
 
     <!-- ===== HEADING ===== -->
-    <h2 class="akr-benefits-heading">
+    <h2 class="akr-benefits-heading" data-animate>
       {{ section.settings.heading_before }}
       <em class="akr-benefits-heading-italic">{{ section.settings.heading_italic }}<svg class="akr-benefits-inside-underline" viewBox="0 0 172 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="none"><path d="M3 9 Q30 2 58 8 Q86 14 114 8 Q142 2 169 8" stroke="#ea7552" stroke-width="3" stroke-linecap="round"/></svg></em>
       {{ section.settings.heading_after }}
     </h2>
-    <p class="akr-benefits-sub">{{ section.settings.subheading }}</p>
+    <p class="akr-benefits-sub" data-animate style="transition-delay:0.08s">{{ section.settings.subheading }}</p>
 
     <!-- ===== CIRCLES ROW ===== -->
     <div class="akr-benefits-icons-row">
       {%- for block in section.blocks -%}
         {%- if block.type == 'benefit_circle' -%}
-          <div class="akr-benefit-item" {{ block.shopify_attributes }}>
+          {%- assign circle_delay = forloop.index0 | times: 70 -%}
+          <div class="akr-benefit-item" data-animate="scale" style="transition-delay:{{ circle_delay }}ms" {{ block.shopify_attributes }}>
             <div class="akr-benefit-circle" style="background:{{ block.settings.circle_color }}">
               {%- if block.settings.icon_asset != blank -%}
                 <img src="{{ block.settings.icon_asset | asset_url }}"
@@ -43,7 +44,7 @@
     <div class="akr-benefits-bottom">
 
       <!-- Left: lifestyle photo -->
-      <div class="akr-benefits-photo">
+      <div class="akr-benefits-photo" data-animate="from-left" style="transition-delay:0.05s">
         {%- if section.settings.photo != blank -%}
           <img src="{{ section.settings.photo | img_url: '1200x' }}"
                alt="{{ section.settings.photo.alt | escape }}"
@@ -58,7 +59,7 @@
       </div>
 
       <!-- Right: text + bullet points -->
-      <div class="akr-benefits-text">
+      <div class="akr-benefits-text" data-animate="from-right" style="transition-delay:0.15s">
         <h3 class="akr-benefits-text-heading">
           {{ section.settings.text_heading_line1 }}<br>
           <em class="akr-benefits-text-orange">{{ section.settings.text_heading_orange }}</em> {{ section.settings.text_heading_line2 }}
@@ -85,6 +86,18 @@
 
   </div><!-- /akr-benefits-inner -->
 </section>
+
+<script>
+(function() {
+  if (typeof IntersectionObserver === 'undefined') return;
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('#akr-benefits [data-animate]').forEach(function(el) { io.observe(el); });
+})();
+</script>
 
 {% schema %}
 {

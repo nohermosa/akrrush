@@ -17,45 +17,30 @@
   }
   .akr-pro-hero__bg {
     position: absolute;
-    top: 77.65px; left: 344px;
-    width: 1086px; height: 634px;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     object-fit: cover;
+    object-position: right center;
     pointer-events: none;
   }
-  .akr-pro-hero__vignette-top {
+  .akr-pro-hero::before {
+    content: '';
     position: absolute;
-    top: 78.12px; left: 344px;
-    width: 1087px; height: 246px;
-    background: linear-gradient(to top, rgba(1,1,1,0), #010101);
+    top: 0; left: 0;
+    width: 800px; height: 100%;
+    background: linear-gradient(90deg, rgba(2,1,1,0.93) 0%, rgba(2,1,1,0.82) 55%, rgba(2,1,1,0) 100%);
+    z-index: 1;
     pointer-events: none;
   }
-  .akr-pro-hero__vignette-bot {
+  .akr-pro-hero__content {
     position: absolute;
-    bottom: 0; left: 344px;
-    width: 1087px; height: 301px;
-    background: linear-gradient(to bottom, rgba(1,1,1,0), #010101);
-    pointer-events: none;
-  }
-  .akr-pro-hero__panel {
-    position: absolute;
-    top: 0.5px; left: 0;
-    width: 720px; height: 777px;
-    background: linear-gradient(90deg, #020101 0%, rgba(2,1,1,0) 102.58%);
-    backdrop-filter: blur(13.25px);
-    border-radius: 16px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 0 100px 60px;
-    box-sizing: border-box;
-  }
-  .akr-pro-hero__text {
-    position: absolute;
-    top: 78px; left: 100px;
-    width: 1062px; z-index: 5;
+    top: 50%; left: 100px;
+    transform: translateY(-50%);
+    width: 560px;
+    z-index: 5;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
   }
   .akr-pro-hero__label {
     font-family: Arial, sans-serif;
@@ -68,12 +53,10 @@
   .akr-pro-hero__heading {
     font-family: 'Newsreader', serif;
     font-weight: 500;
-    font-size: 80px;
-    line-height: 1.1;
+    font-size: 72px;
+    line-height: 1.08;
     color: #fff;
     margin: 0;
-    white-space: pre-wrap;
-    width: 100%;
   }
   .akr-pro-hero__heading em {
     font-family: 'Newsreader', serif;
@@ -85,56 +68,45 @@
     font-family: Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5;
-    color: #fff;
-    max-width: 439px;
+    color: rgba(255,255,255,0.85);
     margin: 0;
   }
-  /* Features — 2 columns inside glass panel */
   .akr-pro-hero__feats {
-    display: flex;
-    gap: 60px;
-    align-items: center;
-    width: 100%;
-  }
-  .akr-pro-hero__feats-col {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    gap: 20px;
-    min-width: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 32px;
   }
   .akr-pro-hero__feat {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .akr-pro-hero__feat-header {
-    display: flex;
-    gap: 13px;
     align-items: center;
+    gap: 10px;
   }
-  .akr-pro-hero__feat-icon {
-    flex-shrink: 0;
-  }
+  .akr-pro-hero__feat-icon { flex-shrink: 0; }
   .akr-pro-hero__feat-title {
     font-family: Arial, sans-serif;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 13px;
     color: #fff;
-    line-height: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
   }
-  .akr-pro-hero__feat-desc {
+  .akr-pro-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ea7552;
+    border-radius: 9999px;
+    padding: 16px 40px;
     font-family: Arial, sans-serif;
+    font-weight: 700;
     font-size: 16px;
-    line-height: 1.5;
     color: #fff;
-    padding-left: 39px;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: fit-content;
+    margin-top: 4px;
   }
-  .akr-pro-hero__divider {
-    height: 0.5px;
-    background: rgba(255,255,255,0.2);
-    width: 100%;
-  }
+  .akr-pro-hero__cta:hover { background: #d4644a; color: #fff; }
 
   /* ── INFO STRIP ── */
   .akr-pro-strip {
@@ -219,13 +191,11 @@
 
   /* ── MOBILE ── */
   @media (max-width: 768px) {
-    .akr-pro-hero { height: auto; min-height: 500px; }
-    .akr-pro-hero__bg { left: 0; top: 0; width: 100%; height: 100%; opacity: 0.3; }
-    .akr-pro-hero__vignette-top, .akr-pro-hero__vignette-bot { left: 0; width: 100%; }
-    .akr-pro-hero__text { position: relative; top: auto; left: auto; width: 100%; padding: 40px 20px 0; }
-    .akr-pro-hero__panel { position: relative; top: auto; width: 100%; height: auto; border-radius: 0; padding: 20px; align-items: flex-start; }
+    .akr-pro-hero { height: auto; min-height: 560px; }
+    .akr-pro-hero::before { width: 100%; }
+    .akr-pro-hero__content { position: relative; top: auto; left: auto; transform: none; width: 100%; padding: 60px 20px 40px; }
     .akr-pro-hero__heading { font-size: 40px; }
-    .akr-pro-hero__feats { flex-direction: column; gap: 24px; }
+    .akr-pro-hero__feats { grid-template-columns: 1fr; }
     .akr-pro-strip { flex-wrap: wrap; }
     .akr-pro-cards { padding: 40px 20px; }
     .akr-pro-cards__grid { grid-template-columns: 1fr; width: 100%; }
@@ -256,91 +226,33 @@
   {%- comment -%} ── SECTION 1: HERO ── {%- endcomment -%}
   <div class="akr-pro-hero">
     <img class="akr-pro-hero__bg" src="{{ 'akr-pro-hero-bg.png' | asset_url }}" alt="åKrrush PRO" loading="eager">
-    <div class="akr-pro-hero__vignette-top"></div>
-    <div class="akr-pro-hero__vignette-bot"></div>
 
-    <div class="akr-pro-hero__text">
+    <div class="akr-pro-hero__content">
       <p class="akr-pro-hero__label">ÅKRRUSH PRO</p>
       <h1 class="akr-pro-hero__heading">Protein meets hydration—<br>Built for <em>performance</em> athletes</h1>
       <p class="akr-pro-hero__body">20 grams of hydrolyzed Norwegian poultry protein and a generous serving of electrolytes in one easy&#8209;to&#8209;mix stick. No more juggling shakes and sports drinks.</p>
-    </div>
-
-    <div class="akr-pro-hero__panel">
       <div class="akr-pro-hero__feats">
-        {%- comment -%} Left column {%- endcomment -%}
-        <div class="akr-pro-hero__feats-col">
-          <div class="akr-pro-hero__feat">
-            <div class="akr-pro-hero__feat-header">
-              <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
-                <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
-              </svg>
-              <span class="akr-pro-hero__feat-title">20g Hydrolyzed Protein</span>
-            </div>
-            <p class="akr-pro-hero__feat-desc">Fast, usable fuel for serious training.</p>
-          </div>
-          <div class="akr-pro-hero__divider"></div>
-          <div class="akr-pro-hero__feat">
-            <div class="akr-pro-hero__feat-header">
-              <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
-                <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
-              </svg>
-              <span class="akr-pro-hero__feat-title">Protein + Electrolytes in One</span>
-            </div>
-            <p class="akr-pro-hero__feat-desc">Hydrates and fuels every workout session.</p>
-          </div>
-          <div class="akr-pro-hero__divider"></div>
-          <div class="akr-pro-hero__feat">
-            <div class="akr-pro-hero__feat-header">
-              <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
-                <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
-              </svg>
-              <span class="akr-pro-hero__feat-title">Clean Nordic Sourcing</span>
-            </div>
-            <p class="akr-pro-hero__feat-desc">Pure, trusted protein from Norwegian ingredients.</p>
-          </div>
+        <div class="akr-pro-hero__feat">
+          <svg class="akr-pro-hero__feat-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1C9 1 5 5 5 9.5C5 12 6.5 14 9 14C11.5 14 13 12 13 9.5C13 8 12 7 12 7C12 7 11.5 10 9.5 10C8.5 10 8 9 8 8C8 5.5 9 3 9 1Z" fill="#ea7552"/></svg>
+          <span class="akr-pro-hero__feat-title">20G PROTEIN</span>
         </div>
-
-        {%- comment -%} Right column {%- endcomment -%}
-        <div class="akr-pro-hero__feats-col">
-          <div class="akr-pro-hero__feat">
-            <div class="akr-pro-hero__feat-header">
-              <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
-                <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
-              </svg>
-              <span class="akr-pro-hero__feat-title">Built for Recovery Days and Heavy Days</span>
-            </div>
-            <p class="akr-pro-hero__feat-desc">Helps muscles rebound fast between sessions.</p>
-          </div>
-          <div class="akr-pro-hero__divider"></div>
-          <div class="akr-pro-hero__feat">
-            <div class="akr-pro-hero__feat-header">
-              <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
-                <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
-              </svg>
-              <span class="akr-pro-hero__feat-title">Hot or Cold. Always Game-Ready</span>
-            </div>
-            <p class="akr-pro-hero__feat-desc">Fuel your body any way you train.</p>
-          </div>
-          <div class="akr-pro-hero__divider"></div>
-          <div class="akr-pro-hero__feat">
-            <div class="akr-pro-hero__feat-header">
-              <svg class="akr-pro-hero__feat-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                <rect width="26" height="26" rx="13" fill="#D76C4C" fill-opacity="0.2"/>
-                <circle cx="13" cy="13" r="5" fill="#D76C4C"/>
-              </svg>
-              <span class="akr-pro-hero__feat-title">No Artificial Additives</span>
-            </div>
-            <p class="akr-pro-hero__feat-desc">Pure, trusted protein from Norwegian ingredients.</p>
-          </div>
+        <div class="akr-pro-hero__feat">
+          <svg class="akr-pro-hero__feat-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M10.5 1L4 10H9L7.5 17L14 8H9L10.5 1Z" fill="#ea7552"/></svg>
+          <span class="akr-pro-hero__feat-title">TRAINING &amp; HYDRATION</span>
+        </div>
+        <div class="akr-pro-hero__feat">
+          <svg class="akr-pro-hero__feat-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2C9 2 4 7 4 11C4 13.8 6.2 16 9 16C11.8 16 14 13.8 14 11C14 7 9 2 9 2Z" fill="#ea7552"/></svg>
+          <span class="akr-pro-hero__feat-title">ELECTROLYTES</span>
+        </div>
+        <div class="akr-pro-hero__feat">
+          <svg class="akr-pro-hero__feat-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1L2 4V9C2 12.9 5.1 16.6 9 17C12.9 16.6 16 12.9 16 9V4L9 1Z" fill="#ea7552"/></svg>
+          <span class="akr-pro-hero__feat-title">RECOVERY SUPPORT</span>
         </div>
       </div>
+      <a href="{{ collection.url }}" class="akr-pro-hero__cta">SHOP PRO</a>
     </div>
   </div>
+
 
   {%- comment -%} ── INFO STRIP ── {%- endcomment -%}
   <div class="akr-pro-strip">

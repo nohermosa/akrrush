@@ -30,6 +30,7 @@
 
 /* Force-override Enkel on all akr section elements */
 .akr-ing-section *,
+.akr-why-section *,
 .akr-benefits-section *,
 .akr-faq-section * {
   font-family: Arial, sans-serif !important;
@@ -39,7 +40,6 @@
 .akr-ing-card-body h4,
 .akr-benefits-heading,
 .akr-benefits-heading em,
-.akr-benefit-name,
 .akr-benefits-text-heading,
 .akr-benefits-text-heading em,
 .akr-faq-heading,
@@ -449,17 +449,18 @@
   display: block;
 }
 .akr-benefit-name {
-  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-family: Arial, sans-serif !important;
   font-size: 20px;
-  font-weight: 400;
-  color: var(--akr-dark);
+  font-weight: 700;
+  color: #100807;
   text-align: center;
   line-height: 1.2;
 }
 .akr-benefit-desc {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--akr-mid);
   text-align: center;
+  letter-spacing: 0.72px;
   margin-top: -8px;
 }
 .akr-benefits-bottom {
@@ -481,7 +482,7 @@
 }
 .akr-benefits-text-heading {
   font-family: 'DM Serif Display', 'Georgia', serif !important;
-  font-size: 60px;
+  font-size: 68px;
   color: var(--akr-dark);
   line-height: 1.1;
   margin-bottom: 18px;
@@ -492,7 +493,7 @@
 .akr-benefits-text-desc {
   font-size: 18px;
   color: var(--akr-mid);
-  line-height: 1.65;
+  line-height: 1.5;
   margin-bottom: 28px;
 }
 .akr-benefits-points {
@@ -564,9 +565,9 @@
 .akr-faq-tab-sub         { background: var(--akr-amber);  color: var(--akr-dark); }
 .akr-faq-heading {
   font-family: 'DM Serif Display', 'Georgia', serif !important;
-  font-size: 60px;
+  font-size: 68px;
   color: var(--akr-dark);
-  line-height: 1.15;
+  line-height: 1;
   margin-bottom: 14px;
   margin-top: 0;
 }
@@ -609,8 +610,8 @@
 .akr-faq-avatars .akr-faq-avatar:first-child { margin-left: 0; }
 .akr-faq-social-text {
   font-size: 18px;
-  font-weight: 600;
-  color: var(--akr-dark);
+  font-weight: 400;
+  color: var(--akr-mid);
   font-family: Arial, sans-serif;
 }
 .akr-faq-list {
@@ -651,9 +652,9 @@
   margin-top: 2px;
 }
 .akr-faq-a {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--akr-mid);
-  line-height: 1.7;
+  line-height: 1.5;
   padding: 0 0 18px 32px;
   display: none;
 }
@@ -937,7 +938,7 @@
 
 /* Eyebrow */
 .akr-hero-eyebrow {
-  font-size: 10px !important;
+  font-size: 13px !important;
   font-weight: 700 !important;
   font-family: Arial, sans-serif !important;
   color: var(--akr-dark) !important;
@@ -948,20 +949,20 @@
 
 /* Title */
 .akr-hero-title {
-  font-family: 'DM Serif Display', 'Georgia', serif !important;
-  font-size: 48px !important;
-  font-weight: 400 !important;
+  font-family: 'Newsreader', 'Georgia', serif !important;
+  font-size: 44px !important;
+  font-weight: 600 !important;
   color: var(--akr-dark) !important;
-  line-height: 1.05 !important;
+  line-height: 1.1 !important;
   margin: 0 0 12px !important;
 }
 
 /* Short desc */
 .akr-hero-short-desc {
-  font-size: 15px !important;
+  font-size: 13px !important;
   font-family: Arial, sans-serif !important;
   color: var(--akr-mid) !important;
-  line-height: 1.55 !important;
+  line-height: 1.5 !important;
   margin-bottom: 14px !important;
 }
 
@@ -975,12 +976,12 @@
   gap: 7px;
 }
 .akr-hero-bullets li {
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-family: Arial, sans-serif !important;
   color: var(--akr-mid) !important;
   padding-left: 18px;
   position: relative;
-  line-height: 1.45 !important;
+  line-height: 1.5 !important;
 }
 .akr-hero-bullets li::before {
   content: '✓';
@@ -1537,7 +1538,7 @@
 .akr-why-center-col { text-align: center; position: relative; }
 .akr-why-sparks-l { position: absolute; left: -34px; top: -28px; }
 .akr-why-sparks-r { position: absolute; right: -34px; top: -28px; }
-.akr-why-heading { font-family: 'DM Serif Display', Georgia, serif !important; font-size: clamp(64px, 7vw, 100px); color: var(--akr-dark); line-height: .98; display: inline-block; position: relative; z-index: 2; }
+.akr-why-heading { font-family: 'DM Serif Display', Georgia, serif !important; font-size: 68px; color: var(--akr-dark); line-height: 1; display: inline-block; position: relative; z-index: 2; }
 .akr-why-heading em { font-style: italic; color: var(--akr-orange); position: relative; display: inline-block; }
 .akr-why-heading em .akr-underline-just { position: absolute; bottom: -16px; left: 0; width: 100%; height: auto; pointer-events: none; display: block; }
 .akr-why-broth-outline { -webkit-text-stroke: 1px var(--akr-dark); color: var(--akr-cream); display: inline; }
@@ -1554,7 +1555,7 @@
 .akr-mtn-path { stroke: #47B1B4; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1200; animation: akr-mtn-draw 2s ease-out forwards, akr-mtn-fill 2s ease-out forwards; }
 
 /* Sub-heading */
-.akr-why-sub { text-align: center; font-size: 17px; color: var(--akr-orange); max-width: 520px; margin: 0 auto 44px; line-height: 1.65; font-weight: 700; }
+.akr-why-sub { text-align: center; font-size: 18px; color: var(--akr-mid); max-width: 640px; margin: 0 auto 44px; line-height: 1.5; font-weight: 400; font-family: Arial, sans-serif !important; }
 .akr-why-sub em { font-style: italic; }
 
 /* Comparison cards */
@@ -1567,7 +1568,7 @@
 .akr-comp-avg-content { flex: 1; }
 .akr-comp-avg-title { font-family: 'DM Serif Display', Georgia, serif !important; font-size: 26px; color: var(--akr-dark); margin-bottom: 20px; text-align: center; }
 .akr-comp-rows { display: flex; flex-direction: column; gap: 0; flex: 1; }
-.akr-comp-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,.07); font-size: 15px; color: var(--akr-mid); line-height: 1.3; }
+.akr-comp-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,.07); font-family: 'Inter', Arial, sans-serif !important; font-size: 16px; color: var(--akr-mid); line-height: 1.5; }
 .akr-comp-row:last-of-type { border-bottom: none; }
 .akr-comp-icon { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
 .akr-comp-icon.x { background: rgba(0,0,0,.13); color: rgba(0,0,0,.5); }

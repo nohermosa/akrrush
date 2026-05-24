@@ -138,7 +138,7 @@
   /* ── PRODUCT CARDS ── */
   .akr-pro-cards { background: #fffbf2; padding: 100px; box-sizing: border-box; }
   .akr-pro-cards__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; width: 100%; }
-  .akr-pro-card { height: 471px; border-radius: 24px; position: relative; overflow: hidden; }
+  .akr-pro-card { height: 471px; border-radius: 24px; position: relative; overflow: hidden; display: block; text-decoration: none; cursor: pointer; }
   .akr-pro-card__img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
   .akr-pro-card__badge { background: #ea7552; border-radius: 100px; padding: 8px 16px; font-family: Arial, sans-serif; font-size: 16px; color: #fff; text-transform: uppercase; letter-spacing: 0.6px; display: inline-flex; align-items: center; position: absolute; top: 24px; left: 24px; z-index: 2; }
   .akr-pro-card__info { position: absolute; bottom: 0; left: 0; width: 292px; padding: 24px; background: linear-gradient(to top, rgba(28,14,8,0.9), rgba(28,14,8,0)); z-index: 2; box-sizing: border-box; }
@@ -291,6 +291,11 @@
       opacity: 1;
     }
   }
+  @keyframes akr-athlete-float {
+    0%   { transform: scaleX(-1) translateY(0px); }
+    50%  { transform: scaleX(-1) translateY(-12px); }
+    100% { transform: scaleX(-1) translateY(0px); }
+  }
   .akr-pro-darkfeats__athlete {
     position: absolute;
     right: 76px;
@@ -305,7 +310,9 @@
     opacity: 0;
   }
   .akr-pro-darkfeats__athlete.akr-athlete-visible {
-    animation: akr-athlete-enter 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation:
+      akr-athlete-enter 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+      akr-athlete-float 5s ease-in-out 0.9s infinite;
   }
 
   /* ── MOBILE ── */
@@ -466,7 +473,11 @@
         {%- assign product = pro_cards[idx] -%}
         {%- assign bg_color = card_colors[idx] -%}
         {%- assign fallback_img = card_images[idx] | asset_url -%}
-        <div class="akr-pro-card" style="background:{{ bg_color }};">
+        {%- if product -%}
+          <a href="{{ product.url }}" class="akr-pro-card" style="background:{{ bg_color }};">
+        {%- else -%}
+          <a href="{{ collection.url }}" class="akr-pro-card" style="background:{{ bg_color }};">
+        {%- endif -%}
           {%- if product -%}
             <img class="akr-pro-card__img" src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
             <span class="akr-pro-card__badge">Sale</span>
@@ -482,12 +493,8 @@
             </div>
           {%- endif -%}
           <div class="akr-pro-card__overlay"></div>
-          {%- if product -%}
-            <a href="{{ product.url }}" class="akr-pro-card__cta">SHOP NOW</a>
-          {%- else -%}
-            <a href="{{ collection.url }}" class="akr-pro-card__cta">SHOP NOW</a>
-          {%- endif -%}
-        </div>
+          <span class="akr-pro-card__cta">SHOP NOW</span>
+        </a>
       {%- endfor -%}
     </div>
   </div>

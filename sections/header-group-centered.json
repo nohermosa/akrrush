@@ -37,7 +37,7 @@
       "type": "header-centered__top-bar",
       "settings": {
         "show_social_icons": true,
-        "text": "BLACK FRIDAY 25% OFF ALL PRODUCTS USE CODE HOLIDAY25",
+        "text": "20% Off With Email Signup",
         "top_bar_background": "#7d6355",
         "top_bar_link": "#fffbf2",
         "top_bar_link_hover": "rgba(0,0,0,0)",
@@ -60,7 +60,7 @@
       "type": "header-centered",
       "settings": {
         "logo": "shopify://shop_images/akrrushLogo_3dce48ff-44be-482b-a289-7542c4785579.png",
-        "logo_width": 270,
+        "logo_width": 200,
         "logo_position": "between",
         "main_linklist": "main-menu",
         "enable_shop_button": true,

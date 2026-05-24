@@ -532,6 +532,97 @@
 }
 
 /* =============================================================
+   BENEFIT ICON ANIMATIONS (alle 6 ikoner)
+   ============================================================= */
+
+/* ── Protein — bicep flex (600ms, pause til 4s) ── */
+@keyframes akr-ben-flex {
+  0%   { transform: scale(1) rotate(0deg); }
+  8%   { transform: scale(1.08) rotate(5deg); }
+  15%  { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.akr-ben-protein {
+  animation: akr-ben-flex 4s cubic-bezier(0.34,1.56,0.64,1) infinite;
+  transform-origin: center center;
+}
+.akr-benefit-item:hover .akr-ben-protein { animation-duration: 1.5s; }
+
+/* ── Collagen — sakte molekyl-rotasjon ── */
+@keyframes akr-ben-mol-rotate {
+  to { transform: rotate(360deg); }
+}
+.akr-ben-collagen {
+  animation: akr-ben-mol-rotate 10s linear infinite;
+  transform-origin: center center;
+}
+.akr-benefit-item:hover .akr-ben-collagen { animation-duration: 3.5s; }
+
+/* ── Joints — kne-bøy ── */
+@keyframes akr-ben-knee-upper {
+  0%, 35%, 100% { transform: rotate(0deg); }
+  15%            { transform: rotate(-12deg); }
+}
+@keyframes akr-ben-knee-lower {
+  0%, 40%, 100% { transform: rotate(0deg); }
+  20%            { transform: rotate(16deg); }
+}
+.akr-ben-joints-upper {
+  animation: akr-ben-knee-upper 4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+}
+.akr-ben-joints-lower {
+  animation: akr-ben-knee-lower 4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+}
+.akr-benefit-item:hover .akr-ben-joints-upper,
+.akr-benefit-item:hover .akr-ben-joints-lower { animation-duration: 1.5s; }
+
+/* ── Energy — sol-puls + lyn-blink ── */
+@keyframes akr-ben-sun-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.05); opacity: 0.9; }
+}
+@keyframes akr-ben-bolt-blink {
+  0%, 68%, 100% { opacity: 0; }
+  71%            { opacity: 1; }
+  77%            { opacity: 1; }
+  82%            { opacity: 0; }
+}
+.akr-ben-energy-sun {
+  animation: akr-ben-sun-pulse 2s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.akr-ben-energy-bolt { animation: akr-ben-bolt-blink 3.5s ease-in-out infinite; }
+.akr-benefit-item:hover .akr-ben-energy-sun  { animation-duration: 0.8s; }
+.akr-benefit-item:hover .akr-ben-energy-bolt { animation-duration: 1.2s; }
+
+/* ── Nordic — vann-drift ── */
+@keyframes akr-ben-water-drift {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(8px); }
+}
+.akr-ben-nordic-water {
+  animation: akr-ben-water-drift 15s ease-in-out infinite;
+}
+.akr-benefit-item:hover .akr-ben-nordic-water { animation-duration: 5s; }
+
+/* ── prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .akr-ben-protein,
+  .akr-ben-collagen,
+  .akr-ben-joints-upper,
+  .akr-ben-joints-lower,
+  .akr-ben-energy-sun,
+  .akr-ben-energy-bolt,
+  .akr-ben-nordic-water { animation: none !important; }
+  .akr-ben-particle { display: none !important; }
+}
+
+/* =============================================================
    BENEFITS — Scroll reveal + hover
    ============================================================= */
 #akr-benefits [data-animate] {

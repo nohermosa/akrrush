@@ -28,10 +28,12 @@
     },
     "ecom_collection_broth_banner_section_AJ8w9K": {
       "type": "ecom-collection-broth-banner-section",
+      "disabled": true,
       "settings": {}
     },
     "main": {
       "type": "collection__main",
+      "disabled": true,
       "settings": {
         "collection_breadcrumb": true,
         "collection_tags": false,

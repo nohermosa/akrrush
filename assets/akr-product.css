@@ -14,6 +14,11 @@
   --akr-teal:   #47b1b4;
   --akr-amber:  #ffc03c;
   --akr-border: #e8d5c4;
+  /* CTA hierarchy */
+  --akr-cta-primary:        #D2724A;
+  --akr-cta-primary-hover:  #B85F3A;
+  --akr-cta-secondary:      #ea7552;
+  --akr-cta-secondary-hover:#d4613e;
 }
 
 /* =============================================================
@@ -915,7 +920,7 @@
   color: #fff;
   letter-spacing: .04em;
   text-transform: uppercase;
-  background: var(--akr-orange);
+  background: var(--akr-cta-secondary);
   border-radius: 9999px;
   padding: 16px 24px;
   text-decoration: none;
@@ -1736,11 +1741,17 @@
 }
 
 /* Custom CTA button */
-.akr-cta-btn {
+.akr-cta-btn,
+a.akr-cta-btn,
+button.akr-cta-btn {
   display: block; width: 100%;
   padding: 18px 20px;
-  background: #ea7552;
-  color: #fff;
+  background: var(--akr-cta-primary) !important;
+  background-color: var(--akr-cta-primary) !important;
+  background-image: none !important;
+  color: #fff !important;
+  opacity: 1 !important;
+  filter: none !important;
   border: none; border-radius: 50px;
   font-size: 15px; font-weight: 800;
   letter-spacing: .04em; text-transform: uppercase;
@@ -1749,7 +1760,9 @@
   transition: background .2s, transform .1s;
   margin-bottom: 8px;
 }
-.akr-cta-btn:hover { background: #d4613e; }
+.akr-cta-btn:hover,
+a.akr-cta-btn:hover,
+button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; background-color: var(--akr-cta-primary-hover) !important; color: #fff !important; }
 .akr-cta-btn:active { transform: scale(.99); }
 
 @media (max-width: 640px) {
@@ -1906,9 +1919,9 @@ button.akr-btn-cta-dark {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #E89B7A !important;
+  background: var(--akr-cta-primary) !important;
   background-image: none !important;
-  background-color: #E89B7A !important;
+  background-color: var(--akr-cta-primary) !important;
   color: #FFFFFF !important;
   opacity: 1 !important;
   filter: none !important;
@@ -1929,14 +1942,14 @@ button.akr-btn-cta-dark {
 .akr-btn-cta-dark:focus { color: #FFFFFF !important; }
 .akr-btn-cta-dark:hover,
 a.akr-btn-cta-dark:hover {
-  background: #D2724A !important;
-  background-color: #D2724A !important;
+  background: var(--akr-cta-primary-hover) !important;
+  background-color: var(--akr-cta-primary-hover) !important;
   color: #FFFFFF !important;
   opacity: 1 !important;
   transform: translateY(-1px);
   box-shadow: 0 8px 24px rgba(210, 114, 74, 0.32);
 }
-.akr-btn-cta-dark:active { background-color: #B85F3A !important; transform: translateY(0); box-shadow: none; }
+.akr-btn-cta-dark:active { background-color: var(--akr-cta-primary-hover) !important; transform: translateY(0); box-shadow: none; }
 
 /* Fix 4c: Trust text — solid, readable */
 .akr-why-trust { font-size: 14px; font-weight: 500; letter-spacing: 0.02em; color: #6B5A4C; margin-top: 14px; margin-bottom: 0; }
@@ -2140,7 +2153,7 @@ a.akr-btn-cta-dark:hover {
 .akr-social-arrow-l { transform: scaleX(-1); }
 .akr-social-btn {
   display: inline-block;
-  background: #ea7552;
+  background: var(--akr-cta-secondary);
   color: white;
   font-family: 'Epilogue', Arial, sans-serif;
   font-size: 14px;
@@ -2389,7 +2402,7 @@ a.akr-btn-cta-dark:hover {
 .akr-num-badge-amber { background: var(--akr-amber); color: var(--akr-dark); transform: rotate(10deg); }
 .akr-num-badge-outline { background: transparent; border: 1.5px solid var(--akr-dark); color: var(--akr-dark); transform: rotate(-10deg); }
 /* CTA */
-.akr-num-cta-btn { display: inline-block; background: var(--akr-orange); color: #fff; border-radius: 999px; padding: 14px 36px; font-size: 15px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; font-family: Arial, sans-serif; }
+.akr-num-cta-btn { display: inline-block; background: var(--akr-cta-secondary); color: #fff; border-radius: 999px; padding: 14px 36px; font-size: 15px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; font-family: Arial, sans-serif; }
 .akr-num-cta-btn:hover { opacity: .9; }
 
 /* Responsive */

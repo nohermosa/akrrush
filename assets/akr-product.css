@@ -155,12 +155,13 @@
   position: relative;
 }
 
-/* "Every gram tracked" — Caveat text, anchored left of NF panel near Calories row */
+/* "Every gram tracked" — anchored inside .akr-nf-cal-row, floats left */
+.akr-nf-cal-row { position: relative; }
 .akr-ing-gram-accent {
   position: absolute;
-  left: -120px;
-  top: 90px;
-  transform: rotate(-6deg);
+  left: -130px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-6deg);
   pointer-events: none;
   z-index: 2;
 }
@@ -347,30 +348,67 @@ section[id="akr-ingredients"] .akr-nf em {
   margin: 8px 0;
 }
 .akr-nf-ing-line b { font-weight: 700 !important; }
-.akr-nf-norway {
-  font-size: 13px;
-  font-weight: 700;
+/* ── Norway pride row (Alt B) ── */
+.akr-nf-norway-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  color: #2c1a10 !important;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--akr-border);
 }
-.akr-nf-norway-flag { font-style: normal; }
+.akr-nf-norway-flag {
+  font-size: 24px;
+  font-style: normal;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.akr-nf-norway-stack {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.akr-nf-norway-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--akr-dark) !important;
+}
+.akr-nf-norway-sub {
+  font-size: 11px;
+  color: var(--akr-mid) !important;
+  margin-top: 2px;
+}
 
 /* ── Lifestyle caption ── */
 .akr-ingredients__lifestyle {
   display: flex;
   flex-direction: column;
+  align-items: center;
   flex: 1;
 }
 .akr-ingredients__lifestyle-caption {
-  margin-top: 16px;
-  text-align: center;
+  margin: 24px auto 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: var(--akr-cream2);
+  border: 1px solid var(--akr-border);
+  border-radius: 9999px;
   font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--akr-mid);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--akr-dark);
   font-family: Arial, sans-serif !important;
+  width: fit-content;
+}
+.akr-ingredients__lifestyle-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--akr-orange);
+  flex-shrink: 0;
+  display: inline-block;
 }
 
 /* ── Ingredients sub-CTA ── */

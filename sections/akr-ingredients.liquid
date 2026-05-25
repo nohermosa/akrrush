@@ -49,17 +49,15 @@
               {%- endif -%}
             </div>
           </div>
-          <p class="akr-ingredients__lifestyle-caption">{{ section.settings.photo_badge }}</p>
+          <p class="akr-ingredients__lifestyle-caption">
+            <span class="akr-ingredients__lifestyle-dot" aria-hidden="true"></span>
+            {{ section.settings.photo_badge }}
+          </p>
         </div>
       </div>
 
       <!-- Right: Nutrition Facts -->
       <div class="akr-ing-nf-col">
-
-        <!-- "Every gram tracked" — Caveat accent, anchored left of NF panel near Calories row -->
-        <div class="akr-ing-gram-accent" aria-hidden="true">
-          <span class="akr-ing-gram-text">Every<br>gram<br>tracked →</span>
-        </div>
 
         <div class="akr-nf">
 
@@ -79,6 +77,9 @@
           <!-- Amount + Calories -->
           <div class="akr-nf-amount">Amount per serving</div>
           <div class="akr-nf-cal-row">
+            <div class="akr-ing-gram-accent" aria-hidden="true">
+              <span class="akr-ing-gram-text">Every<br>gram<br>tracked →</span>
+            </div>
             <span class="akr-nf-cal-label">Calories</span>
             <span class="akr-nf-cal-num">60</span>
           </div>
@@ -112,9 +113,12 @@
 
           <!-- Ingredients + Norway -->
           <p class="akr-nf-ing-line"><b>Ingredients:</b> {{ section.settings.ingredients_text }}</p>
-          <div class="akr-nf-norway">
+          <div class="akr-nf-norway-row">
             <span class="akr-nf-norway-flag" aria-hidden="true">🇳🇴</span>
-            <b>Product of Norway, packaged in USA</b>
+            <div class="akr-nf-norway-stack">
+              <span class="akr-nf-norway-title">Product of Norway</span>
+              <span class="akr-nf-norway-sub">Packaged in USA</span>
+            </div>
           </div>
 
         </div><!-- /akr-nf -->

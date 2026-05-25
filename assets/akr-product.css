@@ -1376,29 +1376,6 @@ a.akr-btn-cta-secondary:hover {
   position: relative;
   background: var(--akr-border);
 }
-.akr-hero-flavor-item.active .akr-hero-flavor-thumb,
-.akr-hero-flavor-item:hover .akr-hero-flavor-thumb {
-  border-color: var(--akr-orange);
-  transform: scale(1.04);
-}
-.akr-hero-flavor-item.active .akr-hero-flavor-thumb::after {
-  content: '✓';
-  position: absolute;
-  bottom: 6px;
-  right: 6px;
-  width: 20px;
-  height: 20px;
-  background: var(--akr-orange);
-  color: #fff;
-  border-radius: 50%;
-  font-size: 11px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 20px;
-  text-align: center;
-}
 .akr-hero-flavor-thumb img {
   width: 100%;
   height: 100%;
@@ -1417,24 +1394,42 @@ a.akr-btn-cta-secondary:hover {
   font-weight: 700 !important;
 }
 
-/* Sprint 3.0 — flavor card interaction states */
+/* Sprint 3.0.1 — flavor card interaction states */
 .akr-hero-flavor-item {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.akr-hero-flavor-item:not(.active):hover {
+.akr-hero-flavor-item .akr-hero-flavor-thumb {
+  transition: border-color 0.2s ease, transform 0.25s ease, box-shadow 0.25s ease, background 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.akr-hero-flavor-item:not(.active):hover .akr-hero-flavor-thumb {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(44, 26, 16, 0.08);
+  border-color: rgba(44, 26, 16, 0.15);
 }
 
 .akr-hero-flavor-item:focus-visible {
+  outline: none;
+}
+
+.akr-hero-flavor-item:focus-visible .akr-hero-flavor-thumb {
   outline: 2px solid var(--akr-cta-secondary);
   outline-offset: 4px;
-  border-radius: 12px;
 }
 
 .akr-hero-flavor-item.active {
   pointer-events: none;
+}
+
+.akr-hero-flavor-item.active .akr-hero-flavor-thumb {
+  border: 3px solid var(--akr-dark);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(44, 26, 16, 0.15);
+  background: var(--akr-cream);
 }
 
 /* Product form */

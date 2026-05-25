@@ -6,10 +6,10 @@
 <section class="akr-why-section" id="akr-why">
   <div class="akr-why-inner">
 
-    <!-- Eyebrow -->
+    <!-- Eyebrow (Fix 2: 13px, 0.18em, centered) -->
     <p class="akr-why-eyebrow">{{ section.settings.eyebrow | default: 'Real Bone Broth' }}</p>
 
-    <!-- Headline — one line on desktop -->
+    <!-- Headline — one line on desktop (UNCHANGED) -->
     <h2 class="akr-why-heading">{{ section.settings.headline_before | default: 'Why drink' }} <em>{{ section.settings.headline_emphasis | default: 'just' }}<img src="{{ 'akr-underline-just.svg' | asset_url }}" class="akr-underline-just" aria-hidden="true" alt=""></em> <span class="akr-why-broth-outline">{{ section.settings.headline_after | default: 'broth?' }}</span></h2>
 
     <!-- Subheadline -->
@@ -57,44 +57,50 @@
         </div>
       </div>
 
-      <!-- RIGHT: åKrrush — content left, image right -->
+      <!-- RIGHT: åKrrush — content + absolutely positioned tilted stick (Fix 1) -->
       <div class="akr-compare-card akr-compare-card--ak">
-        <div class="akr-compare-inner akr-compare-inner--rev">
 
-          <div class="akr-compare-content">
-            <h3 class="akr-compare-title">{{ section.settings.ak_title | default: 'åKrrush' }}</h3>
-            <ul class="akr-compare-list">
-              {%- for i in (1..5) -%}
-                {%- assign field = 'ak_item_' | append: i -%}
-                {%- if section.settings[field] != blank -%}
-                  <li>
-                    <span class="akr-bullet-icon akr-bullet-icon--pos" aria-hidden="true">
-                      <svg viewBox="0 0 12 12"><path d="M1.5 6l3 3L10.5 2.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-                    </span>
-                    {{ section.settings[field] }}
-                  </li>
-                {%- endif -%}
-              {%- endfor -%}
-            </ul>
-            <div class="akr-compare-footer akr-compare-footer--ak">{{ section.settings.ak_footer | default: 'What you get from åKrrush' }}</div>
-          </div>
+        <!-- Fix 1: Tilted stick, overflows right edge, floats via CSS animation -->
+        {%- if section.settings.akrrush_image != blank -%}
+          <img class="akr-compare-stick" src="{{ section.settings.akrrush_image | image_url: width: 640 }}" alt="" loading="lazy" aria-hidden="true">
+        {%- else -%}
+          <!-- TODO: replace src with akrrush-stick-splash.png once asset is provided -->
+          <img class="akr-compare-stick" src="{{ 'akr-stick-savory-chicken.png' | asset_url }}" alt="" loading="lazy" aria-hidden="true">
+        {%- endif -%}
 
-          <div class="akr-compare-img-col akr-compare-img-col--ak">
-            <div class="akr-ak-accent">
-              <span class="akr-ak-accent-text">{{ section.settings.ak_accent | default: 'obvious choice' }}</span>
-              <svg width="32" height="28" viewBox="0 0 32 28" fill="none" aria-hidden="true" class="akr-ak-accent-arrow">
-                <path d="M28 4 C28 4, 24 4, 18 8 C12 12, 6 20, 4 26" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-                <path d="M1 23 L4 27 L8 21" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            {%- if section.settings.akrrush_image != blank -%}
-              <img src="{{ section.settings.akrrush_image | image_url: width: 400 }}" alt="åKrrush" loading="lazy">
-            {%- else -%}
-              <img src="{{ 'akr-stick-savory-chicken.png' | asset_url }}" alt="åKrrush Savory Chicken" loading="lazy">
-            {%- endif -%}
-          </div>
-
+        <!-- "obvious choice" accent — absolutely positioned top-right (Fix 1) -->
+        <div class="akr-ak-accent" aria-hidden="true">
+          <span class="akr-ak-accent-text">{{ section.settings.ak_accent | default: 'obvious choice' }}</span>
+          <svg width="32" height="28" viewBox="0 0 32 28" fill="none" class="akr-ak-accent-arrow">
+            <path d="M28 4 C28 4, 24 4, 18 8 C12 12, 6 20, 4 26" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+            <path d="M1 23 L4 27 L8 21" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
+
+        <!-- Content — right-padded to clear the stick -->
+        <div class="akr-compare-content">
+
+          <!-- Fix 5: Logo SVG instead of text title -->
+          <div class="akr-compare-logo">
+            <img src="{{ 'akr-logo.svg' | asset_url }}" alt="åKrrush" loading="lazy">
+          </div>
+
+          <ul class="akr-compare-list">
+            {%- for i in (1..5) -%}
+              {%- assign field = 'ak_item_' | append: i -%}
+              {%- if section.settings[field] != blank -%}
+                <li>
+                  <span class="akr-bullet-icon akr-bullet-icon--pos" aria-hidden="true">
+                    <svg viewBox="0 0 12 12"><path d="M1.5 6l3 3L10.5 2.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                  </span>
+                  {{ section.settings[field] }}
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+          <div class="akr-compare-footer akr-compare-footer--ak">{{ section.settings.ak_footer | default: 'What you get from åKrrush' }}</div>
+        </div>
+
       </div>
 
     </div><!-- /compare -->
@@ -130,8 +136,7 @@
     { "type": "text",     "id": "avg_item_5",        "label": "Negative item 5",                   "default": "Contains fillers" },
     { "type": "text",     "id": "avg_footer",        "label": "Card footer",                       "default": "What you get from average brands" },
     { "type": "header",   "content": "åKrrush card" },
-    { "type": "image_picker", "id": "akrrush_image", "label": "åKrrush product image" },
-    { "type": "text",     "id": "ak_title",          "label": "Card title",                        "default": "åKrrush" },
+    { "type": "image_picker", "id": "akrrush_image", "label": "åKrrush product image (use akrrush-stick-splash.png)" },
     { "type": "text",     "id": "ak_accent",         "label": "Accent text (handwritten feel)",    "default": "obvious choice" },
     { "type": "text",     "id": "ak_item_1",         "label": "Positive item 1",                   "default": "Rapid protein absorption" },
     { "type": "text",     "id": "ak_item_2",         "label": "Positive item 2",                   "default": "Near 100% bioavailability" },

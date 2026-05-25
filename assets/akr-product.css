@@ -1759,16 +1759,16 @@
 }
 
 /* =============================================================
-   SECTION: WHY DRINK JUST BROTH? (v2)
+   SECTION: WHY DRINK JUST BROTH? (v3)
    ============================================================= */
 .akr-why-section { background: var(--akr-cream); padding: 80px 32px 96px; position: relative; }
 .akr-why-section * { box-sizing: border-box; }
 .akr-why-inner { max-width: 1080px; margin: 0 auto; }
 
-/* Eyebrow — plain centered, no lines */
-.akr-why-eyebrow { text-align: center; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--akr-orange); margin: 0 0 20px; }
+/* Fix 2: Eyebrow — 13px / 500 / 0.18em to match "HOW WE STACK UP" scale */
+.akr-why-eyebrow { text-align: center; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--akr-orange); margin: 0 0 24px; }
 
-/* Headline — single line on desktop */
+/* Headline — single line on desktop (UNCHANGED from v2) */
 .akr-why-heading {
   font-family: 'DM Serif Display', Georgia, serif !important;
   font-size: clamp(2.4rem, 5.5vw, 4.4rem);
@@ -1792,27 +1792,68 @@
 /* Comparison grid */
 .akr-why-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 auto 48px; align-items: stretch; }
 
-/* Cards */
+/* Cards — base */
 .akr-compare-card { border-radius: 24px; padding: 32px; display: flex; flex-direction: column; }
 .akr-compare-card--avg { background: #EDE6DA; }
-.akr-compare-card--ak  { background: #FBE8D9; }
 
-/* Card inner: 2-col image + content */
+/* Fix 1: åKrrush card — position context for absolute stick, clips splash overflow */
+.akr-compare-card--ak { background: #FBE8D9; position: relative; overflow: hidden; }
+
+/* Average card: 2-col image + content */
 .akr-compare-inner { display: grid; grid-template-columns: 40% 60%; gap: 20px; align-items: center; flex: 1; }
-.akr-compare-inner--rev { grid-template-columns: 60% 40%; }
-
-/* Image column */
 .akr-compare-img-col { display: flex; align-items: center; justify-content: center; }
 .akr-compare-img-col img { width: 140px; height: auto; object-fit: contain; display: block; }
-.akr-compare-img-col--ak { flex-direction: column; align-items: center; gap: 8px; }
 
-/* "obvious choice" accent */
-.akr-ak-accent { display: flex; flex-direction: column; align-items: flex-end; }
+/* Fix 1 + Fix 6: Stick image — tilted, floats, overflows right */
+@keyframes ak-stick-float {
+  0%, 100% { transform: translateY(-50%) rotate(-16deg); }
+  50%       { transform: translateY(calc(-50% - 8px)) rotate(-15deg); }
+}
+.akr-compare-stick {
+  position: absolute;
+  top: 50%;
+  right: -8%;
+  transform: translateY(-50%) rotate(-16deg);
+  width: 300px;
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  transform-origin: center center;
+  animation: ak-stick-float 6s ease-in-out infinite;
+}
+.akr-compare-card--ak:hover .akr-compare-stick {
+  animation-play-state: paused;
+  transform: translateY(calc(-50% - 10px)) rotate(-14deg) scale(1.03);
+  transition: transform 400ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .akr-compare-stick { animation: none; }
+}
+
+/* Fix 1: "obvious choice" accent — floats top-right near stick */
+.akr-ak-accent {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
 .akr-ak-accent-text { font-family: 'DM Serif Display', Georgia, serif !important; font-style: italic; font-size: 18px; color: var(--akr-orange); line-height: 1.1; }
 .akr-ak-accent-arrow { align-self: flex-end; }
 
-/* Content column */
+/* Content columns */
 .akr-compare-content { display: flex; flex-direction: column; }
+
+/* åKrrush card content: right-padded to clear the stick */
+.akr-compare-card--ak .akr-compare-content { padding-right: 160px; position: relative; z-index: 1; }
+
+/* Fix 5: Logo block replaces title in right card */
+.akr-compare-logo { display: block; margin-bottom: 22px; height: 36px; }
+.akr-compare-logo img { height: 100%; width: auto; display: block; }
+
+/* Average card title */
 .akr-compare-title { font-family: 'DM Serif Display', Georgia, serif !important; font-size: 28px; font-weight: 500; line-height: 1.1; color: var(--akr-dark); margin: 0 0 20px; }
 
 /* Bullet list */
@@ -1823,17 +1864,43 @@
 .akr-bullet-icon--pos { background: var(--akr-orange); }
 .akr-bullet-icon svg { width: 12px; height: 12px; display: block; }
 
-/* Card footers */
-.akr-compare-footer { font-size: 12px; color: rgba(43, 24, 16, 0.5); margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(43, 24, 16, 0.08); }
-.akr-compare-footer--ak { color: var(--akr-orange); border-top-color: rgba(198, 107, 69, 0.2); }
+/* Fix 4a + 4b: Card footers — solid hex colors, readable */
+.akr-compare-footer { font-size: 13px; font-weight: 500; color: #6B5A4C; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(43, 24, 16, 0.08); }
+.akr-compare-footer--ak { color: #C66B45; border-top-color: rgba(198, 107, 69, 0.2); }
 
-/* CTA */
+/* Fix 3: CTA — correct hover (darker solid hex, not washed-out opacity) */
 .akr-why-cta-wrap { text-align: center; }
-.akr-btn-cta-dark { display: inline-block; background: var(--akr-orange); color: #fff; border-radius: 999px; padding: 18px 36px; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: background 150ms ease, transform 150ms ease; }
-.akr-btn-cta-dark:hover { background: #D88660; transform: translateY(-1px); }
-.akr-why-trust { font-size: 13px; color: rgba(43, 24, 16, 0.55); margin-top: 14px; margin-bottom: 0; }
+.akr-btn-cta-dark {
+  display: inline-block;
+  background: #E89B7A;
+  color: #fff;
+  border-radius: 999px;
+  padding: 18px 36px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+.akr-btn-cta-dark:hover {
+  background: #D2724A;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(210, 114, 74, 0.32);
+}
+.akr-btn-cta-dark:active { background: #B85F3A; transform: translateY(0); box-shadow: none; }
 
-/* Mobile ≤767px */
+/* Fix 4c: Trust text — solid, readable */
+.akr-why-trust { font-size: 14px; font-weight: 500; letter-spacing: 0.02em; color: #6B5A4C; margin-top: 14px; margin-bottom: 0; }
+
+/* ≤1024px: scale stick down before cards get too narrow */
+@media (max-width: 1024px) {
+  .akr-compare-stick { width: 220px; }
+  .akr-compare-card--ak .akr-compare-content { padding-right: 120px; }
+}
+
+/* ≤767px: stack cards, reduce stick proportionally */
 @media (max-width: 767px) {
   .akr-why-section { padding: 56px 20px 72px; }
   .akr-why-heading { white-space: normal; font-size: clamp(2.4rem, 10vw, 3.4rem); margin-bottom: 14px; }
@@ -1843,15 +1910,20 @@
   .akr-compare-title { font-size: 22px; }
   .akr-compare-list li { font-size: 14px; }
   .akr-btn-cta-dark { display: block; text-align: center; font-size: 13px; }
+  .akr-compare-stick { width: 180px; right: -6%; }
+  .akr-compare-card--ak .akr-compare-content { padding-right: 110px; }
+  .akr-ak-accent { top: 14px; right: 16px; }
+  .akr-ak-accent-text { font-size: 15px; }
+  .akr-compare-logo { height: 28px; }
 }
 
-/* ≤400px: card inner collapses to single column */
+/* ≤400px: collapse avg card to single column, further shrink stick */
 @media (max-width: 400px) {
-  .akr-compare-inner,
-  .akr-compare-inner--rev { grid-template-columns: 1fr; }
+  .akr-compare-inner { grid-template-columns: 1fr; }
   .akr-compare-img-col { justify-content: center; }
   .akr-compare-img-col img { width: 120px; max-width: 100%; }
-  .akr-compare-inner--rev .akr-compare-img-col--ak { order: -1; }
+  .akr-compare-stick { width: 140px; right: -4%; }
+  .akr-compare-card--ak .akr-compare-content { padding-right: 80px; }
 }
 
 /* =============================================================

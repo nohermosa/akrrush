@@ -57,14 +57,23 @@
         </div>
       </div>
 
-      <!-- RIGHT: åKrrush — content only, no stick here -->
+      <!-- RIGHT: åKrrush — overflow:hidden clips splash to card boundary (Bug 1) -->
       <div class="akr-compare-card akr-compare-card--ak">
-        <div class="akr-compare-content">
 
+        <!-- Bug 2: accent inside card, absolute positioned top-right pointing at stick -->
+        <div class="akr-ak-accent" aria-hidden="true">
+          <span class="akr-ak-accent-text">{{ section.settings.ak_accent | default: 'obvious choice' }}</span>
+          <svg width="48" height="40" viewBox="0 0 48 40" fill="none" class="akr-ak-accent-arrow">
+            <path d="M2 4 Q 12 22 28 26" stroke="#C66B45" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <path d="M22 20 L 28 26 L 20 28" stroke="#C66B45" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Content left side — padded right to clear stick -->
+        <div class="akr-compare-content">
           <div class="akr-compare-logo">
             <img src="{{ 'akr-logo.svg' | asset_url }}" alt="åKrrush" loading="lazy">
           </div>
-
           <ul class="akr-compare-list">
             {%- for i in (1..5) -%}
               {%- assign field = 'ak_item_' | append: i -%}
@@ -80,22 +89,16 @@
           </ul>
           <div class="akr-compare-footer akr-compare-footer--ak">{{ section.settings.ak_footer | default: 'What you get from åKrrush' }}</div>
         </div>
-      </div>
 
-      <!-- STICK: sibling of cards, positioned over right card via CSS — escapes card overflow -->
-      <div class="akr-compare-visual" aria-hidden="true">
-        <div class="akr-ak-accent">
-          <span class="akr-ak-accent-text">{{ section.settings.ak_accent | default: 'obvious choice' }}</span>
-          <svg width="32" height="28" viewBox="0 0 32 28" fill="none" class="akr-ak-accent-arrow">
-            <path d="M28 4 C28 4, 24 4, 18 8 C12 12, 6 20, 4 26" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-            <path d="M1 23 L4 27 L8 21" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+        <!-- Bug 1: stick inside card — clipped by overflow:hidden to card boundary -->
+        <div class="akr-compare-visual" aria-hidden="true">
+          {%- if section.settings.akrrush_image != blank -%}
+            <img class="akr-compare-stick" src="{{ section.settings.akrrush_image | image_url: width: 800 }}" alt="" loading="lazy">
+          {%- else -%}
+            <img class="akr-compare-stick" src="{{ 'akr-stick-splash.png' | asset_url }}" alt="" loading="lazy">
+          {%- endif -%}
         </div>
-        {%- if section.settings.akrrush_image != blank -%}
-          <img class="akr-compare-stick" src="{{ section.settings.akrrush_image | image_url: width: 800 }}" alt="" loading="lazy">
-        {%- else -%}
-          <img class="akr-compare-stick" src="{{ 'akr-stick-splash.png' | asset_url }}" alt="" loading="lazy">
-        {%- endif -%}
+
       </div>
 
     </div><!-- /compare -->

@@ -1767,8 +1767,8 @@
 .akr-why-section * { box-sizing: border-box; }
 .akr-why-inner { max-width: 1080px; margin: 0 auto; overflow: visible !important; }
 
-/* Eyebrow — matches "HOW WE STACK UP" from ingredients section */
-.akr-why-eyebrow { text-align: center; font-family: Arial, sans-serif !important; font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--akr-orange); margin: 0 0 24px; }
+/* Eyebrow — matches "HOW WE STACK UP" from ingredients section (Bug 4: position:relative keeps it above header) */
+.akr-why-eyebrow { text-align: center; font-family: Arial, sans-serif !important; font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--akr-orange); margin: 0 0 24px; position: relative; z-index: 1; }
 
 /* Headline — single line on desktop (UNCHANGED from v2) */
 .akr-why-heading {
@@ -1791,81 +1791,86 @@
 .akr-why-sub p { font-size: clamp(1rem, 1.4vw, 1.125rem); line-height: 1.55; color: rgba(43, 24, 16, 0.72); margin: 0; }
 .akr-why-sub em { font-style: italic; color: var(--akr-dark); }
 
-/* Comparison grid — position:relative so visual can escape card overflow cleanly */
+/* Comparison grid */
 .akr-why-compare {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  margin: 0 auto 80px;
+  margin: 0 auto 48px;
   align-items: stretch;
-  position: relative;
-  overflow: visible !important;
 }
 
 /* Cards — base */
 .akr-compare-card { border-radius: 24px; padding: 32px; display: flex; flex-direction: column; }
 .akr-compare-card--avg { background: #EDE6DA; }
-.akr-compare-card--ak { background: #FBE8D9; border: 1.5px solid rgba(198, 107, 69, 0.45); }
+
+/* Bug 1: overflow:hidden clips splash to card boundary */
+.akr-compare-card--ak {
+  background: #FBE8D9;
+  border: 1.5px solid rgba(198, 107, 69, 0.45);
+  position: relative;
+  overflow: hidden;
+}
 
 /* Average card: 2-col image + content */
 .akr-compare-inner { display: grid; grid-template-columns: 40% 60%; gap: 20px; align-items: center; flex: 1; }
 .akr-compare-img-col { display: flex; align-items: center; justify-content: center; }
 .akr-compare-img-col img { width: 140px; height: auto; object-fit: contain; display: block; }
 
-/* Visual — sibling of cards, absolute relative to .akr-why-compare
-   Positioned over the right half (2nd card). Overflows top+bottom freely. */
-.akr-compare-visual {
+/* Bug 2: accent inside card, absolute top-right pointing at stick */
+.akr-ak-accent {
   position: absolute;
-  right: -40px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 380px;
-  z-index: 10;
+  top: 24px;
+  right: 185px;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   pointer-events: none;
-  /* grid: span 0 columns so it doesn't push the grid */
-  grid-column: 2;
-  grid-row: 1;
-}
-
-/* Accent above stick */
-.akr-ak-accent {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-left: 24px;
-  margin-bottom: 2px;
 }
 .akr-ak-accent-text { font-family: 'DM Serif Display', Georgia, serif !important; font-style: italic; font-size: 18px; color: var(--akr-orange); line-height: 1.1; }
-.akr-ak-accent-arrow { align-self: flex-start; }
+.akr-ak-accent-arrow { display: block; margin-top: 4px; margin-left: 30%; }
 
-/* Stick — large, rotated, bleeds above and below freely */
+/* Visual — absolute right column inside card, clipped by overflow:hidden */
+.akr-compare-visual {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 260px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* Bug 5: stick rotated -16deg (top leans LEFT). Bug 1: 280px fits inside card with slight right-edge crop */
 @keyframes ak-stick-float {
-  0%, 100% { transform: rotate(-16deg); }
-  50%       { transform: rotate(-15deg) translateY(-12px); }
+  0%, 100% { transform: rotate(-16deg) translateY(0); }
+  50%       { transform: rotate(-15deg) translateY(-8px); }
 }
 .akr-compare-stick {
-  width: 380px;
+  width: 280px;
   height: auto;
   display: block;
   transform: rotate(-16deg);
   transform-origin: center center;
+  margin-right: -30px;
   animation: ak-stick-float 6s ease-in-out infinite;
 }
-.akr-why-compare:hover .akr-compare-stick {
+.akr-compare-card--ak:hover .akr-compare-stick {
   animation-play-state: paused;
-  transform: rotate(-14deg) translateY(-14px) scale(1.03);
+  transform: rotate(-14deg) translateY(-10px) scale(1.03);
   transition: transform 400ms ease;
 }
 @media (prefers-reduced-motion: reduce) {
   .akr-compare-stick { animation: none; }
 }
 
-/* Content */
+/* Content — right-padded to clear the stick column */
 .akr-compare-content { display: flex; flex-direction: column; }
-.akr-compare-card--ak .akr-compare-content { padding-right: 180px; }
+.akr-compare-card--ak .akr-compare-content { padding-right: 200px; position: relative; z-index: 2; }
 
 /* Hotfix Bug 3: Logo block — flex aligned to match avg card title height */
 .akr-compare-logo { display: flex; align-items: center; height: 40px; margin-bottom: 22px; }
@@ -1886,44 +1891,65 @@
 .akr-compare-footer { font-size: 13px; font-weight: 500; color: #6B5A4C; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(43, 24, 16, 0.08); }
 .akr-compare-footer--ak { color: #C66B45; border-top-color: rgba(198, 107, 69, 0.2); }
 
-/* Hotfix Bug 2: CTA — !important overrides to beat theme link styles */
+/* åKrrush "Why drink just broth?" CTA
+ * Note: !important on background-color and color is required because
+ * Shopify theme core CSS sets default a { color: ... } and a:hover { opacity }
+ * rules that override section-scoped styles. Removing !important here will
+ * break the CTA contrast. Verified May 2026 — no global opacity/filter rules
+ * exist in /assets/*.css that cause this; the culprit is theme core CSS.
+ */
 .akr-why-cta-wrap { text-align: center; }
-.akr-btn-cta-dark {
+.akr-btn-cta-dark,
+a.akr-btn-cta-dark,
+button.akr-btn-cta-dark {
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  background-color: #E89B7A;
+  gap: 8px;
+  background: #E89B7A !important;
+  background-image: none !important;
+  background-color: #E89B7A !important;
   color: #FFFFFF !important;
   opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  border: none !important;
   border-radius: 999px;
-  padding: 18px 36px;
-  font-size: 14px;
+  padding: 20px 44px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none !important;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(210, 114, 74, 0.18);
   transition: background-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
 }
-.akr-btn-cta-dark:visited { color: #FFFFFF !important; }
-.akr-btn-cta-dark:hover {
-  background-color: #D2724A;
+.akr-btn-cta-dark:visited,
+.akr-btn-cta-dark:focus { color: #FFFFFF !important; }
+.akr-btn-cta-dark:hover,
+a.akr-btn-cta-dark:hover {
+  background: #D2724A !important;
+  background-color: #D2724A !important;
   color: #FFFFFF !important;
+  opacity: 1 !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(210, 114, 74, 0.32);
+  box-shadow: 0 8px 24px rgba(210, 114, 74, 0.32);
 }
-.akr-btn-cta-dark:active { background-color: #B85F3A; transform: translateY(0); box-shadow: none; }
+.akr-btn-cta-dark:active { background-color: #B85F3A !important; transform: translateY(0); box-shadow: none; }
 
 /* Fix 4c: Trust text — solid, readable */
 .akr-why-trust { font-size: 14px; font-weight: 500; letter-spacing: 0.02em; color: #6B5A4C; margin-top: 14px; margin-bottom: 0; }
 
 /* ≤1024px */
 @media (max-width: 1024px) {
-  .akr-compare-visual { width: 280px; right: -20px; }
-  .akr-compare-stick { width: 280px; }
-  .akr-compare-card--ak .akr-compare-content { padding-right: 150px; }
+  .akr-compare-visual { width: 220px; }
+  .akr-compare-stick { width: 240px; margin-right: -20px; }
+  .akr-compare-card--ak .akr-compare-content { padding-right: 160px; }
+  .akr-ak-accent { right: 140px; }
 }
 
-/* ≤767px: stack cards, visual becomes in-flow below åKrrush card */
+/* ≤767px: stack cards, visual in-flow below content */
 @media (max-width: 767px) {
   .akr-why-section { padding: 56px 20px 80px; }
   .akr-why-heading { white-space: normal; font-size: clamp(2.4rem, 10vw, 3.4rem); margin-bottom: 14px; }
@@ -1932,18 +1958,11 @@
   .akr-compare-img-col img { width: 100px; }
   .akr-compare-title { font-size: 22px; min-height: auto; }
   .akr-compare-list li { font-size: 14px; }
-  .akr-btn-cta-dark { display: flex !important; text-align: center; font-size: 13px; }
+  .akr-btn-cta-dark { display: flex !important; width: 100%; max-width: 360px; margin: 0 auto; font-size: 13px; }
   .akr-compare-card--ak .akr-compare-content { padding-right: 0; }
-  .akr-compare-visual {
-    position: relative;
-    right: auto; top: auto; transform: none;
-    grid-column: 1; grid-row: 3;
-    width: 100%; align-items: center;
-    padding: 20px 0 10px;
-  }
-  .akr-compare-stick { width: 220px; transform: rotate(-10deg); }
-  .akr-ak-accent { padding-left: 0; align-items: center; }
-  .akr-ak-accent-text { font-size: 15px; }
+  .akr-compare-visual { position: relative; right: auto; top: auto; bottom: auto; width: 100%; height: 180px; justify-content: center; }
+  .akr-compare-stick { width: 180px; margin-right: 0; }
+  .akr-ak-accent { position: static; display: none; } /* hidden on mobile, card layout too tight */
   .akr-compare-logo { height: 28px; }
 }
 
@@ -1952,7 +1971,7 @@
   .akr-compare-inner { grid-template-columns: 1fr; }
   .akr-compare-img-col { justify-content: center; }
   .akr-compare-img-col img { width: 120px; max-width: 100%; }
-  .akr-compare-stick { width: 180px; }
+  .akr-compare-stick { width: 160px; }
 }
 
 /* =============================================================

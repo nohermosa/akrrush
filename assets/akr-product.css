@@ -2523,8 +2523,8 @@ a.akr-btn-cta-dark:hover {
 /* 2-column grid */
 .akr-num-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 64px;
+  grid-template-columns: 0.8fr 1.4fr;
+  gap: 48px;
   align-items: center;
 }
 
@@ -2539,7 +2539,7 @@ a.akr-btn-cta-dark:hover {
 
 .akr-num-product {
   position: relative;
-  width: 60%;
+  width: 38%;
 }
 
 .akr-num-product img {
@@ -2549,13 +2549,13 @@ a.akr-btn-cta-dark:hover {
 }
 
 .akr-num-product--1 {
-  transform: rotate(-8deg) translateX(-15%);
+  transform: rotate(-6deg) translateX(-10%);
   z-index: 2;
 }
 
 .akr-num-product--2 {
-  transform: rotate(6deg) translateX(15%);
-  margin-top: -120px;
+  transform: rotate(4deg) translateX(10%);
+  margin-top: -60px;
   z-index: 1;
 }
 
@@ -2664,11 +2664,11 @@ a.akr-btn-cta-dark:hover {
   }
 
   .akr-num-product {
-    width: 50%;
+    width: 42%;
   }
 
   .akr-num-product--2 {
-    margin-top: -80px;
+    margin-top: -50px;
   }
 
   .akr-num-stat {

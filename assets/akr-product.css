@@ -1426,9 +1426,10 @@ a.akr-btn-cta-secondary:hover {
 }
 
 .akr-hero-flavor-item.active .akr-hero-flavor-thumb {
-  border: 3px solid var(--akr-dark);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(44, 26, 16, 0.15);
+  border: 2px solid var(--akr-cta-primary);
+  box-shadow:
+    0 0 0 4px rgba(210, 114, 74, 0.12),
+    0 8px 16px rgba(210, 114, 74, 0.18);
   background: var(--akr-cream);
 }
 

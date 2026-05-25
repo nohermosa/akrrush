@@ -1365,6 +1365,7 @@ a.akr-btn-cta-secondary:hover {
   cursor: pointer;
   text-decoration: none !important;
   flex-shrink: 0;
+  position: relative;
 }
 .akr-hero-flavor-thumb {
   width: 85px;
@@ -1431,6 +1432,26 @@ a.akr-btn-cta-secondary:hover {
     0 0 0 4px rgba(210, 114, 74, 0.12),
     0 8px 16px rgba(210, 114, 74, 0.18);
   background: var(--akr-cream);
+}
+
+/* Sprint 3.0.3 — Active checkmark badge */
+.akr-hero-flavor-item.active::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 32px;
+  height: 32px;
+  background: var(--akr-cta-primary);
+  border: 3px solid var(--akr-cream);
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'><path d='M2.5 7L5.5 10L11.5 4' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
+  box-shadow: 0 2px 6px rgba(44, 26, 16, 0.15);
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* Product form */

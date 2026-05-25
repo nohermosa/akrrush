@@ -126,7 +126,7 @@
     <div class="akr-ing-cards">
       {%- for block in section.blocks -%}
         {%- if block.type == 'ingredient_card' -%}
-          <div class="akr-ing-card" {{ block.shopify_attributes }}>
+          <div class="akr-ing-card" style="background: {{ block.settings.circle_color | color_modify: 'alpha', 0.2 }};" {{ block.shopify_attributes }}>
                 {%- if block.settings.icon_key == 'collagen' -%}
                 <div class="akr-ing-card-circle" style="background:{{ block.settings.circle_color }}">
                   <img src="{{ 'akr-ing-icon-collagen.svg' | asset_url }}" width="52" height="52" alt="" loading="lazy">

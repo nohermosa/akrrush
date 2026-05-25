@@ -138,8 +138,8 @@
 /* ── Photo + NF layout ── */
 .akr-ing-layout {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 100px;
-  gap: 32px;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
   align-items: stretch;
   position: relative;
 }
@@ -155,37 +155,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-.akr-ing-halal-col {
-  grid-column: 3;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 12px;
-}
-.akr-ing-halal-badge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  text-align: center;
-}
-.akr-ing-halal-badge img {
-  width: 88px;
-  height: 88px;
-  display: block;
-  background: var(--akr-dark);
-  border-radius: 50%;
-  padding: 6px;
-}
-section[id="akr-ingredients"] .akr-ing-halal-label {
-  font-family: Arial, sans-serif !important;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--akr-dark);
-  letter-spacing: 0.06em;
-  line-height: 1.2;
-  text-transform: uppercase;
 }
 
 /* Photo frame — stretches to match right col height via align-items: stretch on parent */
@@ -243,6 +212,26 @@ section[id="akr-ingredients"] .akr-nf em {
   font-family: Arial, sans-serif !important;
   color: #2c1a10 !important;
   box-shadow: 9px 15px 15px rgba(190,190,190,.25);
+  position: relative;
+}
+.akr-nf-halal-stamp {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 64px;
+  height: 64px;
+  transform: rotate(-8deg);
+  z-index: 2;
+}
+.akr-nf-halal-stamp img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--akr-dark);
+  border-radius: 50%;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 .akr-nf-title {
   font-size: 36px !important;
@@ -252,6 +241,7 @@ section[id="akr-ingredients"] .akr-nf em {
   margin-bottom: 8px;
   border-bottom: 1px solid var(--akr-border);
   padding-bottom: 8px;
+  padding-right: 80px;
 }
 
 /* Serving row */
@@ -1595,22 +1585,6 @@ a.akr-btn-cta-secondary:hover {
     grid-template-columns: 1fr 1fr;
     gap: 32px;
   }
-  .akr-ing-halal-col {
-    grid-column: 1 / -1;
-    flex-direction: row;
-    justify-content: center;
-    padding-top: 24px;
-    padding-bottom: 8px;
-  }
-  .akr-ing-halal-badge {
-    flex-direction: row;
-    gap: 12px;
-    align-items: center;
-  }
-  .akr-ing-halal-badge img {
-    width: 64px;
-    height: 64px;
-  }
   .akr-ing-photo-col,
   .akr-ing-nf-col {
     grid-column: auto;
@@ -1648,9 +1622,10 @@ a.akr-btn-cta-secondary:hover {
   .akr-ing-heading { font-size: 40px; }
   .akr-ing-subtext { font-size: 15px; }
   .akr-ing-layout { grid-template-columns: 1fr; gap: 32px; }
-  .akr-ing-halal-col { grid-column: 1; }
   .akr-ing-photo-col,
   .akr-ing-nf-col { max-width: 100%; grid-column: 1; }
+  .akr-nf-halal-stamp { width: 52px; height: 52px; top: 12px; right: 12px; }
+  .akr-nf-title { padding-right: 64px; }
   .akr-nf { border-radius: 8px; }
   .akr-benefits-heading { font-size: 40px; }
   .akr-benefits-text-heading { font-size: 36px; }

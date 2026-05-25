@@ -171,9 +171,12 @@
   text-align: center;
 }
 .akr-ing-halal-badge img {
-  width: 80px;
-  height: 80px;
+  width: 88px;
+  height: 88px;
   display: block;
+  background: var(--akr-dark);
+  border-radius: 50%;
+  padding: 6px;
 }
 section[id="akr-ingredients"] .akr-ing-halal-label {
   font-family: Arial, sans-serif !important;

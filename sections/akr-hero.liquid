@@ -115,34 +115,36 @@
 
       <hr class="akr-hero-divider">
 
-      <!-- Flavor selector -->
-      {%- assign has_flavors = false -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'flavor_link' -%}{%- assign has_flavors = true -%}{%- endif -%}
-      {%- endfor -%}
-      {%- if has_flavors -%}
-        <p class="akr-hero-flavor-label">SELECT FLAVOR:</p>
-        <div class="akr-hero-flavor-row">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'flavor_link' -%}
-              <a class="akr-hero-flavor-item{% if block.settings.is_current %} active{% endif %}"
-                 href="{{ block.settings.url | default: '#' }}"
-                 {{ block.shopify_attributes }}>
-                <div class="akr-hero-flavor-thumb">
-                  {%- if block.settings.image_asset != blank -%}
-                    <img src="{{ block.settings.image_asset | asset_url }}"
-                         alt="{{ block.settings.name | escape }}" loading="lazy">
-                  {%- elsif block.settings.image != blank -%}
-                    <img src="{{ block.settings.image | img_url: '200x' }}"
-                         alt="{{ block.settings.name | escape }}" loading="lazy">
-                  {%- endif -%}
-                </div>
-                <span class="akr-hero-flavor-name">{{ block.settings.name }}</span>
-              </a>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
+      <!-- Flavor selector (Sprint 3.0 — hardcoded handles, auto active via product.handle) -->
+      {%- assign akr_flavor_handles = 'bone-broth-chicken,bone-broth-ginger-ramen,bone-broth-chanterelle-mushroom' | split: ',' -%}
+      {%- assign akr_flavor_names = 'Savory Chicken,Ginger Ramen,Chanterelle' | split: ',' -%}
+      {%- assign akr_flavor_images = 'akr-flavor-chicken.png,akr-flavor-ramen.png,akr-flavor-chanterelle.png' | split: ',' -%}
+
+      <p class="akr-hero-flavor-label">SELECT FLAVOR:</p>
+      <div class="akr-hero-flavor-row" role="list" aria-label="Select flavor">
+        {%- for f_handle in akr_flavor_handles -%}
+          {%- assign idx = forloop.index0 -%}
+          {%- assign f_name = akr_flavor_names[idx] -%}
+          {%- assign f_image = akr_flavor_images[idx] -%}
+          {%- assign is_active = false -%}
+          {%- if product.handle == f_handle -%}
+            {%- assign is_active = true -%}
+          {%- endif -%}
+          <a class="akr-hero-flavor-item{% if is_active %} active{% endif %}"
+             href="/products/{{ f_handle }}"
+             role="listitem"
+             {% if is_active %}aria-current="true"{% endif %}>
+            <div class="akr-hero-flavor-thumb">
+              <img src="{{ f_image | asset_url }}"
+                   alt="{{ f_name }}"
+                   loading="lazy"
+                   width="120"
+                   height="120">
+            </div>
+            <span class="akr-hero-flavor-name">{{ f_name }}</span>
+          </a>
+        {%- endfor -%}
+      </div>
 
       <!-- Pack heading -->
       <div class="akr-hero-pack-head">

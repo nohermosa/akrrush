@@ -1417,6 +1417,26 @@ a.akr-btn-cta-secondary:hover {
   font-weight: 700 !important;
 }
 
+/* Sprint 3.0 — flavor card interaction states */
+.akr-hero-flavor-item {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.akr-hero-flavor-item:not(.active):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(44, 26, 16, 0.08);
+}
+
+.akr-hero-flavor-item:focus-visible {
+  outline: 2px solid var(--akr-cta-secondary);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+.akr-hero-flavor-item.active {
+  pointer-events: none;
+}
+
 /* Product form */
 .akr-product-form { margin: 0; }
 

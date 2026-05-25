@@ -24,7 +24,7 @@
     <!-- Comparison cards -->
     <div class="akr-why-compare">
 
-      <!-- LEFT: Average Bone Broth — image left, content right -->
+      <!-- LEFT: Average Bone Broth -->
       <div class="akr-compare-card akr-compare-card--avg">
         <div class="akr-compare-inner">
 
@@ -57,13 +57,10 @@
         </div>
       </div>
 
-      <!-- RIGHT: åKrrush — CSS grid: content left / visual right (Hotfix Bug 1) -->
+      <!-- RIGHT: åKrrush — content only, no stick here -->
       <div class="akr-compare-card akr-compare-card--ak">
-
-        <!-- Left column: content -->
         <div class="akr-compare-content">
 
-          <!-- Logo replaces text title -->
           <div class="akr-compare-logo">
             <img src="{{ 'akr-logo.svg' | asset_url }}" alt="åKrrush" loading="lazy">
           </div>
@@ -83,23 +80,22 @@
           </ul>
           <div class="akr-compare-footer akr-compare-footer--ak">{{ section.settings.ak_footer | default: 'What you get from åKrrush' }}</div>
         </div>
+      </div>
 
-        <!-- Right column: accent + tilted stick -->
-        <div class="akr-compare-visual">
-          <div class="akr-ak-accent" aria-hidden="true">
-            <span class="akr-ak-accent-text">{{ section.settings.ak_accent | default: 'obvious choice' }}</span>
-            <svg width="32" height="28" viewBox="0 0 32 28" fill="none" class="akr-ak-accent-arrow">
-              <path d="M28 4 C28 4, 24 4, 18 8 C12 12, 6 20, 4 26" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-              <path d="M1 23 L4 27 L8 21" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          {%- if section.settings.akrrush_image != blank -%}
-            <img class="akr-compare-stick" src="{{ section.settings.akrrush_image | image_url: width: 640 }}" alt="" loading="lazy" aria-hidden="true">
-          {%- else -%}
-            <img class="akr-compare-stick" src="{{ 'akr-stick-splash.png' | asset_url }}" alt="" loading="lazy" aria-hidden="true">
-          {%- endif -%}
+      <!-- STICK: sibling of cards, positioned over right card via CSS — escapes card overflow -->
+      <div class="akr-compare-visual" aria-hidden="true">
+        <div class="akr-ak-accent">
+          <span class="akr-ak-accent-text">{{ section.settings.ak_accent | default: 'obvious choice' }}</span>
+          <svg width="32" height="28" viewBox="0 0 32 28" fill="none" class="akr-ak-accent-arrow">
+            <path d="M28 4 C28 4, 24 4, 18 8 C12 12, 6 20, 4 26" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+            <path d="M1 23 L4 27 L8 21" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
-
+        {%- if section.settings.akrrush_image != blank -%}
+          <img class="akr-compare-stick" src="{{ section.settings.akrrush_image | image_url: width: 800 }}" alt="" loading="lazy">
+        {%- else -%}
+          <img class="akr-compare-stick" src="{{ 'akr-stick-splash.png' | asset_url }}" alt="" loading="lazy">
+        {%- endif -%}
       </div>
 
     </div><!-- /compare -->

@@ -1791,72 +1791,70 @@
 .akr-why-sub p { font-size: clamp(1rem, 1.4vw, 1.125rem); line-height: 1.55; color: rgba(43, 24, 16, 0.72); margin: 0; }
 .akr-why-sub em { font-style: italic; color: var(--akr-dark); }
 
-/* Comparison grid */
-.akr-why-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 auto 48px; align-items: stretch; overflow: visible !important; }
+/* Comparison grid — position:relative so visual can escape card overflow cleanly */
+.akr-why-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 0 auto 80px;
+  align-items: stretch;
+  position: relative;
+  overflow: visible !important;
+}
 
 /* Cards — base */
 .akr-compare-card { border-radius: 24px; padding: 32px; display: flex; flex-direction: column; }
 .akr-compare-card--avg { background: #EDE6DA; }
-
-/* åKrrush card — stick bleeds outside via absolute positioning */
-.akr-compare-card--ak {
-  background: #FBE8D9;
-  position: relative;
-  overflow: visible !important;
-  border: 1.5px solid rgba(198, 107, 69, 0.45);
-}
+.akr-compare-card--ak { background: #FBE8D9; border: 1.5px solid rgba(198, 107, 69, 0.45); }
 
 /* Average card: 2-col image + content */
 .akr-compare-inner { display: grid; grid-template-columns: 40% 60%; gap: 20px; align-items: center; flex: 1; }
 .akr-compare-img-col { display: flex; align-items: center; justify-content: center; }
 .akr-compare-img-col img { width: 140px; height: auto; object-fit: contain; display: block; }
 
-/* Visual — absolute, out of flow, overflows card top/bottom/right */
+/* Visual — sibling of cards, absolute relative to .akr-why-compare
+   Positioned over the right half (2nd card). Overflows top+bottom freely. */
 .akr-compare-visual {
   position: absolute;
-  right: -60px;
+  right: -40px;
   top: 50%;
   transform: translateY(-50%);
-  width: 400px;
+  width: 380px;
   z-index: 10;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  overflow: visible !important;
+  align-items: flex-start;
   pointer-events: none;
+  /* grid: span 0 columns so it doesn't push the grid */
+  grid-column: 2;
+  grid-row: 1;
 }
 
-/* Accent — sits above stick inside visual column */
+/* Accent above stick */
 .akr-ak-accent {
-  position: relative;
-  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  align-self: flex-start;
-  padding-left: 20px;
-  margin-bottom: 4px;
+  padding-left: 24px;
+  margin-bottom: 2px;
 }
 .akr-ak-accent-text { font-family: 'DM Serif Display', Georgia, serif !important; font-style: italic; font-size: 18px; color: var(--akr-orange); line-height: 1.1; }
 .akr-ak-accent-arrow { align-self: flex-start; }
 
-/* Stick — large, rotated, bleeds above and below card */
+/* Stick — large, rotated, bleeds above and below freely */
 @keyframes ak-stick-float {
   0%, 100% { transform: rotate(-16deg); }
   50%       { transform: rotate(-15deg) translateY(-12px); }
 }
 .akr-compare-stick {
-  width: 400px;
+  width: 380px;
   height: auto;
+  display: block;
   transform: rotate(-16deg);
   transform-origin: center center;
-  z-index: 2;
-  pointer-events: none;
-  display: block;
-  position: relative;
   animation: ak-stick-float 6s ease-in-out infinite;
 }
-.akr-compare-card--ak:hover .akr-compare-stick {
+.akr-why-compare:hover .akr-compare-stick {
   animation-play-state: paused;
   transform: rotate(-14deg) translateY(-14px) scale(1.03);
   transition: transform 400ms ease;
@@ -1865,9 +1863,9 @@
   .akr-compare-stick { animation: none; }
 }
 
-/* Content — padded right to keep bullets clear of stick */
+/* Content */
 .akr-compare-content { display: flex; flex-direction: column; }
-.akr-compare-card--ak .akr-compare-content { padding-right: 210px; position: relative; z-index: 1; }
+.akr-compare-card--ak .akr-compare-content { padding-right: 180px; }
 
 /* Hotfix Bug 3: Logo block — flex aligned to match avg card title height */
 .akr-compare-logo { display: flex; align-items: center; height: 40px; margin-bottom: 22px; }
@@ -1918,37 +1916,43 @@
 /* Fix 4c: Trust text — solid, readable */
 .akr-why-trust { font-size: 14px; font-weight: 500; letter-spacing: 0.02em; color: #6B5A4C; margin-top: 14px; margin-bottom: 0; }
 
-/* ≤1024px: scale down stick + pull in the overhang */
+/* ≤1024px */
 @media (max-width: 1024px) {
-  .akr-compare-visual { width: 300px; right: -30px; }
-  .akr-compare-stick { width: 300px; }
-  .akr-compare-card--ak .akr-compare-content { padding-right: 170px; }
+  .akr-compare-visual { width: 280px; right: -20px; }
+  .akr-compare-stick { width: 280px; }
+  .akr-compare-card--ak .akr-compare-content { padding-right: 150px; }
 }
 
-/* ≤767px: stack cards, collapse stick to in-flow below content */
+/* ≤767px: stack cards, visual becomes in-flow below åKrrush card */
 @media (max-width: 767px) {
   .akr-why-section { padding: 56px 20px 80px; }
   .akr-why-heading { white-space: normal; font-size: clamp(2.4rem, 10vw, 3.4rem); margin-bottom: 14px; }
   .akr-why-sub { margin-bottom: 40px; }
-  .akr-why-compare { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; gap: 12px; }
+  .akr-why-compare { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; gap: 12px; margin-bottom: 40px; }
   .akr-compare-img-col img { width: 100px; }
   .akr-compare-title { font-size: 22px; min-height: auto; }
   .akr-compare-list li { font-size: 14px; }
   .akr-btn-cta-dark { display: flex !important; text-align: center; font-size: 13px; }
   .akr-compare-card--ak .akr-compare-content { padding-right: 0; }
-  .akr-compare-visual { position: relative; right: auto; top: auto; transform: none; width: 100%; align-items: center; margin-top: 24px; padding-bottom: 20px; }
-  .akr-compare-stick { width: 240px; transform: rotate(-10deg); }
-  .akr-ak-accent { align-self: center; padding-left: 0; align-items: center; }
+  .akr-compare-visual {
+    position: relative;
+    right: auto; top: auto; transform: none;
+    grid-column: 1; grid-row: 3;
+    width: 100%; align-items: center;
+    padding: 20px 0 10px;
+  }
+  .akr-compare-stick { width: 220px; transform: rotate(-10deg); }
+  .akr-ak-accent { padding-left: 0; align-items: center; }
   .akr-ak-accent-text { font-size: 15px; }
   .akr-compare-logo { height: 28px; }
 }
 
-/* ≤400px: collapse avg card to single column */
+/* ≤400px */
 @media (max-width: 400px) {
   .akr-compare-inner { grid-template-columns: 1fr; }
   .akr-compare-img-col { justify-content: center; }
   .akr-compare-img-col img { width: 120px; max-width: 100%; }
-  .akr-compare-stick { width: 200px; }
+  .akr-compare-stick { width: 180px; }
 }
 
 /* =============================================================

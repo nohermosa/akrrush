@@ -2000,7 +2000,7 @@ button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; 
 .akr-bullet-icon svg { width: 12px; height: 12px; display: block; }
 
 /* Fix 4a + 4b: Card footers — solid hex colors, readable */
-.akr-compare-footer { font-size: 13px; font-weight: 500; color: #6B5A4C; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(43, 24, 16, 0.08); }
+.akr-compare-footer { font-size: 15px; font-weight: 500; color: #6B5A4C; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(43, 24, 16, 0.08); }
 .akr-compare-footer--ak { color: #C66B45; border-top-color: rgba(198, 107, 69, 0.2); }
 
 /* åKrrush "Why drink just broth?" CTA

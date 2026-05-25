@@ -138,8 +138,8 @@
 /* ── Photo + NF layout ── */
 .akr-ing-layout {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 48px;
+  grid-template-columns: 1.2fr 1fr 100px;
+  gap: 32px;
   align-items: stretch;
   position: relative;
 }
@@ -155,6 +155,34 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+.akr-ing-halal-col {
+  grid-column: 3;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 12px;
+}
+.akr-ing-halal-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+.akr-ing-halal-badge img {
+  width: 80px;
+  height: 80px;
+  display: block;
+}
+section[id="akr-ingredients"] .akr-ing-halal-label {
+  font-family: Arial, sans-serif !important;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--akr-dark);
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
 /* Photo frame — stretches to match right col height via align-items: stretch on parent */
@@ -332,32 +360,6 @@ section[id="akr-ingredients"] .akr-nf em {
 }
 .akr-nf-ing-line b { font-weight: 700 !important; }
 
-/* Halal Certified badge */
-.akr-nf-halal {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--akr-border);
-}
-.akr-nf-halal-icon {
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-}
-.akr-nf-halal-icon img {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-section[id="akr-ingredients"] .akr-nf .akr-nf-halal-text {
-  font-size: 13px !important;
-  font-weight: 700 !important;
-  color: var(--akr-dark) !important;
-  letter-spacing: 0.02em;
-}
-
 /* ── Origin cards ── */
 .akr-ing-origin-cards {
   display: grid;
@@ -384,12 +386,15 @@ section[id="akr-ingredients"] .akr-nf .akr-nf-halal-text {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
 }
 .akr-ing-origin-card--norway .akr-ing-origin-icon { background: rgba(186,12,47,0.12); }
 .akr-ing-origin-card--usa    .akr-ing-origin-icon { background: rgba(60,59,110,0.12); }
 .akr-ing-origin-icon img {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 24px;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
   display: block;
 }
 .akr-ing-origin-text {
@@ -1584,15 +1589,31 @@ a.akr-btn-cta-secondary:hover {
    ============================================================= */
 @media (max-width: 1240px) {
   .akr-ing-layout {
-    grid-template-columns: 1fr;
-    gap: 40px;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .akr-ing-halal-col {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 24px;
+    padding-bottom: 8px;
+  }
+  .akr-ing-halal-badge {
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+  }
+  .akr-ing-halal-badge img {
+    width: 64px;
+    height: 64px;
   }
   .akr-ing-photo-col,
   .akr-ing-nf-col {
-    grid-column: 1;
+    grid-column: auto;
     width: 100%;
-    max-width: 560px;
-    justify-self: center;
+    max-width: none;
+    justify-self: auto;
   }
   .akr-ing-photo-frame {
     aspect-ratio: 3 / 4;
@@ -1623,8 +1644,10 @@ a.akr-btn-cta-secondary:hover {
   }
   .akr-ing-heading { font-size: 40px; }
   .akr-ing-subtext { font-size: 15px; }
+  .akr-ing-layout { grid-template-columns: 1fr; gap: 32px; }
+  .akr-ing-halal-col { grid-column: 1; }
   .akr-ing-photo-col,
-  .akr-ing-nf-col { max-width: 100%; }
+  .akr-ing-nf-col { max-width: 100%; grid-column: 1; }
   .akr-nf { border-radius: 8px; }
   .akr-benefits-heading { font-size: 40px; }
   .akr-benefits-text-heading { font-size: 36px; }

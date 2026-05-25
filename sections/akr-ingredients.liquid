@@ -105,13 +105,6 @@
           <!-- Ingredients + Norway -->
           <p class="akr-nf-ing-line"><b>Ingredients:</b> {{ section.settings.ingredients_text }}</p>
 
-          <div class="akr-nf-halal">
-            <div class="akr-nf-halal-icon">
-              <img src="{{ 'akr-halal-badge.svg' | asset_url }}" alt="" loading="lazy">
-            </div>
-            <span class="akr-nf-halal-text">Halal Certified</span>
-          </div>
-
         </div><!-- /akr-nf -->
 
         <!-- Origin cards (Norway + USA) -->
@@ -137,6 +130,14 @@
         </div>
 
       </div><!-- /nf-col -->
+
+      <!-- Third column: Halal certified badge -->
+      <div class="akr-ing-halal-col">
+        <div class="akr-ing-halal-badge">
+          <img src="{{ 'akr-halal-badge.svg' | asset_url }}" alt="Halal Certified" loading="lazy">
+          <span class="akr-ing-halal-label">Halal<br>Certified</span>
+        </div>
+      </div>
 
     </div><!-- /layout -->
 

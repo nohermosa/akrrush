@@ -27,48 +27,39 @@
         </h2>
       </div>
 
-      <!-- "Absolutely clean" — top-right, Caveat, -5deg, exact Figma sparkle icon -->
-      <div class="akr-ing-clean-row">
-        <span class="akr-ing-clean-note">{{ section.settings.clean_note }}</span>
-        <!-- Group14: Figma sparkle paths p24755500 + p5a39e80 + p2cada680 -->
-        <svg width="21" height="20" viewBox="0 0 20.9997 20" fill="none" aria-hidden="true">
-          <path d="M12.9997 0.5C13.2002 3.50667 14.3663 7.99253 20.0082 8.03566C20.3653 7.98738 20.7008 7.97865 20.9997 8C20.6547 8.02654 20.3245 8.03807 20.0082 8.03566C17.6387 8.35603 14.3217 10.418 14.4809 16.9865C14.4939 17.1684 14.5 17.3403 14.5 17.5C14.4913 17.3259 14.4849 17.1547 14.4809 16.9865C14.29 14.3199 12.6168 9.5 7 9.5C8.83322 9.16667 13 7 12.9997 0.5Z" fill="#EA7552"/>
-          <path d="M2.57134 0C2.65731 1.4149 3.15705 3.5259 5.5751 3.54619C5.72811 3.52347 5.87191 3.51937 6 3.52941C5.85216 3.5419 5.71062 3.54733 5.5751 3.54619C4.55957 3.69696 3.13796 4.6673 3.20616 7.75836C3.21174 7.84397 3.21436 7.92486 3.21436 8C3.21063 7.91805 3.20791 7.83751 3.20616 7.75836C3.12438 6.50349 2.40726 4.23529 0 4.23529C0.785684 4.07843 2.57149 3.05882 2.57134 0Z" fill="#EA7552"/>
-          <path d="M6.57134 12C6.65731 13.4149 7.15705 15.5259 9.5751 15.5462C9.72811 15.5235 9.87191 15.5194 10 15.5294C9.85216 15.5419 9.71062 15.5473 9.5751 15.5462C8.55957 15.697 7.13796 16.6673 7.20616 19.7584C7.21174 19.844 7.21436 19.9249 7.21436 20C7.21063 19.918 7.20791 19.8375 7.20616 19.7584C7.12438 18.5035 6.40726 16.2353 4 16.2353C4.78568 16.0784 6.57149 15.0588 6.57134 12Z" fill="#EA7552"/>
-        </svg>
-      </div>
-
       <p class="akr-ing-subtext">{{ section.settings.subtext }}</p>
     </div>
 
     <!-- ===== PHOTO + NF LAYOUT ===== -->
     <div class="akr-ing-layout">
 
-      <!-- Left: Photo — exact Figma Frame126 structure -->
+      <!-- Left: Photo — pill moved out of frame, rendered as caption -->
       <div class="akr-ing-photo-col">
-        <div class="akr-ing-photo-frame">
-          <div class="akr-ing-photo-wrap">
-            {%- if section.settings.photo != blank -%}
-              <img src="{{ section.settings.photo | img_url: '1600x' }}"
-                   alt="{{ section.settings.photo.alt | escape }}"
-                   loading="lazy">
-            {%- else -%}
-              <img src="{{ 'akr-ing-photo-figma.png' | asset_url }}"
-                   alt="åKrrush bone broth lifestyle"
-                   loading="lazy">
-            {%- endif -%}
+        <div class="akr-ingredients__lifestyle">
+          <div class="akr-ing-photo-frame">
+            <div class="akr-ing-photo-wrap">
+              {%- if section.settings.photo != blank -%}
+                <img src="{{ section.settings.photo | img_url: '1600x' }}"
+                     alt="{{ section.settings.photo.alt | escape }}"
+                     loading="lazy">
+              {%- else -%}
+                <img src="{{ 'akr-ing-photo-figma.png' | asset_url }}"
+                     alt="åKrrush bone broth lifestyle"
+                     loading="lazy">
+              {%- endif -%}
+            </div>
           </div>
-          <div class="akr-ing-photo-badge">{{ section.settings.photo_badge }}</div>
+          <p class="akr-ingredients__lifestyle-caption">{{ section.settings.photo_badge }}</p>
         </div>
-      </div>
-
-      <!-- "Every gram tracked" — absolute, Figma position: left calc(50%-52px), top 490.5px, -15.1deg -->
-      <div class="akr-ing-gram-outer" aria-hidden="true">
-        <img src="{{ 'akr-ing-gram-tracked.svg' | asset_url }}" width="98" height="75" alt="" loading="lazy" class="akr-ing-gram-svg">
       </div>
 
       <!-- Right: Nutrition Facts -->
       <div class="akr-ing-nf-col">
+
+        <!-- "Every gram tracked" — Caveat accent, anchored left of NF panel near Calories row -->
+        <div class="akr-ing-gram-accent" aria-hidden="true">
+          <span class="akr-ing-gram-text">Every<br>gram<br>tracked →</span>
+        </div>
 
         <div class="akr-nf">
 
@@ -98,14 +89,14 @@
 
           <!-- Rows -->
           <div class="akr-nf-row"><span><b>Total Fat</b> 1g</span><span><b>1%</b></span></div>
-          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span><i>Saturated Fat 0g</i></span><span><i>0%</i></span></div>
-          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span><i>Trans Fat 0g</i></span><span></span></div>
+          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span>Saturated Fat 0g</span><span>0%</span></div>
+          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span>Trans Fat 0g</span><span></span></div>
           <div class="akr-nf-row"><span><b>Cholesterol</b> &lt;5mg</span><span><b>1%</b></span></div>
           <div class="akr-nf-row"><span><b>Sodium</b> 460mg</span><span><b>20%</b></span></div>
           <div class="akr-nf-row"><span><b>Total Carbohydrate</b> 1g</span><span><b>0%</b></span></div>
-          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span><i>Dietary Fiber 0g</i></span><span><i>0%</i></span></div>
-          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span><i>Total Sugars 1g</i></span><span></span></div>
-          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span><i>Includes 1g Added Sugars</i></span><span><i>2%</i></span></div>
+          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span>Dietary Fiber 0g</span><span>0%</span></div>
+          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span>Total Sugars 1g</span><span></span></div>
+          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span>Includes 1g Added Sugars</span><span>2%</span></div>
           <div class="akr-nf-row"><span><b>Protein 13g</b></span><span><b>18%</b></span></div>
 
           <div class="akr-nf-border5"></div>
@@ -168,6 +159,10 @@
       {%- endfor -%}
     </div>
 
+    <div class="akr-ing-subcta">
+      <a href="#akr-hero" class="akr-btn-cta-secondary">See the full nutrition story →</a>
+    </div>
+
   </div>
 </section>
 
@@ -180,11 +175,10 @@
     { "type": "text",        "id": "eyebrow",         "label": "Eyebrow",              "default": "WHAT'S INSIDE" },
     { "type": "text",        "id": "heading_before",  "label": "Heading — before icon","default": "Meet the" },
     { "type": "text",        "id": "heading_italic",  "label": "Heading — italic word","default": "ingredients" },
-    { "type": "text",        "id": "clean_note",      "label": "Handwritten note",     "default": "Absolutely clean" },
     { "type": "text",        "id": "subtext",         "label": "Subtext below heading","default": "Real ingredients. Clean labels. Lab-tested for purity." },
     { "type": "image_picker","id": "photo",           "label": "Photo (left column)" },
     { "type": "text",        "id": "photo_badge",     "label": "Photo badge text",     "default": "Lab-tested · 100% bioavailable" },
-    { "type": "textarea",    "id": "ingredients_text","label": "Ingredients list",     "default": "(Chicken, Turkey), Chicken Broth Seasoning, Natural Herbs & Spices." }
+    { "type": "textarea",    "id": "ingredients_text","label": "Ingredients list",     "default": "Hydrolyzed Protein (Chicken, Turkey), Chicken Broth Seasoning (Onion, Sugar, Yeast Extract, Natural Flavors, Lactic Acid [acidity regulator], Salt, Spice [Turmeric, Tarragon, Sage, Lovage]), Salt, Natural Flavors." }
   ],
   "blocks": [
     {

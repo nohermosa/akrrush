@@ -5,20 +5,48 @@
 
 /* Design tokens */
 :root {
+  /* Backgrounds */
   --akr-cream:  #fffbf2;
   --akr-cream2: #fff9f0;
+
+  /* Text */
   --akr-dark:   #2c1a10;
   --akr-mid:    #6f5138;
+
+  /* Brand colors */
   --akr-orange: #ea7552;
   --akr-orange2:#e55a2d;
   --akr-teal:   #47b1b4;
   --akr-amber:  #ffc03c;
   --akr-border: #e8d5c4;
+
+  /* Container widths — see design-audit-pack.md
+   * --akr-container-wide:    Hero, numbers sections (full visual impact)
+   * --akr-container-default: All other content sections
+   * Update tokens here — never hardcode max-widths in individual section CSS.
+   */
+  --akr-container-wide:    1440px;
+  --akr-container-default: 1240px;
+
   /* CTA hierarchy */
   --akr-cta-primary:        #D2724A;
   --akr-cta-primary-hover:  #B85F3A;
   --akr-cta-secondary:      #ea7552;
   --akr-cta-secondary-hover:#d4613e;
+}
+
+/* Sticky header offset for in-page anchor links.
+ * Applies to all akr-*-section elements. Theme sticky header is
+ * z-index 70, height measured at runtime. 80px is safe default —
+ * adjust if header height changes materially. */
+.akr-hero-section,
+.akr-ing-section,
+.akr-social-section,
+.akr-num-section,
+.akr-why-section,
+.akr-benefits-section,
+.akr-faq-section {
+  scroll-margin-top: 80px;
 }
 
 /* =============================================================
@@ -29,7 +57,7 @@
   padding: 100px 40px;
 }
 .akr-ing-inner {
-  max-width: 1400px;
+  max-width: var(--akr-container-default);
   margin: 0 auto;
 }
 
@@ -57,10 +85,6 @@
 .akr-faq-heading {
   font-weight: 700 !important;
 }
-.akr-ing-clean-note {
-  font-family: 'Caveat', cursive !important;
-}
-
 /* ── Heading block ── */
 .akr-ing-heading-outer {
   text-align: center;
@@ -73,7 +97,7 @@
   color: var(--akr-orange);
   letter-spacing: .12em;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   font-family: Arial, sans-serif !important;
 }
 .akr-ing-heading-wrap {
@@ -102,26 +126,6 @@
   flex-shrink: 0;
 }
 
-/* "Absolutely clean" — top-right, Caveat, -5deg */
-.akr-ing-clean-row {
-  position: absolute;
-  right: 0;
-  top: 65px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transform: rotate(-5deg);
-  transform-origin: center;
-  pointer-events: none;
-}
-.akr-ing-clean-note {
-  font-family: 'Caveat', cursive !important;
-  font-size: 28px;
-  color: var(--akr-orange2);
-  line-height: 1;
-  white-space: nowrap;
-}
-
 /* Subtext below heading */
 .akr-ing-subtext {
   font-size: 18px;
@@ -133,150 +137,160 @@
 
 /* ── Photo + NF layout ── */
 .akr-ing-layout {
-  display: flex;
-  gap: 150px;
-  align-items: flex-start;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: stretch;
   position: relative;
-  margin-bottom: 0;
 }
 .akr-ing-photo-col {
-  flex: none;
-  width: 480px;
+  grid-column: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 .akr-ing-nf-col {
-  flex: none;
-  width: 480px;
-}
-/* Figma Frame126: outer 480×611, inner wrap 434×611 right-aligned */
-.akr-ing-photo-frame {
-  width: 480px;
-  height: 611px;
+  grid-column: 2;
+  min-width: 0;
   position: relative;
 }
-.akr-ing-photo-wrap {
+
+/* "Every gram tracked" — Caveat text, anchored left of NF panel near Calories row */
+.akr-ing-gram-accent {
   position: absolute;
-  right: 0;
-  top: 0;
-  width: 434px;
-  height: 611px;
+  left: -120px;
+  top: 90px;
+  transform: rotate(-6deg);
+  pointer-events: none;
+  z-index: 2;
+}
+/* Caveat must beat [class*="akr-"] span rule (11pts) — use parent+child (20pts) */
+.akr-ing-gram-accent .akr-ing-gram-text {
+  font-family: 'Caveat', cursive !important;
+  font-size: 24px;
+  color: var(--akr-orange);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+/* Photo frame — flex: 1 fills photo-col height (stretches to match NF panel) */
+.akr-ing-photo-frame {
+  width: 100%;
+  flex: 1;
+  position: relative;
+  min-height: 400px;
+}
+.akr-ing-photo-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
   border-radius: 40px;
   overflow: hidden;
 }
-/* Figma: h-[177.74%] left-[-29.72%] top-[-39.61%] w-[333.64%] — percentages of 434×611 container */
 .akr-ing-photo-wrap img {
   position: absolute;
-  width: 333.64%;
-  height: 177.74%;
-  left: -29.72%;
-  top: -39.61%;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  object-position: center;
   max-width: none;
   display: block;
 }
-.akr-ing-photo-badge {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255,255,255,.92);
-  border-radius: 999px;
-  padding: 10px 22px;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--akr-dark);
-  white-space: nowrap;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 16px rgba(44,26,16,.12);
-}
 
-/* "Every gram tracked" — SVG asset, Figma Frame62: left calc(50%-49px), top 490.5px */
-.akr-ing-gram-outer {
-  position: absolute;
-  left: calc(50% - 49px);
-  top: 490.5px;
-  width: 98px;
-  height: 75px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  z-index: 10;
+/* ── Nutrition Facts card (harmonized) ── */
+/* NF panel font-family override — must beat [class*="akr-"] global rule
+   in styles-zz-custom.css (specificity 11pts) that sets font-family: inherit !important.
+   section[id] adds 100pts → wins at 111pts on all element descendants. */
+.akr-nf,
+.akr-nf *,
+section[id="akr-ingredients"] .akr-nf,
+section[id="akr-ingredients"] .akr-nf *,
+section[id="akr-ingredients"] .akr-nf h1,
+section[id="akr-ingredients"] .akr-nf h2,
+section[id="akr-ingredients"] .akr-nf h3,
+section[id="akr-ingredients"] .akr-nf p,
+section[id="akr-ingredients"] .akr-nf span,
+section[id="akr-ingredients"] .akr-nf div,
+section[id="akr-ingredients"] .akr-nf b,
+section[id="akr-ingredients"] .akr-nf strong,
+section[id="akr-ingredients"] .akr-nf i,
+section[id="akr-ingredients"] .akr-nf em {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+  color: var(--akr-dark) !important;
 }
-.akr-ing-gram-svg {
-  display: block;
-  width: 98px;
-  height: 75px;
-}
-
-/* ── Nutrition Facts card ── */
-.akr-nf * { font-family: Arial, sans-serif !important; color: #2c1a10 !important; }
 .akr-nf {
-  background: #fff !important;
-  border: 2px solid #2c1a10 !important;
-  border-radius: 12px;
+  background: var(--akr-cream2) !important;
+  border: 1px solid var(--akr-border) !important;
+  border-radius: 16px;
   padding: 24px 26px;
   font-family: Arial, sans-serif !important;
   color: #2c1a10 !important;
   box-shadow: 9px 15px 15px rgba(190,190,190,.25);
 }
 .akr-nf-title {
-  font-size: 32px !important;
+  font-size: 36px !important;
   font-weight: 900 !important;
-  line-height: 1.1 !important;
+  line-height: 1 !important;
   color: #2c1a10 !important;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--akr-border);
+  padding-bottom: 8px;
 }
 
 /* Serving row */
 .akr-nf-serving-row {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-  padding-bottom: 6px;
-  margin-bottom: 0;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 6px 0;
 }
 .akr-nf-serv-bold {
-  font-size: 13px !important;
-  font-weight: 700 !important;
+  font-weight: 700;
+  font-size: 16px;
   display: block;
-  margin-bottom: 2px;
 }
 .akr-nf-serv-sub {
   font-size: 13px !important;
+  font-weight: 400;
   color: #2c1a10 !important;
+  margin-top: 2px;
 }
 .akr-nf-serv-weight {
-  font-size: 13px !important;
-  font-weight: 400 !important;
+  font-weight: 700;
+  font-size: 16px;
   white-space: nowrap;
-  padding-left: 12px;
-  padding-top: 16px;
 }
 
-/* Border helpers */
-.akr-nf-border8 { border-bottom: 8px solid #2c1a10; margin: 4px 0 6px; }
-.akr-nf-border4 { border-bottom: 4px solid #2c1a10; margin: 3px 0; }
-.akr-nf-border5 { border-bottom: 5px solid #2c1a10; margin: 3px 0; }
+/* Border helpers — harmonized: thick → 2px, color → token */
+.akr-nf-border8 { border-bottom: 2px solid var(--akr-dark); margin: 4px 0 6px; }
+.akr-nf-border4 { border-bottom: 2px solid var(--akr-dark); margin: 3px 0; }
+.akr-nf-border5 { border-bottom: 2px solid var(--akr-dark); margin: 3px 0; }
 
 .akr-nf-amount {
-  font-size: 12px !important;
+  font-size: 14px !important;
   font-weight: 700 !important;
   color: #2c1a10 !important;
-  padding: 2px 0 4px;
+  margin: 6px 0 0;
 }
 
 /* Calories */
 .akr-nf-cal-row {
   display: flex;
-  align-items: baseline;
   justify-content: space-between;
-  padding: 2px 0 6px;
+  align-items: baseline;
+  padding: 4px 0 8px;
 }
 .akr-nf-cal-label {
-  font-size: 24px !important;
-  font-weight: 700 !important;
+  font-size: 32px !important;
+  font-weight: 900 !important;
   color: #2c1a10 !important;
+  line-height: 1;
 }
 .akr-nf-cal-num {
-  font-size: 36px !important;
+  font-size: 44px !important;
   font-weight: 900 !important;
   line-height: 1 !important;
   color: #2c1a10 !important;
@@ -284,59 +298,108 @@
 
 /* % Daily Value */
 .akr-nf-dv {
-  font-size: 11px !important;
-  font-weight: 700 !important;
   text-align: right;
+  font-size: 13px !important;
+  font-weight: 700 !important;
   color: #2c1a10 !important;
-  padding: 2px 0;
+  padding: 4px 0;
 }
 
 /* Nutrient rows */
 .akr-nf-row {
   display: flex;
   justify-content: space-between;
-  font-size: 13px !important;
+  font-size: 14px !important;
   color: #2c1a10 !important;
-  padding: 4px 0;
-  border-bottom: 1px solid #2c1a10 !important;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--akr-border) !important;
 }
-.akr-nf-row span { color: #2c1a10 !important; font-size: 13px !important; }
-.akr-nf-row b    { font-weight: 700 !important; color: #2c1a10 !important; }
-.akr-nf-row i    { color: #2c1a10 !important; font-style: italic !important; }
-.akr-nf-indent   { padding-left: 16px; }
-.akr-nf-row-light { border-bottom-color: rgba(44,26,16,.3) !important; }
+.akr-nf-row span { color: #2c1a10 !important; font-size: 14px !important; }
+.akr-nf-row b    { font-weight: 700; color: #2c1a10 !important; }
+.akr-nf-indent   { padding-left: 20px !important; }
+.akr-nf-row-light {
+  font-weight: 400;
+  color: var(--akr-dark) !important;
+  border-bottom: 1px solid var(--akr-border) !important;
+}
 
 /* Vitamins 2-col grid */
 .akr-nf-vitamins {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2px 16px;
-  padding: 6px 0 6px;
+  gap: 4px 24px;
+  padding: 6px 0;
 }
 .akr-nf-vit-cell {
   display: flex;
   justify-content: space-between;
-  font-size: 12px !important;
+  font-size: 13px !important;
   color: #2c1a10 !important;
+  padding: 2px 0;
 }
-.akr-nf-vit-cell span { font-size: 12px !important; color: #2c1a10 !important; }
+.akr-nf-vit-cell span { font-size: 13px !important; color: #2c1a10 !important; }
 
 /* Ingredients + Norway */
 .akr-nf-ing-line {
-  font-size: 12px !important;
+  font-size: 13px;
   color: #2c1a10 !important;
-  margin: 6px 0 4px;
+  line-height: 1.4;
+  margin: 8px 0;
 }
 .akr-nf-ing-line b { font-weight: 700 !important; }
 .akr-nf-norway {
+  font-size: 13px;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px !important;
-  font-weight: 700 !important;
   color: #2c1a10 !important;
 }
 .akr-nf-norway-flag { font-style: normal; }
+
+/* ── Lifestyle caption ── */
+.akr-ingredients__lifestyle {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.akr-ingredients__lifestyle-caption {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--akr-mid);
+  font-family: Arial, sans-serif !important;
+}
+
+/* ── Ingredients sub-CTA ── */
+.akr-ing-subcta {
+  text-align: center;
+  margin-top: 48px;
+}
+.akr-btn-cta-secondary,
+a.akr-btn-cta-secondary,
+button.akr-btn-cta-secondary {
+  display: inline-block;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: var(--akr-cta-secondary) !important;
+  text-decoration: none !important;
+  letter-spacing: 0.02em;
+  font-family: Arial, sans-serif !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  padding: 0 !important;
+  border: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+.akr-btn-cta-secondary:hover,
+a.akr-btn-cta-secondary:hover {
+  opacity: 0.75 !important;
+}
 
 /* ── Ingredient cards ── */
 .akr-ing-cards {
@@ -397,7 +460,7 @@
   padding: 88px 40px;
 }
 .akr-benefits-inner {
-  max-width: 1240px;
+  max-width: var(--akr-container-default);
   margin: 0 auto;
 }
 .akr-benefits-heading {
@@ -779,7 +842,7 @@
   padding: 88px 40px;
 }
 .akr-faq-inner {
-  max-width: 1240px;
+  max-width: var(--akr-container-default);
   margin: 0 auto;
   display: grid;
   grid-template-columns: 603px 1fr;
@@ -1040,7 +1103,7 @@
   padding: 80px 40px 40px;
 }
 .akr-hero-inner {
-  max-width: 1440px;
+  max-width: var(--akr-container-wide);
   margin: 0 auto;
   display: grid !important;
   grid-template-columns: 590px 1fr !important;
@@ -1481,16 +1544,17 @@
 /* =============================================================
    RESPONSIVE
    ============================================================= */
-@media (max-width: 1100px) {
+@media (max-width: 1240px) {
   .akr-ing-layout {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 40px;
-    align-items: center;
   }
   .akr-ing-photo-col,
   .akr-ing-nf-col {
+    grid-column: 1;
     width: 100%;
     max-width: 560px;
+    justify-self: center;
   }
   .akr-ing-photo-frame {
     width: 100%;
@@ -1500,7 +1564,7 @@
     width: 100%;
     height: 100%;
   }
-  .akr-ing-gram-outer { display: none; }
+  .akr-ing-gram-accent { display: none; }
   .akr-benefits-bottom {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1520,7 +1584,6 @@
     padding: 56px 16px;
   }
   .akr-ing-heading { font-size: 40px; }
-  .akr-ing-clean-row { display: none; }
   .akr-ing-subtext { font-size: 15px; }
   .akr-ing-photo-col,
   .akr-ing-nf-col { max-width: 100%; }
@@ -1543,11 +1606,11 @@
   .akr-ing-branch svg { width: 36px !important; height: 32px !important; }
   .akr-ing-eyebrow { font-size: 13px; }
   .akr-ing-subtext { font-size: 14px; }
-  .akr-nf-title { font-size: 26px !important; }
-  .akr-nf-cal-num { font-size: 28px !important; }
-  .akr-nf-cal-label { font-size: 20px !important; }
   .akr-ing-card-icon-wrap, .akr-ing-card-circle { width: 72px; height: 72px; }
   .akr-ing-card-icon { width: 44px; height: 44px; }
+  .akr-nf-title { font-size: 28px !important; }
+  .akr-nf-cal-num { font-size: 32px !important; }
+  .akr-nf-cal-label { font-size: 22px !important; }
 }
 
 /* =============================================================
@@ -1778,7 +1841,7 @@ button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; 
 .akr-why-wrapper { overflow: visible !important; }
 .akr-why-section { background: var(--akr-cream); padding: 80px 32px 120px; position: relative; overflow: visible !important; }
 .akr-why-section * { box-sizing: border-box; }
-.akr-why-inner { max-width: 1080px; margin: 0 auto; overflow: visible !important; }
+.akr-why-inner { max-width: var(--akr-container-default); margin: 0 auto; overflow: visible !important; }
 
 /* Eyebrow — matches "HOW WE STACK UP" from ingredients section (Bug 4: position:relative keeps it above header) */
 .akr-why-eyebrow { text-align: center; font-family: Arial, sans-serif !important; font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--akr-orange); margin: 0 0 24px; position: relative; z-index: 1; }
@@ -2021,7 +2084,7 @@ a.akr-btn-cta-dark:hover {
   align-items: center;
   justify-content: center;
   gap: clamp(48px, 5vw, 72px);
-  max-width: 1100px;
+  max-width: var(--akr-container-default);
   margin: 0 auto;
 }
 
@@ -2363,7 +2426,7 @@ a.akr-btn-cta-dark:hover {
    SECTION: NUMBERS DON'T LIE (v9-figma 1:1)
    ============================================================= */
 .akr-num-section { background: var(--akr-cream); padding: 48px 0 88px; position: relative; overflow: visible; z-index: 2; }
-.akr-num-inner { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr 280px; align-items: center; position: relative; }
+.akr-num-inner { max-width: var(--akr-container-wide); margin: 0 auto; display: grid; grid-template-columns: 280px 1fr 280px; align-items: center; position: relative; }
 /* Side stick columns */
 .akr-num-side { position: relative; align-self: stretch; display: flex; flex-direction: column; justify-content: center; overflow: visible; }
 .akr-num-side-left { align-items: flex-start; padding-left: 24px; }

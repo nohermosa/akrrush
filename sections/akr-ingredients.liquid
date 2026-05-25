@@ -33,52 +33,24 @@
     <!-- ===== PHOTO + NF LAYOUT ===== -->
     <div class="akr-ing-layout">
 
-      <!-- Left: Photo — pill moved out of frame, rendered as caption -->
+      <!-- Left: Photo only -->
       <div class="akr-ing-photo-col">
-        <div class="akr-ingredients__lifestyle">
-          <div class="akr-ing-photo-frame">
-            <div class="akr-ing-photo-wrap">
-              {%- if section.settings.photo != blank -%}
-                <img src="{{ section.settings.photo | img_url: '1600x' }}"
-                     alt="{{ section.settings.photo.alt | escape }}"
-                     loading="lazy">
-              {%- else -%}
-                <img src="{{ 'akr-ing-lifestyle.png' | asset_url }}"
-                     alt="åKrrush Norwegian bone broth — Savory Chicken"
-                     loading="lazy">
-              {%- endif -%}
-            </div>
-          </div>
-          <p class="akr-ingredients__lifestyle-caption">
-            <span class="akr-ingredients__lifestyle-dot" aria-hidden="true"></span>
-            {{ section.settings.photo_badge }}
-          </p>
-        </div>
-
-        <!-- Origin cards — Norway + USA -->
-        <div class="akr-ing-origin-cards">
-          <div class="akr-ing-origin-card akr-ing-origin-card--norway">
-            <div class="akr-ing-origin-icon">
-              <img src="{{ 'akr-flag-norway.svg' | asset_url }}" alt="" loading="lazy">
-            </div>
-            <div class="akr-ing-origin-text">
-              <div class="akr-ing-origin-title">Product of Norway</div>
-              <div class="akr-ing-origin-sub">Premium poultry sourcing</div>
-            </div>
-          </div>
-          <div class="akr-ing-origin-card akr-ing-origin-card--usa">
-            <div class="akr-ing-origin-icon">
-              <img src="{{ 'akr-flag-usa.svg' | asset_url }}" alt="" loading="lazy">
-            </div>
-            <div class="akr-ing-origin-text">
-              <div class="akr-ing-origin-title">Packaged in USA</div>
-              <div class="akr-ing-origin-sub">FDA-compliant facility</div>
-            </div>
+        <div class="akr-ing-photo-frame">
+          <div class="akr-ing-photo-wrap">
+            {%- if section.settings.photo != blank -%}
+              <img src="{{ section.settings.photo | img_url: '1600x' }}"
+                   alt="{{ section.settings.photo.alt | escape }}"
+                   loading="lazy">
+            {%- else -%}
+              <img src="{{ 'akr-ing-lifestyle.png' | asset_url }}"
+                   alt="åKrrush Norwegian bone broth — Savory Chicken"
+                   loading="lazy">
+            {%- endif -%}
           </div>
         </div>
       </div>
 
-      <!-- Right: Nutrition Facts -->
+      <!-- Right: Nutrition Facts + Origin cards -->
       <div class="akr-ing-nf-col">
 
         <div class="akr-nf">
@@ -134,6 +106,29 @@
           <p class="akr-nf-ing-line"><b>Ingredients:</b> {{ section.settings.ingredients_text }}</p>
 
         </div><!-- /akr-nf -->
+
+        <!-- Origin cards (Norway + USA) -->
+        <div class="akr-ing-origin-cards">
+          <div class="akr-ing-origin-card akr-ing-origin-card--norway">
+            <div class="akr-ing-origin-icon">
+              <img src="{{ 'akr-flag-norway.svg' | asset_url }}" alt="" loading="lazy">
+            </div>
+            <div class="akr-ing-origin-text">
+              <div class="akr-ing-origin-title">Product of Norway</div>
+              <div class="akr-ing-origin-sub">Premium poultry sourcing</div>
+            </div>
+          </div>
+          <div class="akr-ing-origin-card akr-ing-origin-card--usa">
+            <div class="akr-ing-origin-icon">
+              <img src="{{ 'akr-flag-usa.svg' | asset_url }}" alt="" loading="lazy">
+            </div>
+            <div class="akr-ing-origin-text">
+              <div class="akr-ing-origin-title">Packaged in USA</div>
+              <div class="akr-ing-origin-sub">FDA-compliant facility</div>
+            </div>
+          </div>
+        </div>
+
       </div><!-- /nf-col -->
 
     </div><!-- /layout -->

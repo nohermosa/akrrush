@@ -148,6 +148,8 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  align-items: center;
 }
 .akr-ing-nf-col {
   grid-column: 2;
@@ -165,21 +167,22 @@
   pointer-events: none;
   z-index: 2;
 }
-/* Caveat must beat [class*="akr-"] span rule (11pts) — use parent+child (20pts) */
-.akr-ing-gram-accent .akr-ing-gram-text {
+/* Caveat override — 122pts beats the 111pt Arial block-rule */
+section[id="akr-ingredients"] .akr-ing-gram-accent .akr-ing-gram-text,
+section[id="akr-ingredients"] .akr-nf .akr-ing-gram-accent .akr-ing-gram-text {
   font-family: 'Caveat', cursive !important;
-  font-size: 24px;
-  color: var(--akr-orange);
-  line-height: 1.1;
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  color: var(--akr-orange) !important;
+  line-height: 1.1 !important;
   white-space: nowrap;
 }
 
-/* Photo frame — flex: 1 fills photo-col height (stretches to match NF panel) */
+/* Photo frame — aspect-ratio 4:5 portrait, full width of photo-col */
 .akr-ing-photo-frame {
   width: 100%;
-  flex: 1;
+  aspect-ratio: 4 / 5;
   position: relative;
-  min-height: 400px;
 }
 .akr-ing-photo-wrap {
   position: relative;
@@ -348,34 +351,42 @@ section[id="akr-ingredients"] .akr-nf em {
   margin: 8px 0;
 }
 .akr-nf-ing-line b { font-weight: 700 !important; }
-/* ── Norway pride row (Alt B) ── */
-.akr-nf-norway-row {
+/* ── Origin cards (under photo, left col) ── */
+.akr-ing-origin-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  margin-top: 12px;
+}
+.akr-ing-origin-card {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--akr-border);
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--akr-border);
 }
-.akr-nf-norway-flag {
-  font-size: 24px;
-  font-style: normal;
+.akr-ing-origin-card--norway { background: rgba(186,12,47,0.06); }
+.akr-ing-origin-card--usa    { background: rgba(60,59,110,0.06); }
+.akr-ing-origin-flag {
+  font-size: 26px;
   line-height: 1;
   flex-shrink: 0;
 }
-.akr-nf-norway-stack {
+.akr-ing-origin-text {
   display: flex;
   flex-direction: column;
   line-height: 1.2;
 }
-.akr-nf-norway-title {
-  font-size: 13px;
+.akr-ing-origin-title {
+  font-size: 12px;
   font-weight: 700;
-  color: var(--akr-dark) !important;
+  color: var(--akr-dark);
 }
-.akr-nf-norway-sub {
+.akr-ing-origin-sub {
   font-size: 11px;
-  color: var(--akr-mid) !important;
+  color: var(--akr-mid);
   margin-top: 2px;
 }
 
@@ -384,7 +395,6 @@ section[id="akr-ingredients"] .akr-nf em {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
 }
 .akr-ingredients__lifestyle-caption {
   margin: 24px auto 0;

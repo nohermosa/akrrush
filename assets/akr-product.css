@@ -214,24 +214,22 @@ section[id="akr-ingredients"] .akr-nf em {
   box-shadow: 9px 15px 15px rgba(190,190,190,.25);
   position: relative;
 }
+/* Halal corner stamp — minimalistisk, transparent bg */
 .akr-nf-halal-stamp {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 64px;
-  height: 64px;
-  transform: rotate(-8deg);
+  top: 14px;
+  right: 14px;
+  width: 56px;
+  height: 56px;
+  transform: rotate(-5deg);
   z-index: 2;
+  pointer-events: none;
+  color: var(--akr-dark);
 }
-.akr-nf-halal-stamp img {
+.akr-nf-halal-stamp svg {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  background: var(--akr-dark);
-  border-radius: 50%;
-  padding: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 .akr-nf-title {
   font-size: 36px !important;
@@ -241,7 +239,7 @@ section[id="akr-ingredients"] .akr-nf em {
   margin-bottom: 8px;
   border-bottom: 1px solid var(--akr-border);
   padding-bottom: 8px;
-  padding-right: 80px;
+  padding-right: 70px;
 }
 
 /* Serving row */
@@ -1624,8 +1622,8 @@ a.akr-btn-cta-secondary:hover {
   .akr-ing-layout { grid-template-columns: 1fr; gap: 32px; }
   .akr-ing-photo-col,
   .akr-ing-nf-col { max-width: 100%; grid-column: 1; }
-  .akr-nf-halal-stamp { width: 52px; height: 52px; top: 12px; right: 12px; }
-  .akr-nf-title { padding-right: 64px; }
+  .akr-nf-halal-stamp { width: 44px; height: 44px; top: 12px; right: 12px; }
+  .akr-nf-title { padding-right: 56px; }
   .akr-nf { border-radius: 8px; }
   .akr-benefits-heading { font-size: 40px; }
   .akr-benefits-text-heading { font-size: 36px; }

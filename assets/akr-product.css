@@ -334,39 +334,53 @@ section[id="akr-ingredients"] .akr-nf em {
 .akr-ing-origin-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 .akr-ing-origin-card {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
+  gap: 14px;
+  padding: 16px 18px;
   border-radius: 16px;
   border: 1px solid var(--akr-border);
 }
 .akr-ing-origin-card--norway { background: rgba(186,12,47,0.06); }
 .akr-ing-origin-card--usa    { background: rgba(60,59,110,0.06); }
-.akr-ing-origin-flag {
-  font-size: 26px;
-  line-height: 1;
+.akr-ing-origin-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+}
+.akr-ing-origin-card--norway .akr-ing-origin-icon { background: rgba(186,12,47,0.12); }
+.akr-ing-origin-card--usa    .akr-ing-origin-icon { background: rgba(60,59,110,0.12); }
+.akr-ing-origin-icon img {
+  width: 28px;
+  height: 28px;
+  display: block;
 }
 .akr-ing-origin-text {
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
+  line-height: 1.3;
+  min-width: 0;
 }
 .akr-ing-origin-title {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--akr-dark);
+  margin-bottom: 2px;
 }
 .akr-ing-origin-sub {
-  font-size: 11px;
-  color: var(--akr-mid);
-  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--akr-dark);
+  opacity: 0.7;
 }
 
 /* ── Lifestyle caption ── */

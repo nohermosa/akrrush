@@ -10,8 +10,16 @@
     <div class="akr-num-header">
       <p class="akr-num-eyebrow">Norwegian Quality · Lab Tested</p>
       <h2 class="akr-num-title">
-        Numbers don't <em>lie.</em>
-        <span class="akr-num-accent">← lab tested</span>
+        Numbers don't
+        <span class="akr-num-lie-wrap">
+          <em>lie.</em>
+          <svg class="akr-num-lie-underline" viewBox="0 0 150.001 9.00039"
+               fill="none" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M2.00035 7.00004C19.5986 3.76625 100.55 -1.19223 148 4.84418"
+                  stroke="#EA7552" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="akr-num-accent">← straight up</span>
       </h2>
     </div>
 
@@ -70,9 +78,9 @@
         </div>
 
         <div class="akr-num-cta-wrap">
-          <a href="{{ section.settings.cta_link | default: '#lab-results' }}"
+          <a href="{{ section.settings.cta_link | default: '/products/bone-broth-chicken' }}"
              class="akr-num-cta">
-            {{ section.settings.cta_text | default: 'View Lab Results →' }}
+            {{ section.settings.cta_text | default: 'Shop Now →' }}
           </a>
         </div>
       </div>
@@ -101,7 +109,7 @@
       "type": "text",
       "id": "cta_text",
       "label": "CTA button text",
-      "default": "View Lab Results →"
+      "default": "Shop Now →"
     },
     {
       "type": "url",

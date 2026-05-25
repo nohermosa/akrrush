@@ -1,84 +1,116 @@
 {{ 'akr-product.css' | asset_url | stylesheet_tag }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Caveat:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
 
-<section class="akr-num-section" id="akr-numbers">
+<section id="akr-numbers" class="akr-num-section">
   <div class="akr-num-inner">
 
-    <!-- LEFT STICK -->
-    <div class="akr-num-side akr-num-side-left">
-      <img class="akr-num-stick-img" src="{{ 'akr-stick-savory-chicken.png' | asset_url }}" alt="Savory Chicken">
-      <span class="akr-num-float-hp">Hydrolyzed Protein</span>
-      <svg class="akr-num-deco-squiggle" width="72" height="18" viewBox="0 0 72 18" fill="none" aria-hidden="true">
-        <path d="M2 9 Q10 2 18 9 Q26 16 34 9 Q42 2 50 9 Q58 16 70 9" stroke="#ffc03c" stroke-width="2.5" stroke-linecap="round"/>
-      </svg>
-      <svg class="akr-num-deco-asterisk" width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
-        <line x1="13" y1="1" x2="13" y2="25" stroke="#ea7552" stroke-width="2" stroke-linecap="round"/>
-        <line x1="1" y1="13" x2="25" y2="13" stroke="#ea7552" stroke-width="2" stroke-linecap="round"/>
-        <line x1="4.5" y1="4.5" x2="21.5" y2="21.5" stroke="#ea7552" stroke-width="2" stroke-linecap="round"/>
-        <line x1="21.5" y1="4.5" x2="4.5" y2="21.5" stroke="#ea7552" stroke-width="2" stroke-linecap="round"/>
-      </svg>
+    <!-- Header: centered above grid -->
+    <div class="akr-num-header">
+      <p class="akr-num-eyebrow">Norwegian Quality · Lab Tested</p>
+      <h2 class="akr-num-title">
+        Numbers don't <em>lie.</em>
+        <span class="akr-num-accent">← lab tested</span>
+      </h2>
     </div>
 
-    <!-- CENTER CONTENT -->
-    <div class="akr-num-center">
-      <img src="{{ 'akr-badge-teal-kos.svg' | asset_url }}" class="akr-num-kos-badge" alt="">
-      <div class="akr-num-eyebrow">NORWEGIAN QUALITY · THIRD-PARTY TESTED</div>
-      <h2 class="akr-num-heading">Numbers don't <em class="akr-num-lie">lie<img src="{{ 'akr-underline-strong.svg' | asset_url }}" class="akr-num-lie-underline" alt=""></em>.</h2>
-      <div class="akr-num-stats-box">
-        <div class="akr-num-lab-note">← lab tested</div>
+    <!-- 2-column grid: products left, stats right -->
+    <div class="akr-num-grid">
+
+      <!-- LEFT: stacked product images -->
+      <div class="akr-num-products">
+        <div class="akr-num-product akr-num-product--1">
+          {%- if section.settings.product_image_1 != blank -%}
+            <img src="{{ section.settings.product_image_1 | image_url: width: 800 }}"
+                 alt="åKrrush Savory Chicken bone broth stick"
+                 loading="lazy">
+          {%- else -%}
+            <img src="{{ 'akr-stick-savory-chicken.png' | asset_url }}"
+                 alt="åKrrush Savory Chicken bone broth stick"
+                 loading="lazy">
+          {%- endif -%}
+        </div>
+        <div class="akr-num-product akr-num-product--2">
+          {%- if section.settings.product_image_2 != blank -%}
+            <img src="{{ section.settings.product_image_2 | image_url: width: 800 }}"
+                 alt="åKrrush Ginger Ramen bone broth stick"
+                 loading="lazy">
+          {%- else -%}
+            <img src="{{ 'akr-stick-ginger-ramen.png' | asset_url }}"
+                 alt="åKrrush Ginger Ramen bone broth stick"
+                 loading="lazy">
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- RIGHT: stats grid + CTA -->
+      <div class="akr-num-content">
         <div class="akr-num-stats">
           <div class="akr-num-stat">
             <div class="akr-num-stat-value">13g</div>
-            <div class="akr-num-stat-label">PROTEIN PER SERVING</div>
-            <div class="akr-num-stat-desc">vs. industry average</div>
+            <div class="akr-num-stat-label">Protein per serving</div>
+            <div class="akr-num-stat-sub">vs. industry average</div>
           </div>
           <div class="akr-num-stat">
             <div class="akr-num-stat-value">0g</div>
-            <div class="akr-num-stat-label">ADDED SUGAR</div>
-            <div class="akr-num-stat-desc">Clean label, every batch</div>
+            <div class="akr-num-stat-label">Added Sugar</div>
+            <div class="akr-num-stat-sub">Clean label, every batch</div>
           </div>
           <div class="akr-num-stat">
             <div class="akr-num-stat-value">99%</div>
-            <div class="akr-num-stat-label">NORWEGIAN POULTRY</div>
-            <div class="akr-num-stat-desc">USDA &amp; FDA approved</div>
+            <div class="akr-num-stat-label">Norwegian Poultry</div>
+            <div class="akr-num-stat-sub">USDA &amp; FDA approved</div>
           </div>
           <div class="akr-num-stat">
-            <div class="akr-num-stat-value">30-day</div>
-            <div class="akr-num-stat-label">MONEY-BACK GUARANTEE</div>
-            <div class="akr-num-stat-desc">Shop with confidence</div>
+            <div class="akr-num-stat-value">5min</div>
+            <div class="akr-num-stat-label">Prep Time</div>
+            <div class="akr-num-stat-sub">Just add hot water</div>
           </div>
         </div>
-      </div>
-      <div class="akr-num-below-row">
-        <span class="akr-num-badge akr-num-badge-amber">Norwegian Sourced</span>
-        <a href="{{ section.settings.cta_url }}" class="akr-num-cta-btn">{{ section.settings.cta_label }}</a>
-        <span class="akr-num-badge akr-num-badge-outline">Cage-Free</span>
-      </div>
-    </div>
 
-    <!-- RIGHT STICK -->
-    <div class="akr-num-side akr-num-side-right">
-      <img class="akr-num-stick-img" src="{{ 'akr-stick-ginger-ramen.png' | asset_url }}" alt="Ginger Ramen">
-      <span class="akr-num-float-13g">13g Per Stick</span>
-      <img src="{{ 'akr-spark-orange.svg' | asset_url }}" class="akr-num-deco-sun" aria-hidden="true" alt="">
-    </div>
+        <div class="akr-num-cta-wrap">
+          <a href="{{ section.settings.cta_link | default: '#lab-results' }}"
+             class="akr-num-cta">
+            {{ section.settings.cta_text | default: 'View Lab Results →' }}
+          </a>
+        </div>
+      </div>
 
+    </div>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "åKr Numbers",
+  "name": "åKrrush Numbers",
   "tag": "div",
   "class": "akr-numbers-wrapper",
   "settings": [
-    { "type": "url",  "id": "cta_url",   "label": "CTA button URL" },
-    { "type": "text", "id": "cta_label", "label": "CTA button label", "default": "VIEW LAB RESULTS →" }
+    {
+      "type": "image_picker",
+      "id": "product_image_1",
+      "label": "Product image 1 (Savory Chicken)"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_2",
+      "label": "Product image 2 (Ginger Ramen)"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "View Lab Results →"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
   ],
   "presets": [
-    { "name": "åKr Numbers" }
+    { "name": "åKrrush Numbers" }
   ]
 }
 {% endschema %}

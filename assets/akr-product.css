@@ -146,6 +146,8 @@
 .akr-ing-photo-col {
   grid-column: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 .akr-ing-nf-col {
   grid-column: 2;
@@ -155,10 +157,11 @@
   gap: 16px;
 }
 
-/* Photo frame — aspect-ratio 3:4 portrait, full width of photo-col */
+/* Photo frame — stretches to match right col height via align-items: stretch on parent */
 .akr-ing-photo-frame {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  height: 100%;
+  min-height: 500px;
   position: relative;
 }
 .akr-ing-photo-wrap {
@@ -328,7 +331,34 @@ section[id="akr-ingredients"] .akr-nf em {
   margin: 8px 0;
 }
 .akr-nf-ing-line b { font-weight: 700 !important; }
-/* ── Origin cards (under photo, left col) ── */
+
+/* Halal Certified badge */
+.akr-nf-halal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--akr-border);
+}
+.akr-nf-halal-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+.akr-nf-halal-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+section[id="akr-ingredients"] .akr-nf .akr-nf-halal-text {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--akr-dark) !important;
+  letter-spacing: 0.02em;
+}
+
+/* ── Origin cards ── */
 .akr-ing-origin-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -377,8 +407,7 @@ section[id="akr-ingredients"] .akr-nf em {
 .akr-ing-origin-sub {
   font-size: 12px;
   font-weight: 500;
-  color: var(--akr-dark);
-  opacity: 0.7;
+  color: #6f5138;
 }
 
 
@@ -1568,6 +1597,7 @@ a.akr-btn-cta-secondary:hover {
   .akr-ing-photo-frame {
     aspect-ratio: 3 / 4;
     height: auto;
+    min-height: 0;
   }
   .akr-ing-photo-wrap {
     width: 100%;

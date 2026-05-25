@@ -1796,36 +1796,37 @@
 .akr-compare-card { border-radius: 24px; padding: 32px; display: flex; flex-direction: column; }
 .akr-compare-card--avg { background: #EDE6DA; }
 
-/* Hotfix Bug 1: åKrrush card — CSS grid, content left / visual right */
-.akr-compare-card--ak { background: #FBE8D9; display: grid; grid-template-columns: 1fr 240px; gap: 24px; align-items: center; overflow: hidden; }
+/* åKrrush card — CSS grid, content left / visual right. NO overflow:hidden — stick bleeds outside card */
+.akr-compare-card--ak { background: #FBE8D9; display: grid; grid-template-columns: 1fr 240px; gap: 24px; align-items: center; position: relative; overflow: visible; }
 
 /* Average card: 2-col image + content */
 .akr-compare-inner { display: grid; grid-template-columns: 40% 60%; gap: 20px; align-items: center; flex: 1; }
 .akr-compare-img-col { display: flex; align-items: center; justify-content: center; }
 .akr-compare-img-col img { width: 140px; height: auto; object-fit: contain; display: block; }
 
-/* Hotfix Bug 1: Visual column — accent above stick */
-.akr-compare-visual { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 200px; }
+/* Visual column — overflows the card */
+.akr-compare-visual { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 200px; overflow: visible; }
 
-/* Hotfix Bug 1: Stick — in-flow, tilted, floats */
+/* Stick — large, rotated, bleeds outside card top/bottom */
 @keyframes ak-stick-float {
   0%, 100% { transform: rotate(-16deg); }
-  50%       { transform: rotate(-15deg) translateY(-8px); }
+  50%       { transform: rotate(-15deg) translateY(-10px); }
 }
 .akr-compare-stick {
   position: relative;
-  width: 220px;
+  width: 300px;
   height: auto;
   transform: rotate(-16deg);
   transform-origin: center center;
   z-index: 1;
   pointer-events: none;
   display: block;
+  margin-bottom: -40px;
   animation: ak-stick-float 6s ease-in-out infinite;
 }
 .akr-compare-card--ak:hover .akr-compare-stick {
   animation-play-state: paused;
-  transform: rotate(-14deg) translateY(-10px) scale(1.03);
+  transform: rotate(-14deg) translateY(-12px) scale(1.03);
   transition: transform 400ms ease;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1900,7 +1901,7 @@
 /* ≤1024px: tighten grid column for visual */
 @media (max-width: 1024px) {
   .akr-compare-card--ak { grid-template-columns: 1fr 200px; gap: 16px; }
-  .akr-compare-stick { width: 180px; }
+  .akr-compare-stick { width: 240px; }
 }
 
 /* ≤767px: stack cards + collapse åKrrush inner grid */
@@ -1914,8 +1915,8 @@
   .akr-compare-list li { font-size: 14px; }
   .akr-btn-cta-dark { display: flex !important; text-align: center; font-size: 13px; }
   .akr-compare-card--ak { grid-template-columns: 1fr; }
-  .akr-compare-visual { min-height: 160px; margin-top: 8px; }
-  .akr-compare-stick { width: 160px; }
+  .akr-compare-visual { min-height: 200px; margin-top: 8px; }
+  .akr-compare-stick { width: 220px; margin-bottom: -20px; }
   .akr-ak-accent { top: 8px; left: 50%; transform: translateX(-50%); align-items: center; }
   .akr-ak-accent-text { font-size: 15px; }
   .akr-compare-logo { height: 28px; }

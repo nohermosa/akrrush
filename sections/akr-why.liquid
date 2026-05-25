@@ -1,114 +1,101 @@
 {{ 'akr-product.css' | asset_url | stylesheet_tag }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Epilogue:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <section class="akr-why-section" id="akr-why">
   <div class="akr-why-inner">
 
-    <!-- Eyebrow pill -->
-    <div class="akr-why-eyebrow-pill" data-animate="scale">
-      <span>🌿 Real Bone Broth</span>
+    <!-- Eyebrow with flanking lines -->
+    <p class="akr-why-eyebrow" data-animate="scale">{{ section.settings.eyebrow | default: 'Real Bone Broth' }}</p>
+
+    <!-- Headline -->
+    <div class="akr-why-heading-wrap">
+      <img src="{{ 'akr-spark-orange.svg' | asset_url }}" class="akr-why-sparks-l" aria-hidden="true" alt="">
+      <img src="{{ 'akr-spark-orange.svg' | asset_url }}" class="akr-why-sparks-r" aria-hidden="true" alt="">
+      <h2 class="akr-why-heading" data-animate>
+        Why drink<br><em>just<img src="{{ 'akr-underline-just.svg' | asset_url }}" class="akr-underline-just" aria-hidden="true" alt=""></em> <span class="akr-why-broth-outline">broth?</span>
+      </h2>
     </div>
-
-    <!-- Heading area: 3-column grid -->
-    <div class="akr-why-heading-outer">
-
-      <!-- LEFT: badges scattered -->
-      <div class="akr-why-left-col">
-        <span class="akr-why-badge-hp" data-animate="from-left" style="transition-delay:0.05s;top:30px;right:0px">Hydrolyzed<br>Protein</span>
-        <span class="akr-why-badge-13g" data-animate="from-left" style="transition-delay:0.18s;top:130px;right:10px">13G PER STICK</span>
-        <span class="akr-why-badge-clean" data-animate="from-left" style="transition-delay:0.3s;top:210px;right:20px">Lab Tested</span>
-      </div>
-
-      <!-- CENTER: sparks + heading -->
-      <div class="akr-why-center-col">
-        <h2 class="akr-why-heading" data-animate style="transition-delay:0.08s">
-          <img src="{{ 'akr-spark-orange.svg' | asset_url }}" class="akr-why-sparks-l" aria-hidden="true" alt="" style="width:52px;height:auto;transform:scaleX(-1)">
-          <img src="{{ 'akr-spark-orange.svg' | asset_url }}" class="akr-why-sparks-r" aria-hidden="true" alt="" style="width:52px;height:auto">
-          Why drink<br><em>just<img src="{{ 'akr-underline-just.svg' | asset_url }}" class="akr-underline-just" aria-hidden="true" alt=""></em> <span class="akr-why-broth-outline">broth?</span>
-        </h2>
-      </div>
-
-      <!-- RIGHT: mountain + badges stacked -->
-      <div class="akr-why-right-col">
-        <svg class="akr-mountain-anim" width="127" height="54" viewBox="0 0 127 54" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Nordic mountains" style="position:absolute;top:10px;left:0px">
-          <g clip-path="url(#akr-mtn-clip)">
-            <path class="akr-mtn-path" d="M72.1283 29.1809L51.3584 2.79453C45.9549 10.2245 42.0015 18.2101 37.4276 26.2288L27.1834 44.2067C27.6379 38.402 30.4009 35.2924 32.8321 30.2174L24.3626 22.1324C23.569 26.9834 24.1462 30.3833 20.0701 32.274L22.8548 24.562C14.176 33.8412 9.73205 46.0891 0 54C6.2187 41.8765 14.3925 32.7217 21.3831 21.9251C21.8232 21.2451 23.3165 20.1173 24.0379 20.0012C24.9037 19.8603 26.599 20.8885 27.2988 21.6099L33.7339 28.1941L45.1974 7.03194C46.7701 4.12961 48.8406 1.73311 51.4089 0L73.5711 27.8127L79.3642 22.0992C80.1505 21.3197 82.6683 20.8305 83.4835 21.6182L100.105 37.664L109.498 29.9853L126.993 47.6646C119.685 44.4057 115.399 37.9377 109.44 32.8876L101.844 39.2396L104.585 43.0043L103.849 43.9994L82.2715 23.5338L74.0978 31.3037L69.4951 32.5476C69.6898 31.992 70.6493 30.8145 72.121 29.1726L72.1283 29.1809Z" fill="#47B1B4" fill-opacity="0"/>
-            <path class="akr-mtn-path" d="M42.2109 22.9533C42.7592 19.6779 44.4329 17.215 46.1644 14.7522C47.1166 12.3142 48.0617 9.85138 49.8725 7.9856C49.1222 14.5532 46.1644 18.973 42.2182 22.9533H42.2109Z" fill="#47B1B4" fill-opacity="0" style="animation-delay:0.3s"/>
-          </g>
-          <defs>
-            <clipPath id="akr-mtn-clip"><rect width="127" height="54" fill="white"/></clipPath>
-          </defs>
-        </svg>
-        <span class="akr-why-badge-norwegian" data-animate="from-right" style="transition-delay:0.15s;position:absolute;top:110px;left:0px">Norwegian<br>Sourced</span>
-        <span class="akr-why-badge-outline" data-animate="from-right" style="transition-delay:0.25s;position:absolute;top:210px;left:8px">No Filler Junk</span>
-      </div>
-
-    </div><!-- /heading-outer -->
 
     <p class="akr-why-sub" data-animate>When you can drink <em>real food</em>. Translation: more fuel, faster recovery, real results.</p>
 
-    <!-- Comparison cards -->
-    <div class="akr-comparison-outer">
-      <div class="akr-comparison-wrap">
-
-        <!-- LEFT: Average Bone Broth -->
-        <div class="akr-comp-card-avg" data-animate="from-left" style="transition-delay:0.05s">
-          <div class="akr-comp-avg-title">Average Bone Broth</div>
-          <div class="akr-comp-avg-inner">
-            <div class="akr-comp-avg-img-wrap">
-              {%- if section.settings.generic_packet != blank -%}
-                <img src="{{ section.settings.generic_packet | img_url: '320x' }}" alt="Generic bone broth packet">
+    <!-- Proof pills 3×2 grid -->
+    <div class="akr-why-proof" data-animate>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'proof_pill' -%}
+          <div class="akr-proof-pill{% if block.settings.highlight %} akr-proof-pill--hl{% endif %}" {{ block.shopify_attributes }}>
+            {%- case block.settings.icon -%}
+              {%- when 'protein' -%}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12c0-4 3-7 8-7s8 3 8 7-3 7-8 7-8-3-8-7Z"/><path d="M8 12h8M12 8v8"/></svg>
+              {%- when 'lightning' -%}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+              {%- when 'flask' -%}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2v6l-3 8a3 3 0 002.8 4h6.4a3 3 0 002.8-4l-3-8V2"/><path d="M8 2h8M7.5 14h9"/></svg>
+              {%- when 'flag' -%}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="1"/><path d="M3 10h18M9 6v12"/></svg>
+              {%- when 'clock' -%}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              {%- when 'no-sign' -%}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7 17L17 7"/></svg>
               {%- else -%}
-                <img src="{{ 'akr-grey-packet.png' | asset_url }}" alt="Generic bone broth packet">
-              {%- endif -%}
-            </div>
-            <div class="akr-comp-avg-content">
-              <div class="akr-comp-rows">
-                <div class="akr-comp-row"><span class="akr-comp-icon x">✕</span>Slow protein absorption</div>
-                <div class="akr-comp-row"><span class="akr-comp-icon x">✕</span>Low bioavailability</div>
-                <div class="akr-comp-row"><span class="akr-comp-icon x">✕</span>Often hard to digest</div>
-                <div class="akr-comp-row"><span class="akr-comp-icon x">✕</span>Unknown sourcing</div>
-                <div class="akr-comp-row"><span class="akr-comp-icon x">✕</span>May contain GMOs / hormones</div>
-              </div>
-            </div>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
+            {%- endcase -%}
+            {%- if block.settings.highlight -%}
+              <strong>{{ block.settings.label }}</strong>
+            {%- else -%}
+              {{ block.settings.label }}
+            {%- endif -%}
           </div>
-          <div class="akr-comp-what">What you get from average brands</div>
-        </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
 
-        <!-- RIGHT: åKrrush -->
-        <div class="akr-comp-card-akr" data-animate="from-right" style="transition-delay:0.15s">
-          <div class="akr-comp-stick-outer">
-            <img src="{{ 'akr-savory-chicken-compare.png' | asset_url }}" alt="åKrrush Savory Chicken stick with broth splash">
-          </div>
-          <div class="akr-comp-akr-top">
-            <div class="akr-comp-akr-title"><img src="{{ 'akr-logo.svg' | asset_url }}" alt="åKrrush" style="height:38px;width:auto;display:block"></div>
-            <div class="akr-comp-akr-hand-wrap">
-              <span class="akr-comp-akr-hand">obvious<br>choice</span>
-              <svg width="38" height="34" viewBox="0 0 38 34" fill="none" style="margin-top:4px;align-self:center" aria-hidden="true">
-                <path d="M32 6 C32 6, 28 6, 22 10 C16 14, 10 22, 8 30" stroke="#e55a2d" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-                <path d="M4 28 L8 32 L12 26" stroke="#e55a2d" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-          </div>
-          <div class="akr-comp-rows">
-            <div class="akr-comp-row"><span class="akr-comp-icon ok">✓</span>Rapid protein absorption</div>
-            <div class="akr-comp-row"><span class="akr-comp-icon ok">✓</span>Near 100% bioavailability</div>
-            <div class="akr-comp-row"><span class="akr-comp-icon ok">✓</span>Easy to digest</div>
-            <div class="akr-comp-row"><span class="akr-comp-icon ok">✓</span>100% Norwegian poultry</div>
-            <div class="akr-comp-row"><span class="akr-comp-icon ok">✓</span>Non-GMO · No hormones</div>
-          </div>
-          <div class="akr-comp-akr-what">What you get from åKrrush</div>
-        </div>
+    <!-- Comparison cards -->
+    <div class="akr-why-compare">
 
-      </div><!-- /comparison-wrap -->
-    </div><!-- /comparison-outer -->
+      <!-- Left: Average Bone Broth -->
+      <div class="akr-compare-card akr-compare-card--avg" data-animate="from-left">
+        <p class="akr-compare-card__label">{{ section.settings.avg_label | default: 'Average Bone Broth' }}</p>
+        <h3 class="akr-compare-card__title">{{ section.settings.avg_title | default: 'Slow, low-yield, hard to digest' }}</h3>
+        <ul class="akr-compare-list akr-compare-list--neg">
+          {%- for i in (1..4) -%}
+            {%- assign field = 'avg_item_' | append: i -%}
+            {%- if section.settings[field] != blank -%}
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                {{ section.settings[field] }}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
 
+      <!-- Right: åKrrush -->
+      <div class="akr-compare-card akr-compare-card--ak" data-animate="from-right">
+        <span class="akr-compare-card__badge">åKrrush</span>
+        <p class="akr-compare-card__label">{{ section.settings.ak_label | default: 'The obvious choice' }}</p>
+        <h3 class="akr-compare-card__title">{{ section.settings.ak_title | default: 'Fast, clean, built to perform' }}</h3>
+        <ul class="akr-compare-list akr-compare-list--pos">
+          {%- for i in (1..4) -%}
+            {%- assign field = 'ak_item_' | append: i -%}
+            {%- if section.settings[field] != blank -%}
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
+                {{ section.settings[field] }}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+
+    </div><!-- /compare -->
+
+    <!-- CTA -->
     <div class="akr-why-cta-wrap">
       <div style="display:inline-flex;align-items:center;gap:16px;margin-bottom:12px">
         <img src="{{ 'akr-spark-orange.svg' | asset_url }}" aria-hidden="true" alt="" style="width:44px;height:auto;transform:rotate(90deg) scaleX(-1)">
-        <a href="{{ section.settings.cta_url }}" class="akr-btn-cta-dark">{{ section.settings.cta_label }}</a>
+        <a href="{{ section.settings.cta_url }}" class="akr-btn-cta-dark">{{ section.settings.cta_label | default: 'TASTE THE DIFFERENCE — SHOP NOW →' }}</a>
         <img src="{{ 'akr-spark-orange.svg' | asset_url }}" aria-hidden="true" alt="" style="width:44px;height:auto;transform:rotate(-90deg)">
       </div>
       <p class="akr-why-trust">{{ section.settings.trust_text }}</p>
@@ -138,13 +125,62 @@
   "tag": "div",
   "class": "akr-why-wrapper",
   "settings": [
-    { "type": "image_picker", "id": "generic_packet", "label": "Generic broth packet image (left card)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "Real Bone Broth" },
     { "type": "url",  "id": "cta_url",    "label": "CTA button URL" },
     { "type": "text", "id": "cta_label",  "label": "CTA button label",  "default": "TASTE THE DIFFERENCE — SHOP NOW →" },
-    { "type": "text", "id": "trust_text", "label": "Trust line below CTA", "default": "Free shipping over $50 · 30-day money-back guarantee" }
+    { "type": "text", "id": "trust_text", "label": "Trust line below CTA", "default": "Free shipping over $50 · 30-day money-back guarantee" },
+    { "type": "header", "content": "Average Bone Broth card" },
+    { "type": "text", "id": "avg_label", "label": "Card label", "default": "Average Bone Broth" },
+    { "type": "text", "id": "avg_title", "label": "Card title", "default": "Slow, low-yield, hard to digest" },
+    { "type": "text", "id": "avg_item_1", "label": "Negative item 1", "default": "Slow protein absorption" },
+    { "type": "text", "id": "avg_item_2", "label": "Negative item 2", "default": "Low bioavailability" },
+    { "type": "text", "id": "avg_item_3", "label": "Negative item 3", "default": "Often hard to digest" },
+    { "type": "text", "id": "avg_item_4", "label": "Negative item 4", "default": "Fillers & additives" },
+    { "type": "header", "content": "åKrrush card" },
+    { "type": "text", "id": "ak_label", "label": "Card label", "default": "The obvious choice" },
+    { "type": "text", "id": "ak_title", "label": "Card title", "default": "Fast, clean, built to perform" },
+    { "type": "text", "id": "ak_item_1", "label": "Positive item 1", "default": "Rapid protein absorption" },
+    { "type": "text", "id": "ak_item_2", "label": "Positive item 2", "default": "Near 100% bioavailability" },
+    { "type": "text", "id": "ak_item_3", "label": "Positive item 3", "default": "Gentle, easy on the gut" },
+    { "type": "text", "id": "ak_item_4", "label": "Positive item 4", "default": "Real food, zero junk" }
+  ],
+  "blocks": [
+    {
+      "type": "proof_pill",
+      "name": "Proof Pill",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "check",
+          "options": [
+            { "value": "protein",   "label": "Protein (circle + cross)" },
+            { "value": "lightning", "label": "Lightning bolt" },
+            { "value": "flask",     "label": "Flask / Lab" },
+            { "value": "flag",      "label": "Flag / Sourcing" },
+            { "value": "clock",     "label": "Clock / Speed" },
+            { "value": "no-sign",   "label": "No-sign / Clean" },
+            { "value": "check",     "label": "Checkmark" }
+          ]
+        },
+        { "type": "checkbox", "id": "highlight", "label": "Highlighted (teal background)", "default": false }
+      ]
+    }
   ],
   "presets": [
-    { "name": "åKr Why Broth" }
+    {
+      "name": "åKr Why Broth",
+      "blocks": [
+        { "type": "proof_pill", "settings": { "label": "Hydrolyzed Protein", "icon": "protein",   "highlight": false } },
+        { "type": "proof_pill", "settings": { "label": "13g per stick",      "icon": "lightning", "highlight": true  } },
+        { "type": "proof_pill", "settings": { "label": "Lab Tested",         "icon": "flask",     "highlight": false } },
+        { "type": "proof_pill", "settings": { "label": "Norwegian Sourced",  "icon": "flag",      "highlight": false } },
+        { "type": "proof_pill", "settings": { "label": "Rapid Absorption",   "icon": "clock",     "highlight": false } },
+        { "type": "proof_pill", "settings": { "label": "No Filler Junk",     "icon": "no-sign",   "highlight": false } }
+      ]
+    }
   ]
 }
 {% endschema %}

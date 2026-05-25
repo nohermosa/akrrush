@@ -2589,17 +2589,17 @@ a.akr-btn-cta-dark:hover {
 
 .akr-num-stat-label {
   font-family: Arial, sans-serif !important;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--akr-dark);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .akr-num-stat-sub {
   font-family: Arial, sans-serif !important;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 400;
   color: var(--akr-mid);
   line-height: 1.4;
@@ -2673,6 +2673,14 @@ a.akr-btn-cta-dark:hover {
 
   .akr-num-stat {
     padding-left: 16px;
+  }
+
+  .akr-num-stat-label {
+    font-size: 13px;
+  }
+
+  .akr-num-stat-sub {
+    font-size: 15px;
   }
 
   .akr-num-cta {

@@ -1761,9 +1761,11 @@
 /* =============================================================
    SECTION: WHY DRINK JUST BROTH? (v3)
    ============================================================= */
-.akr-why-section { background: var(--akr-cream); padding: 80px 32px 96px; position: relative; }
+/* Force overflow visible on every ancestor so stick can bleed outside card */
+.akr-why-wrapper { overflow: visible !important; }
+.akr-why-section { background: var(--akr-cream); padding: 80px 32px 120px; position: relative; overflow: visible !important; }
 .akr-why-section * { box-sizing: border-box; }
-.akr-why-inner { max-width: 1080px; margin: 0 auto; }
+.akr-why-inner { max-width: 1080px; margin: 0 auto; overflow: visible !important; }
 
 /* Eyebrow — matches "HOW WE STACK UP" from ingredients section */
 .akr-why-eyebrow { text-align: center; font-family: Arial, sans-serif !important; font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--akr-orange); margin: 0 0 24px; }
@@ -1790,77 +1792,82 @@
 .akr-why-sub em { font-style: italic; color: var(--akr-dark); }
 
 /* Comparison grid */
-.akr-why-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 auto 48px; align-items: stretch; overflow: visible; }
+.akr-why-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 auto 48px; align-items: stretch; overflow: visible !important; }
 
 /* Cards — base */
 .akr-compare-card { border-radius: 24px; padding: 32px; display: flex; flex-direction: column; }
 .akr-compare-card--avg { background: #EDE6DA; }
 
-/* åKrrush card — flex column, stick positioned absolute so it bleeds outside card */
-.akr-compare-card--ak { background: #FBE8D9; position: relative; overflow: visible; }
+/* åKrrush card — stick bleeds outside via absolute positioning */
+.akr-compare-card--ak {
+  background: #FBE8D9;
+  position: relative;
+  overflow: visible !important;
+  border: 1.5px solid rgba(198, 107, 69, 0.45);
+}
 
 /* Average card: 2-col image + content */
 .akr-compare-inner { display: grid; grid-template-columns: 40% 60%; gap: 20px; align-items: center; flex: 1; }
 .akr-compare-img-col { display: flex; align-items: center; justify-content: center; }
 .akr-compare-img-col img { width: 140px; height: auto; object-fit: contain; display: block; }
 
-/* Visual — absolute, removed from flow, bleeds outside card top/bottom/right */
+/* Visual — absolute, out of flow, overflows card top/bottom/right */
 .akr-compare-visual {
   position: absolute;
-  right: -10px;
+  right: -60px;
   top: 50%;
-  transform: translateY(-52%);
-  width: 260px;
-  z-index: 2;
+  transform: translateY(-50%);
+  width: 400px;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: visible;
+  overflow: visible !important;
   pointer-events: none;
 }
 
-/* Stick — rotated, naturally overflows above+below visual container */
-@keyframes ak-stick-float {
-  0%, 100% { transform: rotate(-16deg); }
-  50%       { transform: rotate(-15deg) translateY(-10px); }
-}
-.akr-compare-stick {
-  position: relative;
-  width: 260px;
-  height: auto;
-  transform: rotate(-16deg);
-  transform-origin: center center;
-  z-index: 2;
-  pointer-events: none;
-  display: block;
-  animation: ak-stick-float 6s ease-in-out infinite;
-}
-.akr-compare-card--ak:hover .akr-compare-stick {
-  animation-play-state: paused;
-  transform: rotate(-14deg) translateY(-12px) scale(1.03);
-  transition: transform 400ms ease;
-}
-@media (prefers-reduced-motion: reduce) {
-  .akr-compare-stick { animation: none; }
-}
-
-/* Accent — in-flow within visual, sits above stick */
+/* Accent — sits above stick inside visual column */
 .akr-ak-accent {
   position: relative;
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 16px;
-  margin-bottom: 6px;
   align-self: flex-start;
+  padding-left: 20px;
+  margin-bottom: 4px;
 }
 .akr-ak-accent-text { font-family: 'DM Serif Display', Georgia, serif !important; font-style: italic; font-size: 18px; color: var(--akr-orange); line-height: 1.1; }
 .akr-ak-accent-arrow { align-self: flex-start; }
 
-/* Content — padded right to clear the absolute stick */
+/* Stick — large, rotated, bleeds above and below card */
+@keyframes ak-stick-float {
+  0%, 100% { transform: rotate(-16deg); }
+  50%       { transform: rotate(-15deg) translateY(-12px); }
+}
+.akr-compare-stick {
+  width: 400px;
+  height: auto;
+  transform: rotate(-16deg);
+  transform-origin: center center;
+  z-index: 2;
+  pointer-events: none;
+  display: block;
+  position: relative;
+  animation: ak-stick-float 6s ease-in-out infinite;
+}
+.akr-compare-card--ak:hover .akr-compare-stick {
+  animation-play-state: paused;
+  transform: rotate(-14deg) translateY(-14px) scale(1.03);
+  transition: transform 400ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .akr-compare-stick { animation: none; }
+}
+
+/* Content — padded right to keep bullets clear of stick */
 .akr-compare-content { display: flex; flex-direction: column; }
-.akr-compare-card--ak .akr-compare-content { padding-right: 190px; position: relative; z-index: 1; }
+.akr-compare-card--ak .akr-compare-content { padding-right: 210px; position: relative; z-index: 1; }
 
 /* Hotfix Bug 3: Logo block — flex aligned to match avg card title height */
 .akr-compare-logo { display: flex; align-items: center; height: 40px; margin-bottom: 22px; }
@@ -1911,16 +1918,16 @@
 /* Fix 4c: Trust text — solid, readable */
 .akr-why-trust { font-size: 14px; font-weight: 500; letter-spacing: 0.02em; color: #6B5A4C; margin-top: 14px; margin-bottom: 0; }
 
-/* ≤1024px: shrink stick slightly */
+/* ≤1024px: scale down stick + pull in the overhang */
 @media (max-width: 1024px) {
-  .akr-compare-stick { width: 220px; }
-  .akr-compare-visual { width: 220px; right: -5px; }
-  .akr-compare-card--ak .akr-compare-content { padding-right: 160px; }
+  .akr-compare-visual { width: 300px; right: -30px; }
+  .akr-compare-stick { width: 300px; }
+  .akr-compare-card--ak .akr-compare-content { padding-right: 170px; }
 }
 
-/* ≤767px: stack cards, bring stick below content in-flow */
+/* ≤767px: stack cards, collapse stick to in-flow below content */
 @media (max-width: 767px) {
-  .akr-why-section { padding: 56px 20px 72px; }
+  .akr-why-section { padding: 56px 20px 80px; }
   .akr-why-heading { white-space: normal; font-size: clamp(2.4rem, 10vw, 3.4rem); margin-bottom: 14px; }
   .akr-why-sub { margin-bottom: 40px; }
   .akr-why-compare { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; gap: 12px; }
@@ -1929,9 +1936,9 @@
   .akr-compare-list li { font-size: 14px; }
   .akr-btn-cta-dark { display: flex !important; text-align: center; font-size: 13px; }
   .akr-compare-card--ak .akr-compare-content { padding-right: 0; }
-  .akr-compare-visual { position: relative; right: auto; top: auto; transform: none; width: 100%; align-items: center; margin-top: 20px; }
-  .akr-compare-stick { width: 200px; }
-  .akr-ak-accent { align-self: center; padding-left: 0; }
+  .akr-compare-visual { position: relative; right: auto; top: auto; transform: none; width: 100%; align-items: center; margin-top: 24px; padding-bottom: 20px; }
+  .akr-compare-stick { width: 240px; transform: rotate(-10deg); }
+  .akr-ak-accent { align-self: center; padding-left: 0; align-items: center; }
   .akr-ak-accent-text { font-size: 15px; }
   .akr-compare-logo { height: 28px; }
 }
@@ -1941,7 +1948,7 @@
   .akr-compare-inner { grid-template-columns: 1fr; }
   .akr-compare-img-col { justify-content: center; }
   .akr-compare-img-col img { width: 120px; max-width: 100%; }
-  .akr-compare-stick { width: 160px; }
+  .akr-compare-stick { width: 200px; }
 }
 
 /* =============================================================

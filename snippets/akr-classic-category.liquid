@@ -115,21 +115,40 @@
   .akr-cl-bundle__btn:hover { background: #d4644a; color: #fff; }
 
   /* Stats section */
-  .akr-cl-stats { padding: 80px 100px; background: #fffbf2; }
-  .akr-cl-stats__card { background: rgba(255,192,60,0.1); border: 1px solid #ffc03c; border-radius: 24px; padding: 33px; }
-  .akr-cl-stats__label { font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #ffc03c; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 24px; }
-  .akr-cl-stats__heading { font-family: 'DM Serif Display', serif; font-size: 40px; color: #2c1a10; margin-bottom: 24px; }
-  .akr-cl-stats__heading em { font-style: italic; color: #ea7552; }
-  .akr-cl-stats__grid { display: flex; justify-content: space-between; }
+  /* ── INFO CARDS (2-col layout) ── */
+  .akr-cl-infocards { padding: 80px 100px; background: #fffbf2; }
+  .akr-cl-infocards__row { display: flex; gap: 24px; align-items: flex-start; position: relative; }
+  /* Left col */
+  .akr-cl-infocards__left { flex: 1 0 0; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+  /* Flavor chooser card */
+  .akr-cl-flavor { background: rgba(71,177,180,0.1); border: 1px solid #47b1b4; border-radius: 24px; padding: 33px; }
+  .akr-cl-flavor__label { font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #47b1b4; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 32px; }
+  .akr-cl-flavor__title { font-family: 'DM Serif Display', serif; font-size: 20px; color: #1a0f08; margin-bottom: 24px; }
+  .akr-cl-flavor__row { display: flex; flex-direction: column; gap: 12px; padding: 16px 0; border-top: 0.5px solid rgba(16,8,7,0.2); }
+  .akr-cl-flavor__row:first-of-type { border-top: none; padding-top: 0; }
+  .akr-cl-flavor__question { font-family: Arial, sans-serif; font-size: 16px; color: #1a0f08; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.6px; }
+  .akr-cl-flavor__options { font-family: Arial, sans-serif; font-size: 16px; color: #1a0f08; letter-spacing: 0.6px; display: flex; gap: 12px; }
+  /* Ingredient / stats card */
+  .akr-cl-stats { background: rgba(255,192,60,0.1); border: 1px solid #ffc03c; border-radius: 24px; padding: 33px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+  .akr-cl-stats__label { font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #ffc03c; text-transform: uppercase; letter-spacing: 0.6px; }
+  .akr-cl-stats__heading { font-family: 'DM Serif Display', serif; font-size: 20px; color: #1a0f08; margin: 0; }
+  .akr-cl-stats__body { font-family: Arial, sans-serif; font-size: 18px; line-height: 1.5; color: #7d6355; margin: 0; }
+  .akr-cl-stats__grid { display: flex; justify-content: space-between; margin-top: 8px; }
   .akr-cl-stats__item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
   .akr-cl-stats__value { font-family: 'DM Serif Display', serif; font-size: 32px; color: #ffc03c; letter-spacing: 1.344px; }
   .akr-cl-stats__sublabel { font-family: Arial, sans-serif; font-size: 12px; color: #1a0f08; text-transform: uppercase; letter-spacing: 0.54px; opacity: 0.5; }
+  /* Right col — testimonial */
+  .akr-cl-infocards__right { flex: 1 0 0; min-width: 0; position: relative; }
+  .akr-cl-review { background: rgba(234,117,82,0.1); border: 1px solid #ea7552; border-radius: 24px; padding: 33px; display: flex; flex-direction: column; justify-content: space-between; min-height: 355px; position: relative; overflow: hidden; }
+  .akr-cl-review__quotemark { margin-bottom: 22px; }
+  .akr-cl-review__quote { font-family: Arial, sans-serif; font-style: italic; font-size: 20px; line-height: 1.5; color: #1a0f08; margin: 0 0 auto; }
+  .akr-cl-review__attribution { font-family: Arial, sans-serif; font-size: 12px; color: #7d6355; text-transform: uppercase; letter-spacing: 0.54px; margin-top: 32px; }
+  /* Product stick floating image */
+  .akr-cl-infocards__stick { position: absolute; right: -60px; top: 120px; width: 280px; transform: rotate(16.3deg); pointer-events: none; z-index: 2; }
+  .akr-cl-infocards__stick img { width: 100%; height: auto; display: block; }
 
   /* Testimonial */
-  .akr-cl-review { padding: 0 100px 80px; background: #fffbf2; }
-  .akr-cl-review__card { background: rgba(234,117,82,0.1); border: 1px solid #ea7552; border-radius: 24px; padding: 33px; }
-  .akr-cl-review__quote { font-family: Arial, sans-serif; font-size: 18px; line-height: 1.5; color: #7d6355; margin: 0 0 32px; }
-  .akr-cl-review__attribution { font-family: Arial, sans-serif; font-size: 12px; color: #7d6355; text-transform: uppercase; letter-spacing: 0.54px; }
+  /* review styles moved into .akr-cl-infocards block above */
 
   /* Mobile */
   @media (max-width: 768px) {
@@ -147,8 +166,9 @@
     .akr-cl-bundle__inner { flex-direction: column; }
     .akr-cl-bundle__heading { font-size: 44px; }
     .akr-cl-bundle__bg { display: none; }
-    .akr-cl-stats { padding: 60px 20px; }
-    .akr-cl-review { padding: 0 20px 60px; }
+    .akr-cl-infocards { padding: 40px 20px; }
+    .akr-cl-infocards__row { flex-direction: column; }
+    .akr-cl-infocards__stick { display: none; }
   }
 </style>
 
@@ -302,35 +322,79 @@
     </div>
   </div>
 
-  {%- comment -%} ── STATS SECTION ── {%- endcomment -%}
-  <div class="akr-cl-stats">
-    <div class="akr-cl-stats__card">
-      <p class="akr-cl-stats__label">INGREDIENT SPOTLIGHT</p>
-      <h3 class="akr-cl-stats__heading">Norwegian <em>Bones</em></h3>
-      <div class="akr-cl-stats__grid">
-        <div class="akr-cl-stats__item">
-          <span class="akr-cl-stats__value">94%</span>
-          <span class="akr-cl-stats__sublabel">ABSORPTION</span>
+  {%- comment -%} ── INFO CARDS (Figma 2-col) ── {%- endcomment -%}
+  <div class="akr-cl-infocards">
+    <div class="akr-cl-infocards__row">
+
+      {%- comment -%} LEFT COL {%- endcomment -%}
+      <div class="akr-cl-infocards__left">
+
+        {%- comment -%} Flavor chooser card {%- endcomment -%}
+        <div class="akr-cl-flavor">
+          <p class="akr-cl-flavor__label">HOW TO CHOOSE YOUR FLAVOR</p>
+          <p class="akr-cl-flavor__title">Which ritual is yours?</p>
+          <div class="akr-cl-flavor__row">
+            <span class="akr-cl-flavor__question">Flavor preference?</span>
+            <div class="akr-cl-flavor__options">
+              <span>Umami / Earthy →</span>
+              <span>Warming / Spiced →</span>
+            </div>
+          </div>
+          <div class="akr-cl-flavor__row">
+            <span class="akr-cl-flavor__question">Primary use?</span>
+            <div class="akr-cl-flavor__options">
+              <span>Drinking solo</span>
+              <span>Cooking base</span>
+            </div>
+          </div>
+          <div class="akr-cl-flavor__row">
+            <span class="akr-cl-flavor__question">Protein priority?</span>
+            <div class="akr-cl-flavor__options">
+              <span>Yes</span>
+              <span>Flavor first</span>
+            </div>
+          </div>
         </div>
-        <div class="akr-cl-stats__item">
-          <span class="akr-cl-stats__value">13g</span>
-          <span class="akr-cl-stats__sublabel">PER STICK</span>
+
+        {%- comment -%} Ingredient spotlight card {%- endcomment -%}
+        <div class="akr-cl-stats">
+          <p class="akr-cl-stats__label">INGREDIENT SPOTLIGHT</p>
+          <p class="akr-cl-stats__heading">Why hydrolyzed protein?</p>
+          <p class="akr-cl-stats__body">Standard protein requires your body to break it down before absorption begins. Hydrolyzed protein arrives pre-broken — smaller peptides, higher uptake, faster delivery to tissue.</p>
+          <div class="akr-cl-stats__grid">
+            <div class="akr-cl-stats__item">
+              <span class="akr-cl-stats__value">94%</span>
+              <span class="akr-cl-stats__sublabel">ABSORPTION</span>
+            </div>
+            <div class="akr-cl-stats__item">
+              <span class="akr-cl-stats__value">13g</span>
+              <span class="akr-cl-stats__sublabel">PER STICK</span>
+            </div>
+            <div class="akr-cl-stats__item">
+              <span class="akr-cl-stats__value">18h</span>
+              <span class="akr-cl-stats__sublabel">SIMMER TIME</span>
+            </div>
+          </div>
         </div>
-        <div class="akr-cl-stats__item">
-          <span class="akr-cl-stats__value">18h</span>
-          <span class="akr-cl-stats__sublabel">SIMMER TIME</span>
+
+      </div>
+
+      {%- comment -%} RIGHT COL {%- endcomment -%}
+      <div class="akr-cl-infocards__right">
+        <div class="akr-cl-review">
+          <div class="akr-cl-review__quotemark">
+            <svg width="32" height="26" viewBox="0 0 32 26" fill="none"><path d="M0 26L8.5 0H14L9 26H0ZM18 26L26.5 0H32L27 26H18Z" fill="#EA7552"/></svg>
+          </div>
+          <p class="akr-cl-review__quote">The Chanterelle flavor tastes like something a grandmother in Telemark would have simmered all day. Except it's in a stick. Remarkable.</p>
+          <p class="akr-cl-review__attribution">MAJA H. · BERGEN · APR 2026</p>
         </div>
       </div>
-    </div>
-  </div>
 
-  {%- comment -%} ── CUSTOMER REVIEW ── {%- endcomment -%}
-  <div class="akr-cl-review">
-    <div class="akr-cl-review__card">
-      <p class="akr-cl-review__quote">
-        The Chanterelle flavor tastes like something a grandmother in Telemark would have simmered all day. Except it's in a stick. Remarkable.
-      </p>
-      <p class="akr-cl-review__attribution">MAJA H. · BERGEN · APR 2026</p>
+      {%- comment -%} Product stick floating image {%- endcomment -%}
+      <div class="akr-cl-infocards__stick">
+        <img src="{{ 'akr-classic-product-stick.png' | asset_url }}" alt="åKrrush Classic" loading="lazy">
+      </div>
+
     </div>
   </div>
 

@@ -57,30 +57,13 @@
         </div>
       </div>
 
-      <!-- RIGHT: åKrrush — content + absolutely positioned tilted stick (Fix 1) -->
+      <!-- RIGHT: åKrrush — CSS grid: content left / visual right (Hotfix Bug 1) -->
       <div class="akr-compare-card akr-compare-card--ak">
 
-        <!-- Fix 1: Tilted stick, overflows right edge, floats via CSS animation -->
-        {%- if section.settings.akrrush_image != blank -%}
-          <img class="akr-compare-stick" src="{{ section.settings.akrrush_image | image_url: width: 640 }}" alt="" loading="lazy" aria-hidden="true">
-        {%- else -%}
-          <!-- TODO: replace src with akrrush-stick-splash.png once asset is provided -->
-          <img class="akr-compare-stick" src="{{ 'akr-stick-savory-chicken.png' | asset_url }}" alt="" loading="lazy" aria-hidden="true">
-        {%- endif -%}
-
-        <!-- "obvious choice" accent — absolutely positioned top-right (Fix 1) -->
-        <div class="akr-ak-accent" aria-hidden="true">
-          <span class="akr-ak-accent-text">{{ section.settings.ak_accent | default: 'obvious choice' }}</span>
-          <svg width="32" height="28" viewBox="0 0 32 28" fill="none" class="akr-ak-accent-arrow">
-            <path d="M28 4 C28 4, 24 4, 18 8 C12 12, 6 20, 4 26" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-            <path d="M1 23 L4 27 L8 21" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-
-        <!-- Content — right-padded to clear the stick -->
+        <!-- Left column: content -->
         <div class="akr-compare-content">
 
-          <!-- Fix 5: Logo SVG instead of text title -->
+          <!-- Logo replaces text title -->
           <div class="akr-compare-logo">
             <img src="{{ 'akr-logo.svg' | asset_url }}" alt="åKrrush" loading="lazy">
           </div>
@@ -99,6 +82,22 @@
             {%- endfor -%}
           </ul>
           <div class="akr-compare-footer akr-compare-footer--ak">{{ section.settings.ak_footer | default: 'What you get from åKrrush' }}</div>
+        </div>
+
+        <!-- Right column: accent + tilted stick -->
+        <div class="akr-compare-visual">
+          <div class="akr-ak-accent" aria-hidden="true">
+            <span class="akr-ak-accent-text">{{ section.settings.ak_accent | default: 'obvious choice' }}</span>
+            <svg width="32" height="28" viewBox="0 0 32 28" fill="none" class="akr-ak-accent-arrow">
+              <path d="M28 4 C28 4, 24 4, 18 8 C12 12, 6 20, 4 26" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+              <path d="M1 23 L4 27 L8 21" stroke="#ea7552" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          {%- if section.settings.akrrush_image != blank -%}
+            <img class="akr-compare-stick" src="{{ section.settings.akrrush_image | image_url: width: 640 }}" alt="" loading="lazy" aria-hidden="true">
+          {%- else -%}
+            <img class="akr-compare-stick" src="{{ 'akr-stick-savory-chicken.png' | asset_url }}" alt="" loading="lazy" aria-hidden="true">
+          {%- endif -%}
         </div>
 
       </div>

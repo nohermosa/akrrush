@@ -79,6 +79,7 @@
 .akr-faq-q-text {
   font-family: 'DM Serif Display', 'Georgia', serif !important;
 }
+.akr-num-title,
 .akr-ing-heading,
 .akr-benefits-heading,
 .akr-benefits-text-heading,
@@ -2626,9 +2627,8 @@ a.akr-btn-cta-dark:hover {
 }
 
 .akr-num-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'DM Serif Display', Georgia, serif !important;
   font-size: clamp(48px, 6vw, 80px);
-  font-weight: 400;
   line-height: 1.05;
   color: var(--akr-dark);
   margin: 0;
@@ -2636,9 +2636,8 @@ a.akr-btn-cta-dark:hover {
 }
 
 .akr-num-title em {
+  font-family: 'DM Serif Display', Georgia, serif !important;
   font-style: italic;
-  font-family: 'DM Serif Display', serif;
-  font-weight: 400;
   color: var(--akr-cta-secondary);
 }
 
@@ -3164,3 +3163,4 @@ section[id="akr-hero"] .akr-sub-perks {
 
 /* cache-bust 2026-05-26-13-45 — Sprint 3.M.4 seal padding fix */
 /* cache-bust 2026-05-26-15-30 — Sprint 4.G dead CSS cleanup (21 classes) */
+/* cache-bust 2026-05-26-21-15 — Sprint 4.M num-title font fix */

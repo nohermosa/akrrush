@@ -1457,6 +1457,321 @@ a.akr-btn-cta-secondary:hover {
 /* Product form */
 .akr-product-form { margin: 0; }
 
+/* ═══════════════════════════════════════════════════════════ */
+/* Sprint 3.1 — PDP typography sweep                           */
+/* Triple-selector (section[id="akr-hero"] .akr-*) = 21pt     */
+/* wins against [class*="akr-"] { inherit } = 10pt            */
+/* ═══════════════════════════════════════════════════════════ */
+
+/* 1. Eyebrow */
+section[id="akr-hero"] .akr-hero-eyebrow {
+  font-family: Arial, sans-serif !important;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akr-cta-secondary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 16px 0;
+  line-height: 1.3;
+}
+
+/* 2. H1 title — DM Serif Display ensured */
+section[id="akr-hero"] .akr-hero-title {
+  font-family: 'DM Serif Display', serif !important;
+  color: var(--akr-dark);
+  line-height: 1.05;
+}
+
+/* 3. Subtitle */
+section[id="akr-hero"] .akr-hero-short-desc {
+  font-family: Arial, sans-serif !important;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--akr-dark);
+  margin: 16px 0 24px 0;
+}
+
+/* 4. Bullets */
+section[id="akr-hero"] .akr-hero-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+section[id="akr-hero"] .akr-hero-bullets li {
+  font-family: Arial, sans-serif !important;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--akr-dark);
+  padding-left: 28px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+section[id="akr-hero"] .akr-hero-bullets li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--akr-cta-secondary);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* 5. Flavor label */
+section[id="akr-hero"] .akr-hero-flavor-label {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--akr-cta-secondary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 32px 0 16px 0;
+  line-height: 1.3;
+}
+
+/* 6. Pack buttons container */
+section[id="akr-hero"] .akr-hero-pack-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+/* 7. Pack button base */
+section[id="akr-hero"] .akr-hero-pack-btn {
+  background: var(--akr-cream);
+  border: 1.5px solid var(--akr-border);
+  border-radius: 12px;
+  padding: 16px 12px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  text-align: center;
+}
+
+section[id="akr-hero"] .akr-hero-pack-btn:hover {
+  border-color: var(--akr-cta-primary);
+}
+
+/* 8. Best-variant */
+section[id="akr-hero"] .akr-hero-pack-btn--best {
+  border: 1.5px solid var(--akr-cta-primary);
+  background: rgba(210, 114, 74, 0.04);
+}
+
+/* 9. Pack name */
+section[id="akr-hero"] .akr-hero-pack-name {
+  font-family: Arial, sans-serif !important;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--akr-dark);
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+
+/* 10. Pack price */
+section[id="akr-hero"] .akr-hero-pack-price {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--akr-mid);
+  line-height: 1.3;
+}
+
+/* 11. "BEST VALUE" pill */
+section[id="akr-hero"] .akr-hero-best-label {
+  font-family: Arial, sans-serif !important;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--akr-cta-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: inline-block;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+/* 12. Subscribe card */
+section[id="akr-hero"] .akr-sub-card {
+  background: var(--akr-cream);
+  border: 1.5px solid var(--akr-cta-primary);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 16px 0;
+  position: relative;
+}
+
+/* 13. Subscribe title */
+section[id="akr-hero"] .akr-sub-card-label {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--akr-dark);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+/* 14. Subscribe price main */
+section[id="akr-hero"] .akr-sub-price-main {
+  font-family: 'DM Serif Display', serif !important;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 400;
+  color: var(--akr-dark);
+  line-height: 1;
+}
+
+/* 15. Subscribe price period */
+section[id="akr-hero"] .akr-sub-price-period {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--akr-mid);
+}
+
+/* 16. Subscribe compare price */
+section[id="akr-hero"] .akr-sub-price-compare {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--akr-mid);
+  text-decoration: line-through;
+}
+
+/* 17. Billing note */
+section[id="akr-hero"] .akr-sub-billing {
+  font-family: Arial, sans-serif !important;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--akr-mid);
+  margin: 8px 0 16px 0;
+}
+
+/* 18. Subscribe perks */
+section[id="akr-hero"] .akr-sub-perk {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--akr-dark);
+  padding-left: 24px;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+section[id="akr-hero"] .akr-sub-perk em,
+section[id="akr-hero"] .akr-sub-perk i {
+  font-style: italic;
+  font-weight: 700;
+  color: var(--akr-dark);
+}
+
+section[id="akr-hero"] .akr-sub-perk::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--akr-cta-secondary);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* 19. Delivery label */
+section[id="akr-hero"] .akr-delivery-label {
+  font-family: Arial, sans-serif !important;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--akr-mid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 16px 0 8px 0;
+  line-height: 1.3;
+}
+
+/* 20. Delivery buttons */
+section[id="akr-hero"] .akr-delivery-btn {
+  font-family: Arial, sans-serif !important;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--akr-dark);
+  background: var(--akr-cream);
+  border: 1.5px solid var(--akr-border);
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+section[id="akr-hero"] .akr-delivery-btn:hover {
+  border-color: var(--akr-cta-primary);
+}
+
+section[id="akr-hero"] .akr-delivery-btn.active,
+section[id="akr-hero"] .akr-delivery-btn[aria-selected="true"],
+section[id="akr-hero"] .akr-delivery-btn--active {
+  background: var(--akr-cream);
+  border-color: var(--akr-cta-primary);
+  color: var(--akr-dark);
+  box-shadow: 0 0 0 3px rgba(210, 114, 74, 0.10);
+}
+
+/* 21. One-time purchase */
+section[id="akr-hero"] .akr-one-time-label {
+  font-family: Arial, sans-serif !important;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akr-dark);
+  line-height: 1.3;
+}
+
+section[id="akr-hero"] .akr-one-time-price {
+  font-family: Arial, sans-serif !important;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--akr-mid);
+  margin-top: 4px;
+}
+
+/* 22. Main CTA button */
+section[id="akr-hero"] .akr-cta-btn {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff !important;
+  background: var(--akr-cta-primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 20px 32px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s ease;
+  line-height: 1.3;
+}
+
+section[id="akr-hero"] .akr-cta-btn:hover {
+  background: var(--akr-cta-primary-hover);
+}
+
+/* 23. Trust note */
+section[id="akr-hero"] .akr-hero-trust {
+  font-family: Arial, sans-serif !important;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--akr-mid);
+  text-align: center;
+  margin-top: 12px;
+  line-height: 1.4;
+}
+
 /* Pack heading */
 .akr-hero-pack-head { margin-bottom: 14px; }
 .akr-hero-pack-desc {

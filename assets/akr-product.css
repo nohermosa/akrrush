@@ -3228,4 +3228,39 @@ section[id="akr-hero"] .akr-pack-underline {
   overflow: visible;
 }
 
-/* cache-bust 2026-05-26-10-30 — Sprint 3.2 strong SVG-underline */
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Sprint 3.3 — Subscribe stamp: SAVE $65/YR in teal                      */
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Old: "BEST VALUE" in terracotta (#ea7552) — duplicated pack banner.    */
+/* New: "SAVE $65/YR" in teal — distinct signal, distinct color.          */
+/* $65/yr = ($53.99 - $48.59) × 12 = $64.80 ≈ $65. Update if prices change. */
+
+section[id="akr-hero"] .akr-sub-stamp {
+  background: var(--akr-teal) !important;
+  color: #fff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  font-family: Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  padding: 8px !important;
+}
+
+section[id="akr-hero"] .akr-sub-stamp-line1 {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  opacity: 0.9;
+}
+
+section[id="akr-hero"] .akr-sub-stamp-line2 {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* cache-bust 2026-05-26-11-00 — Sprint 3.3 stamp redesign */

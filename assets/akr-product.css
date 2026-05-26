@@ -3318,9 +3318,9 @@ section[id="akr-hero"] .akr-sub-perks {
     min-width: 0 !important;
   }
 
-  /* Subscribe card: tighter padding on mobile */
+  /* Subscribe card: tighter padding on mobile + right clearance for seal */
   section[id="akr-hero"] .akr-sub-card {
-    padding: 16px !important;
+    padding: 16px 80px 16px 16px !important;
   }
 
   /* Vintage seal: scale down, prevent overlap */
@@ -3362,4 +3362,4 @@ section[id="akr-hero"] .akr-sub-perks {
   }
 }
 
-/* cache-bust 2026-05-26-13-30 — Sprint 3.M.3 single-column mobile */
+/* cache-bust 2026-05-26-13-45 — Sprint 3.M.4 seal padding fix */

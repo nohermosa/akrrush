@@ -1772,23 +1772,7 @@ section[id="akr-hero"] .akr-hero-trust {
   line-height: 1.4;
 }
 
-/* Pack heading */
-.akr-hero-pack-head { margin-bottom: 14px; }
-.akr-hero-pack-desc {
-  font-size: 13px;
-  font-family: Arial, sans-serif;
-  color: var(--akr-mid);
-  line-height: 1.5;
-  margin: 0;
-  padding-right: 48%;
-}
-.akr-most-popular-svg {
-  display: block;
-}
-@media (max-width: 640px) {
-  .akr-most-popular-svg { display: none; }
-  .akr-hero-pack-desc { padding-right: 0; }
-}
+
 
 /* Pack size buttons */
 .akr-hero-pack-btns {
@@ -3126,18 +3110,6 @@ section[id="akr-hero"] .akr-hero-pack-btn.active .akr-hero-pack-name {
   color: var(--akr-cta-primary) !important;
 }
 
-/* ── Issue 3: Pack-desc subtitle font override ──────────────────────────── */
-/* Old `.akr-hero-pack-desc { font-family: Arial }` lacks !important →       */
-/* loses to `[class*="akr-"] div { font-family: inherit !important }` in     */
-/* styles-zz-custom.css. Fix: use section[id] prefix + !important.           */
-section[id="akr-hero"] .akr-hero-pack-desc {
-  font-family: Arial, sans-serif !important;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--akr-dark);
-  margin: 8px 0 24px 0;
-}
 
 /* ═══════════════════════════════════════════════════════════════════════ */
 /* Sprint 3.1.2 — Pack-btn cream bg + BEST VALUE banner                   */
@@ -3190,43 +3162,6 @@ section[id="akr-hero"] .akr-hero-pack-btn--best .akr-hero-best-label {
   white-space: nowrap !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════ */
-/* Sprint 3.2 — "strong" SVG-underline (Numbers/Real pattern)             */
-/* ═══════════════════════════════════════════════════════════════════════ */
-/* Replaced dual-img heading (akr-heading-strong.svg + akr-underline-strong.svg)
-   with HTML h2 + inline SVG, matching Numbers "lie" / Social "Real" exactly. */
-
-section[id="akr-hero"] .akr-hero-pack-h2 {
-  font-family: 'DM Serif Display', serif !important;
-  font-size: clamp(28px, 3.5vw, 44px);
-  font-weight: 400;
-  line-height: 1.1;
-  color: var(--akr-dark);
-  margin: 0 0 10px 0;
-}
-
-section[id="akr-hero"] .akr-pack-emphasis-wrap {
-  position: relative;
-  display: inline-block;
-}
-
-section[id="akr-hero"] .akr-pack-emphasis-wrap em {
-  font-style: italic;
-  font-family: 'DM Serif Display', serif !important;
-  color: var(--akr-cta-secondary);
-  text-decoration: none;
-}
-
-section[id="akr-hero"] .akr-pack-underline {
-  position: absolute;
-  left: -4px;
-  bottom: -8px;
-  width: calc(100% + 8px);
-  height: 9px;
-  display: block;
-  pointer-events: none;
-  overflow: visible;
-}
 
 /* ═══════════════════════════════════════════════════════════════════════ */
 /* Sprint 3.3.1 — Vintage cream seal (Product of Norway-style)            */
@@ -3283,4 +3218,4 @@ section[id="akr-hero"] .akr-sub-stamp-line3 {
   margin-top: 2px !important;
 }
 
-/* cache-bust 2026-05-26-11-45 — Sprint 3.3.2 readability fix */
+/* cache-bust 2026-05-26-12-00 — Sprint 3.4 remove intro block */

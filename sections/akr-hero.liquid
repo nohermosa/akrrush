@@ -146,28 +146,6 @@
         {%- endfor -%}
       </div>
 
-      <!-- Pack heading -->
-      <div class="akr-hero-pack-head">
-        <h2 class="akr-hero-pack-h2">
-          {{ section.settings.pack_heading_before }}
-          <span class="akr-pack-emphasis-wrap">
-            <em>{{ section.settings.pack_heading_italic }}</em>
-            <svg class="akr-pack-underline" viewBox="0 0 150.001 9.00039"
-                 fill="none" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M2.00035 7.00004C19.5986 3.76625 100.55 -1.19223 148 4.84418"
-                    stroke="#EA7552" stroke-width="4" stroke-linecap="round"></path>
-            </svg>
-          </span>
-        </h2>
-        <!-- Description + most-popular SVG — exact 1:1 with mockup -->
-        <div style="position:relative;margin-bottom:16px">
-          <div class="akr-hero-pack-desc">{{ section.settings.pack_desc }}</div>
-          <img src="{{ 'akr-most-popular.svg' | asset_url }}"
-               aria-hidden="true" alt=""
-               class="akr-most-popular-svg"
-               style="position:absolute;top:-8px;right:28%;width:64px;height:84px;pointer-events:none;z-index:3">
-        </div>
-      </div>
 
       <!-- Pack size buttons (variant selector — outside form so Appstle can read the select) -->
       <div class="akr-hero-pack-btns" id="akrPackBtns">

@@ -3189,3 +3189,5 @@ section[id="akr-hero"] .akr-hero-pack-btn--best .akr-hero-best-label {
   box-shadow: none !important;
   white-space: nowrap !important;
 }
+
+/* cache-bust 2026-05-26-02-45 — force CDN hash regen */

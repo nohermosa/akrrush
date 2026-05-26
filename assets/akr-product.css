@@ -3229,38 +3229,58 @@ section[id="akr-hero"] .akr-pack-underline {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════ */
-/* Sprint 3.3 — Subscribe stamp: SAVE $65/YR in teal                      */
-/* ═══════════════════════════════════════════════════════════════════════ */
-/* Old: "BEST VALUE" in terracotta (#ea7552) — duplicated pack banner.    */
-/* New: "SAVE $65/YR" in teal — distinct signal, distinct color.          */
+/* Sprint 3.3.1 — Vintage cream seal (Product of Norway-style)            */
+/* Cream bg + terracotta border — matches hero "Product of Norway" stamp. */
 /* $65/yr = ($53.99 - $48.59) × 12 = $64.80 ≈ $65. Update if prices change. */
+/* ═══════════════════════════════════════════════════════════════════════ */
 
 section[id="akr-hero"] .akr-sub-stamp {
-  background: var(--akr-teal) !important;
-  color: #fff !important;
+  background: var(--akr-cream) !important;
+  border: 2px solid var(--akr-cta-primary) !important;
+  color: var(--akr-dark) !important;
+  width: 76px !important;
+  height: 76px !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 2px !important;
-  font-family: Arial, sans-serif !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.06em !important;
-  line-height: 1 !important;
   text-align: center !important;
-  padding: 8px !important;
+  padding: 6px !important;
+  line-height: 1 !important;
+  transform: rotate(-5deg) !important;
+  box-shadow: 0 4px 10px rgba(44, 26, 16, 0.15) !important;
+  gap: 2px !important;
 }
 
 section[id="akr-hero"] .akr-sub-stamp-line1 {
-  font-size: 10px !important;
+  font-family: Arial, sans-serif !important;
+  font-size: 8px !important;
   font-weight: 700 !important;
-  opacity: 0.9;
+  color: var(--akr-cta-primary) !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
 }
 
 section[id="akr-hero"] .akr-sub-stamp-line2 {
-  font-size: 14px !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.04em !important;
+  font-family: 'DM Serif Display', serif !important;
+  font-size: 22px !important;
+  font-weight: 400 !important;
+  color: var(--akr-dark) !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  margin-top: 2px !important;
 }
 
-/* cache-bust 2026-05-26-11-00 — Sprint 3.3 stamp redesign */
+section[id="akr-hero"] .akr-sub-stamp-line3 {
+  font-family: Arial, sans-serif !important;
+  font-size: 7px !important;
+  font-weight: 700 !important;
+  color: var(--akr-mid) !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+  margin-top: 2px !important;
+}
+
+/* cache-bust 2026-05-26-11-30 — Sprint 3.3.1 vintage seal */

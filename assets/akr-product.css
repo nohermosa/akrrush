@@ -1886,20 +1886,20 @@ section[id="akr-hero"] .akr-hero-trust {
 .akr-hero-section * {
   font-family: Arial, sans-serif !important;
 }
-/* Hero responsive */
+/* Hero responsive — Sprint 3.M.3: !important added to beat desktop grid !important */
 @media (max-width: 768px) {
   .akr-hero-inner {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
     padding-bottom: 32px;
   }
   .akr-hero-gallery-col {
-    padding-right: 0;
-    border-right: none;
+    padding-right: 0 !important;
+    border-right: none !important;
     border-bottom: 1px solid var(--akr-border);
     padding-bottom: 32px;
   }
-  .akr-hero-info-col { padding-left: 0; }
+  .akr-hero-info-col { padding-left: 0 !important; }
   .akr-hero-main-wrap { max-width: 560px; margin-left: auto; margin-right: auto; }
   .akr-hero-norway { right: calc(50% - 280px + 16px); }
 }
@@ -3362,4 +3362,4 @@ section[id="akr-hero"] .akr-sub-perks {
   }
 }
 
-/* cache-bust 2026-05-26-13-00 — Sprint 3.M.2 full mobile restructure */
+/* cache-bust 2026-05-26-13-30 — Sprint 3.M.3 single-column mobile */

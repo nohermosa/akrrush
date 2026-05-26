@@ -3254,17 +3254,17 @@ section[id="akr-hero"] .akr-sub-stamp {
 
 section[id="akr-hero"] .akr-sub-stamp-line1 {
   font-family: Arial, sans-serif !important;
-  font-size: 8px !important;
+  font-size: 10px !important;
   font-weight: 700 !important;
   color: var(--akr-cta-primary) !important;
-  letter-spacing: 0.15em !important;
+  letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
   line-height: 1 !important;
 }
 
 section[id="akr-hero"] .akr-sub-stamp-line2 {
   font-family: 'DM Serif Display', serif !important;
-  font-size: 22px !important;
+  font-size: 20px !important;
   font-weight: 400 !important;
   color: var(--akr-dark) !important;
   line-height: 1 !important;
@@ -3274,13 +3274,13 @@ section[id="akr-hero"] .akr-sub-stamp-line2 {
 
 section[id="akr-hero"] .akr-sub-stamp-line3 {
   font-family: Arial, sans-serif !important;
-  font-size: 7px !important;
+  font-size: 9px !important;
   font-weight: 700 !important;
   color: var(--akr-mid) !important;
-  letter-spacing: 0.18em !important;
+  letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
   line-height: 1 !important;
   margin-top: 2px !important;
 }
 
-/* cache-bust 2026-05-26-11-30 — Sprint 3.3.1 vintage seal */
+/* cache-bust 2026-05-26-11-45 — Sprint 3.3.2 readability fix */

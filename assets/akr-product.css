@@ -3190,4 +3190,42 @@ section[id="akr-hero"] .akr-hero-pack-btn--best .akr-hero-best-label {
   white-space: nowrap !important;
 }
 
-/* cache-bust 2026-05-26-09-50 — Sprint 3.1.3 polish */
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Sprint 3.2 — "strong" SVG-underline (Numbers/Real pattern)             */
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Replaced dual-img heading (akr-heading-strong.svg + akr-underline-strong.svg)
+   with HTML h2 + inline SVG, matching Numbers "lie" / Social "Real" exactly. */
+
+section[id="akr-hero"] .akr-hero-pack-h2 {
+  font-family: 'DM Serif Display', serif !important;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--akr-dark);
+  margin: 0 0 10px 0;
+}
+
+section[id="akr-hero"] .akr-pack-emphasis-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+section[id="akr-hero"] .akr-pack-emphasis-wrap em {
+  font-style: italic;
+  font-family: 'DM Serif Display', serif !important;
+  color: var(--akr-cta-secondary);
+  text-decoration: none;
+}
+
+section[id="akr-hero"] .akr-pack-underline {
+  position: absolute;
+  left: -4px;
+  bottom: -8px;
+  width: calc(100% + 8px);
+  height: 9px;
+  display: block;
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* cache-bust 2026-05-26-10-30 — Sprint 3.2 strong SVG-underline */

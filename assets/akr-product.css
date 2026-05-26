@@ -3242,4 +3242,37 @@ section[id="akr-hero"] .akr-sub-radio-dot {
   flex-shrink: 0 !important;
 }
 
-/* cache-bust 2026-05-26-12-15 — Sprint 3.4.1 header alignment */
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Sprint 3.4.2 — One-Time Purchase header alignment                      */
+/* Root cause: Sprint 3.1 sets .akr-one-time-label line-height:1.3 on a  */
+/* 16px font → ~20.8px line-box taller than 18px radio dot → drift.      */
+/* Fix: explicit flex on container + line-height:1 on label.             */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+section[id="akr-hero"] .akr-one-time {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+section[id="akr-hero"] .akr-one-time-radio {
+  flex-shrink: 0 !important;
+}
+
+section[id="akr-hero"] .akr-one-time-text {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+}
+
+section[id="akr-hero"] .akr-one-time-label {
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+section[id="akr-hero"] .akr-one-time-price {
+  line-height: 1.4 !important;
+  margin: 0 !important;
+}
+
+/* cache-bust 2026-05-26-12-25 — Sprint 3.4.2 one-time alignment */

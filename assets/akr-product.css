@@ -3083,3 +3083,58 @@ a.akr-btn-cta-dark:hover {
     gap: 20px 24px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Sprint 3.1.1 — Three post-QA fixes                                     */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Issue 1: One-Time Purchase card — remove blue browser focus outline ── */
+/* The .akr-one-time element is a div[role="button"][tabindex="0"].          */
+/* On click it receives :focus → browser default blue outline appears.       */
+/* The --selected border-color rule is correct; only the outline needs fix.  */
+section[id="akr-hero"] .akr-one-time:focus,
+section[id="akr-hero"] .akr-one-time:focus-visible {
+  outline: none;
+}
+/* Replace with on-brand terracotta ring when navigated via keyboard */
+section[id="akr-hero"] .akr-one-time:focus-visible {
+  box-shadow: 0 0 0 3px rgba(210, 114, 74, 0.20);
+}
+
+/* ── Issue 2: Pack button active vs --best double-highlight fix ────────── */
+/* Root cause: old rule `.akr-hero-pack-btn.active, .akr-hero-pack-btn--best */
+/* { border: 2px solid var(--akr-orange) !important }` at line ~1811 groups  */
+/* both selectors — so BEST VALUE pack always shows orange border even when  */
+/* another pack is selected. Fix: separate --best (passive) from .active.   */
+
+/* --best passive: subtle tint only, NOT full orange highlight */
+section[id="akr-hero"] .akr-hero-pack-btn--best:not(.active) {
+  border: 1.5px solid var(--akr-cta-primary) !important;
+  background: rgba(210, 114, 74, 0.04) !important;
+}
+section[id="akr-hero"] .akr-hero-pack-btn--best:not(.active) .akr-hero-pack-name {
+  color: var(--akr-dark) !important;
+}
+
+/* .active: full orange highlight (any pack when selected) */
+section[id="akr-hero"] .akr-hero-pack-btn.active {
+  border: 2px solid var(--akr-cta-primary) !important;
+  background: rgba(210, 114, 74, 0.08) !important;
+  box-shadow: 0 0 0 3px rgba(210, 114, 74, 0.12) !important;
+}
+section[id="akr-hero"] .akr-hero-pack-btn.active .akr-hero-pack-name {
+  color: var(--akr-cta-primary) !important;
+}
+
+/* ── Issue 3: Pack-desc subtitle font override ──────────────────────────── */
+/* Old `.akr-hero-pack-desc { font-family: Arial }` lacks !important →       */
+/* loses to `[class*="akr-"] div { font-family: inherit !important }` in     */
+/* styles-zz-custom.css. Fix: use section[id] prefix + !important.           */
+section[id="akr-hero"] .akr-hero-pack-desc {
+  font-family: Arial, sans-serif !important;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--akr-dark);
+  margin: 8px 0 24px 0;
+}

@@ -3275,4 +3275,34 @@ section[id="akr-hero"] .akr-one-time-price {
   margin: 0 !important;
 }
 
-/* cache-bust 2026-05-26-12-25 — Sprint 3.4.2 one-time alignment */
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Sprint 3.M.1 — Perks list mobile layout                                */
+/* Root cause: Sprint 3.1 raises .akr-sub-perk font to 14px + padding-   */
+/* left:24px, making each cell wider — 2-col grid squeezes at ~995px.    */
+/* Bare @media 640px rule (10pt) can't override Sprint 3.1 (21pt).       */
+/* Fix: section[id] prefix at 21pt collapses to 1-col at ≤768px.         */
+/* Markup: 6 × <div class="akr-sub-perk"> with <em> inline emphasis,     */
+/* no icons — checkmarks from ::before. No wrapper divs.                  */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+/* Desktop: explicit 2-col (no change from bare rule, but now wins) */
+section[id="akr-hero"] .akr-sub-perks {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 6px 20px !important;
+  margin-bottom: 16px !important;
+}
+
+/* ≤768px: collapse to 1 col so perk text never needs to split */
+@media (max-width: 768px) {
+  section[id="akr-hero"] .akr-sub-perks {
+    grid-template-columns: 1fr !important;
+    gap: 8px 0 !important;
+  }
+
+  section[id="akr-hero"] .akr-sub-perk {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* cache-bust 2026-05-26-12-45 — Sprint 3.M.1 perks mobile */

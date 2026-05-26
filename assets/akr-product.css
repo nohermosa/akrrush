@@ -3173,8 +3173,8 @@ section[id="akr-hero"] .akr-sub-stamp {
   background: var(--akr-cream) !important;
   border: 2px solid var(--akr-cta-primary) !important;
   color: var(--akr-dark) !important;
-  width: 76px !important;
-  height: 76px !important;
+  width: 80px !important;
+  height: 80px !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -3212,10 +3212,10 @@ section[id="akr-hero"] .akr-sub-stamp-line3 {
   font-size: 9px !important;
   font-weight: 700 !important;
   color: var(--akr-mid) !important;
-  letter-spacing: 0.14em !important;
+  letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
   line-height: 1 !important;
   margin-top: 2px !important;
 }
 
-/* cache-bust 2026-05-26-12-00 — Sprint 3.4 remove intro block */
+/* cache-bust 2026-05-26-12-00 — Sprint 3.3.3 seal sizing */

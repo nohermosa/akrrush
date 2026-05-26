@@ -1,7 +1,3 @@
-{{ 'akr-product.css' | asset_url | stylesheet_tag }}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
 <section class="akr-why-section" id="akr-why">
   <div class="akr-why-inner">
@@ -10,7 +6,7 @@
     <p class="akr-why-eyebrow">{{ section.settings.eyebrow | default: 'Real Bone Broth' }}</p>
 
     <!-- Headline — one line on desktop (UNCHANGED) -->
-    <h2 class="akr-why-heading">{{ section.settings.headline_before | default: 'Why drink' }} <em>{{ section.settings.headline_emphasis | default: 'just' }}<img src="{{ 'akr-underline-just.svg' | asset_url }}" class="akr-underline-just" aria-hidden="true" alt=""></em> <span class="akr-why-broth-outline">{{ section.settings.headline_after | default: 'broth?' }}</span></h2>
+    <h2 class="akr-why-heading">{{ section.settings.headline_before | default: 'Why drink' }} <em>{{ section.settings.headline_emphasis | default: 'just' }}<img src="{{ 'akr-underline-just.svg' | asset_url }}" class="akr-underline-just" aria-hidden="true" alt="" loading="lazy"></em> <span class="akr-why-broth-outline">{{ section.settings.headline_after | default: 'broth?' }}</span></h2>
 
     <!-- Subheadline -->
     <div class="akr-why-sub">

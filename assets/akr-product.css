@@ -858,16 +858,16 @@ a.akr-btn-cta-secondary:hover {
   font-family: Arial, sans-serif;
 }
 .akr-faq-list {
-  border-top: .5px solid #e4c6bd;
+  border-top: 1px solid #e8d9c4;
 }
 .akr-faq-item {
-  border-bottom: .5px solid #e4c6bd;
+  border-bottom: 1px solid #e8d9c4;
 }
 .akr-faq-q {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 18px 0;
+  gap: 16px;
+  padding: 24px 0;
   cursor: pointer;
   list-style: none;
 }
@@ -888,9 +888,9 @@ a.akr-btn-cta-secondary:hover {
   line-height: 1.45;
 }
 .akr-faq-toggle {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
-  color: var(--akr-orange);
+  color: var(--akr-cta-primary);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -898,7 +898,7 @@ a.akr-btn-cta-secondary:hover {
   font-size: 16px;
   color: var(--akr-mid);
   line-height: 1.5;
-  padding: 0 0 18px 32px;
+  padding: 0 0 24px 36px;
   display: none;
 }
 .akr-faq-a.is-open { display: block; }
@@ -3129,3 +3129,4 @@ section[id="akr-hero"] .akr-sub-perks {
 /* cache-bust 2026-05-26-15-30 — Sprint 4.G dead CSS cleanup (21 classes) */
 /* cache-bust 2026-05-26-21-15 — Sprint 4.M num-title font fix */
 /* cache-bust 2026-05-30-00-00 — Sprint 5.1 RE-APPLY FAQ pills + cleanup */
+/* cache-bust 2026-05-30-17-00 — Sprint 5.2 accordion subtile justeringer */

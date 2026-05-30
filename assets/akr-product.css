@@ -803,19 +803,19 @@ a.akr-btn-cta-secondary:hover {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 0 18px;
-  height: 36px;
+  padding: 12px 24px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 400;
+  letter-spacing: 0.02em;
   cursor: pointer;
   border-radius: 999px;
   white-space: nowrap;
   font-family: Arial, sans-serif;
   border: none;
 }
-.akr-faq-tab-nutrition   { background: var(--akr-orange); color: #fff; }
-.akr-faq-tab-howto       { background: var(--akr-teal);   color: #fff; }
-.akr-faq-tab-sub         { background: var(--akr-amber);  color: var(--akr-dark); }
+.akr-faq-tab-nutrition   { background: #fce4d4; color: #993c1d; font-weight: 700; }
+.akr-faq-tab-howto       { background: #e1f0e4; color: #2d5a3f; }
+.akr-faq-tab-sub         { background: #f5ead4; color: #6b5320; }
 .akr-faq-heading {
   font-family: 'DM Serif Display', 'Georgia', serif !important;
   font-size: 68px;
@@ -851,16 +851,6 @@ a.akr-btn-cta-secondary:hover {
   gap: 14px;
   margin-bottom: 32px;
 }
-.akr-faq-avatars { display: flex; }
-.akr-faq-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 2px solid var(--akr-cream);
-  flex-shrink: 0;
-  margin-left: -10px;
-}
-.akr-faq-avatars .akr-faq-avatar:first-child { margin-left: 0; }
 .akr-faq-social-text {
   font-size: 18px;
   font-weight: 400;
@@ -1013,31 +1003,6 @@ a.akr-btn-cta-secondary:hover {
   font-size: 12px;
   color: var(--akr-mid);
 }
-.akr-faq-pill {
-  position: absolute;
-  border-radius: 999px;
-  padding: 8px 18px;
-  font-size: 13px;
-  font-weight: 700;
-  font-family: Arial, sans-serif;
-  white-space: nowrap;
-  z-index: 10;
-}
-.akr-faq-pill-orange {
-  background: var(--akr-orange);
-  color: #fff;
-  top: -18px;
-  right: -28px;
-  transform: rotate(14.76deg);
-}
-.akr-faq-pill-teal {
-  background: var(--akr-teal);
-  color: #fff;
-  bottom: 150px;
-  left: -24px;
-  transform: rotate(-15deg);
-}
-
 /* =============================================================
    SECTION: HERO (akr-hero)
    ============================================================= */
@@ -1743,8 +1708,7 @@ section[id="akr-hero"] .akr-hero-trust {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .akr-faq-quote-overlay,
-  .akr-faq-pill { display: none; }
+  .akr-faq-quote-overlay { display: none; }
   .akr-faq-right { padding-right: 0; padding-bottom: 0; }
 }
 @media (max-width: 768px) {
@@ -3164,3 +3128,4 @@ section[id="akr-hero"] .akr-sub-perks {
 /* cache-bust 2026-05-26-13-45 — Sprint 3.M.4 seal padding fix */
 /* cache-bust 2026-05-26-15-30 — Sprint 4.G dead CSS cleanup (21 classes) */
 /* cache-bust 2026-05-26-21-15 — Sprint 4.M num-title font fix */
+/* cache-bust 2026-05-30-00-00 — Sprint 5.1 RE-APPLY FAQ pills + cleanup */

@@ -75,8 +75,7 @@
 .akr-benefits-heading em,
 .akr-benefits-text-heading,
 .akr-benefits-text-heading em,
-.akr-faq-heading,
-.akr-faq-q-text {
+.akr-faq-heading {
   font-family: 'DM Serif Display', 'Georgia', serif !important;
 }
 .akr-num-title,
@@ -876,7 +875,8 @@ a.akr-btn-cta-secondary:hover {
   list-style: none;
 }
 .akr-faq-q-text {
-  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-family: Arial, sans-serif !important;
+  font-weight: 700;
   font-size: 16px;
   color: var(--akr-dark);
   flex: 1;
@@ -3127,3 +3127,4 @@ section[id="akr-hero"] .akr-sub-perks {
 /* cache-bust 2026-05-30-17-00 — Sprint 5.2 accordion subtile justeringer */
 /* cache-bust 2026-06-04-00-00 — Sprint 5.3 funksjonelle tabs + aktiv-state */
 /* cache-bust 2026-06-04-14-00 — Sprint 5.3.1 15 spørsmål + fjern nummerering */
+/* cache-bust 2026-06-04-15-00 — Sprint 5.3.3 fix FAQ q-text font */

@@ -269,12 +269,36 @@
         "faq_3": {
           "type": "faq_item",
           "settings": {
+            "category": "nutrition",
+            "question": "What's in each stick?",
+            "answer": "<p>13g of hydrolyzed collagen peptides from Norwegian poultry, natural seasonings, and zero added sugar. No artificial sweeteners, no fillers, no preservatives. Full ingredient list on every package.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "category": "nutrition",
+            "question": "Is it safe during pregnancy or while nursing?",
+            "answer": "<p>åKrrush contains only pure protein from Norwegian poultry with natural seasonings, no caffeine or stimulants. No known contraindications, but always consult your healthcare provider for personalized advice.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "category": "nutrition",
+            "question": "Does it fit keto, paleo, or Whole30 diets?",
+            "answer": "<p>Yes. Each stick has 13g protein, 0g added sugar, and no artificial ingredients. Compatible with keto and paleo. Whole30 compliant in most flavors, check individual ingredient lists for compliance.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
             "category": "howto",
             "question": "When will I see results?",
             "answer": "<p>Most customers report increased energy and better digestion within 1 to 2 weeks. Skin, hair, and joint benefits typically take 4 to 6 weeks of consistent daily use.</p>"
           }
         },
-        "faq_4": {
+        "faq_7": {
           "type": "faq_item",
           "settings": {
             "category": "howto",
@@ -282,15 +306,63 @@
             "answer": "<p>Morning on an empty stomach gives the best absorption for energy and digestion. Post-workout supports muscle recovery. Before bed promotes sleep quality through glycine in collagen.</p>"
           }
         },
-        "faq_5": {
+        "faq_8": {
+          "type": "faq_item",
+          "settings": {
+            "category": "howto",
+            "question": "How do I prepare it?",
+            "answer": "<p>Tear open one stick, pour into a mug or bottle, add hot water, and stir. Fully dissolves in under 30 seconds. Also works mixed into smoothies, soups, or sauces.</p>"
+          }
+        },
+        "faq_9": {
+          "type": "faq_item",
+          "settings": {
+            "category": "howto",
+            "question": "Can I drink more than one stick a day?",
+            "answer": "<p>Yes. Many customers have one in the morning and another post-workout or before bed. Each stick contains 13g of protein, so adjust based on your daily protein goals.</p>"
+          }
+        },
+        "faq_10": {
+          "type": "faq_item",
+          "settings": {
+            "category": "howto",
+            "question": "Can kids drink it?",
+            "answer": "<p>Yes, åKrrush is safe and nutritious for kids over 4. The clean ingredient list makes it a great alternative to sugary drinks. Start with half a stick for younger children.</p>"
+          }
+        },
+        "faq_11": {
+          "type": "faq_item",
+          "settings": {
+            "category": "subscriptions",
+            "question": "How do subscriptions work?",
+            "answer": "<p>Choose your pack (12, 24, or 36 sticks) and delivery frequency (every 2 to 8 weeks). Save 10% on every order. Change flavors, frequency, or pause anytime from your account dashboard.</p>"
+          }
+        },
+        "faq_12": {
           "type": "faq_item",
           "settings": {
             "category": "subscriptions",
             "question": "Can I cancel anytime?",
-            "answer": "<p>Yes, no commitment. Cancel directly from your account dashboard or send one email to support. No questions, no fees, no hidden terms.</p>"
+            "answer": "<p>Yes, no commitment. Cancel directly from your account dashboard. No questions, no fees, no hidden terms.</p>"
           }
         },
-        "faq_6": {
+        "faq_13": {
+          "type": "faq_item",
+          "settings": {
+            "category": "subscriptions",
+            "question": "Can I mix flavors in one subscription?",
+            "answer": "<p>Yes. Build a custom box with any combination of Savory Chicken, Ginger Ramen, and Chanterelle Mushroom. Change the mix anytime before your next shipment ships.</p>"
+          }
+        },
+        "faq_14": {
+          "type": "faq_item",
+          "settings": {
+            "category": "subscriptions",
+            "question": "When will my order ship?",
+            "answer": "<p>Orders placed before 2pm EST ship same day. Free shipping on subscriptions. Most US deliveries arrive within 3 to 5 business days.</p>"
+          }
+        },
+        "faq_15": {
           "type": "faq_item",
           "settings": {
             "category": "subscriptions",
@@ -305,7 +377,16 @@
         "faq_3",
         "faq_4",
         "faq_5",
-        "faq_6"
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9",
+        "faq_10",
+        "faq_11",
+        "faq_12",
+        "faq_13",
+        "faq_14",
+        "faq_15"
       ],
       "settings": {
         "heading_line1": "Everything you",

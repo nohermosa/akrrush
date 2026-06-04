@@ -46,13 +46,10 @@
 
       <!-- FAQ accordion -->
       <div class="akr-faq-list" id="akrFaqList">
-        {%- assign faq_idx = 0 -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'faq_item' -%}
-            {%- assign faq_idx = faq_idx | plus: 1 -%}
             <div class="akr-faq-item" data-category="{{ block.settings.category }}" {{ block.shopify_attributes }}>
               <div class="akr-faq-q" role="button" tabindex="0" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
-                <span class="akr-faq-num">{{ faq_idx }}.</span>
                 <span class="akr-faq-q-text">{{ block.settings.question }}</span>
                 <span class="akr-faq-toggle">{% if forloop.first %}−{% else %}+{% endif %}</span>
               </div>

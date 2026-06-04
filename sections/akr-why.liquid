@@ -3,6 +3,13 @@
   .akr-compare-list li { margin-bottom: 16px !important; }
   .akr-compare-list li:last-child { margin-bottom: 0 !important; }
 </style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.akr-compare-list li').forEach(function(li, i, all) {
+      li.style.cssText += '; margin-bottom: ' + (i < all.length - 1 ? '20px' : '0') + ' !important';
+    });
+  });
+</script>
 
 <section class="akr-why-section" id="akr-why">
   <div class="akr-why-inner">

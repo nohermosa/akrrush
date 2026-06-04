@@ -2120,7 +2120,7 @@ button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; 
 
 /* Bullet list — use margin-bottom (not gap) so spacing works whether ul is flex or block */
 .akr-compare-list { list-style: none; padding: 0; margin: 0; display: flex !important; flex-direction: column; flex: 1; }
-.akr-compare-list li { display: flex; align-items: center; gap: 12px; font-size: 15px; line-height: 1.4; color: var(--akr-dark); margin-bottom: 16px; }
+.akr-compare-list li { display: flex; align-items: center; gap: 12px; font-size: 15px; line-height: 1.4; color: var(--akr-dark); margin-bottom: 32px; }
 .akr-compare-list li:last-child { margin-bottom: 0; }
 .akr-bullet-icon { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .akr-bullet-icon--neg { background: rgba(43, 24, 16, 0.25); }

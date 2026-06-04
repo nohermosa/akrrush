@@ -1,6 +1,6 @@
 
 <style>
-  .akr-compare-list li { margin-bottom: 16px !important; }
+  .akr-compare-list li { margin-bottom: 32px !important; }
   .akr-compare-list li:last-child { margin-bottom: 0 !important; }
 </style>
 <script>
@@ -8,7 +8,7 @@
     document.querySelectorAll('.akr-compare-list').forEach(function(ul) {
       var items = ul.querySelectorAll('li');
       items.forEach(function(li, i) {
-        li.style.setProperty('margin-bottom', i < items.length - 1 ? '20px' : '0', 'important');
+        li.style.setProperty('margin-bottom', i < items.length - 1 ? '32px' : '0', 'important');
       });
     });
   });
@@ -53,7 +53,7 @@
               {%- for i in (1..5) -%}
                 {%- assign field = 'avg_item_' | append: i -%}
                 {%- if section.settings[field] != blank -%}
-                  <li style="margin-bottom: 16px;">
+                  <li style="margin-bottom: 32px;">
                     <span class="akr-bullet-icon akr-bullet-icon--neg" aria-hidden="true">
                       <svg viewBox="0 0 12 12"><path d="M2 2l8 8M10 2L2 10" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
                     </span>

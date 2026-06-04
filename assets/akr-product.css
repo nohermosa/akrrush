@@ -875,15 +875,6 @@ a.akr-btn-cta-secondary:hover {
   cursor: pointer;
   list-style: none;
 }
-.akr-faq-num {
-  font-family: 'DM Serif Display', 'Georgia', serif !important;
-  font-size: 15px;
-  color: var(--akr-orange);
-  font-style: italic;
-  flex-shrink: 0;
-  margin-top: 2px;
-  width: 20px;
-}
 .akr-faq-q-text {
   font-family: 'DM Serif Display', 'Georgia', serif !important;
   font-size: 16px;
@@ -902,7 +893,7 @@ a.akr-btn-cta-secondary:hover {
   font-size: 16px;
   color: var(--akr-mid);
   line-height: 1.5;
-  padding: 0 0 24px 36px;
+  padding: 0 0 24px 0;
   display: none;
 }
 .akr-faq-a.is-open { display: block; }
@@ -3135,3 +3126,4 @@ section[id="akr-hero"] .akr-sub-perks {
 /* cache-bust 2026-05-30-00-00 — Sprint 5.1 RE-APPLY FAQ pills + cleanup */
 /* cache-bust 2026-05-30-17-00 — Sprint 5.2 accordion subtile justeringer */
 /* cache-bust 2026-06-04-00-00 — Sprint 5.3 funksjonelle tabs + aktiv-state */
+/* cache-bust 2026-06-04-14-00 — Sprint 5.3.1 15 spørsmål + fjern nummerering */

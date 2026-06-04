@@ -286,6 +286,24 @@
 <script src="{{ 'z__jsProduct.js' | asset_url }}" data-theme-editor-load-script></script>
 
 <script>
+// Disable sticky header on custom åKrrush pages
+(function() {
+  function akrDisableSticky() {
+    if (window.PXUTheme && window.PXUTheme.jsHeader && typeof window.PXUTheme.jsHeader.disableSticky === 'function') {
+      window.PXUTheme.jsHeader.disableSticky();
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', akrDisableSticky);
+  } else {
+    akrDisableSticky();
+  }
+  // Retry after a short delay in case header JS initializes late
+  setTimeout(akrDisableSticky, 500);
+})();
+</script>
+
+<script>
 (function() {
 
   // ── Thumbnail gallery ──

@@ -13,9 +13,24 @@
 /* ── Hide native purchase buttons — replaced by custom CTA ── */
 #product-form-{{ product.id }} .purchase-details { display: none !important; }
 
-/* ── Hide Appstle visual widget — keep in DOM for selling_plan injection ── */
-#shopify-section-{{ section.id }} .appstle_subscription_wrapper { display: none !important; }
-#shopify-section-{{ section.id }} .product-app { height: 0 !important; overflow: hidden !important; }
+/* ── Hide Appstle visual widget — keep FULLY FUNCTIONAL in DOM (positionally hidden, not display:none) ── */
+#shopify-section-{{ section.id }} .appstle_subscription_wrapper {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  pointer-events: none !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+#shopify-section-{{ section.id }} .product-app {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+}
 </style>
 
 {%- liquid
@@ -437,19 +452,24 @@
     });
   });
 
-  // CTA: click the hidden native ATC button (Appstle has already injected selling_plan)
+  // CTA: call PXUTheme AJAX cart directly (most reliable — Appstle has injected selling_plan into form)
   if (ctaBtn) {
     ctaBtn.addEventListener('click', function() {
       var formId = ctaBtn.getAttribute('data-form-id');
-      // Try native ATC button (hidden via CSS but still clickable)
-      var nativeBtn = formId ? document.querySelector('#' + formId + ' .button--add-to-cart') : null;
+      var form = formId ? document.getElementById(formId) : null;
+      if (!form) form = document.querySelector('form[action*="cart/add"]');
+      if (!form) return;
+
+      // Preferred: use PXUTheme AJAX cart handler (opens mini-cart drawer)
+      if (window.PXUTheme && window.PXUTheme.jsAjaxCart && typeof window.PXUTheme.jsAjaxCart.addToCart === 'function') {
+        window.PXUTheme.jsAjaxCart.addToCart($(form));
+        return;
+      }
+      // Fallback: click native submit button (triggers jQuery delegated handler)
+      var nativeBtn = form.querySelector('.button--add-to-cart');
       if (nativeBtn) { nativeBtn.click(); return; }
-      // Fallback: any submit inside product form
-      var anySubmit = document.querySelector('form[action*="cart/add"] [type="submit"]');
-      if (anySubmit) { anySubmit.click(); return; }
-      // Last resort: submit form
-      var form = document.querySelector('form[action*="cart/add"]');
-      if (form) { form.submit(); }
+      // Last resort: form submit (full page refresh)
+      form.submit();
     });
   }
 
@@ -458,6 +478,11 @@
 })();
 </script>
 
+{%- comment -%}
+  Badge settings (badge_protein_title, badge_protein_sub, badge_nongmo_title, badge_nongmo_sub)
+  beholdes for fremtidig HTML-implementasjon. Per Sprint 4.G (2026-05-26): badges er for
+  tiden del av hero-bilde, ikke separate HTML-elementer. Slett ikke uten beslutning.
+{%- endcomment -%}
 {% schema %}
 {
   "name": "åKr Hero",

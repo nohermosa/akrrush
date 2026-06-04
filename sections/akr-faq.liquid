@@ -29,6 +29,7 @@
       </div>
 
       <!-- Heading -->
+      <p class="akr-faq-eyebrow">FAQ</p>
       <h2 class="akr-faq-heading">
         {{ section.settings.heading_line1 }}<br>
         <span class="akr-faq-actually">{{ section.settings.heading_italic
@@ -95,7 +96,7 @@
           <div class="akr-faq-quote-stars">★★★★★</div>
           <div class="akr-faq-quote-text">"{{ section.settings.quote_text }}"</div>
           <div class="akr-faq-quote-attribution">
-            <img class="akr-faq-quote-avatar" src="{{ 'akr-faq-reviewer.png' | asset_url }}" alt="{{ section.settings.quote_author }}" loading="lazy">
+            <div class="akr-faq-quote-avatar akr-faq-quote-avatar-initial">SM</div>
             <div>
               <div class="akr-faq-quote-name">{{ section.settings.quote_author }}</div>
               <div class="akr-faq-quote-loc">{{ section.settings.quote_location }}</div>

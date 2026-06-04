@@ -819,6 +819,16 @@ a.akr-btn-cta-secondary:hover {
 .akr-faq-tab-nutrition   { background: #fce4d4; color: #993c1d; }
 .akr-faq-tab-howto       { background: #e1f0e4; color: #2d5a3f; }
 .akr-faq-tab-sub         { background: #f5ead4; color: #6b5320; }
+.akr-faq-section .akr-faq-eyebrow {
+  font-family: Arial, sans-serif !important;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--akr-cta-secondary);
+  margin: 0 0 12px 0;
+  text-align: left;
+}
 .akr-faq-heading {
   font-family: 'DM Serif Display', 'Georgia', serif !important;
   font-size: 68px;
@@ -993,6 +1003,17 @@ a.akr-btn-cta-secondary:hover {
   border-radius: 50%;
   flex-shrink: 0;
   background: linear-gradient(135deg, #ea7552, #ffc03c);
+}
+.akr-faq-section .akr-faq-quote-avatar-initial {
+  background: var(--akr-cta-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif !important;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 .akr-faq-quote-name {
   font-size: 13px;
@@ -3134,3 +3155,4 @@ section[id="akr-hero"] .akr-sub-perks {
 /* cache-bust 2026-06-04-14-00 — Sprint 5.3.1 15 spørsmål + fjern nummerering */
 /* cache-bust 2026-06-04-15-00 — Sprint 5.3.3 fix FAQ q-text font */
 /* cache-bust 2026-06-04-16-00 — Sprint 5.3.4 fix font spesifisitet */
+/* cache-bust 2026-06-04-17-00 — Sprint 5.4 quote-card + eyebrow */

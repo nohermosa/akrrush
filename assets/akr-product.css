@@ -2053,7 +2053,7 @@ button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; 
 }
 
 /* Average card: 2-col image + content */
-.akr-compare-inner { display: grid; grid-template-columns: 40% 60%; gap: 20px; align-items: center; flex: 1; }
+.akr-compare-inner { display: grid; grid-template-columns: 40% 60%; gap: 20px; align-items: flex-start; flex: 1; }
 .akr-compare-img-col { display: flex; align-items: center; justify-content: center; }
 .akr-compare-img-col img { width: 140px; height: auto; object-fit: contain; display: block; }
 
@@ -2134,8 +2134,8 @@ button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; 
   font-weight: 600;
   font-style: italic;
   letter-spacing: 0.01em;
-  color: #7a6a60;
-  background: rgba(43, 24, 16, 0.06);
+  color: #3d2b1e;
+  background: rgba(43, 24, 16, 0.08);
   border-radius: 0 0 24px 24px;
   text-align: center;
 }

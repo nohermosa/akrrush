@@ -5,8 +5,11 @@
 </style>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.akr-compare-list li').forEach(function(li, i, all) {
-      li.style.cssText += '; margin-bottom: ' + (i < all.length - 1 ? '20px' : '0') + ' !important';
+    document.querySelectorAll('.akr-compare-list').forEach(function(ul) {
+      var items = ul.querySelectorAll('li');
+      items.forEach(function(li, i) {
+        li.style.setProperty('margin-bottom', i < items.length - 1 ? '20px' : '0', 'important');
+      });
     });
   });
 </script>

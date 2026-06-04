@@ -880,7 +880,7 @@ a.akr-btn-cta-secondary:hover {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  padding: 24px 0;
+  padding: 24px 0 10px 0;
   cursor: pointer;
   list-style: none;
 }

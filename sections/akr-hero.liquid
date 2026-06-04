@@ -452,24 +452,62 @@
     });
   });
 
-  // CTA: call PXUTheme AJAX cart directly (most reliable — Appstle has injected selling_plan into form)
+  // CTA: direct fetch to /cart/add.js with exact known values (bypasses form serialization issues)
   if (ctaBtn) {
     ctaBtn.addEventListener('click', function() {
-      var formId = ctaBtn.getAttribute('data-form-id');
-      var form = formId ? document.getElementById(formId) : null;
-      if (!form) form = document.querySelector('form[action*="cart/add"]');
-      if (!form) return;
+      var activePackBtn = document.querySelector('.akr-hero-pack-btn.active');
+      if (!activePackBtn) return;
+      var variantId = parseInt(activePackBtn.getAttribute('data-variant-id'), 10);
+      if (!variantId) return;
 
-      // Preferred: use PXUTheme AJAX cart handler (opens mini-cart drawer)
-      if (window.PXUTheme && window.PXUTheme.jsAjaxCart && typeof window.PXUTheme.jsAjaxCart.addToCart === 'function') {
-        window.PXUTheme.jsAjaxCart.addToCart($(form));
-        return;
+      var payload = { id: variantId, quantity: 1 };
+
+      if (isSubscribeMode) {
+        // 1. Try Appstle's injected hidden input in the form
+        var sellingPlanInput = document.querySelector('form[action*="cart/add"] input[name="selling_plan"]');
+        var spVal = sellingPlanInput ? sellingPlanInput.value : '';
+        // 2. Fallback: URL param (Appstle updates the URL when plan changes)
+        if (!spVal) {
+          spVal = new URLSearchParams(window.location.search).get('selling_plan') || '';
+        }
+        if (spVal) {
+          payload.selling_plan = parseInt(spVal, 10);
+        }
       }
-      // Fallback: click native submit button (triggers jQuery delegated handler)
-      var nativeBtn = form.querySelector('.button--add-to-cart');
-      if (nativeBtn) { nativeBtn.click(); return; }
-      // Last resort: form submit (full page refresh)
-      form.submit();
+
+      ctaBtn.disabled = true;
+      ctaBtn.textContent = 'Adding…';
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.status) {
+          // Error object from Shopify
+          console.error('Cart add error:', data.description || data.message);
+          ctaBtn.disabled = false;
+          akrUpdateSubPrices();
+          return;
+        }
+        // Success — rebuild PXUTheme mini-cart and show drawer
+        if (window.PXUTheme && window.PXUTheme.jsAjaxCart) {
+          window.PXUTheme.jsAjaxCart.buildCart();
+          var $trigger = $('[data-ajax-cart-trigger]');
+          if ($trigger.length) $trigger.addClass('show-mini-cart');
+        } else {
+          window.location.href = '/cart';
+        }
+        ctaBtn.disabled = false;
+        akrUpdateSubPrices();
+      })
+      .catch(function() {
+        ctaBtn.disabled = false;
+        akrUpdateSubPrices();
+        window.location.href = '/cart';
+      });
     });
   }
 

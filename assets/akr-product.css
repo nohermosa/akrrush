@@ -1317,7 +1317,7 @@ section[id="akr-hero"] .akr-hero-title {
 /* 3. Subtitle */
 section[id="akr-hero"] .akr-hero-short-desc {
   font-family: Arial, sans-serif !important;
-  font-size: 17px;
+  font-size: 15px !important;
   font-weight: 400;
   line-height: 1.5;
   color: var(--akr-dark);
@@ -1333,7 +1333,7 @@ section[id="akr-hero"] .akr-hero-bullets {
 
 section[id="akr-hero"] .akr-hero-bullets li {
   font-family: Arial, sans-serif !important;
-  font-size: 16px;
+  font-size: 15px !important;
   font-weight: 400;
   line-height: 1.5;
   color: var(--akr-dark);

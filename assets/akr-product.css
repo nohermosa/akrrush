@@ -1782,13 +1782,14 @@ section[id="akr-hero"] .akr-hero-trust {
 
 .akr-sub-card {
   position: relative;
-  border: 1.5px solid #ea7552;
+  border: 1.5px solid #e8d5c4;
   border-radius: 16px;
   background: #fff;
   margin-bottom: 10px;
   cursor: pointer;
-  transition: box-shadow .15s;
+  transition: box-shadow .15s, border-color .15s;
 }
+.akr-sub-card--selected { border-color: #ea7552; }
 .akr-sub-card:hover { box-shadow: 0 4px 16px rgba(234,117,82,.15); }
 
 .akr-sub-stamp {
@@ -1922,7 +1923,7 @@ section[id="akr-hero"] .akr-hero-trust {
   padding: 12px 16px;
   margin-bottom: 14px;
   cursor: pointer;
-  background: #f5f0eb;
+  background: rgba(251, 218, 190, 0.2);
   transition: border-color .15s;
 }
 .akr-one-time:hover { border-color: #c0a090; }

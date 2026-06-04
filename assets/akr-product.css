@@ -2120,7 +2120,7 @@ button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; 
 
 /* Bullet list */
 .akr-compare-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 18px; flex: 1; }
-.akr-compare-list li { display: flex; align-items: center; gap: 12px; font-size: 15px; line-height: 1.4; color: var(--akr-dark); }
+.akr-compare-list li { display: flex; align-items: center; gap: 12px; font-size: 15px; line-height: 1.4; color: var(--akr-dark); padding: 3px 0; }
 .akr-bullet-icon { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .akr-bullet-icon--neg { background: rgba(43, 24, 16, 0.25); }
 .akr-bullet-icon--pos { background: var(--akr-orange); }

@@ -2128,7 +2128,7 @@ button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; 
 
 /* Fix 4a + 4b: Card footers — solid hex colors, readable */
 .akr-compare-footer {
-  width: 100%;
+  margin: auto -32px 0 -32px;
   padding: 14px 28px;
   font-size: 13px;
   font-weight: 600;
@@ -2137,7 +2137,6 @@ button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; 
   color: #7a6a60;
   background: rgba(43, 24, 16, 0.06);
   border-radius: 0 0 24px 24px;
-  margin-top: auto;
   text-align: center;
 }
 .akr-compare-footer--ak {
@@ -2148,6 +2147,7 @@ button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; 
   background: var(--akr-cta-primary);
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  border-radius: 0 0 22px 22px;
 }
 
 /* åKrrush "Why drink just broth?" CTA

@@ -214,11 +214,11 @@
   }
   .akr-pro-darkfeats__fade-bot {
     position: absolute;
-    left: 344px; top: 411px;
-    width: 1087px; height: 301px;
+    left: 0; bottom: 0;
+    width: 100%; height: 40%;
     background: linear-gradient(to bottom, rgba(1,1,1,0) 0%, #010101 100%);
     pointer-events: none;
-    z-index: 1;
+    z-index: 3;
   }
   .akr-pro-darkfeats__panel {
     position: absolute;
@@ -302,8 +302,8 @@
     height: 620px;
     z-index: 2;
     pointer-events: none;
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 22%, black 100%);
-    mask-image: linear-gradient(to top, transparent 0%, black 22%, black 100%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, transparent 20%, black 45%, black 100%);
+    mask-image: linear-gradient(to top, transparent 0%, transparent 20%, black 45%, black 100%);
     transform: scaleX(-1) translateX(-80px);
     opacity: 0;
   }

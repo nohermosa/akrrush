@@ -159,13 +159,11 @@
   .akr-pro-feature__body { font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #1a0f08; }
 
   /* ── TESTIMONIAL ── */
-  .akr-pro-testimonial { background: #020101; padding: 100px; position: relative; overflow: hidden; box-sizing: border-box; }
-  .akr-pro-testimonial__inner { display: flex; gap: 60px; align-items: flex-start; max-width: 1240px; margin: 0 auto; }
-  .akr-pro-testimonial__card { background: #2c1a10; border-radius: 24px; padding: 40px; width: 555px; flex-shrink: 0; }
-  .akr-pro-testimonial__usabobsled { width: 100%; height: 149px; object-fit: contain; margin-bottom: 24px; }
-  .akr-pro-testimonial__quote { font-family: Arial, sans-serif; font-size: 18px; line-height: 1.5; color: #fff; }
-  .akr-pro-testimonial__right { flex: 1; display: flex; flex-direction: column; gap: 24px; }
-  .akr-pro-quote-card { background: #fff; border-radius: 16px; padding: 22px 24px; box-shadow: 0 20px 20px rgba(26,20,17,0.12); }
+  .akr-pro-testimonial { background: linear-gradient(145deg, #f5dcd1 0%, #faeae3 55%, #f2d4c6 100%); padding: 80px 100px 140px; position: relative; overflow: visible; box-sizing: border-box; }
+  .akr-pro-testimonial__inner { max-width: 860px; margin: 0 auto; position: relative; }
+  .akr-pro-testimonial__photo-wrap { position: relative; border-radius: 32px; overflow: visible; }
+  .akr-pro-testimonial__photo { width: 100%; height: 560px; border-radius: 32px; display: block; object-fit: cover; object-position: 65% center; }
+  .akr-pro-quote-card { position: absolute; bottom: -50px; right: -50px; background: #fff; border-radius: 20px; padding: 28px 32px; box-shadow: 0 24px 48px rgba(26,20,17,0.18); width: 340px; z-index: 2; }
   .akr-pro-quote-card__text { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 32px; line-height: 1.1; color: #2c1a10; margin: 0; }
   .akr-pro-quote-card__text span { color: #ea7552; }
   .akr-pro-quote-card__reviewer { display: flex; gap: 10px; align-items: center; padding-top: 15px; margin-top: 16px; border-top: 1px solid rgba(26,20,17,0.07); }
@@ -382,9 +380,10 @@
     .akr-pro-feature { padding: 40px 20px; }
     .akr-pro-feature__inner { flex-direction: column; gap: 40px; }
     .akr-pro-feature__img-wrap { width: 100%; }
-    .akr-pro-testimonial { padding: 40px 20px; }
-    .akr-pro-testimonial__inner { flex-direction: column; }
-    .akr-pro-testimonial__card { width: 100%; }
+    .akr-pro-testimonial { padding: 40px 20px 100px; }
+    .akr-pro-testimonial__inner { max-width: 100%; }
+    .akr-pro-testimonial__photo { height: 340px; object-position: 70% center; }
+    .akr-pro-quote-card { position: absolute; bottom: -60px; right: 10px; left: 10px; width: auto; padding: 20px; }
     .akr-pro-brand { padding: 40px 20px; }
     .akr-pro-brand__inner { flex-direction: column; gap: 40px; }
     .akr-pro-brand__img-wrap { width: 100%; }
@@ -564,11 +563,8 @@
   {%- comment -%} ── TESTIMONIAL ── {%- endcomment -%}
   <div class="akr-pro-testimonial">
     <div class="akr-pro-testimonial__inner">
-      <div class="akr-pro-testimonial__card">
-        <img class="akr-pro-testimonial__usabobsled" src="{{ 'akr-pro-usabobsled.png' | asset_url }}" alt="USA Bobsled & Skeleton Team" loading="lazy">
-        <p class="akr-pro-testimonial__quote">We're honored to partner with the USA Bobsled &amp; Skeleton Team. This collaboration reflects our shared commitment to quality and perseverance.</p>
-      </div>
-      <div class="akr-pro-testimonial__right">
+      <div class="akr-pro-testimonial__photo-wrap">
+        <img class="akr-pro-testimonial__photo" src="{{ 'akr-pro-testimonial-athlete.png' | asset_url }}" alt="USA Bobsled Athlete" loading="lazy">
         <div class="akr-pro-quote-card">
           <p class="akr-pro-quote-card__text">"The ritual<br>I never <span>skip.</span>"</p>
           <div class="akr-pro-quote-card__reviewer">
@@ -579,12 +575,6 @@
               <div class="akr-pro-quote-card__stars">★★★★★</div>
             </div>
           </div>
-        </div>
-        <div>
-          <span class="akr-pro-tag">
-            <svg viewBox="0 0 15 16" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 0L14 4v8l-6.5 4L1 12V4z" fill="white"/></svg>
-            20g Protein
-          </span>
         </div>
       </div>
     </div>

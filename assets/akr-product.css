@@ -1431,11 +1431,14 @@ section[id="akr-hero"] .akr-hero-best-label {
 /* 12. Subscribe card */
 section[id="akr-hero"] .akr-sub-card {
   background: var(--akr-cream);
-  border: 1.5px solid var(--akr-cta-primary);
+  border: 1.5px solid #e8d5c4;
   border-radius: 16px;
   padding: 20px 24px;
   margin: 16px 0;
   position: relative;
+}
+section[id="akr-hero"] .akr-sub-card.akr-sub-card--selected {
+  border-color: var(--akr-cta-primary);
 }
 
 /* 13. Subscribe title */

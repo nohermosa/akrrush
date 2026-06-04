@@ -1218,7 +1218,7 @@ a.akr-btn-cta-secondary:hover {
   display: block;
 }
 .akr-hero-flavor-name {
-  font-size: 12px !important;
+  font-size: 14px !important;
   font-weight: 600 !important;
   font-family: Arial, sans-serif !important;
   color: var(--akr-mid) !important;
@@ -1355,7 +1355,7 @@ section[id="akr-hero"] .akr-hero-bullets li::before {
 /* 5. Flavor label */
 section[id="akr-hero"] .akr-hero-flavor-label {
   font-family: Arial, sans-serif !important;
-  font-size: 14px;
+  font-size: 13px !important;
   font-weight: 700;
   color: var(--akr-cta-secondary);
   letter-spacing: 0.12em;

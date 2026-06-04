@@ -317,7 +317,16 @@
   @media (max-width: 768px) {
     /* Darkfeats: padding-top creates image area, panel flows directly below */
     .akr-pro-darkfeats { height: auto; min-height: unset; overflow: hidden; padding-top: 420px; }
-    .akr-pro-darkfeats__bg { left: 0; width: 100%; top: 0; height: 420px; opacity: 1; object-position: 35% center; object-fit: cover; }
+    .akr-pro-darkfeats::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 50%; height: 420px;
+      background: linear-gradient(to right, rgba(2,1,1,0.75) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 3;
+    }
+    .akr-pro-darkfeats__bg { left: 0; width: 100%; top: 0; height: 420px; opacity: 1; object-position: 18% center; object-fit: cover; }
     .akr-pro-darkfeats__fade-top { display: none; }
     .akr-pro-darkfeats__fade-bot {
       display: block;
@@ -329,14 +338,14 @@
     }
     .akr-pro-darkfeats__athlete {
       position: absolute;
-      left: 42%; right: auto; top: 0; bottom: auto;
+      left: 30%; right: auto; top: 0; bottom: auto;
       height: 420px; width: auto;
       z-index: 4;
       transform: scaleX(-1);
       opacity: 1;
       animation: none !important;
-      -webkit-mask-image: none;
-      mask-image: none;
+      -webkit-mask-image: linear-gradient(to top, transparent 0%, transparent 15%, black 35%, black 100%);
+      mask-image: linear-gradient(to top, transparent 0%, transparent 15%, black 35%, black 100%);
     }
     .akr-pro-darkfeats__athlete.akr-athlete-visible { animation: none !important; }
     .akr-pro-darkfeats__panel {

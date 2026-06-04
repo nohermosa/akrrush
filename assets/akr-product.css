@@ -2048,7 +2048,7 @@ button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; 
   background: #FBE8D9;
   border: 1.5px solid rgba(198, 107, 69, 0.45);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Average card: 2-col image + content */
@@ -2070,37 +2070,36 @@ button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; 
 .akr-ak-accent-text { font-family: 'DM Serif Display', Georgia, serif !important; font-style: italic; font-size: 18px; color: var(--akr-orange); line-height: 1.1; }
 .akr-ak-accent-arrow { display: block; margin-top: 4px; margin-left: 30%; }
 
-/* Visual — absolute right column inside card, clipped by overflow:hidden */
+/* Visual — absolute right, overflows card boundary (overflow:visible on card) */
 .akr-compare-visual {
   position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 260px;
-  z-index: 1;
+  right: -40px;
+  top: -60px;
+  bottom: auto;
+  width: 280px;
+  z-index: 10;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   pointer-events: none;
 }
 
-/* Bug 5: stick rotated -16deg (top leans LEFT). Bug 1: 280px fits inside card with slight right-edge crop */
 @keyframes ak-stick-float {
   0%, 100% { transform: rotate(-16deg) translateY(0); }
-  50%       { transform: rotate(-15deg) translateY(-8px); }
+  50%       { transform: rotate(-15deg) translateY(-10px); }
 }
 .akr-compare-stick {
-  width: 280px;
+  width: 320px;
   height: auto;
   display: block;
   transform: rotate(-16deg);
   transform-origin: center center;
-  margin-right: -30px;
   animation: ak-stick-float 6s ease-in-out infinite;
+  filter: drop-shadow(0 12px 24px rgba(43,24,16,0.18));
 }
 .akr-compare-card--ak:hover .akr-compare-stick {
   animation-play-state: paused;
-  transform: rotate(-14deg) translateY(-10px) scale(1.03);
+  transform: rotate(-14deg) translateY(-14px) scale(1.03);
   transition: transform 400ms ease;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2180,15 +2179,15 @@ a.akr-btn-cta-dark:hover {
 /* Fix 4c: Trust text — solid, readable */
 .akr-why-trust { font-size: 14px; font-weight: 500; letter-spacing: 0.02em; color: #6B5A4C; margin-top: 14px; margin-bottom: 0; }
 
-/* ≤1024px */
+/* ≤1024px (tablet) */
 @media (max-width: 1024px) {
-  .akr-compare-visual { width: 220px; }
-  .akr-compare-stick { width: 240px; margin-right: -20px; }
-  .akr-compare-card--ak .akr-compare-content { padding-right: 160px; }
-  .akr-ak-accent { right: 140px; }
+  .akr-compare-visual { width: 220px; right: -24px; top: -40px; }
+  .akr-compare-stick { width: 260px; }
+  .akr-compare-card--ak .akr-compare-content { padding-right: 180px; }
+  .akr-ak-accent { right: 150px; }
 }
 
-/* ≤767px: stack cards, visual in-flow below content */
+/* ≤767px: stack cards, stick back in-flow below content */
 @media (max-width: 767px) {
   .akr-why-section { padding: 56px 20px 80px; }
   .akr-why-heading { white-space: normal; font-size: clamp(2.4rem, 10vw, 3.4rem); margin-bottom: 14px; }
@@ -2198,10 +2197,11 @@ a.akr-btn-cta-dark:hover {
   .akr-compare-title { font-size: 22px; min-height: auto; }
   .akr-compare-list li { font-size: 14px; }
   .akr-btn-cta-dark { display: flex !important; width: 100%; max-width: 360px; margin: 0 auto; font-size: 13px; }
+  .akr-compare-card--ak { overflow: hidden; } /* re-clip on mobile so stick doesn't cause scrollbar */
   .akr-compare-card--ak .akr-compare-content { padding-right: 0; }
-  .akr-compare-visual { position: relative; right: auto; top: auto; bottom: auto; width: 100%; height: 180px; justify-content: center; }
-  .akr-compare-stick { width: 180px; margin-right: 0; }
-  .akr-ak-accent { position: static; display: none; } /* hidden on mobile, card layout too tight */
+  .akr-compare-visual { position: absolute; right: -10px; top: -30px; bottom: auto; width: 160px; height: auto; justify-content: center; }
+  .akr-compare-stick { width: 180px; filter: drop-shadow(0 8px 16px rgba(43,24,16,0.15)); }
+  .akr-ak-accent { position: static; display: none; }
   .akr-compare-logo { height: 28px; }
 }
 
@@ -2210,7 +2210,7 @@ a.akr-btn-cta-dark:hover {
   .akr-compare-inner { grid-template-columns: 1fr; }
   .akr-compare-img-col { justify-content: center; }
   .akr-compare-img-col img { width: 120px; max-width: 100%; }
-  .akr-compare-stick { width: 160px; }
+  .akr-compare-stick { width: 150px; }
 }
 
 /* =============================================================

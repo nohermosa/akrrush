@@ -2882,7 +2882,7 @@ section[id="akr-hero"] .akr-one-time:focus-visible {
 
 /* --best passive: subtle tint only, NOT full orange highlight */
 section[id="akr-hero"] .akr-hero-pack-btn--best:not(.active) {
-  border: 1.5px solid var(--akr-cta-primary) !important;
+  border: 1.5px solid #e8d5c4 !important;
   background: rgba(210, 114, 74, 0.04) !important;
 }
 section[id="akr-hero"] .akr-hero-pack-btn--best:not(.active) .akr-hero-pack-name {

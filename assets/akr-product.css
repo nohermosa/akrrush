@@ -811,7 +811,7 @@ a.akr-btn-cta-secondary:hover {
   white-space: nowrap;
   font-family: Arial, sans-serif;
   border: none;
-  opacity: 0.55;
+  opacity: 0.75;
   transition: opacity 0.2s ease;
 }
 .akr-faq-tab:hover { opacity: 0.8; }
@@ -3156,3 +3156,4 @@ section[id="akr-hero"] .akr-sub-perks {
 /* cache-bust 2026-06-04-15-00 — Sprint 5.3.3 fix FAQ q-text font */
 /* cache-bust 2026-06-04-16-00 — Sprint 5.3.4 fix font spesifisitet */
 /* cache-bust 2026-06-04-17-00 — Sprint 5.4 quote-card + eyebrow */
+/* cache-bust 2026-06-04-18-00 — Sprint 5.4.1 tab inactive opacity 0.55→0.75 */

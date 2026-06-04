@@ -910,6 +910,7 @@ a.akr-btn-cta-secondary:hover {
 .akr-faq-section .akr-faq-a p {
   font-family: Arial, sans-serif !important;
   font-weight: 400;
+  font-size: medium;
 }
 .akr-faq-section .akr-faq-a.is-open { display: block; }
 .akr-faq-still-curious {

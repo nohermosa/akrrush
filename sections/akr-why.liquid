@@ -47,10 +47,10 @@
                 {%- endif -%}
               {%- endfor -%}
             </ul>
-            <div class="akr-compare-footer">{{ section.settings.avg_footer | default: 'What you settle for.' }}</div>
           </div>
 
         </div>
+        <div class="akr-compare-footer">{{ section.settings.avg_footer | default: 'The average experience' }}</div>
       </div>
 
       <!-- RIGHT: åKrrush — overflow:hidden clips splash to card boundary (Bug 1) -->
@@ -83,8 +83,8 @@
               {%- endif -%}
             {%- endfor -%}
           </ul>
-          <div class="akr-compare-footer akr-compare-footer--ak">{{ section.settings.ak_footer | default: 'What you deserve.' }}</div>
         </div>
+        <div class="akr-compare-footer akr-compare-footer--ak">{{ section.settings.ak_footer | default: 'The åKrrush standard' }}</div>
 
         <!-- Bug 1: stick inside card — clipped by overflow:hidden to card boundary -->
         <div class="akr-compare-visual" aria-hidden="true">

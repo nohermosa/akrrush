@@ -1,5 +1,21 @@
 
 <style>
+/* ── Disable sticky header on custom åKrrush pages ── */
+#header.sticky--enabled,
+#header.sticky--enabled > *,
+.header-sticky-wrapper #header {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  width: auto !important;
+  z-index: auto !important;
+}
+.header-sticky-wrapper {
+  position: static !important;
+  height: auto !important;
+}
+
 /* ── Native product__form: hide elements we replace with custom UI ── */
 #product-form-{{ product.id }} options-selection,
 #product-form-{{ product.id }} .options-selection { display: none !important; }
@@ -285,23 +301,6 @@
 
 <script src="{{ 'z__jsProduct.js' | asset_url }}" data-theme-editor-load-script></script>
 
-<script>
-// Disable sticky header on custom åKrrush pages
-(function() {
-  function akrDisableSticky() {
-    if (window.PXUTheme && window.PXUTheme.jsHeader && typeof window.PXUTheme.jsHeader.disableSticky === 'function') {
-      window.PXUTheme.jsHeader.disableSticky();
-    }
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', akrDisableSticky);
-  } else {
-    akrDisableSticky();
-  }
-  // Retry after a short delay in case header JS initializes late
-  setTimeout(akrDisableSticky, 500);
-})();
-</script>
 
 <script>
 (function() {

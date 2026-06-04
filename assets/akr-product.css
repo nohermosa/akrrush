@@ -812,8 +812,12 @@ a.akr-btn-cta-secondary:hover {
   white-space: nowrap;
   font-family: Arial, sans-serif;
   border: none;
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
 }
-.akr-faq-tab-nutrition   { background: #fce4d4; color: #993c1d; font-weight: 700; }
+.akr-faq-tab:hover { opacity: 0.8; }
+.akr-faq-tab.is-active { opacity: 1; font-weight: 700; }
+.akr-faq-tab-nutrition   { background: #fce4d4; color: #993c1d; }
 .akr-faq-tab-howto       { background: #e1f0e4; color: #2d5a3f; }
 .akr-faq-tab-sub         { background: #f5ead4; color: #6b5320; }
 .akr-faq-heading {
@@ -3130,3 +3134,4 @@ section[id="akr-hero"] .akr-sub-perks {
 /* cache-bust 2026-05-26-21-15 — Sprint 4.M num-title font fix */
 /* cache-bust 2026-05-30-00-00 — Sprint 5.1 RE-APPLY FAQ pills + cleanup */
 /* cache-bust 2026-05-30-17-00 — Sprint 5.2 accordion subtile justeringer */
+/* cache-bust 2026-06-04-00-00 — Sprint 5.3 funksjonelle tabs + aktiv-state */

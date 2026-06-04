@@ -1,14 +1,13 @@
 
 <style>
   .akr-compare-list li { margin-bottom: 32px !important; }
-  .akr-compare-list li:last-child { margin-bottom: 0 !important; }
 </style>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.akr-compare-list').forEach(function(ul) {
       var items = ul.querySelectorAll('li');
       items.forEach(function(li, i) {
-        li.style.setProperty('margin-bottom', i < items.length - 1 ? '32px' : '0', 'important');
+        li.style.setProperty('margin-bottom', '32px', 'important');
       });
     });
   });

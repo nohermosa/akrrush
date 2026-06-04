@@ -127,7 +127,6 @@
         "eyebrow": "How we stack up",
         "heading_before": "Meet the",
         "heading_italic": "ingredients",
-        "clean_note": "Absolutely clean",
         "photo_badge": "Lab-tested · 100% bioavailable",
         "ingredients_text": "Hydrolyzed Protein (Chicken, Turkey), Chicken Broth Seasoning (Onion, Sugar, Yeast Extract, Natural Flavors, Lactic Acid [acidity regulator], Salt, Spice [Turmeric, Tarragon, Sage, Lovage]), Salt, Natural Flavors."
       }
@@ -141,10 +140,7 @@
     },
     "akr_numbers": {
       "type": "akr-numbers",
-      "settings": {
-        "cta_url": "/products/bone-broth",
-        "cta_label": "VIEW LAB RESULTS →"
-      }
+      "settings": {}
     },
     "akr_why": {
       "type": "akr-why",
@@ -257,43 +253,49 @@
         "faq_1": {
           "type": "faq_item",
           "settings": {
+            "category": "nutrition",
             "question": "How is åKrrush different from regular bone broth?",
-            "answer": "Every batch is third-party tested for heavy metals, contaminants, and microbial safety. USDA approved, FDA compliant. We use enzymatic hydrolysis — a cold-process that breaks collagen into small peptides your body absorbs 1.5× faster than traditionally boiled broth."
+            "answer": "<p>Every batch is third-party tested for heavy metals, contaminants, and microbial safety. USDA approved, FDA compliant. We use enzymatic hydrolysis, a cold-process that breaks collagen into small peptides your body absorbs 1.5x faster than traditionally boiled broth.</p>"
           }
         },
         "faq_2": {
           "type": "faq_item",
           "settings": {
-            "question": "Can I mix it with food or just drink it?",
-            "answer": "Both! åKrrush dissolves instantly in hot water for drinking, but it also works beautifully stirred into soups, sauces, oatmeal, or smoothies. Many subscribers add it to recipes for a clean protein boost without affecting the flavor."
+            "category": "nutrition",
+            "question": "How does it taste?",
+            "answer": "<p>Mild and clean. Not salty or overpowering like many American bone broths. Three flavors (Savory Chicken, Ginger Ramen, Chanterelle Mushroom) are crafted to be enjoyable on their own, not just as a cooking ingredient.</p>"
           }
         },
         "faq_3": {
           "type": "faq_item",
           "settings": {
-            "question": "How do subscriptions work?",
-            "answer": "Choose your pack size (12, 24, or 36 sticks) and delivery frequency (30, 45, or 60 days). You save 10% automatically. Skip, pause, swap flavors, or cancel any time — no lock-in, no penalty. Manage everything from your customer account."
+            "category": "howto",
+            "question": "When will I see results?",
+            "answer": "<p>Most customers report increased energy and better digestion within 1 to 2 weeks. Skin, hair, and joint benefits typically take 4 to 6 weeks of consistent daily use.</p>"
           }
         },
         "faq_4": {
           "type": "faq_item",
           "settings": {
-            "question": "Is åKrrush suitable for keto, paleo, or Whole30?",
-            "answer": "Yes to all three. åKrrush has 0g sugar, 0g net carbs, no grains, no dairy, no legumes. It's gluten-free, non-GMO, and contains no artificial anything. Perfect for elimination protocols and clean eating."
+            "category": "howto",
+            "question": "What's the best time of day to drink it?",
+            "answer": "<p>Morning on an empty stomach gives the best absorption for energy and digestion. Post-workout supports muscle recovery. Before bed promotes sleep quality through glycine in collagen.</p>"
           }
         },
         "faq_5": {
           "type": "faq_item",
           "settings": {
-            "question": "When will I see results?",
-            "answer": "Most subscribers notice improved energy and digestion within the first week. Joint and skin improvements typically appear after 3–6 weeks of daily use, as collagen peptides accumulate in connective tissue. 87% of subscribers reorder — that tells the story."
+            "category": "subscriptions",
+            "question": "Can I cancel anytime?",
+            "answer": "<p>Yes, no commitment. Cancel directly from your account dashboard or send one email to support. No questions, no fees, no hidden terms.</p>"
           }
         },
         "faq_6": {
           "type": "faq_item",
           "settings": {
-            "question": "Where is åKrrush made?",
-            "answer": "åKrrush is a Product of Norway, packaged in the USA. 99%+ of our ingredients are sourced from Norway — free-range Nordic poultry, clean herbs and spices. We're USDA and FDA approved for the US market."
+            "category": "subscriptions",
+            "question": "What if I don't like it?",
+            "answer": "<p>30-day risk-free guarantee. If you're not satisfied, we'll refund your first order (even if the sticks have been opened). <a href=\"/pages/contact\">Contact us</a> to start a return.</p>"
           }
         }
       },
@@ -309,11 +311,9 @@
         "heading_line1": "Everything you",
         "heading_italic": "actually",
         "heading_suffix": "want to know.",
-        "subheading": "From bone-broth science to subscription perks — we've got you covered.",
+        "subheading": "From bone-broth science to subscription perks, we've got you covered.",
         "social_text": "From 2,800+ verified åKrrush drinkers",
-        "chat_label": "STILL CURIOUS? — CHAT WITH US →",
-        "pill_orange": "Nordic Source",
-        "pill_teal": "13g Protein",
+        "chat_label": "STILL CURIOUS? CHAT WITH US →",
         "quote_text": "The ritual I never skip.",
         "quote_author": "Sarah M.",
         "quote_location": "Verified · Austin, TX"

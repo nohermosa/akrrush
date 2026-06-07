@@ -169,12 +169,14 @@
   }
 </style>
 
-{% assign classic_cards = collection.products | slice: 0, 3 %}
-{% assign variety_product = all_products['akrrush-bone-broth-variety-pack'] %}
+{% assign cl_p0 = all_products['bone-broth-ginger-ramen'] %}
+{% assign cl_p1 = all_products['bone-broth-chanterelle-mushroom'] %}
+{% assign cl_p2 = all_products['bone-broth-chicken'] %}
+{% assign cl_p3 = all_products['akrrush-bone-broth-variety-pack'] %}
 {% assign cl_card_colors = '#47b1b4,#ffc03c,#ea7552,#c25b2c' | split: ',' %}
 {% assign cl_card_images = 'akr-classic-card-ramen.png,akr-classic-card-chanterelle.png,akr-classic-card-chicken.png,akr-classic-card-variety.png' | split: ',' %}
 {% assign cl_card_names = 'Ginger Ramen,Chanterelle,Savory Chicken,Variety Pack' | split: ',' %}
-{% assign cl_card_prices = '$18,$18,$18,$54' | split: ',' %}
+{% assign cl_card_products = cl_p0 | append: '' %}{% comment %}placeholder for array{% endcomment %}
 
 <div class="akr-cl">
 
@@ -267,61 +269,63 @@
   {%- comment -%} ── PRODUCT CARDS ── {%- endcomment -%}
   <div class="akr-cl-cards" id="akr-cl-products">
     <div class="akr-cl-cards__grid">
-      {%- for i in (1..3) -%}
-        {%- assign idx = forloop.index0 -%}
-        {%- assign product = classic_cards[idx] -%}
-        {%- assign bg_color = cl_card_colors[idx] -%}
-        {%- assign fallback_img = cl_card_images[idx] | asset_url -%}
-        {%- if product -%}
-          <a href="{{ product.url }}" class="akr-cl-card" style="background:{{ bg_color }};">
-        {%- else -%}
-          <a href="{{ collection.url }}" class="akr-cl-card" style="background:{{ bg_color }};">
-        {%- endif -%}
-          <img class="akr-cl-card__img" src="{{ fallback_img }}" alt="{{ cl_card_names[idx] }}" loading="lazy">
-          <div class="akr-cl-card__inner">
-            {%- if product and product.compare_at_price > product.price -%}
-              <span class="akr-cl-card__badge">Sale</span>
-            {%- endif -%}
-          </div>
-          <div class="akr-cl-card__info">
-            {%- if product -%}
-              <p class="akr-cl-card__name">{{ product.title }}</p>
-              <p class="akr-cl-card__price">{{ product.price | money }}</p>
-            {%- else -%}
-              <p class="akr-cl-card__name">{{ cl_card_names[idx] }}</p>
-              <p class="akr-cl-card__price">{{ cl_card_prices[idx] }}</p>
-            {%- endif -%}
-          </div>
-          <div class="akr-cl-card__overlay"></div>
-          <span class="akr-cl-card__cta">SHOP NOW</span>
-        </a>
-      {%- endfor -%}
 
-      {%- comment -%} Variety Pack — 4th card {%- endcomment -%}
-      {%- assign variety_fallback = 'akr-classic-card-variety.png' | asset_url -%}
-      {%- if variety_product -%}
-        <a href="{{ variety_product.url }}" class="akr-cl-card" style="background:{{ cl_card_colors[3] }};">
-          <img class="akr-cl-card__img" src="{{ variety_fallback }}" alt="Variety Pack" loading="lazy">
-          <div class="akr-cl-card__inner"></div>
-          <div class="akr-cl-card__info">
-            <p class="akr-cl-card__name">{{ variety_product.title }}</p>
-            <p class="akr-cl-card__price">{{ variety_product.price | money }}</p>
-          </div>
-          <div class="akr-cl-card__overlay"></div>
-          <span class="akr-cl-card__cta">SHOP NOW</span>
-        </a>
-      {%- else -%}
-        <a href="/products/akrrush-bone-broth-variety-pack" class="akr-cl-card" style="background:{{ cl_card_colors[3] }};">
-          <img class="akr-cl-card__img" src="{{ variety_fallback }}" alt="Variety Pack" loading="lazy">
-          <div class="akr-cl-card__inner"></div>
-          <div class="akr-cl-card__info">
-            <p class="akr-cl-card__name">Variety Pack</p>
-            <p class="akr-cl-card__price">{{ cl_card_prices[3] }}</p>
-          </div>
-          <div class="akr-cl-card__overlay"></div>
-          <span class="akr-cl-card__cta">SHOP NOW</span>
-        </a>
-      {%- endif -%}
+      {%- comment -%} Card 1 — Ginger Ramen {%- endcomment -%}
+      <a href="{{ cl_p0.url | default: '/products/bone-broth-ginger-ramen' }}" class="akr-cl-card" style="background:#47b1b4;">
+        <img class="akr-cl-card__img" src="{{ 'akr-classic-card-ramen.png' | asset_url }}" alt="Ginger Ramen" loading="lazy">
+        <div class="akr-cl-card__inner">
+          {%- if cl_p0.compare_at_price > cl_p0.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
+        </div>
+        <div class="akr-cl-card__info">
+          <p class="akr-cl-card__name">Ginger Ramen</p>
+          <p class="akr-cl-card__price">{{ cl_p0.price | money | default: '$29.99' }}</p>
+        </div>
+        <div class="akr-cl-card__overlay"></div>
+        <span class="akr-cl-card__cta">SHOP NOW</span>
+      </a>
+
+      {%- comment -%} Card 2 — Chanterelle {%- endcomment -%}
+      <a href="{{ cl_p1.url | default: '/products/bone-broth-chanterelle-mushroom' }}" class="akr-cl-card" style="background:#ffc03c;">
+        <img class="akr-cl-card__img" src="{{ 'akr-classic-card-chanterelle.png' | asset_url }}" alt="Chanterelle" loading="lazy">
+        <div class="akr-cl-card__inner">
+          {%- if cl_p1.compare_at_price > cl_p1.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
+        </div>
+        <div class="akr-cl-card__info">
+          <p class="akr-cl-card__name">Chanterelle</p>
+          <p class="akr-cl-card__price">{{ cl_p1.price | money | default: '$29.99' }}</p>
+        </div>
+        <div class="akr-cl-card__overlay"></div>
+        <span class="akr-cl-card__cta">SHOP NOW</span>
+      </a>
+
+      {%- comment -%} Card 3 — Savory Chicken {%- endcomment -%}
+      <a href="{{ cl_p2.url | default: '/products/bone-broth-chicken' }}" class="akr-cl-card" style="background:#ea7552;">
+        <img class="akr-cl-card__img" src="{{ 'akr-classic-card-chicken.png' | asset_url }}" alt="Savory Chicken" loading="lazy">
+        <div class="akr-cl-card__inner">
+          {%- if cl_p2.compare_at_price > cl_p2.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
+        </div>
+        <div class="akr-cl-card__info">
+          <p class="akr-cl-card__name">Savory Chicken</p>
+          <p class="akr-cl-card__price">{{ cl_p2.price | money | default: '$29.99' }}</p>
+        </div>
+        <div class="akr-cl-card__overlay"></div>
+        <span class="akr-cl-card__cta">SHOP NOW</span>
+      </a>
+
+      {%- comment -%} Card 4 — Variety Pack {%- endcomment -%}
+      <a href="{{ cl_p3.url | default: '/products/akrrush-bone-broth-variety-pack' }}" class="akr-cl-card" style="background:#c25b2c;">
+        <img class="akr-cl-card__img" src="{{ 'akr-classic-card-variety.png' | asset_url }}" alt="Variety Pack" loading="lazy">
+        <div class="akr-cl-card__inner">
+          {%- if cl_p3.compare_at_price > cl_p3.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
+        </div>
+        <div class="akr-cl-card__info">
+          <p class="akr-cl-card__name">Variety Pack</p>
+          <p class="akr-cl-card__price">{{ cl_p3.price | money | default: '$24.99' }}</p>
+        </div>
+        <div class="akr-cl-card__overlay"></div>
+        <span class="akr-cl-card__cta">SHOP NOW</span>
+      </a>
+
     </div>
   </div>
 

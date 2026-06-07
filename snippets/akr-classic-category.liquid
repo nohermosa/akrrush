@@ -276,13 +276,11 @@
         {%- else -%}
           <a href="{{ collection.url }}" class="akr-cl-card" style="background:{{ bg_color }};">
         {%- endif -%}
-          {%- if product -%}
-            <img class="akr-cl-card__img" src="{{ product.featured_image | image_url: width: 450 }}" alt="{{ product.title | escape }}" loading="lazy">
-          {%- else -%}
-            <img class="akr-cl-card__img" src="{{ fallback_img }}" alt="{{ cl_card_names[idx] }}" loading="lazy">
-          {%- endif -%}
+          <img class="akr-cl-card__img" src="{{ fallback_img }}" alt="{{ cl_card_names[idx] }}" loading="lazy">
           <div class="akr-cl-card__inner">
-            <span class="akr-cl-card__badge">Sale</span>
+            {%- if product and product.compare_at_price > product.price -%}
+              <span class="akr-cl-card__badge">Sale</span>
+            {%- endif -%}
           </div>
           <div class="akr-cl-card__info">
             {%- if product -%}
@@ -311,7 +309,6 @@
           <h2 class="akr-cl-bundle__heading">All <em>three flavors</em>. One ritual.</h2>
           <p class="akr-cl-bundle__sub">FL·01 + FL·02 + FL·03 · 90 sticks total. Discover your ritual before committing to one.</p>
           <div class="akr-cl-bundle__actions">
-            <span class="akr-cl-bundle__price">$18</span>
             <a href="{{ collection.url }}" class="akr-cl-bundle__btn">Choose Your Flavor →</a>
           </div>
         </div>
@@ -383,7 +380,7 @@
             <svg width="44" height="36" viewBox="0 0 44 36" fill="none" aria-hidden="true"><path d="M0 22C0 10 6 4 18 0L20.5 4C14 6.5 11 11 11 16H19V36H0V22ZM24 22C24 10 30 4 42 0L44.5 4C38 6.5 35 11 35 16H43V36H24V22Z" fill="#EA7552"/></svg>
           </div>
           <p class="akr-cl-review__quote">The Chanterelle flavor tastes like something a grandmother in Telemark would have simmered all day. Except it's in a stick. Remarkable.</p>
-          <p class="akr-cl-review__attribution">MAJA H. · BERGEN · APR 2026</p>
+          <p class="akr-cl-review__attribution">MAJA H. · PORTLAND, OR · APR 2026</p>
         </div>
       </div>
 

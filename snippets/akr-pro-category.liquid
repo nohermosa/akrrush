@@ -399,7 +399,7 @@
 </style>
 
 {% assign pro_cards = collection.products | slice: 0, 4 %}
-{% assign card_colors = '#47b1b4,#ffc03c,#ea7552,#ea7552' | split: ',' %}
+{% assign card_colors = '#47b1b4,#ffc03c,#ea7552,#2c1a10' | split: ',' %}
 {% assign card_images = 'akr-pro-card-variety.png,akr-pro-card-chicken.png,akr-pro-card-ginger.png,akr-pro-card-mushroom.png' | split: ',' %}
 {% assign card_names = 'åKrrush PRO Variety Pack,Bold Chicken PRO,Ginger åKrrush PRO,Max Mushroom PRO' | split: ',' %}
 {% assign card_prices = '$39.99,$39.99,$39.99,$39.99' | split: ',' %}
@@ -432,7 +432,7 @@
           <span class="akr-pro-hero__feat-title">RECOVERY SUPPORT</span>
         </div>
       </div>
-      <a href="{{ collection.url }}" class="akr-pro-hero__cta">SHOP PRO</a>
+      <a href="#akr-pro-products" class="akr-pro-hero__cta">SHOP PRO</a>
     </div>
   </div>
 
@@ -441,7 +441,7 @@
   <div class="akr-pro-strip">
     <p>20G PROTEIN</p>
     <span class="akr-pro-strip__dot">·</span>
-    <p>60 CAL</p>
+    <p>ELECTROLYTES</p>
     <span class="akr-pro-strip__dot">·</span>
     <p>100% NORWEGIAN POULTRY</p>
     <span class="akr-pro-strip__dot">·</span>
@@ -519,7 +519,7 @@
   </div>
 
   {%- comment -%} ── PRODUCT CARDS ── {%- endcomment -%}
-  <div class="akr-pro-cards">
+  <div class="akr-pro-cards" id="akr-pro-products">
     <div class="akr-pro-cards__grid">
       {%- for i in (1..4) -%}
         {%- assign idx = forloop.index0 -%}

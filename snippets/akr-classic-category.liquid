@@ -78,7 +78,7 @@
 
   /* Product cards */
   .akr-cl-cards { background: #fffbf2; padding: 0 100px 100px; }
-  .akr-cl-cards__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1240px; }
+  .akr-cl-cards__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1240px; }
   .akr-cl-card { height: 471px; border-radius: 24px; position: relative; overflow: hidden; display: block; text-decoration: none; cursor: pointer; }
   .akr-cl-card--teal { background: #47b1b4; }
   .akr-cl-card--yellow { background: #ffc03c; }
@@ -170,10 +170,11 @@
 </style>
 
 {% assign classic_cards = collection.products | slice: 0, 3 %}
-{% assign cl_card_colors = '#47b1b4,#ffc03c,#ea7552' | split: ',' %}
-{% assign cl_card_images = 'akr-classic-card-ramen.png,akr-classic-card-chanterelle.png,akr-classic-card-chicken.png' | split: ',' %}
-{% assign cl_card_names = 'Ginger Ramen,Chanterelle,Savory Chicken' | split: ',' %}
-{% assign cl_card_prices = '$18,$18,$18' | split: ',' %}
+{% assign variety_product = all_products['akrrush-bone-broth-variety-pack'] %}
+{% assign cl_card_colors = '#47b1b4,#ffc03c,#ea7552,#c25b2c' | split: ',' %}
+{% assign cl_card_images = 'akr-classic-card-ramen.png,akr-classic-card-chanterelle.png,akr-classic-card-chicken.png,akr-classic-card-variety.png' | split: ',' %}
+{% assign cl_card_names = 'Ginger Ramen,Chanterelle,Savory Chicken,Variety Pack' | split: ',' %}
+{% assign cl_card_prices = '$18,$18,$18,$54' | split: ',' %}
 
 <div class="akr-cl">
 
@@ -295,6 +296,32 @@
           <span class="akr-cl-card__cta">SHOP NOW</span>
         </a>
       {%- endfor -%}
+
+      {%- comment -%} Variety Pack — 4th card {%- endcomment -%}
+      {%- assign variety_fallback = 'akr-classic-card-variety.png' | asset_url -%}
+      {%- if variety_product -%}
+        <a href="{{ variety_product.url }}" class="akr-cl-card" style="background:{{ cl_card_colors[3] }};">
+          <img class="akr-cl-card__img" src="{{ variety_fallback }}" alt="Variety Pack" loading="lazy">
+          <div class="akr-cl-card__inner"></div>
+          <div class="akr-cl-card__info">
+            <p class="akr-cl-card__name">{{ variety_product.title }}</p>
+            <p class="akr-cl-card__price">{{ variety_product.price | money }}</p>
+          </div>
+          <div class="akr-cl-card__overlay"></div>
+          <span class="akr-cl-card__cta">SHOP NOW</span>
+        </a>
+      {%- else -%}
+        <a href="/products/akrrush-bone-broth-variety-pack" class="akr-cl-card" style="background:{{ cl_card_colors[3] }};">
+          <img class="akr-cl-card__img" src="{{ variety_fallback }}" alt="Variety Pack" loading="lazy">
+          <div class="akr-cl-card__inner"></div>
+          <div class="akr-cl-card__info">
+            <p class="akr-cl-card__name">Variety Pack</p>
+            <p class="akr-cl-card__price">{{ cl_card_prices[3] }}</p>
+          </div>
+          <div class="akr-cl-card__overlay"></div>
+          <span class="akr-cl-card__cta">SHOP NOW</span>
+        </a>
+      {%- endif -%}
     </div>
   </div>
 

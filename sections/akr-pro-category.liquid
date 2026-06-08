@@ -135,8 +135,6 @@
   }
 </style>
 
-{% paginate collection.products by 50 %}
-{% assign pro_cards = collection.products | slice: 0, 4 %}
 {% assign card_colors = '#47b1b4,#ffc03c,#ea7552,#ea7552' | split: ',' %}
 {% assign card_images = 'akr-pro-card-variety.png,akr-pro-card-chicken.png,akr-pro-card-ginger.png,akr-pro-card-mushroom.png' | split: ',' %}
 
@@ -206,7 +204,7 @@
   {%- comment -%} ── SECTION 2: PRODUCT CARDS ── {%- endcomment -%}
   <div class="akr-pro-cards">
     <div class="akr-pro-cards__grid">
-      {%- for product in pro_cards -%}
+      {%- for product in collection.products limit: 4 -%}
         {%- assign idx = forloop.index0 -%}
         {%- assign bg_color = card_colors[idx] -%}
         {%- assign fallback_img = card_images[idx] | asset_url -%}
@@ -350,7 +348,6 @@
   </div>
 
 </div>
-{% endpaginate %}
 
 {% schema %}
 {

@@ -1,4 +1,9 @@
 
+{%- assign akr_is_pro = false -%}
+{%- for c in product.collections -%}
+  {%- if c.handle == 'akrrush-pro' -%}{%- assign akr_is_pro = true -%}{%- endif -%}
+{%- endfor -%}
+
 <section class="akr-faq-section" id="akr-faq">
   <div class="akr-faq-inner">
 
@@ -82,6 +87,10 @@
                            {{ section.settings.photo | img_url: '800x' }} 800w"
                    sizes="(max-width: 768px) 100vw, 480px"
                    alt="{{ section.settings.photo.alt | escape }}"
+                   loading="lazy">
+            {%- elsif akr_is_pro -%}
+              <img src="{{ 'akr-pro-faq-photo.jpg' | asset_url }}"
+                   alt="åKrrush PRO athlete"
                    loading="lazy">
             {%- else -%}
               <img src="{{ 'akr-faq-photo.jpg' | asset_url }}"

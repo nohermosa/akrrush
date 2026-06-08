@@ -916,7 +916,6 @@ a.akr-btn-cta-secondary:hover {
 .akr-faq-still-curious {
   margin-top: 28px;
   padding-top: 24px;
-  border-top: 1px solid var(--akr-border);
 }
 .akr-btn-chat {
   display: inline-flex;

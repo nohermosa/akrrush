@@ -81,12 +81,31 @@
 
       <div class="akr-hero-main-wrap">
 
-        <!-- Main product image -->
-        <img class="akr-hero-main-img" id="akrMainImg"
-             src="{{ product.featured_image | image_url: width: 800 }}"
-             alt="{{ product.title | escape }}"
-             fetchpriority="high"
-             loading="eager">
+        <!-- Main product image — use card asset mapped by handle, fall back to featured_image -->
+        {%- assign akr_main_img = '' -%}
+        {%- case product.handle -%}
+          {%- when 'bone-broth-chanterelle-mushroom' -%}{%- assign akr_main_img = 'akr-classic-card-chanterelle.png' -%}
+          {%- when 'bone-broth-ginger-ramen' -%}{%- assign akr_main_img = 'akr-classic-card-ramen.png' -%}
+          {%- when 'bone-broth-chicken' -%}{%- assign akr_main_img = 'akr-classic-card-chicken.png' -%}
+          {%- when 'akrrush-bone-broth-variety-pack' -%}{%- assign akr_main_img = 'akr-classic-card-variety.png' -%}
+          {%- when 'bold-chicken-pro-bone-broth' -%}{%- assign akr_main_img = 'akr-pro-card-chicken.png' -%}
+          {%- when 'ginger-akrrush-pro-bone-broth' -%}{%- assign akr_main_img = 'akr-pro-card-ginger.png' -%}
+          {%- when 'max-mushroom-pro-bone-broth' -%}{%- assign akr_main_img = 'akr-pro-card-mushroom.png' -%}
+          {%- when 'akrrush-pro-variety-pack-bone-broth' -%}{%- assign akr_main_img = 'akr-pro-card-variety.png' -%}
+        {%- endcase -%}
+        {%- if akr_main_img != '' -%}
+          <img class="akr-hero-main-img" id="akrMainImg"
+               src="{{ akr_main_img | asset_url }}"
+               alt="{{ product.title | escape }}"
+               fetchpriority="high"
+               loading="eager">
+        {%- else -%}
+          <img class="akr-hero-main-img" id="akrMainImg"
+               src="{{ product.featured_image | image_url: width: 800 }}"
+               alt="{{ product.title | escape }}"
+               fetchpriority="high"
+               loading="eager">
+        {%- endif -%}
 
 
       </div><!-- /main-wrap -->

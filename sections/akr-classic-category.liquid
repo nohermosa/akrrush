@@ -52,7 +52,7 @@
     color: #fff; text-transform: uppercase; text-decoration: none;
     width: fit-content;
   }
-  .akr-cl-hero__cta:hover { background: #d4644a; color: #fff; }
+  /* hover → see Emil quality layer below */
 
   /* Info strip */
   .akr-cl-strip {
@@ -94,7 +94,7 @@
   .akr-cl-card__price { font-family: Arial, sans-serif; font-weight: 700; font-size: 24px; color: #fff; margin: 0; }
   .akr-cl-card__overlay { position: absolute; inset: 0; background: rgba(44,26,16,0.7); z-index: 3; }
   .akr-cl-card__cta { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: #ea7552; border-radius: 9999px; padding: 16px 32px; font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #fff; text-transform: uppercase; text-decoration: none; white-space: nowrap; z-index: 4; }
-  .akr-cl-card__cta:hover { background: #d4644a; color: #fff; }
+  /* hover → see Emil quality layer below */
 
   /* Bundle */
   .akr-cl-bundle { padding: 0 100px 100px; background: #fffbf2; }
@@ -110,7 +110,7 @@
   .akr-cl-bundle__actions { display: flex; align-items: center; gap: 24px; }
   .akr-cl-bundle__price { font-family: Arial, sans-serif; font-weight: 700; font-size: 24px; color: #ea7552; }
   .akr-cl-bundle__btn { background: #ea7552; border-radius: 1000px; padding: 16px 20px; font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #fff; text-decoration: none; letter-spacing: 0.6px; display: inline-flex; }
-  .akr-cl-bundle__btn:hover { background: #d4644a; color: #fff; }
+  /* hover → see Emil quality layer below */
 
   /* Stats section */
   .akr-cl-stats { padding: 80px 100px; background: #fffbf2; }
@@ -147,6 +147,32 @@
     .akr-cl-bundle__bg { display: none; }
     .akr-cl-stats { padding: 60px 20px; }
     .akr-cl-review { padding: 0 20px 60px; }
+  }
+
+  /* ── Emil Kowalski quality layer ── */
+  .akr-cl-hero__cta,
+  .akr-cl-card__cta,
+  .akr-cl-bundle__btn {
+    transition: background 200ms cubic-bezier(0.16, 1, 0.3, 1),
+                color 150ms ease,
+                transform 140ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .akr-cl-hero__cta:active,
+  .akr-cl-card__cta:active,
+  .akr-cl-bundle__btn:active {
+    transform: scale(0.97);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .akr-cl-hero__cta:hover,
+    .akr-cl-card__cta:hover,
+    .akr-cl-bundle__btn:hover { background: #d4644a; color: #fff; }
+    .akr-cl-filter__btn:hover { opacity: 1; }
+    .akr-cl-filter__btn:hover span { color: #ea7552; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .akr-cl-hero__cta,
+    .akr-cl-card__cta,
+    .akr-cl-bundle__btn { transition: none; }
   }
 </style>
 

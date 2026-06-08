@@ -1,4 +1,9 @@
 
+{%- assign akr_is_pro = false -%}
+{%- for c in product.collections -%}
+  {%- if c.handle == 'akrrush-pro' -%}{%- assign akr_is_pro = true -%}{%- endif -%}
+{%- endfor -%}
+
 <style>
   .akr-compare-list li { margin-bottom: 32px !important; }
 </style>
@@ -17,14 +22,24 @@
   <div class="akr-why-inner">
 
     <!-- Eyebrow (Fix 2: 13px, 0.18em, centered) -->
-    <p class="akr-why-eyebrow">{{ section.settings.eyebrow | default: 'Real Bone Broth' }}</p>
+    <p class="akr-why-eyebrow">
+      {%- if akr_is_pro -%}Performance Bone Broth PRO{%- else -%}{{ section.settings.eyebrow | default: 'Real Bone Broth' }}{%- endif -%}
+    </p>
 
-    <!-- Headline — one line on desktop (UNCHANGED) -->
-    <h2 class="akr-why-heading">{{ section.settings.headline_before | default: 'Why drink' }} <em>{{ section.settings.headline_emphasis | default: 'just' }}<img src="{{ 'akr-underline-just.svg' | asset_url }}" class="akr-underline-just" aria-hidden="true" alt="" loading="lazy"></em> <span class="akr-why-broth-outline">{{ section.settings.headline_after | default: 'broth?' }}</span></h2>
+    <!-- Headline — one line on desktop -->
+    <h2 class="akr-why-heading">
+      {%- if akr_is_pro -%}
+        Why settle for <em>just<img src="{{ 'akr-underline-just.svg' | asset_url }}" class="akr-underline-just" aria-hidden="true" alt="" loading="lazy"></em> <span class="akr-why-broth-outline">powder?</span>
+      {%- else -%}
+        {{ section.settings.headline_before | default: 'Why drink' }} <em>{{ section.settings.headline_emphasis | default: 'just' }}<img src="{{ 'akr-underline-just.svg' | asset_url }}" class="akr-underline-just" aria-hidden="true" alt="" loading="lazy"></em> <span class="akr-why-broth-outline">{{ section.settings.headline_after | default: 'broth?' }}</span>
+      {%- endif -%}
+    </h2>
 
     <!-- Subheadline -->
     <div class="akr-why-sub">
-      {%- if section.settings.sub != blank -%}
+      {%- if akr_is_pro -%}
+        <p>When you can fuel with <em>20g protein + electrolytes</em> + real broth taste. No chalky shakes. Just performance.</p>
+      {%- elsif section.settings.sub != blank -%}
         {{ section.settings.sub }}
       {%- else -%}
         <p>When you can drink <em>real food</em>. Translation: more fuel, faster recovery, real results.</p>
@@ -34,7 +49,7 @@
     <!-- Comparison cards -->
     <div class="akr-why-compare">
 
-      <!-- LEFT: Average Bone Broth -->
+      <!-- LEFT: Average / Competitor -->
       <div class="akr-compare-card akr-compare-card--avg">
         <div class="akr-compare-inner">
 
@@ -47,24 +62,40 @@
           </div>
 
           <div class="akr-compare-content">
-            <h3 class="akr-compare-title">{{ section.settings.avg_title | default: 'Average Bone Broth' }}</h3>
+            <h3 class="akr-compare-title">
+              {%- if akr_is_pro -%}Protein Powder + Sports Drinks{%- else -%}{{ section.settings.avg_title | default: 'Average Bone Broth' }}{%- endif -%}
+            </h3>
             <ul class="akr-compare-list">
-              {%- for i in (1..5) -%}
-                {%- assign field = 'avg_item_' | append: i -%}
-                {%- if section.settings[field] != blank -%}
+              {%- if akr_is_pro -%}
+                {%- assign pro_avg_items = 'Chalky, artificial taste|No electrolytes included|Zero collagen support|Synthetic ingredients & fillers|Missing real nutrition' | split: '|' -%}
+                {%- for item in pro_avg_items -%}
                   <li style="margin-bottom: 32px;">
                     <span class="akr-bullet-icon akr-bullet-icon--neg" aria-hidden="true">
                       <svg viewBox="0 0 12 12"><path d="M2 2l8 8M10 2L2 10" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
                     </span>
-                    {{ section.settings[field] }}
+                    {{ item }}
                   </li>
-                {%- endif -%}
-              {%- endfor -%}
+                {%- endfor -%}
+              {%- else -%}
+                {%- for i in (1..5) -%}
+                  {%- assign field = 'avg_item_' | append: i -%}
+                  {%- if section.settings[field] != blank -%}
+                    <li style="margin-bottom: 32px;">
+                      <span class="akr-bullet-icon akr-bullet-icon--neg" aria-hidden="true">
+                        <svg viewBox="0 0 12 12"><path d="M2 2l8 8M10 2L2 10" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+                      </span>
+                      {{ section.settings[field] }}
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
             </ul>
           </div>
 
         </div>
-        <div class="akr-compare-footer">{{ section.settings.avg_footer | default: 'The average experience' }}</div>
+        <div class="akr-compare-footer">
+          {%- if akr_is_pro -%}What protein powder + sports drinks give you{%- else -%}{{ section.settings.avg_footer | default: 'What you get from average brands' }}{%- endif -%}
+        </div>
       </div>
 
       <!-- RIGHT: åKrrush — overflow:hidden clips splash to card boundary (Bug 1) -->
@@ -85,20 +116,34 @@
             <img src="{{ 'akr-logo.svg' | asset_url }}" alt="åKrrush" loading="lazy">
           </div>
           <ul class="akr-compare-list">
-            {%- for i in (1..5) -%}
-              {%- assign field = 'ak_item_' | append: i -%}
-              {%- if section.settings[field] != blank -%}
+            {%- if akr_is_pro -%}
+              {%- assign pro_ak_items = '20g hydrolyzed protein per stick|Electrolytes for performance & hydration|Collagen peptides for joints & recovery|99% Norwegian poultry|Keto · Paleo · No artificial fillers' | split: '|' -%}
+              {%- for item in pro_ak_items -%}
                 <li style="margin-bottom: 16px;">
                   <span class="akr-bullet-icon akr-bullet-icon--pos" aria-hidden="true">
                     <svg viewBox="0 0 12 12"><path d="M1.5 6l3 3L10.5 2.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
                   </span>
-                  {{ section.settings[field] }}
+                  {{ item }}
                 </li>
-              {%- endif -%}
-            {%- endfor -%}
+              {%- endfor -%}
+            {%- else -%}
+              {%- for i in (1..5) -%}
+                {%- assign field = 'ak_item_' | append: i -%}
+                {%- if section.settings[field] != blank -%}
+                  <li style="margin-bottom: 16px;">
+                    <span class="akr-bullet-icon akr-bullet-icon--pos" aria-hidden="true">
+                      <svg viewBox="0 0 12 12"><path d="M1.5 6l3 3L10.5 2.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                    </span>
+                    {{ section.settings[field] }}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
           </ul>
         </div>
-        <div class="akr-compare-footer akr-compare-footer--ak">{{ section.settings.ak_footer | default: 'The åKrrush standard' }}</div>
+        <div class="akr-compare-footer akr-compare-footer--ak">
+          {%- if akr_is_pro -%}What åKrrush PRO delivers{%- else -%}{{ section.settings.ak_footer | default: 'The åKrrush standard' }}{%- endif -%}
+        </div>
 
         <!-- Bug 1: stick inside card — clipped by overflow:hidden to card boundary -->
         <div class="akr-compare-visual" aria-hidden="true">
@@ -115,7 +160,9 @@
 
     <!-- CTA -->
     <div class="akr-why-cta-wrap">
-      <a href="{{ section.settings.cta_url }}" class="akr-btn-cta-dark">{{ section.settings.cta_text | default: 'TASTE THE DIFFERENCE — SHOP NOW →' }}</a>
+      <a href="{{ section.settings.cta_url }}" class="akr-btn-cta-dark">
+        {%- if akr_is_pro -%}FUEL WITH PRO — SHOP NOW →{%- else -%}{{ section.settings.cta_text | default: 'TASTE THE DIFFERENCE — SHOP NOW →' }}{%- endif -%}
+      </a>
       <p class="akr-why-trust">{{ section.settings.trust_text | default: 'Free shipping over $50 · 30-day money-back guarantee' }}</p>
     </div>
 

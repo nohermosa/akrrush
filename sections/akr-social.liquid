@@ -1,4 +1,9 @@
 
+{%- assign akr_is_pro = false -%}
+{%- for c in product.collections -%}
+  {%- if c.handle == 'akrrush-pro' -%}{%- assign akr_is_pro = true -%}{%- endif -%}
+{%- endfor -%}
+
 <section class="akr-social-section" id="akr-social">
   <div class="akr-social-inner">
 
@@ -33,7 +38,13 @@
         </h2>
       </div>
 
-      <p class="akr-social-sub">Watch Thalia's morning ritual in 60 seconds — one stick, real broth, real fuel. Loved by 240K+ on TikTok.</p>
+      <p class="akr-social-sub">
+        {%- if akr_is_pro -%}
+          Watch how athletes fuel with PRO — 20g protein, electrolytes, real broth. Zero prep, peak performance. Loved by 240K+ on TikTok.
+        {%- else -%}
+          Watch Thalia's morning ritual in 60 seconds — one stick, real broth, real fuel. Loved by 240K+ on TikTok.
+        {%- endif -%}
+      </p>
 
       <!-- Stats: editorial style, no boxes -->
       <div class="akr-social-stats">

@@ -33,6 +33,10 @@
             <img src="{{ section.settings.product_image_1 | image_url: width: 800 }}"
                  alt="åKrrush Savory Chicken bone broth stick"
                  loading="lazy">
+          {%- elsif akr_num_is_pro -%}
+            <img src="{{ 'akr-pro-card-chicken.png' | asset_url }}"
+                 alt="åKrrush PRO Bold Chicken bone broth stick"
+                 loading="lazy">
           {%- else -%}
             <img src="{{ 'akr-stick-savory-chicken.png' | asset_url }}"
                  alt="åKrrush Savory Chicken bone broth stick"
@@ -43,6 +47,10 @@
           {%- if section.settings.product_image_2 != blank -%}
             <img src="{{ section.settings.product_image_2 | image_url: width: 800 }}"
                  alt="åKrrush Ginger Ramen bone broth stick"
+                 loading="lazy">
+          {%- elsif akr_num_is_pro -%}
+            <img src="{{ 'akr-pro-card-ginger.png' | asset_url }}"
+                 alt="åKrrush PRO Ginger bone broth stick"
                  loading="lazy">
           {%- else -%}
             <img src="{{ 'akr-stick-ginger-ramen.png' | asset_url }}"

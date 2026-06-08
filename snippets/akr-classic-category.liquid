@@ -271,7 +271,7 @@
     <div class="akr-cl-cards__grid">
 
       {%- comment -%} Card 1 — Ginger Ramen {%- endcomment -%}
-      <a href="{{ cl_p0.url | default: '/products/bone-broth-ginger-ramen' }}" class="akr-cl-card" style="background:#47b1b4; height:471px;">
+      <a href="{{ cl_p0.url | default: '/products/bone-broth-ginger-ramen' }}" class="akr-cl-card" style="background:#47b1b4;">
         <img class="akr-cl-card__img" src="{{ 'akr-classic-card-ramen.png' | asset_url }}" alt="Ginger Ramen" loading="lazy">
         <div class="akr-cl-card__inner">
           {%- if cl_p0.compare_at_price > cl_p0.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
@@ -285,7 +285,7 @@
       </a>
 
       {%- comment -%} Card 2 — Chanterelle {%- endcomment -%}
-      <a href="{{ cl_p1.url | default: '/products/bone-broth-chanterelle-mushroom' }}" class="akr-cl-card" style="background:#ffc03c; height:471px;">
+      <a href="{{ cl_p1.url | default: '/products/bone-broth-chanterelle-mushroom' }}" class="akr-cl-card" style="background:#ffc03c;">
         <img class="akr-cl-card__img" src="{{ 'akr-classic-card-chanterelle.png' | asset_url }}" alt="Chanterelle" loading="lazy">
         <div class="akr-cl-card__inner">
           {%- if cl_p1.compare_at_price > cl_p1.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
@@ -299,7 +299,7 @@
       </a>
 
       {%- comment -%} Card 3 — Savory Chicken {%- endcomment -%}
-      <a href="{{ cl_p2.url | default: '/products/bone-broth-chicken' }}" class="akr-cl-card" style="background:#ea7552; height:471px;">
+      <a href="{{ cl_p2.url | default: '/products/bone-broth-chicken' }}" class="akr-cl-card" style="background:#ea7552;">
         <img class="akr-cl-card__img" src="{{ 'akr-classic-card-chicken.png' | asset_url }}" alt="Savory Chicken" loading="lazy">
         <div class="akr-cl-card__inner">
           {%- if cl_p2.compare_at_price > cl_p2.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
@@ -313,7 +313,7 @@
       </a>
 
       {%- comment -%} Card 4 — Variety Pack {%- endcomment -%}
-      <a href="{{ cl_p3.url | default: '/products/akrrush-bone-broth-variety-pack' }}" class="akr-cl-card" style="background:#c25b2c; height:471px;">
+      <a href="{{ cl_p3.url | default: '/products/akrrush-bone-broth-variety-pack' }}" class="akr-cl-card" style="background:#c25b2c;">
         <img class="akr-cl-card__img" src="{{ 'akr-classic-card-variety.png' | asset_url }}" alt="Variety Pack" loading="lazy">
         <div class="akr-cl-card__inner">
           {%- if cl_p3.compare_at_price > cl_p3.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
@@ -442,6 +442,12 @@
     });
     document.querySelectorAll('.akr-cl-stats__body').forEach(function(el) {
       el.style.setProperty('color', '#3d2b1e', 'important');
+    });
+    // Card height: 471px desktop / 340px mobile
+    var isMobile = window.innerWidth <= 768;
+    document.querySelectorAll('.akr-cl-card').forEach(function(el) {
+      el.style.setProperty('height', isMobile ? '340px' : '471px', 'important');
+      el.style.setProperty('max-height', isMobile ? '340px' : '471px', 'important');
     });
     document.querySelectorAll('.akr-cl-review__attribution').forEach(function(el) {
       el.style.setProperty('color', '#5a3d2b', 'important');

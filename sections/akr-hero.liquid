@@ -16,6 +16,10 @@
   height: auto !important;
 }
 
+/* ── Hide thumbnail strip + nutrition label link ── */
+.akr-hero-thumbs { display: none !important; }
+.akr-hero-view-nf { display: none !important; }
+
 /* ── Native product__form: hide elements we replace with custom UI ── */
 #product-form-{{ product.id }} options-selection,
 #product-form-{{ product.id }} .options-selection { display: none !important; }
@@ -151,11 +155,11 @@
       {%- if akr_is_pro -%}
         {%- assign akr_flavor_handles = 'bold-chicken-pro-bone-broth,ginger-akrrush-pro-bone-broth,max-mushroom-pro-bone-broth' | split: ',' -%}
         {%- assign akr_flavor_names = 'Bold Chicken,Ginger PRO,Max Mushroom' | split: ',' -%}
-        {%- assign akr_flavor_images = 'akr-flavor-chicken.png,akr-flavor-ramen.png,akr-flavor-chanterelle.png' | split: ',' -%}
+        {%- assign akr_flavor_images = 'akr-pro-card-chicken.png,akr-pro-card-ginger.png,akr-pro-card-mushroom.png' | split: ',' -%}
       {%- else -%}
         {%- assign akr_flavor_handles = 'bone-broth-chicken,bone-broth-ginger-ramen,bone-broth-chanterelle-mushroom' | split: ',' -%}
         {%- assign akr_flavor_names = 'Savory Chicken,Ginger Ramen,Chanterelle' | split: ',' -%}
-        {%- assign akr_flavor_images = 'akr-flavor-chicken.png,akr-flavor-ramen.png,akr-flavor-chanterelle.png' | split: ',' -%}
+        {%- assign akr_flavor_images = 'akr-classic-card-chicken.png,akr-classic-card-ramen.png,akr-classic-card-chanterelle.png' | split: ',' -%}
       {%- endif -%}
 
       <p class="akr-hero-flavor-label">SELECT FLAVOR:</p>

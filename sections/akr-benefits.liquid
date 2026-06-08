@@ -1,4 +1,9 @@
 
+{%- assign akr_is_pro = false -%}
+{%- for c in product.collections -%}
+  {%- if c.handle == 'akrrush-pro' -%}{%- assign akr_is_pro = true -%}{%- endif -%}
+{%- endfor -%}
+
 <section class="akr-benefits-section" id="akr-benefits">
   <div class="akr-benefits-inner">
 
@@ -114,6 +119,8 @@
       <div class="akr-benefits-photo">
         {%- if section.settings.photo != blank -%}
           <img src="{{ section.settings.photo | img_url: '1200x' }}" alt="{{ section.settings.photo.alt | escape }}" class="akr-benefits-photo-img" loading="lazy">
+        {%- elsif akr_is_pro -%}
+          <img src="{{ 'akr-pro-benefits-photo.jpg' | asset_url }}" alt="åKrrush PRO performance" class="akr-benefits-photo-img" loading="lazy">
         {%- else -%}
           <img src="{{ 'akr-benefits-photo.png' | asset_url }}" alt="åKrrush lifestyle" class="akr-benefits-photo-img" loading="lazy">
         {%- endif -%}

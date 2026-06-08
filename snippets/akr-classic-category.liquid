@@ -278,7 +278,7 @@
         </div>
         <div class="akr-cl-card__info">
           <p class="akr-cl-card__name">Ginger Ramen</p>
-          <p class="akr-cl-card__price">{{ cl_p0.price | money | default: '$29.99' }}</p>
+          <p class="akr-cl-card__price">{%- if cl_p0.price_varies -%}From {% endif %}{{ cl_p0.price | money | default: 'From $29.99' }}</p>
         </div>
         <div class="akr-cl-card__overlay"></div>
         <span class="akr-cl-card__cta">SHOP NOW</span>
@@ -292,7 +292,7 @@
         </div>
         <div class="akr-cl-card__info">
           <p class="akr-cl-card__name">Chanterelle</p>
-          <p class="akr-cl-card__price">{{ cl_p1.price | money | default: '$29.99' }}</p>
+          <p class="akr-cl-card__price">{%- if cl_p1.price_varies -%}From {% endif %}{{ cl_p1.price | money | default: 'From $29.99' }}</p>
         </div>
         <div class="akr-cl-card__overlay"></div>
         <span class="akr-cl-card__cta">SHOP NOW</span>
@@ -306,7 +306,7 @@
         </div>
         <div class="akr-cl-card__info">
           <p class="akr-cl-card__name">Savory Chicken</p>
-          <p class="akr-cl-card__price">{{ cl_p2.price | money | default: '$29.99' }}</p>
+          <p class="akr-cl-card__price">{%- if cl_p2.price_varies -%}From {% endif %}{{ cl_p2.price | money | default: 'From $29.99' }}</p>
         </div>
         <div class="akr-cl-card__overlay"></div>
         <span class="akr-cl-card__cta">SHOP NOW</span>
@@ -320,7 +320,7 @@
         </div>
         <div class="akr-cl-card__info">
           <p class="akr-cl-card__name">Variety Pack</p>
-          <p class="akr-cl-card__price">{{ cl_p3.price | money | default: '$24.99' }}</p>
+          <p class="akr-cl-card__price">{%- if cl_p3.price_varies -%}From {% endif %}{{ cl_p3.price | money | default: 'From $24.99' }}</p>
         </div>
         <div class="akr-cl-card__overlay"></div>
         <span class="akr-cl-card__cta">SHOP NOW</span>

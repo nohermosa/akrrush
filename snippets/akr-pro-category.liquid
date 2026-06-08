@@ -535,12 +535,12 @@
           {%- if product -%}
             <div class="akr-pro-card__info">
               <p class="akr-pro-card__name">{{ product.title }}</p>
-              <p class="akr-pro-card__price">{{ product.price | money }}</p>
+              <p class="akr-pro-card__price">{%- if product.price_varies -%}From {% endif %}{{ product.price | money }}</p>
             </div>
           {%- else -%}
             <div class="akr-pro-card__info">
               <p class="akr-pro-card__name">{{ card_names[idx] }}</p>
-              <p class="akr-pro-card__price">{{ card_prices[idx] }}</p>
+              <p class="akr-pro-card__price">From {{ card_prices[idx] }}</p>
             </div>
           {%- endif -%}
           <div class="akr-pro-card__overlay"></div>

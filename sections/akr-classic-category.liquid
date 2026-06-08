@@ -5,6 +5,17 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
 <style>
+  /* ── Live-theme CSS isolation ── */
+  .akr-cl, .akr-cl * { font-family: Arial, sans-serif !important; }
+  .akr-cl .akr-cl-hero__heading .serif,
+  .akr-cl .akr-cl-hero__heading .serif-italic,
+  .akr-cl .akr-cl-quote__text,
+  .akr-cl .akr-cl-bundle__heading,
+  .akr-cl .akr-cl-stats__heading { font-family: 'DM Serif Display', serif !important; }
+  .akr-cl p { font-weight: 400 !important; }
+  .akr-cl h1, .akr-cl h2, .akr-cl h3, .akr-cl h4 {
+    font-size: unset; line-height: unset; color: unset; margin-bottom: unset;
+  }
   .akr-cl { font-family: Arial, sans-serif; }
 
   /* Hero */
@@ -176,6 +187,7 @@
   }
 </style>
 
+{% paginate collection.products by 50 %}
 {% assign classic_cards = collection.products | slice: 0, 3 %}
 {% assign cl_card_colors = '#47b1b4,#ffc03c,#ea7552' | split: ',' %}
 {% assign cl_card_images = 'akr-classic-card-ramen.png,akr-classic-card-chanterelle.png,akr-classic-card-chicken.png' | split: ',' %}
@@ -371,6 +383,7 @@
   </div>
 
 </div>
+{% endpaginate %}
 
 {% schema %}
 {

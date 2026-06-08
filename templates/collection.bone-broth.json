@@ -9,12 +9,12 @@
  */
 {
   "sections": {
-    "akr_pro_category_main": {
-      "type": "akr-pro-category",
+    "akr_classic_category_main": {
+      "type": "akr-classic-category",
       "settings": {}
     }
   },
   "order": [
-    "akr_pro_category_main"
+    "akr_classic_category_main"
   ]
 }

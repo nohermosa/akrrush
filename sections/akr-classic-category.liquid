@@ -281,26 +281,18 @@
   {%- comment -%} ── PRODUCT CARDS ── {%- endcomment -%}
   <div class="akr-cl-cards" id="akr-cl-products">
     <div class="akr-cl-cards__grid">
-      {%- for product in collection.products limit: 3 -%}
+      {%- assign _cl_col = collections['bone-broth'] | default: collection -%}
+      {%- for product in _cl_col.products limit: 3 -%}
         {%- assign idx = forloop.index0 -%}
         {%- assign bg_color = cl_card_colors[idx] -%}
         {%- assign fallback_img = cl_card_images[idx] | asset_url -%}
         <div class="akr-cl-card" style="background:{{ bg_color }};">
-          {%- if product.featured_image -%}
-            <img
-              class="akr-cl-card__img"
-              src="{{ product.featured_image | image_url: width: 450 }}"
-              alt="{{ product.title | escape }}"
-              loading="lazy"
-            >
-          {%- else -%}
-            <img
-              class="akr-cl-card__img"
-              src="{{ fallback_img }}"
-              alt="{{ product.title | escape }}"
-              loading="lazy"
-            >
-          {%- endif -%}
+          <img
+            class="akr-cl-card__img"
+            src="{{ fallback_img }}"
+            alt="{{ product.title | escape }}"
+            loading="lazy"
+          >
 
           <div class="akr-cl-card__inner">
             <div style="position:relative;z-index:2;"></div>

@@ -16,7 +16,7 @@
     font-size: unset; line-height: unset; color: unset; margin-bottom: unset;
   }
   .akr-pro { font-family: Arial, sans-serif; }
-  .akr-pro-hero { background: #000; position: relative; overflow: hidden; min-height: 778px; }
+  .akr-pro-hero { background: #000; position: relative; overflow: hidden; min-height: 778px !important; height: 778px !important; }
   .akr-pro-hero__bg-img { position: absolute; top: 0; right: 0; width: 75%; height: 100%; object-fit: cover; }
   .akr-pro-hero__vignette-top { position: absolute; top: 0; right: 0; width: 75%; height: 38%; background: linear-gradient(to bottom, #010101, rgba(1,1,1,0)); }
   .akr-pro-hero__vignette-bot { position: absolute; bottom: 0; right: 0; width: 75%; height: 45%; background: linear-gradient(to top, #010101, rgba(1,1,1,0)); }
@@ -211,21 +211,12 @@
         {%- assign fallback_img = card_images[idx] | asset_url -%}
         {%- assign is_featured = forloop.index | modulo: 2 -%}
         <div class="akr-pro-card" style="background:{{ bg_color }};">
-          {%- if product.featured_image -%}
-            <img
-              class="akr-pro-card__img"
-              src="{{ product.featured_image | image_url: width: 400 }}"
-              alt="{{ product.title | escape }}"
-              loading="lazy"
-            >
-          {%- else -%}
-            <img
-              class="akr-pro-card__img"
-              src="{{ fallback_img }}"
-              alt="{{ product.title | escape }}"
-              loading="lazy"
-            >
-          {%- endif -%}
+          <img
+            class="akr-pro-card__img"
+            src="{{ fallback_img }}"
+            alt="{{ product.title | escape }}"
+            loading="lazy"
+          >
 
           <div class="akr-pro-card__inner">
             <div style="position:relative;z-index:2;">

@@ -150,15 +150,15 @@
   /* Mobile */
   @media (max-width: 768px) {
     .akr-cl-hero { height: auto; min-height: 600px; }
-    .akr-cl-hero__bg { width: 100%; opacity: 0.4; }
-    .akr-cl-hero__panel { position: relative; top: auto; left: auto; transform: none; width: 100%; padding: 40px 20px; }
+    .akr-cl-hero__bg { width: 100%; opacity: 0.15; }
+    .akr-cl-hero__panel { position: relative; top: auto; left: auto; transform: none; width: 100%; padding: 40px 20px; background: rgba(255,251,242,0.88); border-radius: 16px; margin: 24px 16px; width: calc(100% - 32px); box-sizing: border-box; }
     .akr-cl-hero__heading .serif, .akr-cl-hero__heading .serif-italic { font-size: 44px; }
     .akr-cl-filter { padding: 24px 20px; flex-wrap: wrap; gap: 16px; }
     .akr-cl-quote { padding: 60px 20px; }
     .akr-cl-quote__text { font-size: 28px; }
     .akr-cl-cards { padding: 0 20px 60px; }
     .akr-cl-cards__grid { grid-template-columns: 1fr; }
-    .akr-cl-card { height: 340px; }
+    .akr-cl-card { height: 340px !important; max-height: 340px !important; }
     .akr-cl-bundle { padding: 0 20px 60px; }
     .akr-cl-bundle__inner { flex-direction: column; }
     .akr-cl-bundle__heading { font-size: 44px; }
@@ -271,7 +271,7 @@
     <div class="akr-cl-cards__grid">
 
       {%- comment -%} Card 1 — Ginger Ramen {%- endcomment -%}
-      <a href="{{ cl_p0.url | default: '/products/bone-broth-ginger-ramen' }}" class="akr-cl-card" style="background:#47b1b4;">
+      <a href="{{ cl_p0.url | default: '/products/bone-broth-ginger-ramen' }}" class="akr-cl-card" style="background:#47b1b4; height:471px;">
         <img class="akr-cl-card__img" src="{{ 'akr-classic-card-ramen.png' | asset_url }}" alt="Ginger Ramen" loading="lazy">
         <div class="akr-cl-card__inner">
           {%- if cl_p0.compare_at_price > cl_p0.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
@@ -285,7 +285,7 @@
       </a>
 
       {%- comment -%} Card 2 — Chanterelle {%- endcomment -%}
-      <a href="{{ cl_p1.url | default: '/products/bone-broth-chanterelle-mushroom' }}" class="akr-cl-card" style="background:#ffc03c;">
+      <a href="{{ cl_p1.url | default: '/products/bone-broth-chanterelle-mushroom' }}" class="akr-cl-card" style="background:#ffc03c; height:471px;">
         <img class="akr-cl-card__img" src="{{ 'akr-classic-card-chanterelle.png' | asset_url }}" alt="Chanterelle" loading="lazy">
         <div class="akr-cl-card__inner">
           {%- if cl_p1.compare_at_price > cl_p1.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
@@ -299,7 +299,7 @@
       </a>
 
       {%- comment -%} Card 3 — Savory Chicken {%- endcomment -%}
-      <a href="{{ cl_p2.url | default: '/products/bone-broth-chicken' }}" class="akr-cl-card" style="background:#ea7552;">
+      <a href="{{ cl_p2.url | default: '/products/bone-broth-chicken' }}" class="akr-cl-card" style="background:#ea7552; height:471px;">
         <img class="akr-cl-card__img" src="{{ 'akr-classic-card-chicken.png' | asset_url }}" alt="Savory Chicken" loading="lazy">
         <div class="akr-cl-card__inner">
           {%- if cl_p2.compare_at_price > cl_p2.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
@@ -313,7 +313,7 @@
       </a>
 
       {%- comment -%} Card 4 — Variety Pack {%- endcomment -%}
-      <a href="{{ cl_p3.url | default: '/products/akrrush-bone-broth-variety-pack' }}" class="akr-cl-card" style="background:#c25b2c;">
+      <a href="{{ cl_p3.url | default: '/products/akrrush-bone-broth-variety-pack' }}" class="akr-cl-card" style="background:#c25b2c; height:471px;">
         <img class="akr-cl-card__img" src="{{ 'akr-classic-card-variety.png' | asset_url }}" alt="Variety Pack" loading="lazy">
         <div class="akr-cl-card__inner">
           {%- if cl_p3.compare_at_price > cl_p3.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}

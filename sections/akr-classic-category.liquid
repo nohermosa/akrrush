@@ -1,21 +1,7 @@
-{% comment %} AKrrush Classic Category Page — Custom Liquid Section v1.0 {% endcomment %}
+{% comment %} AKrrush Classic Category Page — Snippet v1.0 {% endcomment %}
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
 <style>
-  /* ── Live-theme CSS isolation ── */
-  .akr-cl, .akr-cl * { font-family: Arial, sans-serif !important; }
-  .akr-cl .akr-cl-hero__heading .serif,
-  .akr-cl .akr-cl-hero__heading .serif-italic,
-  .akr-cl .akr-cl-quote__text,
-  .akr-cl .akr-cl-bundle__heading,
-  .akr-cl .akr-cl-stats__heading { font-family: 'DM Serif Display', serif !important; }
-  .akr-cl p { font-weight: 400 !important; }
-  .akr-cl h1, .akr-cl h2, .akr-cl h3, .akr-cl h4 {
-    font-size: unset; line-height: unset; color: unset; margin-bottom: unset;
-  }
   .akr-cl { font-family: Arial, sans-serif; }
 
   /* Hero */
@@ -30,7 +16,7 @@
     top: 0; left: 0;
     width: 100%; height: 100%;
     object-fit: cover;
-    object-position: center 60%;
+    object-position: center top;
     pointer-events: none;
   }
   .akr-cl-hero__panel {
@@ -63,7 +49,7 @@
     color: #fff; text-transform: uppercase; text-decoration: none;
     width: fit-content;
   }
-  /* hover → see Emil quality layer below */
+  .akr-cl-hero__cta:hover { background: #d4644a; color: #fff; }
 
   /* Info strip */
   .akr-cl-strip {
@@ -75,7 +61,7 @@
   .akr-cl-strip__dot { font-family: Arial, sans-serif; font-size: 13px; color: rgba(255,255,255,0.7); }
 
   /* Filter bar */
-  .akr-cl-filter { padding: 24px 100px; display: flex; align-items: center; justify-content: space-between; background: #fffbf2; }
+  .akr-cl-filter { display: none !important; }
   .akr-cl-filter__left { display: flex; gap: 40px; align-items: center; }
   .akr-cl-filter__label { font-family: Arial, sans-serif; font-weight: 700; font-size: 14px; color: #100807; text-transform: uppercase; letter-spacing: 0.6px; }
   .akr-cl-filter__btn { display: flex; gap: 6px; align-items: center; opacity: 0.7; cursor: pointer; }
@@ -92,20 +78,22 @@
 
   /* Product cards */
   .akr-cl-cards { background: #fffbf2; padding: 0 100px 100px; }
-  .akr-cl-cards__grid { display: flex; gap: 24px; max-width: 1240px; }
-  .akr-cl-card { flex: 1; height: 442.67px; border-radius: 24px; position: relative; overflow: hidden; min-width: 0; }
+  .akr-cl-cards__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; width: 100%; }
+  .akr-cl-card { height: 471px; border-radius: 24px; position: relative; overflow: hidden; display: block; text-decoration: none; cursor: pointer; }
   .akr-cl-card--teal { background: #47b1b4; }
   .akr-cl-card--yellow { background: #ffc03c; }
   .akr-cl-card--coral { background: #ea7552; }
   .akr-cl-card__inner { display: flex; flex-direction: column; justify-content: space-between; padding: 32px; height: 100%; position: relative; }
-  .akr-cl-card__img { position: absolute; width: 100%; height: calc(100% + 14px); left: 0; top: -7px; object-fit: cover; }
-  .akr-cl-card__badge { background: #ea7552; border-radius: 100px; padding: 8px 16px; font-family: Arial, sans-serif; font-size: 16px; color: #fff; text-transform: uppercase; letter-spacing: 0.6px; display: inline-flex; align-items: center; position: relative; z-index: 2; }
+  .akr-cl-card__img { position: absolute; width: 100%; height: 100%; left: 0; top: 0; object-fit: cover; }
+  .akr-cl-card__badge { background: #ea7552; border-radius: 100px; padding: 8px 16px; font-family: Arial, sans-serif; font-size: 16px; color: #fff; text-transform: uppercase; letter-spacing: 0.6px; display: inline-flex; align-items: center; position: relative; z-index: 2; align-self: flex-start; }
   .akr-cl-card__info { position: absolute; bottom: -0.33px; left: 0; width: 100%; padding: 32px; background: linear-gradient(to top, rgba(28,14,8,0.9), rgba(28,14,8,0)); z-index: 2; }
   .akr-cl-card__name { font-family: Arial, sans-serif; font-weight: 700; font-size: 24px; line-height: 1.2; color: #fff; margin: 0 0 16px; }
   .akr-cl-card__price { font-family: Arial, sans-serif; font-weight: 700; font-size: 24px; color: #fff; margin: 0; }
-  .akr-cl-card__overlay { position: absolute; inset: 0; background: rgba(44,26,16,0.7); z-index: 3; }
-  .akr-cl-card__cta { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: #ea7552; border-radius: 9999px; padding: 16px 32px; font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #fff; text-transform: uppercase; text-decoration: none; white-space: nowrap; z-index: 4; }
-  /* hover → see Emil quality layer below */
+  .akr-cl-card__overlay { position: absolute; inset: 0; background: rgba(44,26,16,0.7); z-index: 3; opacity: 0; transition: opacity 0.25s; }
+  .akr-cl-card__cta { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: #ea7552; border-radius: 9999px; padding: 16px 32px; font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #fff; text-transform: uppercase; text-decoration: none; white-space: nowrap; z-index: 4; opacity: 0; transition: opacity 0.25s; }
+  .akr-cl-card:hover .akr-cl-card__overlay { opacity: 1; }
+  .akr-cl-card:hover .akr-cl-card__cta { opacity: 1; }
+  .akr-cl-card__cta:hover { background: #d4644a; color: #fff; }
 
   /* Bundle */
   .akr-cl-bundle { padding: 0 100px 100px; background: #fffbf2; }
@@ -121,74 +109,89 @@
   .akr-cl-bundle__actions { display: flex; align-items: center; gap: 24px; }
   .akr-cl-bundle__price { font-family: Arial, sans-serif; font-weight: 700; font-size: 24px; color: #ea7552; }
   .akr-cl-bundle__btn { background: #ea7552; border-radius: 1000px; padding: 16px 20px; font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #fff; text-decoration: none; letter-spacing: 0.6px; display: inline-flex; }
-  /* hover → see Emil quality layer below */
+  .akr-cl-bundle__btn:hover { background: #d4644a; color: #fff; }
 
   /* Stats section */
-  .akr-cl-stats { padding: 80px 100px; background: #fffbf2; }
-  .akr-cl-stats__card { background: rgba(255,192,60,0.1); border: 1px solid #ffc03c; border-radius: 24px; padding: 33px; }
-  .akr-cl-stats__label { font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #ffc03c; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 24px; }
-  .akr-cl-stats__heading { font-family: 'DM Serif Display', serif; font-size: 40px; color: #2c1a10; margin-bottom: 24px; }
-  .akr-cl-stats__heading em { font-style: italic; color: #ea7552; }
-  .akr-cl-stats__grid { display: flex; justify-content: space-between; }
+  /* ── INFO CARDS (2-col layout) ── */
+  .akr-cl-infocards { padding: 80px 100px; background: #fffbf2; }
+  .akr-cl-infocards__row { display: flex; gap: 24px; align-items: flex-start; position: relative; }
+  /* Left col */
+  .akr-cl-infocards__left { flex: 1 0 0; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+  /* Flavor chooser card */
+  .akr-cl-flavor { background: rgba(71,177,180,0.1); border: 1px solid #47b1b4; border-radius: 24px; padding: 33px; }
+  .akr-cl-flavor__label { font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #47b1b4; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 32px; }
+  .akr-cl-flavor__title { font-family: 'DM Serif Display', serif; font-size: 20px; color: #1a0f08; margin-bottom: 24px; }
+  .akr-cl-flavor__row { display: flex; flex-direction: column; gap: 12px; padding: 16px 0; border-top: 0.5px solid rgba(16,8,7,0.2); }
+  .akr-cl-flavor__row:first-of-type { border-top: none; padding-top: 0; }
+  .akr-cl-flavor__question { font-family: Arial, sans-serif; font-size: 16px; color: #7d6355; letter-spacing: 0; }
+  .akr-cl-flavor__options { font-family: Arial, sans-serif; font-size: 16px; color: #1a0f08; letter-spacing: 0.6px; display: flex; gap: 12px; }
+  /* Ingredient / stats card */
+  .akr-cl-stats { background: rgba(255,192,60,0.1); border: 1px solid #ffc03c; border-radius: 24px; padding: 33px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+  .akr-cl-stats__label { font-family: Arial, sans-serif; font-weight: 700; font-size: 16px; color: #ffc03c; text-transform: uppercase; letter-spacing: 0.6px; }
+  .akr-cl-stats__heading { font-family: 'DM Serif Display', serif; font-size: 20px; color: #1a0f08; margin: 0; }
+  .akr-cl-stats__body { font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #3d2b1e; margin: 0; }
+  .akr-cl-stats__grid { display: flex; justify-content: space-between; margin-top: 8px; }
   .akr-cl-stats__item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .akr-cl-stats__value { font-family: 'DM Serif Display', serif; font-size: 32px; color: #ffc03c; letter-spacing: 1.344px; }
-  .akr-cl-stats__sublabel { font-family: Arial, sans-serif; font-size: 12px; color: #1a0f08; text-transform: uppercase; letter-spacing: 0.54px; opacity: 0.5; }
+  .akr-cl-stats__value { font-family: 'DM Serif Display', serif; font-size: 32px; color: #b07d00; letter-spacing: 1.344px; }
+  .akr-cl-stats__sublabel { font-family: Arial, sans-serif; font-size: 12px; color: #5a4535; text-transform: uppercase; letter-spacing: 0.54px; }
+  /* Right col — testimonial */
+  .akr-cl-infocards__right { flex: 1 0 0; min-width: 0; position: relative; }
+  .akr-cl-review { background: rgba(234,117,82,0.1); border: 1px solid #ea7552; border-radius: 24px; padding: 33px; display: flex; flex-direction: column; justify-content: space-between; min-height: 355px; position: relative; overflow: hidden; }
+  .akr-cl-review__quotemark { margin-bottom: 22px; }
+  .akr-cl-review__quote { font-family: Arial, sans-serif; font-style: italic; font-size: 20px; line-height: 1.5; color: #1a0f08; margin: 0 0 auto; }
+  .akr-cl-review__attribution { font-family: Arial, sans-serif; font-size: 12px; color: #5a4535; text-transform: uppercase; letter-spacing: 0.54px; margin-top: 32px; }
+  /* Product stick floating image */
+  .akr-cl-infocards__stick { position: absolute; right: -10px; top: 250px; width: 400px; transform: rotate(16.3deg); pointer-events: none; z-index: 2; }
+  .akr-cl-infocards__stick img { width: 100%; height: auto; display: block; }
 
   /* Testimonial */
-  .akr-cl-review { padding: 0 100px 80px; background: #fffbf2; }
-  .akr-cl-review__card { background: rgba(234,117,82,0.1); border: 1px solid #ea7552; border-radius: 24px; padding: 33px; }
-  .akr-cl-review__quote { font-family: Arial, sans-serif; font-size: 18px; line-height: 1.5; color: #7d6355; margin: 0 0 32px; }
-  .akr-cl-review__attribution { font-family: Arial, sans-serif; font-size: 12px; color: #7d6355; text-transform: uppercase; letter-spacing: 0.54px; }
+  /* review styles moved into .akr-cl-infocards block above */
+
+  /* Tablet (iPad: 769–1024px) */
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .akr-cl-hero__panel { left: 40px; width: calc(100% - 80px); }
+    .akr-cl-hero__heading .serif, .akr-cl-hero__heading .serif-italic { font-size: 56px; }
+    .akr-cl-quote { padding: 60px 40px; }
+    .akr-cl-cards { padding: 0 40px 60px; }
+    .akr-cl-cards__grid { grid-template-columns: repeat(2, 1fr); }
+    .akr-cl-bundle { padding: 0 40px 60px; }
+    .akr-cl-bundle__heading { font-size: 48px; }
+    .akr-cl-bundle__bg { display: none !important; }
+    .akr-cl-bundle__fade { display: none !important; }
+    .akr-cl-bundle__content { max-width: 100%; }
+    .akr-cl-infocards { padding: 60px 40px; }
+  }
 
   /* Mobile */
   @media (max-width: 768px) {
     .akr-cl-hero { height: auto; min-height: 600px; }
-    .akr-cl-hero__bg { width: 100%; opacity: 0.4; }
-    .akr-cl-hero__panel { position: relative; top: auto; left: auto; transform: none; width: 100%; padding: 40px 20px; }
+    .akr-cl-hero__bg { width: 100%; opacity: 0.15; }
+    .akr-cl-hero__panel { position: relative; top: auto; left: auto; transform: none; width: 100%; padding: 40px 20px; background: rgba(255,251,242,0.88); border-radius: 16px; margin: 24px 16px; width: calc(100% - 32px); box-sizing: border-box; }
     .akr-cl-hero__heading .serif, .akr-cl-hero__heading .serif-italic { font-size: 44px; }
     .akr-cl-filter { padding: 24px 20px; flex-wrap: wrap; gap: 16px; }
     .akr-cl-quote { padding: 60px 20px; }
     .akr-cl-quote__text { font-size: 28px; }
     .akr-cl-cards { padding: 0 20px 60px; }
-    .akr-cl-cards__grid { flex-direction: column; }
-    .akr-cl-card { height: 340px; }
+    .akr-cl-cards__grid { grid-template-columns: 1fr; }
+    .akr-cl-card { height: 340px !important; max-height: 340px !important; }
     .akr-cl-bundle { padding: 0 20px 60px; }
     .akr-cl-bundle__inner { flex-direction: column; }
     .akr-cl-bundle__heading { font-size: 44px; }
     .akr-cl-bundle__bg { display: none; }
-    .akr-cl-stats { padding: 60px 20px; }
-    .akr-cl-review { padding: 0 20px 60px; }
-  }
-
-  /* ── Emil Kowalski quality layer ── */
-  .akr-cl-hero__cta,
-  .akr-cl-card__cta,
-  .akr-cl-bundle__btn {
-    transition: background 200ms cubic-bezier(0.16, 1, 0.3, 1),
-                color 150ms ease,
-                transform 140ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .akr-cl-hero__cta:active,
-  .akr-cl-card__cta:active,
-  .akr-cl-bundle__btn:active {
-    transform: scale(0.97);
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .akr-cl-hero__cta:hover,
-    .akr-cl-card__cta:hover,
-    .akr-cl-bundle__btn:hover { background: #d4644a; color: #fff; }
-    .akr-cl-filter__btn:hover { opacity: 1; }
-    .akr-cl-filter__btn:hover span { color: #ea7552; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .akr-cl-hero__cta,
-    .akr-cl-card__cta,
-    .akr-cl-bundle__btn { transition: none; }
+    .akr-cl-infocards { padding: 40px 20px; }
+    .akr-cl-infocards__row { flex-direction: column; }
+    .akr-cl-infocards__stick { display: none; }
   }
 </style>
 
-{% assign cl_card_colors = '#47b1b4,#ffc03c,#ea7552' | split: ',' %}
-{% assign cl_card_images = 'akr-classic-card-ramen.png,akr-classic-card-chanterelle.png,akr-classic-card-chicken.png' | split: ',' %}
+{% assign cl_p0 = all_products['bone-broth-ginger-ramen'] %}
+{% assign cl_p1 = all_products['bone-broth-chanterelle-mushroom'] %}
+{% assign cl_p2 = all_products['bone-broth-chicken'] %}
+{% assign cl_p3 = all_products['akrrush-bone-broth-variety-pack'] %}
+{% assign cl_card_colors = '#47b1b4,#ffc03c,#ea7552,#c25b2c' | split: ',' %}
+{% assign cl_card_images = 'akr-classic-card-ramen.png,akr-classic-card-chanterelle.png,akr-classic-card-chicken.png,akr-classic-card-variety.png' | split: ',' %}
+{% assign cl_card_names = 'Ginger Ramen,Chanterelle,Savory Chicken,Variety Pack' | split: ',' %}
+{% assign cl_card_products = cl_p0 | append: '' %}{% comment %}placeholder for array{% endcomment %}
 
 <div class="akr-cl">
 
@@ -281,43 +284,63 @@
   {%- comment -%} ── PRODUCT CARDS ── {%- endcomment -%}
   <div class="akr-cl-cards" id="akr-cl-products">
     <div class="akr-cl-cards__grid">
-      {%- assign _cl_col = collections['bone-broth'] | default: collection -%}
-      {%- for product in _cl_col.products limit: 3 -%}
-        {%- assign idx = forloop.index0 -%}
-        {%- assign bg_color = cl_card_colors[idx] -%}
-        {%- assign fallback_img = cl_card_images[idx] | asset_url -%}
-        <div class="akr-cl-card" style="background:{{ bg_color }};">
-          <img
-            class="akr-cl-card__img"
-            src="{{ fallback_img }}"
-            alt="{{ product.title | escape }}"
-            loading="lazy"
-          >
 
-          <div class="akr-cl-card__inner">
-            <div style="position:relative;z-index:2;"></div>
-            <div style="height:0;"></div>
-          </div>
-
-          <div class="akr-cl-card__info">
-            <p class="akr-cl-card__name">{{ product.title }}</p>
-            <p class="akr-cl-card__price">{{ product.price | money }}</p>
-          </div>
-
-          <span class="akr-cl-card__badge" style="position:absolute;bottom:32px;right:32px;z-index:3;">Sale</span>
-
-          {%- if forloop.index == 2 -%}
-            <div class="akr-cl-card__overlay"></div>
-            <a href="{{ product.url }}" class="akr-cl-card__cta">SHOP NOW</a>
-          {%- endif -%}
+      {%- comment -%} Card 1 — Ginger Ramen {%- endcomment -%}
+      <a href="{{ cl_p0.url | default: '/products/bone-broth-ginger-ramen' }}" class="akr-cl-card" style="background:#47b1b4;">
+        <img class="akr-cl-card__img" src="{{ 'akr-classic-card-ramen.png' | asset_url }}" alt="Ginger Ramen" loading="lazy">
+        <div class="akr-cl-card__inner">
+          {%- if cl_p0.compare_at_price > cl_p0.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
         </div>
-      {%- else -%}
-        {%- for i in (1..3) -%}
-          {%- assign idx = forloop.index0 -%}
-          {%- assign bg_color = cl_card_colors[idx] -%}
-          <div class="akr-cl-card" style="background:{{ bg_color }};"></div>
-        {%- endfor -%}
-      {%- endfor -%}
+        <div class="akr-cl-card__info">
+          <p class="akr-cl-card__name">Ginger Ramen</p>
+          <p class="akr-cl-card__price">{%- if cl_p0.price_varies -%}From {% endif %}{{ cl_p0.price | money | default: 'From $29.99' }}</p>
+        </div>
+        <div class="akr-cl-card__overlay"></div>
+        <span class="akr-cl-card__cta">SHOP NOW</span>
+      </a>
+
+      {%- comment -%} Card 2 — Chanterelle {%- endcomment -%}
+      <a href="{{ cl_p1.url | default: '/products/bone-broth-chanterelle-mushroom' }}" class="akr-cl-card" style="background:#ffc03c;">
+        <img class="akr-cl-card__img" src="{{ 'akr-classic-card-chanterelle.png' | asset_url }}" alt="Chanterelle" loading="lazy">
+        <div class="akr-cl-card__inner">
+          {%- if cl_p1.compare_at_price > cl_p1.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
+        </div>
+        <div class="akr-cl-card__info">
+          <p class="akr-cl-card__name">Chanterelle</p>
+          <p class="akr-cl-card__price">{%- if cl_p1.price_varies -%}From {% endif %}{{ cl_p1.price | money | default: 'From $29.99' }}</p>
+        </div>
+        <div class="akr-cl-card__overlay"></div>
+        <span class="akr-cl-card__cta">SHOP NOW</span>
+      </a>
+
+      {%- comment -%} Card 3 — Savory Chicken {%- endcomment -%}
+      <a href="{{ cl_p2.url | default: '/products/bone-broth-chicken' }}" class="akr-cl-card" style="background:#ea7552;">
+        <img class="akr-cl-card__img" src="{{ 'akr-classic-card-chicken.png' | asset_url }}" alt="Savory Chicken" loading="lazy">
+        <div class="akr-cl-card__inner">
+          {%- if cl_p2.compare_at_price > cl_p2.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
+        </div>
+        <div class="akr-cl-card__info">
+          <p class="akr-cl-card__name">Savory Chicken</p>
+          <p class="akr-cl-card__price">{%- if cl_p2.price_varies -%}From {% endif %}{{ cl_p2.price | money | default: 'From $29.99' }}</p>
+        </div>
+        <div class="akr-cl-card__overlay"></div>
+        <span class="akr-cl-card__cta">SHOP NOW</span>
+      </a>
+
+      {%- comment -%} Card 4 — Variety Pack {%- endcomment -%}
+      <a href="{{ cl_p3.url | default: '/products/akrrush-bone-broth-variety-pack' }}" class="akr-cl-card" style="background:#c25b2c;">
+        <img class="akr-cl-card__img" src="{{ 'akr-classic-card-variety.png' | asset_url }}" alt="Variety Pack" loading="lazy">
+        <div class="akr-cl-card__inner">
+          {%- if cl_p3.compare_at_price > cl_p3.price -%}<span class="akr-cl-card__badge">Sale</span>{%- endif -%}
+        </div>
+        <div class="akr-cl-card__info">
+          <p class="akr-cl-card__name">Variety Pack</p>
+          <p class="akr-cl-card__price">{%- if cl_p3.price_varies -%}From {% endif %}{{ cl_p3.price | money | default: 'From $24.99' }}</p>
+        </div>
+        <div class="akr-cl-card__overlay"></div>
+        <span class="akr-cl-card__cta">SHOP NOW</span>
+      </a>
+
     </div>
   </div>
 
@@ -332,7 +355,6 @@
           <h2 class="akr-cl-bundle__heading">All <em>three flavors</em>. One ritual.</h2>
           <p class="akr-cl-bundle__sub">FL·01 + FL·02 + FL·03 · 90 sticks total. Discover your ritual before committing to one.</p>
           <div class="akr-cl-bundle__actions">
-            <span class="akr-cl-bundle__price">$18</span>
             <a href="{{ collection.url }}" class="akr-cl-bundle__btn">Choose Your Flavor →</a>
           </div>
         </div>
@@ -340,39 +362,120 @@
     </div>
   </div>
 
-  {%- comment -%} ── STATS SECTION ── {%- endcomment -%}
-  <div class="akr-cl-stats">
-    <div class="akr-cl-stats__card">
-      <p class="akr-cl-stats__label">INGREDIENT SPOTLIGHT</p>
-      <h3 class="akr-cl-stats__heading">Norwegian <em>Bones</em></h3>
-      <div class="akr-cl-stats__grid">
-        <div class="akr-cl-stats__item">
-          <span class="akr-cl-stats__value">94%</span>
-          <span class="akr-cl-stats__sublabel">ABSORPTION</span>
+  {%- comment -%} ── INFO CARDS (Figma 2-col) ── {%- endcomment -%}
+  <div class="akr-cl-infocards">
+    <div class="akr-cl-infocards__row">
+
+      {%- comment -%} LEFT COL {%- endcomment -%}
+      <div class="akr-cl-infocards__left">
+
+        {%- comment -%} Flavor chooser card {%- endcomment -%}
+        <div class="akr-cl-flavor">
+          <p class="akr-cl-flavor__label">HOW TO CHOOSE YOUR FLAVOR</p>
+          <p class="akr-cl-flavor__title">Which ritual is yours?</p>
+          <div class="akr-cl-flavor__row">
+            <span class="akr-cl-flavor__question" style="color:#7d6355 !important;opacity:1 !important;">Flavor preference?</span>
+            <div class="akr-cl-flavor__options">
+              <span>Umami / Earthy →</span>
+              <span>Warming / Spiced →</span>
+            </div>
+          </div>
+          <div class="akr-cl-flavor__row">
+            <span class="akr-cl-flavor__question" style="color:#7d6355 !important;opacity:1 !important;">Primary use?</span>
+            <div class="akr-cl-flavor__options">
+              <span>Drinking solo</span>
+              <span>Cooking base</span>
+            </div>
+          </div>
+          <div class="akr-cl-flavor__row">
+            <span class="akr-cl-flavor__question" style="color:#7d6355 !important;opacity:1 !important;">Protein priority?</span>
+            <div class="akr-cl-flavor__options">
+              <span>Yes</span>
+              <span>Flavor first</span>
+            </div>
+          </div>
         </div>
-        <div class="akr-cl-stats__item">
-          <span class="akr-cl-stats__value">13g</span>
-          <span class="akr-cl-stats__sublabel">PER STICK</span>
+
+        {%- comment -%} Ingredient spotlight card {%- endcomment -%}
+        <div class="akr-cl-stats">
+          <p class="akr-cl-stats__label">INGREDIENT SPOTLIGHT</p>
+          <p class="akr-cl-stats__heading">Why hydrolyzed protein?</p>
+          <p class="akr-cl-stats__body">Standard protein requires your body to break it down before absorption begins. Hydrolyzed protein arrives pre-broken — smaller peptides, higher uptake, faster delivery to tissue.</p>
+          <div class="akr-cl-stats__grid">
+            <div class="akr-cl-stats__item">
+              <span class="akr-cl-stats__value" style="color:#b07d00 !important;">94%</span>
+              <span class="akr-cl-stats__sublabel" style="color:#5a4535 !important;opacity:1 !important;">ABSORPTION</span>
+            </div>
+            <div class="akr-cl-stats__item">
+              <span class="akr-cl-stats__value" style="color:#b07d00 !important;">13g</span>
+              <span class="akr-cl-stats__sublabel" style="color:#5a4535 !important;opacity:1 !important;">PER STICK</span>
+            </div>
+            <div class="akr-cl-stats__item">
+              <span class="akr-cl-stats__value" style="color:#b07d00 !important;">18h</span>
+              <span class="akr-cl-stats__sublabel" style="color:#5a4535 !important;opacity:1 !important;">SIMMER TIME</span>
+            </div>
+          </div>
         </div>
-        <div class="akr-cl-stats__item">
-          <span class="akr-cl-stats__value">18h</span>
-          <span class="akr-cl-stats__sublabel">SIMMER TIME</span>
+
+      </div>
+
+      {%- comment -%} RIGHT COL {%- endcomment -%}
+      <div class="akr-cl-infocards__right">
+        <div class="akr-cl-review">
+          <div class="akr-cl-review__quotemark">
+            <svg width="44" height="36" viewBox="0 0 44 36" fill="none" aria-hidden="true"><path d="M0 22C0 10 6 4 18 0L20.5 4C14 6.5 11 11 11 16H19V36H0V22ZM24 22C24 10 30 4 42 0L44.5 4C38 6.5 35 11 35 16H43V36H24V22Z" fill="#EA7552"/></svg>
+          </div>
+          <p class="akr-cl-review__quote">The Chanterelle flavor tastes like something a grandmother in Telemark would have simmered all day. Except it's in a stick. Remarkable.</p>
+          <p class="akr-cl-review__attribution">MAJA H. · PORTLAND, OR · APR 2026</p>
         </div>
       </div>
-    </div>
-  </div>
 
-  {%- comment -%} ── CUSTOMER REVIEW ── {%- endcomment -%}
-  <div class="akr-cl-review">
-    <div class="akr-cl-review__card">
-      <p class="akr-cl-review__quote">
-        The Chanterelle flavor tastes like something a grandmother in Telemark would have simmered all day. Except it's in a stick. Remarkable.
-      </p>
-      <p class="akr-cl-review__attribution">MAJA H. · BERGEN · APR 2026</p>
+      {%- comment -%} Product stick floating image {%- endcomment -%}
+      <div class="akr-cl-infocards__stick">
+        <img src="{{ 'akr-classic-product-stick.png' | asset_url }}" alt="åKrrush Classic" loading="lazy">
+      </div>
+
     </div>
   </div>
 
 </div>
+
+<script>
+(function() {
+  function akrFixContrast() {
+    document.querySelectorAll('.akr-cl-flavor__question').forEach(function(el) {
+      el.style.setProperty('color', '#5a3d2b', 'important');
+      el.style.setProperty('opacity', '1', 'important');
+    });
+    document.querySelectorAll('.akr-cl-stats__value').forEach(function(el) {
+      el.style.setProperty('color', '#8b6000', 'important');
+      el.style.setProperty('opacity', '1', 'important');
+    });
+    document.querySelectorAll('.akr-cl-stats__sublabel').forEach(function(el) {
+      el.style.setProperty('color', '#5a3d2b', 'important');
+      el.style.setProperty('opacity', '1', 'important');
+    });
+    document.querySelectorAll('.akr-cl-stats__body').forEach(function(el) {
+      el.style.setProperty('color', '#3d2b1e', 'important');
+    });
+    // Card height: 471px desktop+tablet / 340px mobile
+    var cardH = window.innerWidth <= 768 ? '340px' : '471px';
+    document.querySelectorAll('.akr-cl-card').forEach(function(el) {
+      el.style.setProperty('height', cardH, 'important');
+      el.style.setProperty('max-height', cardH, 'important');
+    });
+    document.querySelectorAll('.akr-cl-review__attribution').forEach(function(el) {
+      el.style.setProperty('color', '#5a3d2b', 'important');
+      el.style.setProperty('opacity', '1', 'important');
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', akrFixContrast);
+  } else {
+    akrFixContrast();
+  }
+})();
+</script>
 
 {% schema %}
 {

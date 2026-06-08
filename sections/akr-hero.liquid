@@ -431,6 +431,8 @@
   function akrSyncAppstle(subscribe) {
     var wrapper = document.querySelector('.appstle_subscription_wrapper');
     if (!wrapper) return;
+    // Save scroll before clicking — r.click() on off-screen elements causes browser to scroll to them
+    var savedScroll = window.scrollY;
     var radios = wrapper.querySelectorAll('input[type="radio"]');
     radios.forEach(function(r) {
       // Subscribe radios have a non-empty selling plan ID as value
@@ -438,6 +440,9 @@
       if (subscribe && isSubRadio)  { r.click(); }
       if (!subscribe && !isSubRadio) { r.click(); }
     });
+    // Restore scroll immediately and on next frame to cover both sync + async scroll
+    window.scrollTo(0, savedScroll);
+    requestAnimationFrame(function() { window.scrollTo(0, savedScroll); });
   }
 
   function akrSetMode(subscribe) {
@@ -455,11 +460,16 @@
     var radios = wrapper.querySelectorAll('input[type="radio"]');
     if (radios.length === 0) return false;
     var clicked = false;
+    var savedScroll = window.scrollY;
     radios.forEach(function(r) {
       if (r.value && r.value !== '' && r.value !== '0') {
         r.click(); clicked = true;
       }
     });
+    if (clicked) {
+      window.scrollTo(0, savedScroll);
+      requestAnimationFrame(function() { window.scrollTo(0, savedScroll); });
+    }
     return clicked;
   }
 

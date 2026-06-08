@@ -1,0 +1,132 @@
+
+{%- assign akr_num_is_pro = false -%}
+{%- for c in product.collections -%}
+  {%- if c.handle == 'akrrush-pro' -%}{%- assign akr_num_is_pro = true -%}{%- endif -%}
+{%- endfor -%}
+<section id="akr-numbers" class="akr-num-section">
+  <div class="akr-num-inner">
+
+    <!-- Header: centered above grid -->
+    <div class="akr-num-header">
+      <p class="akr-num-eyebrow">Norwegian Quality · Lab Tested</p>
+      <h2 class="akr-num-title">
+        Numbers don't
+        <span class="akr-num-lie-wrap">
+          <em>lie.</em>
+          <svg class="akr-num-lie-underline" viewBox="0 0 150.001 9.00039"
+               fill="none" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M2.00035 7.00004C19.5986 3.76625 100.55 -1.19223 148 4.84418"
+                  stroke="#EA7552" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="akr-num-accent">← straight up</span>
+      </h2>
+    </div>
+
+    <!-- 2-column grid: products left, stats right -->
+    <div class="akr-num-grid">
+
+      <!-- LEFT: stacked product images -->
+      <div class="akr-num-products">
+        <div class="akr-num-product akr-num-product--1">
+          {%- if section.settings.product_image_1 != blank -%}
+            <img src="{{ section.settings.product_image_1 | image_url: width: 800 }}"
+                 alt="åKrrush Savory Chicken bone broth stick"
+                 loading="lazy">
+          {%- elsif akr_num_is_pro -%}
+            <img src="{{ 'akr-pro-num-chicken.png' | asset_url }}"
+                 alt="åKrrush PRO Bold Chicken bone broth stick"
+                 loading="lazy">
+          {%- else -%}
+            <img src="{{ 'akr-stick-savory-chicken.png' | asset_url }}"
+                 alt="åKrrush Savory Chicken bone broth stick"
+                 loading="lazy">
+          {%- endif -%}
+        </div>
+        <div class="akr-num-product akr-num-product--2">
+          {%- if section.settings.product_image_2 != blank -%}
+            <img src="{{ section.settings.product_image_2 | image_url: width: 800 }}"
+                 alt="åKrrush Ginger Ramen bone broth stick"
+                 loading="lazy">
+          {%- elsif akr_num_is_pro -%}
+            <img src="{{ 'akr-pro-num-mushroom.png' | asset_url }}"
+                 alt="åKrrush PRO Max Mushroom bone broth stick"
+                 loading="lazy">
+          {%- else -%}
+            <img src="{{ 'akr-stick-ginger-ramen.png' | asset_url }}"
+                 alt="åKrrush Ginger Ramen bone broth stick"
+                 loading="lazy">
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- RIGHT: stats grid + CTA -->
+      <div class="akr-num-content">
+        <div class="akr-num-stats">
+          <div class="akr-num-stat">
+            <div class="akr-num-stat-value">{% if akr_num_is_pro %}20g{% else %}13g{% endif %}</div>
+            <div class="akr-num-stat-label">Protein per serving</div>
+            <div class="akr-num-stat-sub">vs. industry average</div>
+          </div>
+          <div class="akr-num-stat">
+            <div class="akr-num-stat-value">{% if akr_num_is_pro %}120{% else %}60{% endif %}</div>
+            <div class="akr-num-stat-label">Calories</div>
+            <div class="akr-num-stat-sub">{% if akr_num_is_pro %}Performance fuel{% else %}Light fuel, zero bloat{% endif %}</div>
+          </div>
+          <div class="akr-num-stat">
+            <div class="akr-num-stat-value">99%</div>
+            <div class="akr-num-stat-label">Norwegian Poultry</div>
+            <div class="akr-num-stat-sub">USDA &amp; FDA approved</div>
+          </div>
+          <div class="akr-num-stat">
+            <div class="akr-num-stat-value">5min</div>
+            <div class="akr-num-stat-label">Prep Time</div>
+            <div class="akr-num-stat-sub">Just add hot water</div>
+          </div>
+        </div>
+
+        <div class="akr-num-cta-wrap">
+          <a href="#akr-hero"
+             class="akr-num-cta akr-scroll-to-hero">
+            {{ section.settings.cta_text | default: 'Shop Now →' }}
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "åKrrush Numbers",
+  "tag": "div",
+  "class": "akr-numbers-wrapper",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "product_image_1",
+      "label": "Product image 1 (Savory Chicken)"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_2",
+      "label": "Product image 2 (Ginger Ramen)"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "Shop Now →"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "presets": [
+    { "name": "åKrrush Numbers" }
+  ]
+}
+{% endschema %}

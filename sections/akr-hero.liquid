@@ -1,0 +1,642 @@
+
+<style>
+/* ── Disable sticky header on custom åKrrush pages ── */
+#header.sticky--enabled,
+#header.sticky--enabled > *,
+.header-sticky-wrapper #header {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  width: auto !important;
+  z-index: auto !important;
+}
+.header-sticky-wrapper {
+  position: static !important;
+  height: auto !important;
+}
+
+/* ── Hide thumbnail strip + nutrition label link ── */
+.akr-hero-thumbs { display: none !important; }
+.akr-hero-view-nf { display: none !important; }
+
+/* ── Native product__form: hide elements we replace with custom UI ── */
+#product-form-{{ product.id }} options-selection,
+#product-form-{{ product.id }} .options-selection { display: none !important; }
+#product-form-{{ product.id }} .same-collection-products { display: none !important; }
+#product-form-{{ product.id }} .purchase-details__quantity { display: none !important; }
+#product-form-{{ product.id }} .cart-warning { display: none !important; }
+#product-form-{{ product.id }} .surface-pick-up,
+#product-form-{{ product.id }} .surface-pick-up__modal { display: none !important; }
+#product-form-{{ product.id }} .clearfix { overflow: visible !important; }
+
+/* ── Hide native purchase buttons — replaced by custom CTA ── */
+#product-form-{{ product.id }} .purchase-details { display: none !important; }
+
+/* ── Hide Appstle visual widget — keep FULLY FUNCTIONAL in DOM (positionally hidden, not display:none) ── */
+#shopify-section-{{ section.id }} .appstle_subscription_wrapper {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  pointer-events: none !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+#shopify-section-{{ section.id }} .product-app {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+}
+</style>
+
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  unless request.query_string contains 'variant='
+    if product.variants.size > 1
+      assign selected_variant = product.variants[1]
+    endif
+  endunless
+  assign best_idx = section.settings.best_value_index | minus: 1
+-%}
+
+<script type="application/json" data-section-id="{{ section.id }}" data-section-data>
+{
+  "product": {{ product | json }},
+  "section_id": {{ section.id | json }},
+  "variant_id": {{ selected_variant.id }},
+  "enable_video_looping": false,
+  "image_zoom": "disabled"
+}
+</script>
+
+<section class="akr-hero-section" id="akr-hero">
+  <div class="akr-hero-inner">
+
+    <!-- ===== LEFT: Gallery ===== -->
+    <div class="akr-hero-gallery-col">
+
+      <div class="akr-hero-main-wrap">
+
+        <!-- Main product image — use card asset mapped by handle, fall back to featured_image -->
+        {%- assign akr_main_img = '' -%}
+        {%- case product.handle -%}
+          {%- when 'bone-broth-chanterelle-mushroom' -%}{%- assign akr_main_img = 'akr-classic-card-chanterelle.png' -%}
+          {%- when 'bone-broth-ginger-ramen' -%}{%- assign akr_main_img = 'akr-classic-card-ramen.png' -%}
+          {%- when 'bone-broth-chicken' -%}{%- assign akr_main_img = 'akr-classic-card-chicken.png' -%}
+          {%- when 'akrrush-bone-broth-variety-pack' -%}{%- assign akr_main_img = 'akr-classic-card-variety.png' -%}
+          {%- when 'bold-chicken-pro-bone-broth' -%}{%- assign akr_main_img = 'akr-pro-card-chicken.png' -%}
+          {%- when 'ginger-akrrush-pro-bone-broth' -%}{%- assign akr_main_img = 'akr-pro-card-ginger.png' -%}
+          {%- when 'max-mushroom-pro-bone-broth' -%}{%- assign akr_main_img = 'akr-pro-card-mushroom.png' -%}
+          {%- when 'akrrush-pro-variety-pack-bone-broth' -%}{%- assign akr_main_img = 'akr-pro-card-variety.png' -%}
+        {%- endcase -%}
+        {%- if akr_main_img != '' -%}
+          <img class="akr-hero-main-img" id="akrMainImg"
+               src="{{ akr_main_img | asset_url }}"
+               alt="{{ product.title | escape }}"
+               fetchpriority="high"
+               loading="eager">
+        {%- else -%}
+          <img class="akr-hero-main-img" id="akrMainImg"
+               src="{{ product.featured_image | image_url: width: 800 }}"
+               alt="{{ product.title | escape }}"
+               fetchpriority="high"
+               loading="eager">
+        {%- endif -%}
+
+
+      </div><!-- /main-wrap -->
+
+      <!-- Thumbnails -->
+      <div class="akr-hero-thumbs">
+        {%- for image in product.images -%}
+          <div class="akr-hero-thumb{% if forloop.first %} active{% endif %}"
+               data-img="{{ image | img_url: '800x' }}">
+            <img src="{{ image | img_url: '160x160' }}"
+                 alt="{{ image.alt | default: product.title | escape }}"
+                 loading="lazy">
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <a href="#" class="akr-hero-view-nf js-akr-view-nf">View Nutrition Label</a>
+
+    </div><!-- /gallery-col -->
+
+    <!-- ===== RIGHT: Info ===== -->
+    <div class="akr-hero-info-col">
+
+      <!-- Yotpo stars (first @app block) -->
+      {%- assign akr_yotpo_done = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' and akr_yotpo_done == false -%}
+          {%- assign akr_yotpo_done = true -%}
+          <div class="akr-hero-yotpo">{% render block %}</div>
+        {%- endif -%}
+      {%- endfor -%}
+
+      <!-- Eyebrow -->
+      <p class="akr-hero-eyebrow">{{ section.settings.eyebrow }}</p>
+
+      <!-- Title -->
+      <h1 class="akr-hero-title">{{ product.title }}</h1>
+
+      <!-- Short description -->
+      {%- if section.settings.short_desc != blank -%}
+        <p class="akr-hero-short-desc">{{ section.settings.short_desc }}</p>
+      {%- endif -%}
+
+      <!-- Feature bullets -->
+      {%- assign has_features = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'feature_point' -%}{%- assign has_features = true -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if has_features -%}
+        <ul class="akr-hero-bullets">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'feature_point' -%}
+              <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      <hr class="akr-hero-divider">
+
+      <!-- Flavor selector — Classic vs PRO based on collection -->
+      {%- assign akr_is_pro = false -%}
+      {%- for c in product.collections -%}
+        {%- if c.handle == 'akrrush-pro' -%}{%- assign akr_is_pro = true -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if akr_is_pro -%}
+        {%- assign akr_flavor_handles = 'bold-chicken-pro-bone-broth,ginger-akrrush-pro-bone-broth,max-mushroom-pro-bone-broth' | split: ',' -%}
+        {%- assign akr_flavor_names = 'Bold Chicken,Ginger PRO,Max Mushroom' | split: ',' -%}
+        {%- assign akr_flavor_images = 'akr-pro-card-chicken.png,akr-pro-card-ginger.png,akr-pro-card-mushroom.png' | split: ',' -%}
+      {%- else -%}
+        {%- assign akr_flavor_handles = 'bone-broth-chicken,bone-broth-ginger-ramen,bone-broth-chanterelle-mushroom' | split: ',' -%}
+        {%- assign akr_flavor_names = 'Savory Chicken,Ginger Ramen,Chanterelle' | split: ',' -%}
+        {%- assign akr_flavor_images = 'akr-classic-card-chicken.png,akr-classic-card-ramen.png,akr-classic-card-chanterelle.png' | split: ',' -%}
+      {%- endif -%}
+
+      <p class="akr-hero-flavor-label">SELECT FLAVOR:</p>
+      <div class="akr-hero-flavor-row" role="list" aria-label="Select flavor">
+        {%- for f_handle in akr_flavor_handles -%}
+          {%- assign idx = forloop.index0 -%}
+          {%- assign f_name = akr_flavor_names[idx] -%}
+          {%- assign f_image = akr_flavor_images[idx] -%}
+          {%- assign is_active = false -%}
+          {%- if product.handle == f_handle -%}
+            {%- assign is_active = true -%}
+          {%- endif -%}
+          <a class="akr-hero-flavor-item{% if is_active %} active{% endif %}"
+             href="/products/{{ f_handle }}"
+             role="listitem"
+             {% if is_active %}aria-current="true"{% endif %}>
+            <div class="akr-hero-flavor-thumb">
+              <img src="{{ f_image | asset_url }}"
+                   alt="{{ f_name }}"
+                   loading="lazy"
+                   width="120"
+                   height="120">
+            </div>
+            <span class="akr-hero-flavor-name">{{ f_name }}</span>
+          </a>
+        {%- endfor -%}
+      </div>
+
+
+      <!-- Pack size buttons (variant selector — outside form so Appstle can read the select) -->
+      <div class="akr-hero-pack-btns" id="akrPackBtns">
+        {%- for variant in product.variants -%}
+          {%- assign is_best = false -%}
+          {%- if forloop.index0 == best_idx -%}{%- assign is_best = true -%}{%- endif -%}
+          <button type="button"
+                  class="akr-hero-pack-btn{% if is_best %} akr-hero-pack-btn--best{% endif %}{% if variant.id == selected_variant.id %} active{% endif %}"
+                  data-variant-id="{{ variant.id }}">
+            {%- if is_best -%}<span class="akr-hero-best-label">BEST VALUE</span>{%- endif -%}
+            <div class="akr-hero-pack-name">{{ variant.title }}</div>
+            <div class="akr-hero-pack-price">{{ variant.price | money_without_trailing_zeros }}</div>
+          </button>
+        {%- endfor -%}
+      </div>
+
+      <!-- ── Subscription pricing data ── -->
+      {%- assign akr_discount_pct = 10 -%}
+      {%- for spg in product.selling_plan_groups -%}
+        {%- for sp in spg.selling_plans -%}
+          {%- for pa in sp.price_adjustments -%}
+            {%- if pa.value_type == 'percentage' -%}{%- assign akr_discount_pct = pa.value -%}{%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endfor -%}
+      {%- assign akr_sub_mult = 100 | minus: akr_discount_pct -%}
+      {%- assign akr_sub_cents = selected_variant.price | times: akr_sub_mult | divided_by: 100 -%}
+
+      <script type="application/json" id="akrVariantPrices">
+      [{%- for v in product.variants -%}{%- assign vc = v.price | times: akr_sub_mult | divided_by: 100 -%}{"id":{{ v.id }},"price":{{ v.price }},"sub_price":{{ vc }}}{% unless forloop.last %},{% endunless %}{%- endfor -%}]
+      </script>
+
+      <!-- ── Custom subscription card UI ── -->
+      <div class="akr-sub-wrap">
+
+        <!-- Subscribe card -->
+        <div class="akr-sub-card akr-sub-card--selected" id="akrSubCard" role="button" tabindex="0">
+          {%- comment -%} Annual savings: discount per order × 13 orders/year (every 4 weeks) {%- endcomment -%}
+          {%- assign akr_saving_per_order = selected_variant.price | times: akr_discount_pct | divided_by: 100 -%}
+          {%- assign akr_saving_annual = akr_saving_per_order | times: 13 | divided_by: 100 -%}
+          <div class="akr-sub-stamp">
+            <span class="akr-sub-stamp-line1">SAVE</span>
+            <span class="akr-sub-stamp-line2">${{ akr_saving_annual }}</span>
+            <span class="akr-sub-stamp-line3">PER YEAR</span>
+          </div>
+          <div class="akr-sub-card-header">
+            <div class="akr-sub-radio-dot"></div>
+            <span class="akr-sub-card-label">Subscribe &amp; Save — {{ akr_discount_pct }}% off</span>
+          </div>
+          <div class="akr-sub-card-body">
+            <div class="akr-sub-price-row">
+              <span class="akr-sub-price-main" id="akrSubPrice">{{ akr_sub_cents | money }}</span>
+              <span class="akr-sub-price-period">/mo ·</span>
+              <span class="akr-sub-price-compare" id="akrSubCompare">{{ selected_variant.price | money }}</span>
+            </div>
+            <div class="akr-sub-billing" id="akrSubBilling">Billed {{ akr_sub_cents | money }} every 4 weeks</div>
+            <div class="akr-sub-perks">
+              <div class="akr-sub-perk">Free <em>Welcome Pack</em> with 1st order</div>
+              <div class="akr-sub-perk"><em>Cancel or pause</em> anytime</div>
+              <div class="akr-sub-perk"><em>Maximum savings</em> — lowest price per stick</div>
+              <div class="akr-sub-perk"><em>Swap flavors</em> between shipments</div>
+              <div class="akr-sub-perk"><em>Free</em> shipping every order</div>
+              <div class="akr-sub-perk"><em>Priority</em> customer support</div>
+            </div>
+            <div class="akr-delivery-row">
+              <span class="akr-delivery-label">Delivery every</span>
+              <div class="akr-delivery-btns" id="akrDeliveryBtns">
+                <button type="button" class="akr-delivery-btn active" data-days="30">30 Days</button>
+                <button type="button" class="akr-delivery-btn" data-days="45">45 Days</button>
+                <button type="button" class="akr-delivery-btn" data-days="60">60 Days</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- One-time option -->
+        <div class="akr-one-time" id="akrOneTime" role="button" tabindex="0">
+          <div class="akr-one-time-radio"></div>
+          <div class="akr-one-time-text">
+            <div class="akr-one-time-label">One-Time Purchase</div>
+            <div class="akr-one-time-price" id="akrOneTimePrice">{{ selected_variant.price | money }} · Free shipping over $50 · No commitment</div>
+          </div>
+        </div>
+
+      </div><!-- /akr-sub-wrap -->
+
+      <!-- Product form — use the real snippet so Appstle can attach to it -->
+      {%
+        render 'product__form',
+        context: 'product',
+        product: product,
+        sold_out_options: 'disabled',
+        selected_variant: selected_variant,
+        show_payment_button: false,
+        collection_handles: product.collections | map: 'handle'
+      %}
+
+      <!-- @app blocks (Appstle subscription widget) rendered after the form,
+           matching the live product page structure: Appstle JS searches the
+           document for form[action*="cart/add"] and injects before the ATC btn -->
+      {%- assign akr_app_idx = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}
+          {%- assign akr_app_idx = akr_app_idx | plus: 1 -%}
+          {%- if akr_app_idx > 1 -%}
+            <div class="product-app" {{ block.shopify_attributes }}>
+              {%- render block -%}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <!-- Custom CTA button (triggers Appstle-injected form) -->
+      <button type="button" class="akr-cta-btn" id="akrCtaBtn"
+              data-form-id="product-form-{{ product.id }}">
+        SUBSCRIBE &amp; SAVE — ADD TO CART · {{ akr_sub_cents | money }}/mo
+      </button>
+
+      <!-- Trust note -->
+      {%- if section.settings.trust_note != blank -%}
+        <p class="akr-hero-trust">{{ section.settings.trust_note }}</p>
+      {%- endif -%}
+
+    </div><!-- /info-col -->
+
+  </div><!-- /hero-inner -->
+</section>
+
+<script src="{{ 'z__jsProduct.js' | asset_url }}" data-theme-editor-load-script></script>
+
+
+<script>
+(function() {
+
+  // ── Thumbnail gallery ──
+  var thumbs = document.querySelectorAll('.akr-hero-thumb');
+  var mainImg = document.getElementById('akrMainImg');
+  thumbs.forEach(function(th) {
+    th.addEventListener('click', function() {
+      thumbs.forEach(function(t) { t.classList.remove('active'); });
+      th.classList.add('active');
+      if (mainImg) mainImg.src = th.dataset.img;
+    });
+  });
+
+  // ── Pack variant selection ──
+  var packBtns = document.querySelectorAll('.akr-hero-pack-btn');
+
+  function akrSelectPack(btn) {
+    packBtns.forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var vid = btn.getAttribute('data-variant-id');
+    var variantSelect = document.querySelector('[data-variants]');
+    if (variantSelect) {
+      variantSelect.value = vid;
+      ['change','input'].forEach(function(ev) {
+        variantSelect.dispatchEvent(new Event(ev, { bubbles: true }));
+      });
+    }
+    var vs = document.querySelector('[data-variant-selection]');
+    if (vs) { vs.setAttribute('variant', vid); }
+    setTimeout(akrUpdateSubPrices, 0);
+  }
+
+  packBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() { akrSelectPack(this); });
+  });
+
+  // ── View Nutrition Label ──
+  var viewNf = document.querySelector('.js-akr-view-nf');
+  if (viewNf) {
+    viewNf.addEventListener('click', function(e) {
+      var ing = document.querySelector('.akr-ing-section');
+      if (ing) { e.preventDefault(); ing.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  }
+
+  // ── Subscription card ──
+  var isSubscribeMode = true;
+  var priceData = [];
+  var priceEl = document.getElementById('akrVariantPrices');
+  if (priceEl) {
+    try { priceData = JSON.parse(priceEl.textContent || priceEl.innerText); } catch(e) {}
+  }
+
+  var subCard        = document.getElementById('akrSubCard');
+  var oneTime        = document.getElementById('akrOneTime');
+  var ctaBtn         = document.getElementById('akrCtaBtn');
+  var subPriceEl     = document.getElementById('akrSubPrice');
+  var subCompareEl   = document.getElementById('akrSubCompare');
+  var subBillingEl   = document.getElementById('akrSubBilling');
+  var oneTimePriceEl = document.getElementById('akrOneTimePrice');
+
+  function fmtMoney(cents) {
+    return '$' + (cents / 100).toFixed(2);
+  }
+
+  function akrUpdateSubPrices() {
+    var activePackBtn = document.querySelector('.akr-hero-pack-btn.active');
+    if (!activePackBtn) return;
+    var vid = activePackBtn.getAttribute('data-variant-id');
+    var vd = null;
+    for (var i = 0; i < priceData.length; i++) {
+      if (String(priceData[i].id) === String(vid)) { vd = priceData[i]; break; }
+    }
+    if (!vd) return;
+
+    var subP  = fmtMoney(vd.sub_price);
+    var fullP = fmtMoney(vd.price);
+
+    if (subPriceEl)     subPriceEl.textContent     = subP;
+    if (subCompareEl)   subCompareEl.textContent   = fullP;
+    if (subBillingEl)   subBillingEl.textContent   = 'Billed ' + subP + ' every 4 weeks';
+    if (oneTimePriceEl) oneTimePriceEl.textContent = fullP + ' · Free shipping over $50 · No commitment';
+    if (ctaBtn) {
+      ctaBtn.textContent = isSubscribeMode
+        ? 'SUBSCRIBE & SAVE — ADD TO CART · ' + subP + '/mo'
+        : 'ADD TO CART · ' + fullP;
+    }
+  }
+
+  function akrSyncAppstle(subscribe) {
+    var wrapper = document.querySelector('.appstle_subscription_wrapper');
+    if (!wrapper) return;
+    // Save scroll before clicking — r.click() on off-screen elements causes browser to scroll to them
+    var savedScroll = window.scrollY;
+    var radios = wrapper.querySelectorAll('input[type="radio"]');
+    radios.forEach(function(r) {
+      // Subscribe radios have a non-empty selling plan ID as value
+      var isSubRadio = r.value && r.value !== '' && r.value !== '0';
+      if (subscribe && isSubRadio)  { r.click(); }
+      if (!subscribe && !isSubRadio) { r.click(); }
+    });
+    // Restore scroll immediately and on next frame to cover both sync + async scroll
+    window.scrollTo(0, savedScroll);
+    requestAnimationFrame(function() { window.scrollTo(0, savedScroll); });
+  }
+
+  function akrSetMode(subscribe) {
+    isSubscribeMode = subscribe;
+    if (subCard) subCard.classList.toggle('akr-sub-card--selected', subscribe);
+    if (oneTime) oneTime.classList.toggle('akr-one-time--selected', !subscribe);
+    akrSyncAppstle(subscribe);
+    akrUpdateSubPrices();
+  }
+
+  // Auto-select subscribe when Appstle finishes rendering
+  function akrTryAutoSubscribe() {
+    var wrapper = document.querySelector('.appstle_subscription_wrapper');
+    if (!wrapper) return false;
+    var radios = wrapper.querySelectorAll('input[type="radio"]');
+    if (radios.length === 0) return false;
+    var clicked = false;
+    var savedScroll = window.scrollY;
+    radios.forEach(function(r) {
+      if (r.value && r.value !== '' && r.value !== '0') {
+        r.click(); clicked = true;
+      }
+    });
+    if (clicked) {
+      window.scrollTo(0, savedScroll);
+      requestAnimationFrame(function() { window.scrollTo(0, savedScroll); });
+    }
+    return clicked;
+  }
+
+  if (!akrTryAutoSubscribe()) {
+    var obs = new MutationObserver(function() {
+      if (akrTryAutoSubscribe()) obs.disconnect();
+    });
+    obs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(function() { obs.disconnect(); akrTryAutoSubscribe(); }, 6000);
+  }
+
+  // Card / one-time click handlers
+  if (subCard) {
+    subCard.addEventListener('click', function() { akrSetMode(true); });
+    subCard.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); akrSetMode(true); }
+    });
+  }
+  if (oneTime) {
+    oneTime.addEventListener('click', function() { akrSetMode(false); });
+    oneTime.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); akrSetMode(false); }
+    });
+  }
+
+  // Delivery frequency buttons
+  var deliveryBtns = document.querySelectorAll('#akrDeliveryBtns .akr-delivery-btn');
+  deliveryBtns.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation(); // don't bubble to card click
+      deliveryBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      // Attempt to sync with matching Appstle selling plan
+      var days = btn.getAttribute('data-days');
+      document.querySelectorAll('.appstle_subscription_wrapper select').forEach(function(sel) {
+        sel.querySelectorAll('option').forEach(function(opt) {
+          if (opt.textContent.includes(days) || opt.value.includes(days)) {
+            sel.value = opt.value;
+            sel.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        });
+      });
+    });
+  });
+
+  // CTA: direct fetch to /cart/add.js with exact known values (bypasses form serialization issues)
+  if (ctaBtn) {
+    ctaBtn.addEventListener('click', function() {
+      var activePackBtn = document.querySelector('.akr-hero-pack-btn.active');
+      if (!activePackBtn) return;
+      var variantId = parseInt(activePackBtn.getAttribute('data-variant-id'), 10);
+      if (!variantId) return;
+
+      var payload = { id: variantId, quantity: 1 };
+
+      if (isSubscribeMode) {
+        // 1. Try Appstle's injected hidden input in the form
+        var sellingPlanInput = document.querySelector('form[action*="cart/add"] input[name="selling_plan"]');
+        var spVal = sellingPlanInput ? sellingPlanInput.value : '';
+        // 2. Fallback: URL param (Appstle updates the URL when plan changes)
+        if (!spVal) {
+          spVal = new URLSearchParams(window.location.search).get('selling_plan') || '';
+        }
+        if (spVal) {
+          payload.selling_plan = parseInt(spVal, 10);
+        }
+      }
+
+      ctaBtn.disabled = true;
+      ctaBtn.textContent = 'Adding…';
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.status) {
+          // Error object from Shopify
+          console.error('Cart add error:', data.description || data.message);
+          ctaBtn.disabled = false;
+          akrUpdateSubPrices();
+          return;
+        }
+        // Success — rebuild PXUTheme mini-cart and show drawer
+        if (window.PXUTheme && window.PXUTheme.jsAjaxCart) {
+          window.PXUTheme.jsAjaxCart.buildCart();
+          var $trigger = $('[data-ajax-cart-trigger]');
+          if ($trigger.length) $trigger.addClass('show-mini-cart');
+        } else {
+          window.location.href = '/cart';
+        }
+        ctaBtn.disabled = false;
+        akrUpdateSubPrices();
+      })
+      .catch(function() {
+        ctaBtn.disabled = false;
+        akrUpdateSubPrices();
+        window.location.href = '/cart';
+      });
+    });
+  }
+
+  akrUpdateSubPrices();
+
+})();
+</script>
+
+{%- comment -%}
+  Badge settings (badge_protein_title, badge_protein_sub, badge_nongmo_title, badge_nongmo_sub)
+  beholdes for fremtidig HTML-implementasjon. Per Sprint 4.G (2026-05-26): badges er for
+  tiden del av hero-bilde, ikke separate HTML-elementer. Slett ikke uten beslutning.
+{%- endcomment -%}
+{% schema %}
+{
+  "name": "åKr Hero",
+  "tag": "div",
+  "class": "akr-hero-wrapper product-template product-main jsProduct",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "NORWEGIAN BONE BROTH · STICK PACKS" },
+    { "type": "textarea", "id": "short_desc", "label": "Short description", "default": "13g protein per stick. 99%+ Norwegian sourced. No prep, no mess — tear open, stir into hot water, drink." },
+    { "type": "text", "id": "badge_protein_title", "label": "Badge Protein title", "default": "13G PROTEIN" },
+    { "type": "text", "id": "badge_protein_sub",   "label": "Badge Protein subtitle", "default": "Per single-serve stick" },
+    { "type": "text", "id": "badge_nongmo_title",  "label": "Badge Non-GMO title", "default": "NON-GMO" },
+    { "type": "text", "id": "badge_nongmo_sub",    "label": "Badge Non-GMO subtitle", "default": "No hormones · No antibiotics" },
+    { "type": "text", "id": "pack_heading_before", "label": "Pack heading before italic", "default": "Your weekly dose of" },
+    { "type": "text", "id": "pack_heading_italic", "label": "Pack heading italic word", "default": "strong" },
+    { "type": "textarea", "id": "pack_desc", "label": "Pack description", "default": "Save more, ship less, and keep your daily ritual on repeat — with perks that make it feel extra good." },
+    { "type": "text", "id": "most_popular_text", "label": "Most popular label", "default": "most popular" },
+    { "type": "range", "id": "best_value_index", "label": "Best Value variant position (1=first)", "min": 1, "max": 10, "step": 1, "default": 2 },
+    { "type": "text", "id": "trust_note", "label": "Trust note", "default": "30-day money-back guarantee · Free shipping · Cancel anytime" }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "feature_point",
+      "name": "Feature Point",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Replaces protein powder + collagen supplement" }
+      ]
+    },
+    {
+      "type": "flavor_link",
+      "name": "Flavor Option",
+      "settings": [
+        { "type": "text",         "id": "name",        "label": "Flavor name",            "default": "Savory Chicken" },
+        { "type": "text",         "id": "image_asset", "label": "Image asset filename (e.g. akr-flavor-chicken.png)" },
+        { "type": "image_picker", "id": "image",       "label": "Flavor image (upload)" },
+        { "type": "url",          "id": "url",         "label": "Product URL" },
+        { "type": "checkbox",     "id": "is_current",  "label": "This is the current product", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "åKr Hero",
+      "blocks": [
+        { "type": "feature_point", "settings": { "text": "Replaces protein powder + collagen supplement" } },
+        { "type": "feature_point", "settings": { "text": "~100% protein bioavailability (enzymatic hydrolysis)" } },
+        { "type": "feature_point", "settings": { "text": "USDA & FDA Approved · Produced in Norway" } },
+        { "type": "feature_point", "settings": { "text": "30-day money-back guarantee" } },
+        { "type": "flavor_link", "settings": { "name": "Savory Chicken",  "image_asset": "akr-flavor-chicken.png",     "is_current": true } },
+        { "type": "flavor_link", "settings": { "name": "Ginger Ramen",    "image_asset": "akr-flavor-ramen.png" } },
+        { "type": "flavor_link", "settings": { "name": "Chanterelle",     "image_asset": "akr-flavor-chanterelle.png" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

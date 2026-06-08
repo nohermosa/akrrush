@@ -1,0 +1,223 @@
+
+{%- assign akr_is_pro = false -%}
+{%- for c in product.collections -%}
+  {%- if c.handle == 'akrrush-pro' -%}{%- assign akr_is_pro = true -%}{%- endif -%}
+{%- endfor -%}
+
+<style>
+  .akr-compare-list li { margin-bottom: 32px !important; }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.akr-compare-list').forEach(function(ul) {
+      var items = ul.querySelectorAll('li');
+      items.forEach(function(li, i) {
+        li.style.setProperty('margin-bottom', '32px', 'important');
+      });
+    });
+  });
+</script>
+
+<section class="akr-why-section" id="akr-why">
+  <div class="akr-why-inner">
+
+    <!-- Eyebrow (Fix 2: 13px, 0.18em, centered) -->
+    <p class="akr-why-eyebrow">
+      {%- if akr_is_pro -%}Performance Bone Broth PRO{%- else -%}{{ section.settings.eyebrow | default: 'Real Bone Broth' }}{%- endif -%}
+    </p>
+
+    <!-- Headline — one line on desktop -->
+    <h2 class="akr-why-heading">
+      {%- if akr_is_pro -%}
+        Why settle for <em>just<img src="{{ 'akr-underline-just.svg' | asset_url }}" class="akr-underline-just" aria-hidden="true" alt="" loading="lazy"></em> <span class="akr-why-broth-outline">powder?</span>
+      {%- else -%}
+        {{ section.settings.headline_before | default: 'Why drink' }} <em>{{ section.settings.headline_emphasis | default: 'just' }}<img src="{{ 'akr-underline-just.svg' | asset_url }}" class="akr-underline-just" aria-hidden="true" alt="" loading="lazy"></em> <span class="akr-why-broth-outline">{{ section.settings.headline_after | default: 'broth?' }}</span>
+      {%- endif -%}
+    </h2>
+
+    <!-- Subheadline -->
+    <div class="akr-why-sub">
+      {%- if akr_is_pro -%}
+        <p>When you can fuel with <em>20g protein + electrolytes</em> + real broth taste. No chalky shakes. Just performance.</p>
+      {%- elsif section.settings.sub != blank -%}
+        {{ section.settings.sub }}
+      {%- else -%}
+        <p>When you can drink <em>real food</em>. Translation: more fuel, faster recovery, real results.</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Comparison cards -->
+    <div class="akr-why-compare">
+
+      <!-- LEFT: Average / Competitor -->
+      <div class="akr-compare-card akr-compare-card--avg">
+        <div class="akr-compare-inner">
+
+          <div class="akr-compare-img-col">
+            {%- if section.settings.average_image != blank -%}
+              <img src="{{ section.settings.average_image | image_url: width: 400 }}" alt="{{ section.settings.avg_title | default: 'Average Bone Broth' }}" loading="lazy">
+            {%- else -%}
+              <img src="{{ 'akr-grey-packet.png' | asset_url }}" alt="Generic bone broth packet" loading="lazy">
+            {%- endif -%}
+          </div>
+
+          <div class="akr-compare-content">
+            <h3 class="akr-compare-title">
+              {%- if akr_is_pro -%}Protein Powder + Sports Drinks{%- else -%}{{ section.settings.avg_title | default: 'Average Bone Broth' }}{%- endif -%}
+            </h3>
+            <ul class="akr-compare-list">
+              {%- if akr_is_pro -%}
+                {%- assign pro_avg_items = 'Chalky, artificial taste|No electrolytes included|Zero collagen support|Synthetic ingredients & fillers|Missing real nutrition' | split: '|' -%}
+                {%- for item in pro_avg_items -%}
+                  <li style="margin-bottom: 32px;">
+                    <span class="akr-bullet-icon akr-bullet-icon--neg" aria-hidden="true">
+                      <svg viewBox="0 0 12 12"><path d="M2 2l8 8M10 2L2 10" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+                    </span>
+                    {{ item }}
+                  </li>
+                {%- endfor -%}
+              {%- else -%}
+                {%- for i in (1..5) -%}
+                  {%- assign field = 'avg_item_' | append: i -%}
+                  {%- if section.settings[field] != blank -%}
+                    <li style="margin-bottom: 32px;">
+                      <span class="akr-bullet-icon akr-bullet-icon--neg" aria-hidden="true">
+                        <svg viewBox="0 0 12 12"><path d="M2 2l8 8M10 2L2 10" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+                      </span>
+                      {{ section.settings[field] }}
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+            </ul>
+          </div>
+
+        </div>
+        <div class="akr-compare-footer">
+          {%- if akr_is_pro -%}What protein powder + sports drinks give you{%- else -%}{{ section.settings.avg_footer | default: 'What you get from average brands' }}{%- endif -%}
+        </div>
+      </div>
+
+      <!-- RIGHT: åKrrush — overflow:hidden clips splash to card boundary (Bug 1) -->
+      <div class="akr-compare-card akr-compare-card--ak">
+
+        <!-- Bug 2: accent inside card, absolute positioned top-right pointing at stick -->
+        <div class="akr-ak-accent" aria-hidden="true">
+          <span class="akr-ak-accent-text">{{ section.settings.ak_accent | default: 'obvious choice' }}</span>
+          <svg width="48" height="40" viewBox="0 0 48 40" fill="none" class="akr-ak-accent-arrow">
+            <path d="M2 4 Q 12 22 28 26" stroke="#C66B45" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <path d="M22 20 L 28 26 L 20 28" stroke="#C66B45" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Content left side — padded right to clear stick -->
+        <div class="akr-compare-content">
+          <div class="akr-compare-logo">
+            <img src="{{ 'akr-logo.svg' | asset_url }}" alt="åKrrush" loading="lazy">
+          </div>
+          <ul class="akr-compare-list">
+            {%- if akr_is_pro -%}
+              {%- assign pro_ak_items = '20g hydrolyzed protein per stick|Electrolytes for performance & hydration|Collagen peptides for joints & recovery|99% Norwegian poultry|Keto · Paleo · No artificial fillers' | split: '|' -%}
+              {%- for item in pro_ak_items -%}
+                <li style="margin-bottom: 16px;">
+                  <span class="akr-bullet-icon akr-bullet-icon--pos" aria-hidden="true">
+                    <svg viewBox="0 0 12 12"><path d="M1.5 6l3 3L10.5 2.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                  </span>
+                  {{ item }}
+                </li>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for i in (1..5) -%}
+                {%- assign field = 'ak_item_' | append: i -%}
+                {%- if section.settings[field] != blank -%}
+                  <li style="margin-bottom: 16px;">
+                    <span class="akr-bullet-icon akr-bullet-icon--pos" aria-hidden="true">
+                      <svg viewBox="0 0 12 12"><path d="M1.5 6l3 3L10.5 2.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                    </span>
+                    {{ section.settings[field] }}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          </ul>
+        </div>
+        <div class="akr-compare-footer akr-compare-footer--ak">
+          {%- if akr_is_pro -%}What åKrrush PRO delivers{%- else -%}{{ section.settings.ak_footer | default: 'The åKrrush standard' }}{%- endif -%}
+        </div>
+
+        <!-- Bug 1: stick inside card — clipped by overflow:hidden to card boundary -->
+        <div class="akr-compare-visual" aria-hidden="true">
+          {%- if section.settings.akrrush_image != blank -%}
+            <img class="akr-compare-stick" src="{{ section.settings.akrrush_image | image_url: width: 800 }}" alt="" loading="lazy">
+          {%- elsif akr_is_pro -%}
+            <img class="akr-compare-stick" src="{{ 'akr-pro-stick-splash.png' | asset_url }}" alt="" loading="lazy">
+          {%- else -%}
+            <img class="akr-compare-stick" src="{{ 'akr-stick-splash.png' | asset_url }}" alt="" loading="lazy">
+          {%- endif -%}
+        </div>
+
+      </div>
+
+    </div><!-- /compare -->
+
+    <!-- CTA -->
+    <div class="akr-why-cta-wrap">
+      <a href="#akr-hero" class="akr-btn-cta-dark akr-scroll-to-hero">
+        {%- if akr_is_pro -%}FUEL WITH PRO — SHOP NOW →{%- else -%}{{ section.settings.cta_text | default: 'TASTE THE DIFFERENCE — SHOP NOW →' }}{%- endif -%}
+      </a>
+      <p class="akr-why-trust">{{ section.settings.trust_text | default: 'Free shipping over $50 · 30-day money-back guarantee' }}</p>
+    </div>
+
+  </div><!-- /akr-why-inner -->
+</section>
+
+<script>
+document.addEventListener('click', function(e) {
+  var btn = e.target.closest('.akr-scroll-to-hero');
+  if (!btn) return;
+  e.preventDefault();
+  var hero = document.getElementById('akr-hero');
+  if (hero) hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Why drink just broth",
+  "tag": "div",
+  "class": "akr-why-wrapper",
+  "settings": [
+    { "type": "text",     "id": "eyebrow",           "label": "Eyebrow text",                      "default": "Real Bone Broth" },
+    { "type": "header",   "content": "Headline" },
+    { "type": "text",     "id": "headline_before",   "label": "Headline — text before italic word", "default": "Why drink" },
+    { "type": "text",     "id": "headline_emphasis",  "label": "Headline — italic word",            "default": "just" },
+    { "type": "text",     "id": "headline_after",    "label": "Headline — outline word",            "default": "broth?" },
+    { "type": "richtext", "id": "sub",               "label": "Subheadline",                        "default": "<p>When you can drink <em>real food<\/em>. Translation: more fuel, faster recovery, real results.<\/p>" },
+    { "type": "header",   "content": "Average Bone Broth card" },
+    { "type": "image_picker", "id": "average_image", "label": "Average broth image (gray packet)" },
+    { "type": "text",     "id": "avg_title",         "label": "Card title",                        "default": "Average Bone Broth" },
+    { "type": "text",     "id": "avg_item_1",        "label": "Negative item 1",                   "default": "Slow protein absorption" },
+    { "type": "text",     "id": "avg_item_2",        "label": "Negative item 2",                   "default": "Low bioavailability" },
+    { "type": "text",     "id": "avg_item_3",        "label": "Negative item 3",                   "default": "Hard to digest" },
+    { "type": "text",     "id": "avg_item_4",        "label": "Negative item 4",                   "default": "Often imported sources" },
+    { "type": "text",     "id": "avg_item_5",        "label": "Negative item 5",                   "default": "Contains fillers" },
+    { "type": "text",     "id": "avg_footer",        "label": "Card footer",                       "default": "What you get from average brands" },
+    { "type": "header",   "content": "åKrrush card" },
+    { "type": "image_picker", "id": "akrrush_image", "label": "åKrrush product image (use akrrush-stick-splash.png)" },
+    { "type": "text",     "id": "ak_accent",         "label": "Accent text (handwritten feel)",    "default": "obvious choice" },
+    { "type": "text",     "id": "ak_item_1",         "label": "Positive item 1",                   "default": "Rapid protein absorption" },
+    { "type": "text",     "id": "ak_item_2",         "label": "Positive item 2",                   "default": "Near 100% bioavailability" },
+    { "type": "text",     "id": "ak_item_3",         "label": "Positive item 3",                   "default": "Easy to digest" },
+    { "type": "text",     "id": "ak_item_4",         "label": "Positive item 4",                   "default": "100% Norwegian poultry" },
+    { "type": "text",     "id": "ak_item_5",         "label": "Positive item 5",                   "default": "Non-GMO · No hormones" },
+    { "type": "text",     "id": "ak_footer",         "label": "Card footer",                       "default": "What you get from åKrrush" },
+    { "type": "header",   "content": "CTA" },
+    { "type": "url",      "id": "cta_url",           "label": "CTA button URL" },
+    { "type": "text",     "id": "cta_text",          "label": "CTA button text",                   "default": "TASTE THE DIFFERENCE — SHOP NOW →" },
+    { "type": "text",     "id": "trust_text",        "label": "Reassurance text",                  "default": "Free shipping over $50 · 30-day money-back guarantee" }
+  ],
+  "presets": [
+    { "name": "Why drink just broth" }
+  ]
+}
+{% endschema %}

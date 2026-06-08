@@ -379,7 +379,7 @@
     .akr-pro-strip::-webkit-scrollbar { display: none; }
     .akr-pro-cards { padding: 40px 20px; }
     .akr-pro-cards__grid { grid-template-columns: 1fr; width: 100%; }
-    .akr-pro-card { height: 340px; }
+    .akr-pro-card { height: 340px !important; max-height: 340px !important; }
     .akr-pro-card__img { width: 100%; height: 100%; left: 0; top: 0; }
     .akr-pro-card__info { width: 100%; }
     .akr-pro-feature { padding: 40px 20px; }
@@ -389,7 +389,7 @@
     .akr-pro-testimonial__inner { flex-direction: column; }
     .akr-pro-testimonial__card { width: 100%; }
     .akr-pro-testimonial__photo { height: 300px; }
-    .akr-pro-quote-card { bottom: 16px; right: 16px; width: 240px; padding: 16px; }
+    .akr-pro-quote-card { bottom: -16px; right: 0; left: 0; margin: 0 auto; width: calc(100% - 32px); padding: 16px; transform: rotate(0deg); }
     .akr-pro-quote-card__text { font-size: 20px; }
     .akr-pro-brand { padding: 40px 20px; }
     .akr-pro-brand__inner { flex-direction: column; gap: 40px; }
@@ -398,11 +398,13 @@
   }
 </style>
 
-{% assign pro_cards = collection.products | slice: 0, 4 %}
+{% assign pro_p0 = all_products['bold-chicken-pro-bone-broth'] %}
+{% assign pro_p1 = all_products['ginger-akrrush-pro-bone-broth'] %}
+{% assign pro_p2 = all_products['max-mushroom-pro-bone-broth'] %}
+{% assign pro_p3 = all_products['akrrush-pro-variety-pack-bone-broth'] %}
 {% assign card_colors = '#47b1b4,#ffc03c,#ea7552,#2c1a10' | split: ',' %}
-{% assign card_images = 'akr-pro-card-variety.png,akr-pro-card-chicken.png,akr-pro-card-ginger.png,akr-pro-card-mushroom.png' | split: ',' %}
-{% assign card_names = 'åKrrush PRO Variety Pack,Bold Chicken PRO,Ginger åKrrush PRO,Max Mushroom PRO' | split: ',' %}
-{% assign card_prices = '$39.99,$39.99,$39.99,$39.99' | split: ',' %}
+{% assign card_images = 'akr-pro-card-chicken.png,akr-pro-card-ginger.png,akr-pro-card-mushroom.png,akr-pro-card-variety.png' | split: ',' %}
+{% assign card_names = 'Bold Chicken PRO,Ginger åKrrush PRO,Max Mushroom PRO,PRO Variety Pack' | split: ',' %}
 
 <div class="akr-pro">
 
@@ -521,32 +523,51 @@
   {%- comment -%} ── PRODUCT CARDS ── {%- endcomment -%}
   <div class="akr-pro-cards" id="akr-pro-products">
     <div class="akr-pro-cards__grid">
-      {%- for i in (1..4) -%}
-        {%- assign idx = forloop.index0 -%}
-        {%- assign product = pro_cards[idx] -%}
-        {%- assign bg_color = card_colors[idx] -%}
-        {%- assign fallback_img = card_images[idx] | asset_url -%}
-        {%- if product -%}
-          <a href="{{ product.url }}" class="akr-pro-card" style="background:{{ bg_color }};">
-        {%- else -%}
-          <a href="{{ collection.url }}" class="akr-pro-card" style="background:{{ bg_color }};">
-        {%- endif -%}
-          <img class="akr-pro-card__img" src="{{ fallback_img }}" alt="{{ product.title | default: card_names[idx] | escape }}" loading="lazy">
-          {%- if product -%}
-            <div class="akr-pro-card__info">
-              <p class="akr-pro-card__name">{{ product.title }}</p>
-              <p class="akr-pro-card__price">{%- if product.price_varies -%}From {% endif %}{{ product.price | money }}</p>
-            </div>
-          {%- else -%}
-            <div class="akr-pro-card__info">
-              <p class="akr-pro-card__name">{{ card_names[idx] }}</p>
-              <p class="akr-pro-card__price">From {{ card_prices[idx] }}</p>
-            </div>
-          {%- endif -%}
-          <div class="akr-pro-card__overlay"></div>
-          <span class="akr-pro-card__cta">SHOP NOW</span>
-        </a>
-      {%- endfor -%}
+
+      {%- comment -%} Card 1 — Bold Chicken PRO {%- endcomment -%}
+      <a href="{{ pro_p0.url | default: '/products/bold-chicken-pro-bone-broth' }}" class="akr-pro-card" style="background:#47b1b4; height:471px;">
+        <img class="akr-pro-card__img" src="{{ 'akr-pro-card-chicken.png' | asset_url }}" alt="Bold Chicken PRO" loading="lazy">
+        <div class="akr-pro-card__info">
+          <p class="akr-pro-card__name">Bold Chicken PRO</p>
+          <p class="akr-pro-card__price">{%- if pro_p0.price_varies -%}From {% endif %}{{ pro_p0.price | money | default: 'From $39.99' }}</p>
+        </div>
+        <div class="akr-pro-card__overlay"></div>
+        <span class="akr-pro-card__cta">SHOP NOW</span>
+      </a>
+
+      {%- comment -%} Card 2 — Ginger PRO {%- endcomment -%}
+      <a href="{{ pro_p1.url | default: '/products/ginger-akrrush-pro-bone-broth' }}" class="akr-pro-card" style="background:#ffc03c; height:471px;">
+        <img class="akr-pro-card__img" src="{{ 'akr-pro-card-ginger.png' | asset_url }}" alt="Ginger åKrrush PRO" loading="lazy">
+        <div class="akr-pro-card__info">
+          <p class="akr-pro-card__name">Ginger åKrrush PRO</p>
+          <p class="akr-pro-card__price">{%- if pro_p1.price_varies -%}From {% endif %}{{ pro_p1.price | money | default: 'From $39.99' }}</p>
+        </div>
+        <div class="akr-pro-card__overlay"></div>
+        <span class="akr-pro-card__cta">SHOP NOW</span>
+      </a>
+
+      {%- comment -%} Card 3 — Max Mushroom PRO {%- endcomment -%}
+      <a href="{{ pro_p2.url | default: '/products/max-mushroom-pro-bone-broth' }}" class="akr-pro-card" style="background:#ea7552; height:471px;">
+        <img class="akr-pro-card__img" src="{{ 'akr-pro-card-mushroom.png' | asset_url }}" alt="Max Mushroom PRO" loading="lazy">
+        <div class="akr-pro-card__info">
+          <p class="akr-pro-card__name">Max Mushroom PRO</p>
+          <p class="akr-pro-card__price">{%- if pro_p2.price_varies -%}From {% endif %}{{ pro_p2.price | money | default: 'From $39.99' }}</p>
+        </div>
+        <div class="akr-pro-card__overlay"></div>
+        <span class="akr-pro-card__cta">SHOP NOW</span>
+      </a>
+
+      {%- comment -%} Card 4 — PRO Variety Pack {%- endcomment -%}
+      <a href="{{ pro_p3.url | default: '/products/akrrush-pro-variety-pack-bone-broth' }}" class="akr-pro-card" style="background:#2c1a10; height:471px;">
+        <img class="akr-pro-card__img" src="{{ 'akr-pro-card-variety.png' | asset_url }}" alt="PRO Variety Pack" loading="lazy">
+        <div class="akr-pro-card__info">
+          <p class="akr-pro-card__name">PRO Variety Pack</p>
+          <p class="akr-pro-card__price">{%- if pro_p3.price_varies -%}From {% endif %}{{ pro_p3.price | money | default: 'From $39.99' }}</p>
+        </div>
+        <div class="akr-pro-card__overlay"></div>
+        <span class="akr-pro-card__cta">SHOP NOW</span>
+      </a>
+
     </div>
   </div>
 

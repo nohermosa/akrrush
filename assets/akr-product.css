@@ -904,15 +904,29 @@ a.akr-btn-cta-secondary:hover {
   font-size: 16px;
   color: var(--akr-mid);
   line-height: 1.5;
-  padding: 0 0 24px 0;
-  display: none;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0;
+  /* Close: fast — Emil: "fast when responding" */
+  transition: max-height 180ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 140ms ease-in,
+              padding 180ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .akr-faq-section .akr-faq-a p {
   font-family: Arial, sans-serif !important;
   font-weight: 400;
   font-size: medium;
 }
-.akr-faq-section .akr-faq-a.is-open { display: block; }
+.akr-faq-section .akr-faq-a.is-open {
+  max-height: 600px;
+  opacity: 1;
+  padding: 0 0 24px 0;
+  /* Open: slower — comfortable reading expansion */
+  transition: max-height 320ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 260ms ease-out,
+              padding 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
 .akr-faq-still-curious {
   margin-top: 28px;
   padding-top: 24px;
@@ -3186,3 +3200,122 @@ section[id="akr-hero"] .akr-sub-perks {
 /* cache-bust 2026-06-04-17-00 — Sprint 5.4 quote-card + eyebrow */
 /* cache-bust 2026-06-04-19-00 — compare-list gap 14→18px + stripe fixes */
 /* cache-bust 2026-06-04-18-00 — Sprint 5.4.1 tab inactive opacity 0.55→0.75 */
+/* cache-bust 2026-06-08-00-00 — Emil Kowalski design quality layer */
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* DESIGN QUALITY LAYER — Emil Kowalski philosophy                        */
+/* Taste, responsiveness, invisible correctness.                          */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Custom easing variables ── */
+:root {
+  --akr-ease-snappy:  cubic-bezier(0.16, 1, 0.3, 1);   /* fast, responsive */
+  --akr-ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1); /* slight overshoot */
+  --akr-ease-smooth:  cubic-bezier(0.4, 0, 0.2, 1);    /* material morph */
+}
+
+/* ── Button press feedback: scale(0.97) on all interactive elements ──
+   Emil: "Buttons must feel responsive. scale(0.97) feels satisfying."    */
+.akr-cta-btn:active,
+button.akr-cta-btn:active,
+a.akr-cta-btn:active {
+  transform: scale(0.97) !important;
+  transition: transform 100ms var(--akr-ease-snappy) !important;
+}
+
+.akr-btn-cta-dark:active,
+a.akr-btn-cta-dark:active,
+button.akr-btn-cta-dark:active {
+  transform: scale(0.97) !important;
+  box-shadow: none !important;
+  transition: transform 100ms var(--akr-ease-snappy), box-shadow 100ms ease !important;
+}
+
+.akr-num-cta:active {
+  transform: scale(0.97);
+  transition: transform 100ms var(--akr-ease-snappy), background 0.2s ease;
+}
+
+.akr-btn-chat {
+  transition: opacity 150ms ease-out, color 150ms ease-out, transform 100ms var(--akr-ease-snappy);
+}
+.akr-btn-chat:active { transform: scale(0.97); }
+
+.akr-delivery-btn:active { transform: scale(0.97); }
+
+section[id="akr-hero"] .akr-hero-pack-btn:active {
+  transform: scale(0.97);
+  transition: transform 100ms var(--akr-ease-snappy), border-color 0.2s ease, background 0.2s ease;
+}
+
+.akr-faq-tab:active { transform: scale(0.97); }
+.akr-faq-tab {
+  transition: opacity 150ms ease-out, transform 100ms var(--akr-ease-snappy) !important;
+}
+
+/* ── CTA transition: custom easing replaces plain ease ── */
+.akr-btn-cta-dark,
+a.akr-btn-cta-dark,
+button.akr-btn-cta-dark {
+  transition: background-color 200ms var(--akr-ease-snappy),
+              transform 150ms var(--akr-ease-snappy),
+              box-shadow 200ms var(--akr-ease-snappy) !important;
+}
+
+/* ── Hover states: gate behind pointer:fine — prevents mobile false triggers ──
+   Emil: "Touch device hover states break the feel. Guard them."          */
+@media (hover: hover) and (pointer: fine) {
+  .akr-benefit-item:hover .akr-benefit-circle {
+    transform: translateY(-7px);
+    box-shadow: 0 14px 30px rgba(44,26,16,0.13);
+  }
+  .akr-sub-card:hover { box-shadow: 0 4px 16px rgba(234,117,82,.15); }
+  .akr-one-time:hover { border-color: #c0a090; }
+  .akr-hero-thumb:hover { border-color: var(--akr-orange); }
+  .akr-hero-flavor-item:not(.active):hover .akr-hero-flavor-thumb {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44,26,16,0.08);
+  }
+  .akr-phone-screen:hover .akr-phone-play-circle { transform: scale(1.06); }
+  .akr-compare-card--ak:hover .akr-compare-stick {
+    animation-play-state: paused;
+    transform: rotate(-14deg) translateY(-14px) scale(1.03);
+    transition: transform 400ms ease;
+  }
+  .akr-btn-cta-dark:hover,
+  a.akr-btn-cta-dark:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(210,114,74,0.32);
+  }
+  .akr-num-cta:hover { background: var(--akr-cta-secondary-hover); }
+  .akr-faq-tab:hover { opacity: 0.8; }
+  .akr-btn-chat:hover { opacity: .9; color: #fff; }
+  section[id="akr-hero"] .akr-hero-pack-btn:hover { border-color: var(--akr-cta-primary); }
+  section[id="akr-hero"] .akr-delivery-btn:hover { border-color: var(--akr-cta-primary); }
+}
+
+/* ── prefers-reduced-motion: comprehensive ── */
+@media (prefers-reduced-motion: reduce) {
+  .akr-btn-cta-dark,
+  a.akr-btn-cta-dark,
+  button.akr-btn-cta-dark,
+  .akr-cta-btn,
+  button.akr-cta-btn,
+  .akr-num-cta,
+  .akr-btn-chat,
+  .akr-delivery-btn,
+  .akr-hero-pack-btn,
+  .akr-faq-tab,
+  .akr-benefit-item,
+  .akr-benefit-circle,
+  .akr-compare-stick,
+  .akr-hero-flavor-thumb,
+  .akr-phone-play-circle {
+    transition: none !important;
+    animation: none !important;
+  }
+  .akr-faq-section .akr-faq-a,
+  .akr-faq-section .akr-faq-a.is-open {
+    transition: none !important;
+  }
+}

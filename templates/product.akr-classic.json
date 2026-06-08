@@ -1,0 +1,413 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "akr_hero": {
+      "type": "akr-hero",
+      "blocks": {
+        "yotpo_stars": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "feature_1": {
+          "type": "feature_point",
+          "settings": {
+            "text": "Replaces protein powder + collagen supplement"
+          }
+        },
+        "feature_2": {
+          "type": "feature_point",
+          "settings": {
+            "text": "~100% protein bioavailability (enzymatic hydrolysis)"
+          }
+        },
+        "feature_3": {
+          "type": "feature_point",
+          "settings": {
+            "text": "USDA & FDA Approved · Produced in Norway"
+          }
+        },
+        "feature_4": {
+          "type": "feature_point",
+          "settings": {
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "flavor_chicken": {
+          "type": "flavor_link",
+          "settings": {
+            "name": "Savory Chicken",
+            "image_asset": "akr-flavor-chicken.png",
+            "is_current": false
+          }
+        },
+        "flavor_ramen": {
+          "type": "flavor_link",
+          "settings": {
+            "name": "Ginger Ramen",
+            "image_asset": "akr-flavor-ramen.png",
+            "is_current": false
+          }
+        },
+        "flavor_chanterelle": {
+          "type": "flavor_link",
+          "settings": {
+            "name": "Chanterelle",
+            "image_asset": "akr-flavor-chanterelle.png",
+            "is_current": false
+          }
+        },
+        "appstle_widget": {
+          "type": "shopify://apps/appstle-subscription/blocks/appstle-subscription-helper/fe257d39-6f88-4f35-ab08-bd437e3aa94e",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "yotpo_stars",
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4",
+        "flavor_chicken",
+        "flavor_ramen",
+        "flavor_chanterelle",
+        "appstle_widget"
+      ],
+      "settings": {
+        "eyebrow": "NORWEGIAN BONE BROTH · STICK PACKS",
+        "short_desc": "13g protein per stick. 99%+ Norwegian sourced. No prep, no mess — tear open, stir into hot water, drink.",
+        "badge_protein_title": "13G PROTEIN",
+        "badge_protein_sub": "Per single-serve stick",
+        "badge_nongmo_title": "NON-GMO",
+        "badge_nongmo_sub": "No hormones · No antibiotics",
+        "pack_heading_before": "Your weekly dose of",
+        "pack_heading_italic": "strong",
+        "pack_desc": "Save more, ship less, and keep your daily ritual on repeat — with perks that make it feel extra good.",
+        "most_popular_text": "most popular",
+        "best_value_index": 2,
+        "trust_note": "30-day money-back guarantee · Free shipping · Cancel anytime"
+      }
+    },
+    "akr_ingredients": {
+      "type": "akr-ingredients",
+      "blocks": {
+        "card_collagen": {
+          "type": "ingredient_card",
+          "settings": {
+            "icon_key": "collagen",
+            "circle_color": "#fbdabe",
+            "title": "Hydrolyzed Collagen Peptides",
+            "description": "Broken into tiny peptides for near-100% bioavailability."
+          }
+        },
+        "card_chicken": {
+          "type": "ingredient_card",
+          "settings": {
+            "icon_key": "chicken",
+            "circle_color": "#cbd9c1",
+            "title": "Norwegian Chicken & Turkey",
+            "description": "Free-range Nordic poultry, cleanly sourced for fast absorption."
+          }
+        }
+      },
+      "block_order": [
+        "card_collagen",
+        "card_chicken"
+      ],
+      "settings": {
+        "eyebrow": "How we stack up",
+        "heading_before": "Meet the",
+        "heading_italic": "ingredients",
+        "photo_badge": "Lab-tested · 100% bioavailable",
+        "ingredients_text": "Hydrolyzed Protein (Chicken, Turkey), Chicken Broth Seasoning (Onion, Sugar, Yeast Extract, Natural Flavors, Lactic Acid [acidity regulator], Salt, Spice [Turmeric, Tarragon, Sage, Lovage]), Salt, Natural Flavors."
+      }
+    },
+    "akr_social": {
+      "type": "akr-social",
+      "settings": {
+        "cta_url": "/collections/bone-broth",
+        "cta_label": "WATCH THE FULL RITUAL  →"
+      }
+    },
+    "akr_numbers": {
+      "type": "akr-numbers",
+      "settings": {}
+    },
+    "akr_why": {
+      "type": "akr-why",
+      "settings": {
+        "cta_url": "/collections/bone-broth",
+        "trust_text": "Free shipping over $50 · 30-day money-back guarantee"
+      }
+    },
+    "akr_benefits": {
+      "type": "akr-benefits",
+      "blocks": {
+        "circle_protein": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-ben-icon-protein.svg",
+            "circle_color": "#feb595",
+            "name": "Protein",
+            "desc": "13g per stick"
+          }
+        },
+        "circle_collagen": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-ben-icon-collagen2.svg",
+            "circle_color": "#fbdabe",
+            "name": "Collagen",
+            "desc": "Skin & joints"
+          }
+        },
+        "circle_joints": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-ben-icon-joints.svg",
+            "circle_color": "#fdc85c",
+            "name": "Joints",
+            "desc": "Reduced ache"
+          }
+        },
+        "circle_gut": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-ben-icon-gut.svg",
+            "circle_color": "#cbd9c1",
+            "name": "Gut",
+            "desc": "Better digestion"
+          }
+        },
+        "circle_energy": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-ben-icon-energy.svg",
+            "circle_color": "#fce3b4",
+            "name": "Energy",
+            "desc": "No crash"
+          }
+        },
+        "circle_nordic": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-ben-icon-nordic.svg",
+            "circle_color": "#a1cccf",
+            "name": "Nordic",
+            "desc": "100% Norwegian"
+          }
+        },
+        "point_1": {
+          "type": "benefit_point",
+          "settings": {
+            "text": "13g hydrolyzed protein your body absorbs in minutes"
+          }
+        },
+        "point_2": {
+          "type": "benefit_point",
+          "settings": {
+            "text": "Zero artificial fillers, sweeteners, or preservatives"
+          }
+        },
+        "point_3": {
+          "type": "benefit_point",
+          "settings": {
+            "text": "Made from Norwegian chicken & turkey bones — sourced from cage-free Nordic farms"
+          }
+        }
+      },
+      "block_order": [
+        "circle_protein",
+        "circle_collagen",
+        "circle_joints",
+        "circle_gut",
+        "circle_energy",
+        "circle_nordic",
+        "point_1",
+        "point_2",
+        "point_3"
+      ],
+      "settings": {
+        "heading_before": "Real benefits",
+        "heading_italic": "inside",
+        "heading_after": "every stick",
+        "subheading": "Six science-backed reasons to make åKrrush your daily ritual.",
+        "text_heading_line1": "Real broth,",
+        "text_heading_orange": "real",
+        "text_heading_line2": "fuel.",
+        "text_desc": "Slow-simmered Norwegian poultry, pure hydrolyzed protein, and the comforting taste of real broth — bottled into a 30-second morning ritual."
+      }
+    },
+    "akr_faq": {
+      "type": "akr-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "category": "nutrition",
+            "question": "How is åKrrush different from regular bone broth?",
+            "answer": "<p>Every batch is third-party tested for heavy metals, contaminants, and microbial safety. USDA approved, FDA compliant. We use enzymatic hydrolysis, a cold-process that breaks collagen into small peptides your body absorbs 1.5x faster than traditionally boiled broth.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "category": "nutrition",
+            "question": "How does it taste?",
+            "answer": "<p>Mild and clean. Not salty or overpowering like many American bone broths. Three flavors — Savory Chicken, Ginger Ramen, and Chanterelle Mushroom — are crafted to be enjoyable on their own, not just as a cooking ingredient.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "category": "nutrition",
+            "question": "What's in each stick?",
+            "answer": "<p>13g of hydrolyzed collagen peptides from Norwegian poultry, natural seasonings, and zero added sugar. No artificial sweeteners, no fillers, no preservatives. Full ingredient list on every package.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "category": "nutrition",
+            "question": "Is it safe during pregnancy or while nursing?",
+            "answer": "<p>åKrrush contains only pure protein from Norwegian poultry with natural seasonings, no caffeine or stimulants. No known contraindications, but always consult your healthcare provider for personalized advice.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "category": "nutrition",
+            "question": "Does it fit keto, paleo, or Whole30 diets?",
+            "answer": "<p>Yes. Each stick has 13g protein, 0g added sugar, and no artificial ingredients. Compatible with keto and paleo. Whole30 compliant in most flavors — check individual ingredient lists for compliance.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
+            "category": "howto",
+            "question": "When will I see results?",
+            "answer": "<p>Most customers report increased energy and better digestion within 1 to 2 weeks. Skin, hair, and joint benefits typically take 4 to 6 weeks of consistent daily use.</p>"
+          }
+        },
+        "faq_7": {
+          "type": "faq_item",
+          "settings": {
+            "category": "howto",
+            "question": "What's the best time of day to drink it?",
+            "answer": "<p>Morning on an empty stomach gives the best absorption for energy and digestion. Post-workout supports muscle recovery. Before bed promotes sleep quality through glycine in collagen.</p>"
+          }
+        },
+        "faq_8": {
+          "type": "faq_item",
+          "settings": {
+            "category": "howto",
+            "question": "How do I prepare it?",
+            "answer": "<p>Tear open one stick, pour into a mug or bottle, add hot water, and stir. Fully dissolves in under 30 seconds. Also works mixed into smoothies, soups, or sauces.</p>"
+          }
+        },
+        "faq_9": {
+          "type": "faq_item",
+          "settings": {
+            "category": "howto",
+            "question": "Can I drink more than one stick a day?",
+            "answer": "<p>Yes. Many customers have one in the morning and another post-workout or before bed. Each stick contains 13g of protein, so adjust based on your daily protein goals.</p>"
+          }
+        },
+        "faq_10": {
+          "type": "faq_item",
+          "settings": {
+            "category": "howto",
+            "question": "Can kids drink it?",
+            "answer": "<p>Yes, åKrrush Classic is safe and nutritious for kids over 4. The clean ingredient list makes it a great alternative to sugary drinks. Start with half a stick for younger children.</p>"
+          }
+        },
+        "faq_11": {
+          "type": "faq_item",
+          "settings": {
+            "category": "subscriptions",
+            "question": "How do subscriptions work?",
+            "answer": "<p>Choose your pack (12, 24, or 36 sticks) and delivery frequency (every 2 to 8 weeks). Save 10% on every order. Change flavors, frequency, or pause anytime from your account dashboard.</p>"
+          }
+        },
+        "faq_12": {
+          "type": "faq_item",
+          "settings": {
+            "category": "subscriptions",
+            "question": "Can I cancel anytime?",
+            "answer": "<p>Yes, no commitment. Cancel directly from your account dashboard. No questions, no fees, no hidden terms.</p>"
+          }
+        },
+        "faq_13": {
+          "type": "faq_item",
+          "settings": {
+            "category": "subscriptions",
+            "question": "Can I mix flavors in one subscription?",
+            "answer": "<p>Yes. Build a custom box with any combination of Savory Chicken, Ginger Ramen, and Chanterelle Mushroom. Change the mix anytime before your next shipment ships.</p>"
+          }
+        },
+        "faq_14": {
+          "type": "faq_item",
+          "settings": {
+            "category": "subscriptions",
+            "question": "When will my order ship?",
+            "answer": "<p>Orders placed before 2pm EST ship same day. Free shipping on subscriptions. Most US deliveries arrive within 3 to 5 business days.</p>"
+          }
+        },
+        "faq_15": {
+          "type": "faq_item",
+          "settings": {
+            "category": "subscriptions",
+            "question": "What if I don't like it?",
+            "answer": "<p>30-day risk-free guarantee. If you're not satisfied, we'll refund your first order (even if the sticks have been opened). <a href=\"/pages/contact\">Contact us</a> to start a return.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9",
+        "faq_10",
+        "faq_11",
+        "faq_12",
+        "faq_13",
+        "faq_14",
+        "faq_15"
+      ],
+      "settings": {
+        "heading_line1": "Everything you",
+        "heading_italic": "actually",
+        "heading_suffix": "want to know.",
+        "subheading": "From bone-broth science to subscription perks, we've got you covered.",
+        "social_text": "From 2,800+ verified åKrrush drinkers",
+        "chat_label": "STILL CURIOUS? CHAT WITH US →",
+        "quote_text": "The ritual I never skip.",
+        "quote_author": "Sarah M.",
+        "quote_location": "Verified · Austin, TX"
+      }
+    }
+  },
+  "order": [
+    "akr_hero",
+    "akr_ingredients",
+    "akr_social",
+    "akr_numbers",
+    "akr_why",
+    "akr_benefits",
+    "akr_faq"
+  ]
+}

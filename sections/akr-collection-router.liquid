@@ -1,0 +1,25 @@
+{% comment %} Routes collection pages to custom designs based on handle {% endcomment %}
+
+{% if collection.handle == 'akrrush-pro' or collection.handle == 'bone-broth' %}
+  <style>
+    #shopify-section-banner,
+    #shopify-section-ecom_collection_broth_banner_section_AJ8w9K,
+    #shopify-section-main { display: none !important; }
+  </style>
+{% endif %}
+
+{% if collection.handle == 'akrrush-pro' %}
+  {% render 'akr-pro-category' %}
+{% elsif collection.handle == 'bone-broth' %}
+  {% render 'akr-classic-category' %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Collection Router",
+  "settings": [],
+  "presets": [
+    { "name": "Collection Router" }
+  ]
+}
+{% endschema %}

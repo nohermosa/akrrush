@@ -1,0 +1,413 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "akr_hero": {
+      "type": "akr-hero",
+      "blocks": {
+        "yotpo_stars": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "feature_1": {
+          "type": "feature_point",
+          "settings": {
+            "text": "20g hydrolyzed protein — fast, usable fuel for serious training"
+          }
+        },
+        "feature_2": {
+          "type": "feature_point",
+          "settings": {
+            "text": "Electrolytes for training, hydration & recovery"
+          }
+        },
+        "feature_3": {
+          "type": "feature_point",
+          "settings": {
+            "text": "USDA & FDA Approved · Produced in Norway"
+          }
+        },
+        "feature_4": {
+          "type": "feature_point",
+          "settings": {
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "flavor_chicken": {
+          "type": "flavor_link",
+          "settings": {
+            "name": "Bold Chicken",
+            "image_asset": "akr-pro-card-chicken.png",
+            "is_current": false
+          }
+        },
+        "flavor_ginger": {
+          "type": "flavor_link",
+          "settings": {
+            "name": "Ginger PRO",
+            "image_asset": "akr-pro-card-ginger.png",
+            "is_current": false
+          }
+        },
+        "flavor_mushroom": {
+          "type": "flavor_link",
+          "settings": {
+            "name": "Max Mushroom",
+            "image_asset": "akr-pro-card-mushroom.png",
+            "is_current": false
+          }
+        },
+        "appstle_widget": {
+          "type": "shopify://apps/appstle-subscription/blocks/appstle-subscription-helper/fe257d39-6f88-4f35-ab08-bd437e3aa94e",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "yotpo_stars",
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4",
+        "flavor_chicken",
+        "flavor_ginger",
+        "flavor_mushroom",
+        "appstle_widget"
+      ],
+      "settings": {
+        "eyebrow": "PERFORMANCE BONE BROTH PRO · STICK PACKS",
+        "short_desc": "20g protein + electrolytes per stick. 99%+ Norwegian sourced. No prep, no mess — tear open, mix, fuel up.",
+        "badge_protein_title": "20G PROTEIN",
+        "badge_protein_sub": "Per single-serve stick",
+        "badge_nongmo_title": "ELECTROLYTES",
+        "badge_nongmo_sub": "Recovery + hydration support",
+        "pack_heading_before": "Your weekly dose of",
+        "pack_heading_italic": "performance",
+        "pack_desc": "Save more, ship less, and keep your training ritual on repeat — with perks that make it feel extra good.",
+        "most_popular_text": "most popular",
+        "best_value_index": 2,
+        "trust_note": "30-day money-back guarantee · Free shipping · Cancel anytime"
+      }
+    },
+    "akr_ingredients": {
+      "type": "akr-ingredients",
+      "blocks": {
+        "card_collagen": {
+          "type": "ingredient_card",
+          "settings": {
+            "icon_key": "collagen",
+            "circle_color": "#fbdabe",
+            "title": "Hydrolyzed Collagen Peptides",
+            "description": "Broken into bioactive peptides for near-100% absorption during and after training."
+          }
+        },
+        "card_chicken": {
+          "type": "ingredient_card",
+          "settings": {
+            "icon_key": "chicken",
+            "circle_color": "#cbd9c1",
+            "title": "Norwegian Chicken & Turkey",
+            "description": "Free-range Nordic poultry, cleanly sourced for maximum performance and recovery."
+          }
+        }
+      },
+      "block_order": [
+        "card_collagen",
+        "card_chicken"
+      ],
+      "settings": {
+        "eyebrow": "What's inside PRO",
+        "heading_before": "Meet the",
+        "heading_italic": "ingredients",
+        "photo_badge": "Lab-tested · 100% bioavailable",
+        "ingredients_text": "Hydrolyzed Protein (Chicken, Turkey), Chicken Broth Seasoning (Onion, Sugar, Yeast Extract, Natural Flavors, Lactic Acid [acidity regulator], Salt, Spice [Turmeric, Tarragon, Sage, Lovage]), Electrolytes (Sodium, Potassium, Magnesium), Salt, Natural Flavors."
+      }
+    },
+    "akr_social": {
+      "type": "akr-social",
+      "settings": {
+        "cta_url": "/collections/akrrush-pro",
+        "cta_label": "WATCH THE FULL RITUAL  →"
+      }
+    },
+    "akr_numbers": {
+      "type": "akr-numbers",
+      "settings": {}
+    },
+    "akr_why": {
+      "type": "akr-why",
+      "settings": {
+        "cta_url": "/collections/akrrush-pro",
+        "trust_text": "Free shipping over $50 · 30-day money-back guarantee"
+      }
+    },
+    "akr_benefits": {
+      "type": "akr-benefits",
+      "blocks": {
+        "circle_protein": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-ben-icon-protein.svg",
+            "circle_color": "#feb595",
+            "name": "Protein",
+            "desc": "20g per stick"
+          }
+        },
+        "circle_electrolytes": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-ben-icon-energy.svg",
+            "circle_color": "#a1cccf",
+            "name": "Electrolytes",
+            "desc": "Hydrate & perform"
+          }
+        },
+        "circle_recovery": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-ben-icon-joints.svg",
+            "circle_color": "#fdc85c",
+            "name": "Recovery",
+            "desc": "Faster rebound"
+          }
+        },
+        "circle_collagen": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-ben-icon-collagen2.svg",
+            "circle_color": "#fbdabe",
+            "name": "Collagen",
+            "desc": "Joints & tissue"
+          }
+        },
+        "circle_gut": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-ben-icon-gut.svg",
+            "circle_color": "#cbd9c1",
+            "name": "Gut",
+            "desc": "Zero bloat"
+          }
+        },
+        "circle_nordic": {
+          "type": "benefit_circle",
+          "settings": {
+            "icon_asset": "akr-ben-icon-nordic.svg",
+            "circle_color": "#a1cccf",
+            "name": "Nordic",
+            "desc": "100% Norwegian"
+          }
+        },
+        "point_1": {
+          "type": "benefit_point",
+          "settings": {
+            "text": "20g hydrolyzed protein your body absorbs in minutes"
+          }
+        },
+        "point_2": {
+          "type": "benefit_point",
+          "settings": {
+            "text": "Electrolytes for performance, hydration & recovery"
+          }
+        },
+        "point_3": {
+          "type": "benefit_point",
+          "settings": {
+            "text": "Made from Norwegian chicken & turkey bones — zero artificial fillers or preservatives"
+          }
+        }
+      },
+      "block_order": [
+        "circle_protein",
+        "circle_electrolytes",
+        "circle_recovery",
+        "circle_collagen",
+        "circle_gut",
+        "circle_nordic",
+        "point_1",
+        "point_2",
+        "point_3"
+      ],
+      "settings": {
+        "heading_before": "Real benefits",
+        "heading_italic": "inside",
+        "heading_after": "every stick",
+        "subheading": "Six performance-backed reasons to make åKrrush PRO your training ritual.",
+        "text_heading_line1": "Performance broth,",
+        "text_heading_orange": "real",
+        "text_heading_line2": "results.",
+        "text_desc": "Slow-simmered Norwegian poultry, 20g hydrolyzed protein, electrolytes — and the comforting taste of real broth. Your pre, intra, and post-workout ritual in one 30-second mix."
+      }
+    },
+    "akr_faq": {
+      "type": "akr-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "category": "nutrition",
+            "question": "How is åKrrush PRO different from regular bone broth?",
+            "answer": "<p>åKrrush PRO delivers 20g of hydrolyzed protein plus electrolytes in a single stick — more than 1.5x the protein of standard bone broth. Every batch is third-party tested for heavy metals, contaminants, and microbial safety. We use enzymatic hydrolysis, a cold-process that breaks collagen into small peptides your body absorbs 1.5x faster than traditionally boiled broth.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "category": "nutrition",
+            "question": "How does it taste?",
+            "answer": "<p>Bold and clean — crafted to perform as well as it tastes. Three PRO flavors (Bold Chicken, Ginger PRO, Max Mushroom) are designed for athletes who want real nutrition without sacrificing flavor.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "category": "nutrition",
+            "question": "What's in each PRO stick?",
+            "answer": "<p>20g of hydrolyzed collagen peptides from Norwegian poultry, electrolytes (sodium, potassium, magnesium), natural seasonings, and zero added sugar. No artificial sweeteners, no fillers, no preservatives. Full ingredient list on every package.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "category": "nutrition",
+            "question": "Is it safe during pregnancy or while nursing?",
+            "answer": "<p>åKrrush PRO contains only pure protein from Norwegian poultry, electrolytes, and natural seasonings — no caffeine or stimulants. No known contraindications, but always consult your healthcare provider for personalized advice.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "category": "nutrition",
+            "question": "Does it fit keto, paleo, or Whole30 diets?",
+            "answer": "<p>Yes. Each PRO stick has 20g protein, 0g added sugar, and no artificial ingredients. Compatible with keto and paleo. Whole30 compliant in most flavors — check individual ingredient lists for compliance.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
+            "category": "howto",
+            "question": "When will I see results?",
+            "answer": "<p>Most athletes report faster recovery and better energy within 1 to 2 weeks of daily use. Collagen and joint benefits typically emerge after 4 to 6 weeks of consistent training support.</p>"
+          }
+        },
+        "faq_7": {
+          "type": "faq_item",
+          "settings": {
+            "category": "howto",
+            "question": "What's the best time to drink åKrrush PRO?",
+            "answer": "<p>Pre-workout for energy and hydration. Intra-workout mixed into a water bottle. Post-workout for muscle recovery and rehydration. It works hot or cold — whatever your training demands.</p>"
+          }
+        },
+        "faq_8": {
+          "type": "faq_item",
+          "settings": {
+            "category": "howto",
+            "question": "How do I prepare it?",
+            "answer": "<p>Tear open one stick, pour into a mug or bottle, add 10oz of hot or cold water, and stir. Fully dissolves in under 30 seconds. Works hot as a broth or cold as a performance drink.</p>"
+          }
+        },
+        "faq_9": {
+          "type": "faq_item",
+          "settings": {
+            "category": "howto",
+            "question": "Can I drink more than one stick a day?",
+            "answer": "<p>Yes. Many athletes have one pre-workout and another post-workout or before bed. Each stick contains 20g of protein and electrolytes, so adjust based on your daily training goals.</p>"
+          }
+        },
+        "faq_10": {
+          "type": "faq_item",
+          "settings": {
+            "category": "howto",
+            "question": "Can kids drink it?",
+            "answer": "<p>åKrrush PRO is formulated for active adults and athletes. For children, we recommend åKrrush Classic — same clean Norwegian protein, optimized for everyday nutrition.</p>"
+          }
+        },
+        "faq_11": {
+          "type": "faq_item",
+          "settings": {
+            "category": "subscriptions",
+            "question": "How do subscriptions work?",
+            "answer": "<p>Choose your pack (12, 24, or 36 sticks) and delivery frequency (every 2 to 8 weeks). Save 10% on every order. Change flavors, frequency, or pause anytime from your account dashboard.</p>"
+          }
+        },
+        "faq_12": {
+          "type": "faq_item",
+          "settings": {
+            "category": "subscriptions",
+            "question": "Can I cancel anytime?",
+            "answer": "<p>Yes, no commitment. Cancel directly from your account dashboard. No questions, no fees, no hidden terms.</p>"
+          }
+        },
+        "faq_13": {
+          "type": "faq_item",
+          "settings": {
+            "category": "subscriptions",
+            "question": "Can I mix PRO flavors in one subscription?",
+            "answer": "<p>Yes. Build a custom box with any combination of Bold Chicken, Ginger PRO, and Max Mushroom. Change the mix anytime before your next shipment ships.</p>"
+          }
+        },
+        "faq_14": {
+          "type": "faq_item",
+          "settings": {
+            "category": "subscriptions",
+            "question": "When will my order ship?",
+            "answer": "<p>Orders placed before 2pm EST ship same day. Free shipping on subscriptions. Most US deliveries arrive within 3 to 5 business days.</p>"
+          }
+        },
+        "faq_15": {
+          "type": "faq_item",
+          "settings": {
+            "category": "subscriptions",
+            "question": "What if I don't like it?",
+            "answer": "<p>30-day risk-free guarantee. If you're not satisfied, we'll refund your first order (even if the sticks have been opened). <a href=\"/pages/contact\">Contact us</a> to start a return.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9",
+        "faq_10",
+        "faq_11",
+        "faq_12",
+        "faq_13",
+        "faq_14",
+        "faq_15"
+      ],
+      "settings": {
+        "heading_line1": "Everything you",
+        "heading_italic": "actually",
+        "heading_suffix": "want to know.",
+        "subheading": "From performance science to subscription perks, we've got you covered.",
+        "social_text": "From 2,800+ verified åKrrush drinkers",
+        "chat_label": "STILL CURIOUS? CHAT WITH US →",
+        "quote_text": "The ritual I never skip.",
+        "quote_author": "Sarah M.",
+        "quote_location": "Verified · Austin, TX"
+      }
+    }
+  },
+  "order": [
+    "akr_hero",
+    "akr_ingredients",
+    "akr_social",
+    "akr_numbers",
+    "akr_why",
+    "akr_benefits",
+    "akr_faq"
+  ]
+}

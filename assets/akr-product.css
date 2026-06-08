@@ -2077,7 +2077,7 @@ button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; 
   right: -40px;
   top: -60px;
   bottom: auto;
-  width: 280px;
+  width: 250px;
   z-index: 10;
   display: flex;
   align-items: flex-start;
@@ -2704,9 +2704,12 @@ a.akr-btn-cta-dark:hover {
 }
 
 .akr-num-product img {
-  width: 100%;
+  width: auto;
   height: auto;
+  max-width: 100%;
+  max-height: 340px;
   display: block;
+  margin: 0 auto;
 }
 
 .akr-num-product--1 {

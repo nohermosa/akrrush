@@ -79,7 +79,7 @@
 
         <!-- Main product image -->
         <img class="akr-hero-main-img" id="akrMainImg"
-             src="{{ 'akr-savory-chicken-hero.jpg' | asset_url }}"
+             src="{{ product.featured_image | image_url: width: 800 }}"
              alt="{{ product.title | escape }}"
              fetchpriority="high"
              loading="eager">
@@ -143,10 +143,20 @@
 
       <hr class="akr-hero-divider">
 
-      <!-- Flavor selector (Sprint 3.0 — hardcoded handles, auto active via product.handle) -->
-      {%- assign akr_flavor_handles = 'bone-broth-chicken,bone-broth-ginger-ramen,bone-broth-chanterelle-mushroom' | split: ',' -%}
-      {%- assign akr_flavor_names = 'Savory Chicken,Ginger Ramen,Chanterelle' | split: ',' -%}
-      {%- assign akr_flavor_images = 'akr-flavor-chicken.png,akr-flavor-ramen.png,akr-flavor-chanterelle.png' | split: ',' -%}
+      <!-- Flavor selector — Classic vs PRO based on collection -->
+      {%- assign akr_is_pro = false -%}
+      {%- for c in product.collections -%}
+        {%- if c.handle == 'akrrush-pro' -%}{%- assign akr_is_pro = true -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if akr_is_pro -%}
+        {%- assign akr_flavor_handles = 'bold-chicken-pro-bone-broth,ginger-akrrush-pro-bone-broth,max-mushroom-pro-bone-broth' | split: ',' -%}
+        {%- assign akr_flavor_names = 'Bold Chicken,Ginger PRO,Max Mushroom' | split: ',' -%}
+        {%- assign akr_flavor_images = 'akr-flavor-chicken.png,akr-flavor-ramen.png,akr-flavor-chanterelle.png' | split: ',' -%}
+      {%- else -%}
+        {%- assign akr_flavor_handles = 'bone-broth-chicken,bone-broth-ginger-ramen,bone-broth-chanterelle-mushroom' | split: ',' -%}
+        {%- assign akr_flavor_names = 'Savory Chicken,Ginger Ramen,Chanterelle' | split: ',' -%}
+        {%- assign akr_flavor_images = 'akr-flavor-chicken.png,akr-flavor-ramen.png,akr-flavor-chanterelle.png' | split: ',' -%}
+      {%- endif -%}
 
       <p class="akr-hero-flavor-label">SELECT FLAVOR:</p>
       <div class="akr-hero-flavor-row" role="list" aria-label="Select flavor">
@@ -185,7 +195,7 @@
                   data-variant-id="{{ variant.id }}">
             {%- if is_best -%}<span class="akr-hero-best-label">BEST VALUE</span>{%- endif -%}
             <div class="akr-hero-pack-name">{{ variant.title }}</div>
-            <div class="akr-hero-pack-price">{{ variant.price | money_without_trailing_zeros }}/mo</div>
+            <div class="akr-hero-pack-price">{{ variant.price | money_without_trailing_zeros }}</div>
           </button>
         {%- endfor -%}
       </div>
@@ -211,9 +221,12 @@
 
         <!-- Subscribe card -->
         <div class="akr-sub-card akr-sub-card--selected" id="akrSubCard" role="button" tabindex="0">
+          {%- comment -%} Annual savings: discount per order × 13 orders/year (every 4 weeks) {%- endcomment -%}
+          {%- assign akr_saving_per_order = selected_variant.price | times: akr_discount_pct | divided_by: 100 -%}
+          {%- assign akr_saving_annual = akr_saving_per_order | times: 13 | divided_by: 100 -%}
           <div class="akr-sub-stamp">
             <span class="akr-sub-stamp-line1">SAVE</span>
-            <span class="akr-sub-stamp-line2">$65</span>
+            <span class="akr-sub-stamp-line2">${{ akr_saving_annual }}</span>
             <span class="akr-sub-stamp-line3">PER YEAR</span>
           </div>
           <div class="akr-sub-card-header">

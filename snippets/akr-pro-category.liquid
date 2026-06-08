@@ -319,6 +319,59 @@
       akr-athlete-float 5s ease-in-out 0.9s infinite;
   }
 
+  /* ── TABLET (769–1024px) ── */
+  @media (max-width: 1024px) and (min-width: 769px) {
+    /* Hero */
+    .akr-pro-hero__content { left: 40px; width: calc(100% - 80px); }
+    .akr-pro-hero__heading { font-size: 52px; }
+
+    /* Dark features — composite image layout (same as mobile) */
+    .akr-pro-darkfeats { height: auto; overflow: hidden; }
+    .akr-pro-darkfeats__bg { display: none; }
+    .akr-pro-darkfeats__mobile-bg { display: block; width: 100%; height: auto; position: relative; }
+    .akr-pro-darkfeats__fade-top { display: none; }
+    .akr-pro-darkfeats__fade-bot { display: none; }
+    .akr-pro-darkfeats__athlete { display: none !important; }
+    .akr-pro-darkfeats__panel {
+      position: relative; top: auto; left: auto; transform: none;
+      width: 100%; height: auto;
+      padding: 40px 60px;
+      background: #010101;
+      backdrop-filter: none; -webkit-backdrop-filter: none;
+      border-radius: 0; box-sizing: border-box; overflow: visible;
+    }
+    .akr-pro-darkfeats__cols { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; row-gap: 0; align-items: start; }
+    .akr-pro-darkfeats__col { display: contents; }
+    .akr-pro-darkfeats__col:first-child > div { grid-column: 1; }
+    .akr-pro-darkfeats__col:last-child > div { grid-column: 2; }
+    .akr-pro-darkfeats__col > div:nth-child(1) { grid-row: 1; padding-bottom: 14px; }
+    .akr-pro-darkfeats__col > div:nth-child(2) { grid-row: 2; }
+    .akr-pro-darkfeats__col > div:nth-child(3) { grid-row: 3; padding-top: 14px; padding-bottom: 14px; }
+    .akr-pro-darkfeats__col > div:nth-child(4) { grid-row: 4; }
+    .akr-pro-darkfeats__col > div:nth-child(5) { grid-row: 5; padding-top: 14px; }
+
+    /* Product cards */
+    .akr-pro-cards { padding: 60px 40px; }
+    .akr-pro-cards__grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* Feature */
+    .akr-pro-feature { padding: 60px 40px; }
+    .akr-pro-feature__inner { flex-direction: column; gap: 40px; }
+    .akr-pro-feature__img-wrap { width: 100%; }
+
+    /* Testimonial */
+    .akr-pro-testimonial { padding: 60px 40px; }
+    .akr-pro-testimonial__inner { flex-direction: column; }
+    .akr-pro-testimonial__card { width: 100%; }
+    .akr-pro-testimonial__right { flex: none; width: 100%; }
+
+    /* Brand */
+    .akr-pro-brand { padding: 60px 40px; }
+    .akr-pro-brand__inner { flex-direction: column; gap: 40px; }
+    .akr-pro-brand__img-wrap { width: 100%; }
+    .akr-pro-brand__heading { font-size: 48px; }
+  }
+
   /* ── MOBILE ── */
   @media (max-width: 768px) {
     /* Darkfeats: single composite image on mobile — no positioning hacks needed */
@@ -525,7 +578,7 @@
     <div class="akr-pro-cards__grid">
 
       {%- comment -%} Card 1 — Bold Chicken PRO {%- endcomment -%}
-      <a href="{{ pro_p0.url | default: '/products/bold-chicken-pro-bone-broth' }}" class="akr-pro-card" style="background:#47b1b4; height:471px;">
+      <a href="{{ pro_p0.url | default: '/products/bold-chicken-pro-bone-broth' }}" class="akr-pro-card" style="background:#47b1b4;">
         <img class="akr-pro-card__img" src="{{ 'akr-pro-card-chicken.png' | asset_url }}" alt="Bold Chicken PRO" loading="lazy">
         <div class="akr-pro-card__info">
           <p class="akr-pro-card__name">Bold Chicken PRO</p>
@@ -536,7 +589,7 @@
       </a>
 
       {%- comment -%} Card 2 — Ginger PRO {%- endcomment -%}
-      <a href="{{ pro_p1.url | default: '/products/ginger-akrrush-pro-bone-broth' }}" class="akr-pro-card" style="background:#ffc03c; height:471px;">
+      <a href="{{ pro_p1.url | default: '/products/ginger-akrrush-pro-bone-broth' }}" class="akr-pro-card" style="background:#ffc03c;">
         <img class="akr-pro-card__img" src="{{ 'akr-pro-card-ginger.png' | asset_url }}" alt="Ginger åKrrush PRO" loading="lazy">
         <div class="akr-pro-card__info">
           <p class="akr-pro-card__name">Ginger åKrrush PRO</p>
@@ -547,7 +600,7 @@
       </a>
 
       {%- comment -%} Card 3 — Max Mushroom PRO {%- endcomment -%}
-      <a href="{{ pro_p2.url | default: '/products/max-mushroom-pro-bone-broth' }}" class="akr-pro-card" style="background:#ea7552; height:471px;">
+      <a href="{{ pro_p2.url | default: '/products/max-mushroom-pro-bone-broth' }}" class="akr-pro-card" style="background:#ea7552;">
         <img class="akr-pro-card__img" src="{{ 'akr-pro-card-mushroom.png' | asset_url }}" alt="Max Mushroom PRO" loading="lazy">
         <div class="akr-pro-card__info">
           <p class="akr-pro-card__name">Max Mushroom PRO</p>
@@ -558,7 +611,7 @@
       </a>
 
       {%- comment -%} Card 4 — PRO Variety Pack {%- endcomment -%}
-      <a href="{{ pro_p3.url | default: '/products/akrrush-pro-variety-pack-bone-broth' }}" class="akr-pro-card" style="background:#2c1a10; height:471px;">
+      <a href="{{ pro_p3.url | default: '/products/akrrush-pro-variety-pack-bone-broth' }}" class="akr-pro-card" style="background:#2c1a10;">
         <img class="akr-pro-card__img" src="{{ 'akr-pro-card-variety.png' | asset_url }}" alt="PRO Variety Pack" loading="lazy">
         <div class="akr-pro-card__info">
           <p class="akr-pro-card__name">PRO Variety Pack</p>
@@ -630,14 +683,29 @@
 
 <script>
 (function() {
+  // Athlete float animation
   var athlete = document.querySelector('.akr-pro-darkfeats__athlete');
-  if (!athlete) return;
-  var observer = new IntersectionObserver(function(entries) {
-    if (entries[0].isIntersecting) {
-      athlete.classList.add('akr-athlete-visible');
-      observer.disconnect();
-    }
-  }, { threshold: 0.2 });
-  observer.observe(athlete);
+  if (athlete) {
+    var observer = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        athlete.classList.add('akr-athlete-visible');
+        observer.disconnect();
+      }
+    }, { threshold: 0.2 });
+    observer.observe(athlete);
+  }
+  // Card height: 471px desktop+tablet / 340px mobile
+  function akrFixProCards() {
+    var cardH = window.innerWidth <= 768 ? '340px' : '471px';
+    document.querySelectorAll('.akr-pro-card').forEach(function(el) {
+      el.style.setProperty('height', cardH, 'important');
+      el.style.setProperty('max-height', cardH, 'important');
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', akrFixProCards);
+  } else {
+    akrFixProCards();
+  }
 })();
 </script>

@@ -149,6 +149,8 @@
         <div class="akr-compare-visual" aria-hidden="true">
           {%- if section.settings.akrrush_image != blank -%}
             <img class="akr-compare-stick" src="{{ section.settings.akrrush_image | image_url: width: 800 }}" alt="" loading="lazy">
+          {%- elsif akr_is_pro -%}
+            <img class="akr-compare-stick" src="{{ 'akr-pro-stick-splash.png' | asset_url }}" alt="" loading="lazy">
           {%- else -%}
             <img class="akr-compare-stick" src="{{ 'akr-stick-splash.png' | asset_url }}" alt="" loading="lazy">
           {%- endif -%}

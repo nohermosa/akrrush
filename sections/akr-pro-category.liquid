@@ -204,7 +204,8 @@
   {%- comment -%} ── SECTION 2: PRODUCT CARDS ── {%- endcomment -%}
   <div class="akr-pro-cards">
     <div class="akr-pro-cards__grid">
-      {%- for product in collection.products limit: 4 -%}
+      {%- assign _pro_col = collections['akrrush-pro'] | default: collection -%}
+      {%- for product in _pro_col.products limit: 4 -%}
         {%- assign idx = forloop.index0 -%}
         {%- assign bg_color = card_colors[idx] -%}
         {%- assign fallback_img = card_images[idx] | asset_url -%}

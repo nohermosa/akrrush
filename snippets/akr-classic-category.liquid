@@ -424,3 +424,34 @@
   </div>
 
 </div>
+
+<script>
+(function() {
+  function akrFixContrast() {
+    document.querySelectorAll('.akr-cl-flavor__question').forEach(function(el) {
+      el.style.setProperty('color', '#5a3d2b', 'important');
+      el.style.setProperty('opacity', '1', 'important');
+    });
+    document.querySelectorAll('.akr-cl-stats__value').forEach(function(el) {
+      el.style.setProperty('color', '#8b6000', 'important');
+      el.style.setProperty('opacity', '1', 'important');
+    });
+    document.querySelectorAll('.akr-cl-stats__sublabel').forEach(function(el) {
+      el.style.setProperty('color', '#5a3d2b', 'important');
+      el.style.setProperty('opacity', '1', 'important');
+    });
+    document.querySelectorAll('.akr-cl-stats__body').forEach(function(el) {
+      el.style.setProperty('color', '#3d2b1e', 'important');
+    });
+    document.querySelectorAll('.akr-cl-review__attribution').forEach(function(el) {
+      el.style.setProperty('color', '#5a3d2b', 'important');
+      el.style.setProperty('opacity', '1', 'important');
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', akrFixContrast);
+  } else {
+    akrFixContrast();
+  }
+})();
+</script>

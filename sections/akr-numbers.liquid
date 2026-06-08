@@ -1,4 +1,8 @@
 
+{%- assign akr_num_is_pro = false -%}
+{%- for c in product.collections -%}
+  {%- if c.handle == 'akrrush-pro' -%}{%- assign akr_num_is_pro = true -%}{%- endif -%}
+{%- endfor -%}
 <section id="akr-numbers" class="akr-num-section">
   <div class="akr-num-inner">
 
@@ -52,14 +56,14 @@
       <div class="akr-num-content">
         <div class="akr-num-stats">
           <div class="akr-num-stat">
-            <div class="akr-num-stat-value">13g</div>
+            <div class="akr-num-stat-value">{% if akr_num_is_pro %}20g{% else %}13g{% endif %}</div>
             <div class="akr-num-stat-label">Protein per serving</div>
             <div class="akr-num-stat-sub">vs. industry average</div>
           </div>
           <div class="akr-num-stat">
-            <div class="akr-num-stat-value">60</div>
+            <div class="akr-num-stat-value">{% if akr_num_is_pro %}120{% else %}60{% endif %}</div>
             <div class="akr-num-stat-label">Calories</div>
-            <div class="akr-num-stat-sub">Light fuel, zero bloat</div>
+            <div class="akr-num-stat-sub">{% if akr_num_is_pro %}Performance fuel{% else %}Light fuel, zero bloat{% endif %}</div>
           </div>
           <div class="akr-num-stat">
             <div class="akr-num-stat-value">99%</div>

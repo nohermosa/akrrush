@@ -1,4 +1,8 @@
 
+{%- assign akr_is_pro = false -%}
+{%- for c in product.collections -%}
+  {%- if c.handle == 'akrrush-pro' -%}{%- assign akr_is_pro = true -%}{%- endif -%}
+{%- endfor -%}
 <section class="akr-ing-section" id="akr-ingredients">
   <div class="akr-ing-inner">
 
@@ -37,6 +41,10 @@
               <img src="{{ section.settings.photo | img_url: '1600x' }}"
                    alt="{{ section.settings.photo.alt | escape }}"
                    loading="lazy">
+            {%- elsif akr_is_pro -%}
+              <img src="{{ 'akr-pro-ing-lifestyle.png' | asset_url }}"
+                   alt="åKrrush PRO — performance bone broth"
+                   loading="lazy">
             {%- else -%}
               <img src="{{ 'akr-ing-lifestyle.png' | asset_url }}"
                    alt="åKrrush Norwegian bone broth — Savory Chicken"
@@ -65,7 +73,7 @@
               <span class="akr-nf-serv-bold">Serv. size:</span>
               <div class="akr-nf-serv-sub">Servings Per Container: Varies by pack size</div>
             </div>
-            <div class="akr-nf-serv-weight">1 packet (18g)</div>
+            <div class="akr-nf-serv-weight">1 packet ({% if akr_is_pro %}33g{% else %}18g{% endif %})</div>
           </div>
           <div class="akr-nf-border8"></div>
 
@@ -73,7 +81,7 @@
           <div class="akr-nf-amount">Amount per serving</div>
           <div class="akr-nf-cal-row">
             <span class="akr-nf-cal-label">Calories</span>
-            <span class="akr-nf-cal-num">60</span>
+            <span class="akr-nf-cal-num">{% if akr_is_pro %}120{% else %}60{% endif %}</span>
           </div>
           <div class="akr-nf-border4"></div>
 
@@ -85,21 +93,21 @@
           <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span>Saturated Fat 0g</span><span>0%</span></div>
           <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span>Trans Fat 0g</span><span></span></div>
           <div class="akr-nf-row"><span><b>Cholesterol</b> &lt;5mg</span><span><b>1%</b></span></div>
-          <div class="akr-nf-row"><span><b>Sodium</b> 460mg</span><span><b>20%</b></span></div>
-          <div class="akr-nf-row"><span><b>Total Carbohydrate</b> 1g</span><span><b>0%</b></span></div>
+          <div class="akr-nf-row"><span><b>Sodium</b> {% if akr_is_pro %}760mg</span><span><b>33%{% else %}460mg</span><span><b>20%{% endif %}</b></span></div>
+          <div class="akr-nf-row"><span><b>Total Carbohydrate</b> {% if akr_is_pro %}6g</span><span><b>2%{% else %}1g</span><span><b>0%{% endif %}</b></span></div>
           <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span>Dietary Fiber 0g</span><span>0%</span></div>
-          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span>Total Sugars 1g</span><span></span></div>
-          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span>Includes 1g Added Sugars</span><span>2%</span></div>
-          <div class="akr-nf-row"><span><b>Protein 13g</b></span><span><b>18%</b></span></div>
+          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span>Total Sugars {% if akr_is_pro %}3g{% else %}1g{% endif %}</span><span></span></div>
+          <div class="akr-nf-row akr-nf-indent akr-nf-row-light"><span>Includes {% if akr_is_pro %}3g{% else %}1g{% endif %} Added Sugars</span><span>{% if akr_is_pro %}6%{% else %}2%{% endif %}</span></div>
+          <div class="akr-nf-row"><span><b>Protein {% if akr_is_pro %}20g{% else %}13g{% endif %}</b></span><span><b>{% if akr_is_pro %}28%{% else %}18%{% endif %}</b></span></div>
 
           <div class="akr-nf-border5"></div>
 
           <!-- Vitamins 2-col grid -->
           <div class="akr-nf-vitamins">
             <div class="akr-nf-vit-cell"><span>Vitamin D 0mcg</span><span>0%</span></div>
-            <div class="akr-nf-vit-cell"><span>Calcium 11mg</span><span>0%</span></div>
-            <div class="akr-nf-vit-cell"><span>Iron 0.5mg</span><span>2%</span></div>
-            <div class="akr-nf-vit-cell"><span>Potassium 350mg</span><span>8%</span></div>
+            <div class="akr-nf-vit-cell"><span>Calcium {% if akr_is_pro %}18mg</span><span>2%{% else %}11mg</span><span>0%{% endif %}</span></div>
+            <div class="akr-nf-vit-cell"><span>Iron {% if akr_is_pro %}.6mg</span><span>4%{% else %}0.5mg</span><span>2%{% endif %}</span></div>
+            <div class="akr-nf-vit-cell"><span>Potassium {% if akr_is_pro %}630mg</span><span>15%{% else %}350mg</span><span>8%{% endif %}</span></div>
           </div>
           <div class="akr-nf-border4"></div>
 

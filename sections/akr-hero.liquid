@@ -510,12 +510,14 @@
   }
 
   // Build selling plan lookup map: days → plan ID
-  var akrPlanMap = {};
+  // Hardcoded known IDs as reliable fallback (Appstle plan IDs confirmed 2026-06-09)
+  var akrPlanMap = { '30': 5202804987, '45': 5202837755, '60': 5202870523 };
   try {
     var planData = JSON.parse(document.getElementById('akrSellingPlans').textContent);
     planData.forEach(function(p) {
-      var match = (p.name || '').match(/\d+/);
-      if (match) akrPlanMap[match[0]] = p.id;
+      // Match "Every 30 Days" → 30, "Every 45 Days" → 45, etc.
+      var match = (p.name || '').match(/(\d+)\s*days?/i) || (p.name || '').match(/(\d+)/);
+      if (match && p.id) akrPlanMap[match[1]] = p.id;
     });
   } catch(e) {}
 

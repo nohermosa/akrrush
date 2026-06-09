@@ -43,6 +43,63 @@
 /* ── Hide native purchase buttons — replaced by custom CTA ── */
 #product-form-{{ product.id }} .purchase-details { display: none !important; }
 
+/* ── Sticky ATC bar ── */
+.akr-sticky-bar {
+  position: fixed;
+  bottom: -90px;
+  left: 0; right: 0;
+  z-index: 9999;
+  background: #7D6355;
+  padding: 10px 16px 10px 16px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.18);
+  transition: bottom 0.3s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: Arial, sans-serif !important;
+}
+.akr-sticky-bar.is-visible {
+  bottom: 0;
+}
+.akr-sticky-product-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.akr-sticky-title {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.02em;
+}
+.akr-sticky-price {
+  color: rgba(255,255,255,0.85);
+  font-size: 13px;
+  font-weight: 400;
+}
+.akr-sticky-cta {
+  flex-shrink: 0;
+  background: #EA7552;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 11px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.akr-sticky-cta:active { background: #d0633f; }
+.akr-sticky-cta:disabled { opacity: 0.6; cursor: not-allowed; }
+
 /* ── Hide Appstle visual widget — keep FULLY FUNCTIONAL in DOM (positionally hidden, not display:none) ── */
 #shopify-section-{{ section.id }} .appstle_subscription_wrapper {
   position: absolute !important;
@@ -349,6 +406,15 @@
   </div><!-- /hero-inner -->
 </section>
 
+<!-- Sticky ATC bar — appears when #akrCtaBtn scrolls out of view -->
+<div class="akr-sticky-bar" id="akrStickyBar" aria-hidden="true" role="region" aria-label="Quick add to cart">
+  <div class="akr-sticky-product-info">
+    <span class="akr-sticky-title">{{ product.title }}</span>
+    <span class="akr-sticky-price" id="akrStickyPrice"><!-- filled by JS --></span>
+  </div>
+  <button type="button" class="akr-sticky-cta" id="akrStickyBtn">ADD TO CART</button>
+</div>
+
 <script src="{{ 'z__jsProduct.js' | asset_url }}" data-theme-editor-load-script></script>
 
 
@@ -542,68 +608,99 @@
   var firstActive = document.querySelector('#akrDeliveryBtns .akr-delivery-btn.active');
   if (firstActive) akrSelectedPlanId = akrPlanMap[firstActive.getAttribute('data-days')] || null;
 
-  // CTA: direct fetch to /cart/add.js with exact known values (bypasses form serialization issues)
-  if (ctaBtn) {
-    ctaBtn.addEventListener('click', function() {
-      var activePackBtn = document.querySelector('.akr-hero-pack-btn.active');
-      if (!activePackBtn) return;
-      var variantId = parseInt(activePackBtn.getAttribute('data-variant-id'), 10);
-      if (!variantId) return;
+  // ── Shared add-to-cart function (used by main CTA + sticky bar) ──
+  function akrDoAddToCart(triggerBtn) {
+    var activePackBtn = document.querySelector('.akr-hero-pack-btn.active');
+    if (!activePackBtn) return;
+    var variantId = parseInt(activePackBtn.getAttribute('data-variant-id'), 10);
+    if (!variantId) return;
 
-      var payload = { id: variantId, quantity: 1 };
+    var payload = { id: variantId, quantity: 1 };
 
-      if (isSubscribeMode) {
-        // 1. Use our tracked plan from the delivery-frequency button click
-        var spVal = akrSelectedPlanId ? String(akrSelectedPlanId) : '';
-        // 2. Fallback: any selling_plan input on the page (Appstle's hidden field)
-        if (!spVal) {
-          var spInput = document.querySelector('input[name="selling_plan"]');
-          if (spInput && spInput.value) spVal = spInput.value;
-        }
-        // 3. Fallback: URL param
-        if (!spVal) {
-          spVal = new URLSearchParams(window.location.search).get('selling_plan') || '';
-        }
-        if (spVal) {
-          payload.selling_plan = parseInt(spVal, 10);
-        }
+    if (isSubscribeMode) {
+      var spVal = akrSelectedPlanId ? String(akrSelectedPlanId) : '';
+      if (!spVal) {
+        var spInput = document.querySelector('input[name="selling_plan"]');
+        if (spInput && spInput.value) spVal = spInput.value;
       }
+      if (!spVal) {
+        spVal = new URLSearchParams(window.location.search).get('selling_plan') || '';
+      }
+      if (spVal) payload.selling_plan = parseInt(spVal, 10);
+    }
 
-      ctaBtn.disabled = true;
-      ctaBtn.textContent = 'Adding…';
+    if (triggerBtn) { triggerBtn.disabled = true; triggerBtn.textContent = 'Adding…'; }
 
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
-        body: JSON.stringify(payload)
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (data.status) {
-          // Error object from Shopify
-          console.error('Cart add error:', data.description || data.message);
-          ctaBtn.disabled = false;
-          akrUpdateSubPrices();
-          return;
-        }
-        // Success — rebuild PXUTheme mini-cart and show drawer
-        if (window.PXUTheme && window.PXUTheme.jsAjaxCart) {
-          window.PXUTheme.jsAjaxCart.buildCart();
-          var $trigger = $('[data-ajax-cart-trigger]');
-          if ($trigger.length) $trigger.addClass('show-mini-cart');
-        } else {
-          window.location.href = '/cart';
-        }
-        ctaBtn.disabled = false;
-        akrUpdateSubPrices();
-      })
-      .catch(function() {
-        ctaBtn.disabled = false;
-        akrUpdateSubPrices();
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.status) {
+        console.error('Cart add error:', data.description || data.message);
+        if (triggerBtn) { triggerBtn.disabled = false; akrUpdateSubPrices(); }
+        return;
+      }
+      if (window.PXUTheme && window.PXUTheme.jsAjaxCart) {
+        window.PXUTheme.jsAjaxCart.buildCart();
+        var $trigger = $('[data-ajax-cart-trigger]');
+        if ($trigger.length) $trigger.addClass('show-mini-cart');
+      } else {
         window.location.href = '/cart';
-      });
+      }
+      if (triggerBtn) { triggerBtn.disabled = false; akrUpdateSubPrices(); }
+    })
+    .catch(function() {
+      if (triggerBtn) { triggerBtn.disabled = false; akrUpdateSubPrices(); }
+      window.location.href = '/cart';
     });
   }
+
+  // Main CTA button
+  if (ctaBtn) {
+    ctaBtn.addEventListener('click', function() { akrDoAddToCart(ctaBtn); });
+  }
+
+  // ── Sticky bar ──
+  var stickyBar = document.getElementById('akrStickyBar');
+  var stickyBtn = document.getElementById('akrStickyBtn');
+  var stickyPriceEl = document.getElementById('akrStickyPrice');
+
+  // Update sticky price label to match current mode + variant
+  function akrUpdateStickyPrice() {
+    if (!stickyPriceEl) return;
+    var activePackBtn = document.querySelector('.akr-hero-pack-btn.active');
+    if (!activePackBtn) return;
+    var vid = activePackBtn.getAttribute('data-variant-id');
+    for (var i = 0; i < priceData.length; i++) {
+      if (String(priceData[i].id) === String(vid)) {
+        stickyPriceEl.textContent = isSubscribeMode
+          ? fmtMoney(priceData[i].sub_price) + '/mo · Subscribe & Save'
+          : fmtMoney(priceData[i].price) + ' · One-time';
+        break;
+      }
+    }
+  }
+
+  // Show/hide sticky bar using IntersectionObserver on main CTA
+  if (stickyBar && ctaBtn) {
+    var stickyObs = new IntersectionObserver(function(entries) {
+      var isVisible = !entries[0].isIntersecting;
+      stickyBar.classList.toggle('is-visible', isVisible);
+      stickyBar.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+    }, { rootMargin: '0px', threshold: 0 });
+    stickyObs.observe(ctaBtn);
+  }
+
+  if (stickyBtn) {
+    stickyBtn.addEventListener('click', function() { akrDoAddToCart(stickyBtn); });
+  }
+
+  // Patch akrUpdateSubPrices to also update sticky label
+  var _origUpdateSub = akrUpdateSubPrices;
+  akrUpdateSubPrices = function() { _origUpdateSub(); akrUpdateStickyPrice(); };
 
   akrUpdateSubPrices();
 

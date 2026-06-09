@@ -1,0 +1,3339 @@
+/* =============================================================
+   åKrrush — Custom Product Page Styles
+   Sections: akr-ingredients, akr-benefits, akr-faq
+   ============================================================= */
+
+/* Design tokens */
+:root {
+  /* Backgrounds */
+  --akr-cream:  #fffbf2;
+  --akr-cream2: #fff9f0;
+
+  /* Text */
+  --akr-dark:   #2c1a10;
+  --akr-mid:    #6f5138;
+
+  /* Brand colors */
+  --akr-orange: #ea7552;
+  --akr-orange2:#e55a2d;
+  --akr-teal:   #47b1b4;
+  --akr-amber:  #ffc03c;
+  --akr-border: #e8d5c4;
+
+  /* Container widths — see design-audit-pack.md
+   * --akr-container-wide:    Hero, numbers sections (full visual impact)
+   * --akr-container-default: All other content sections
+   * Update tokens here — never hardcode max-widths in individual section CSS.
+   */
+  --akr-container-wide:    1440px;
+  --akr-container-default: 1240px;
+
+  /* CTA hierarchy */
+  --akr-cta-primary:        #D2724A;
+  --akr-cta-primary-hover:  #B85F3A;
+  --akr-cta-secondary:      #ea7552;
+  --akr-cta-secondary-hover:#d4613e;
+}
+
+/* Sticky header offset for in-page anchor links.
+ * Applies to all akr-*-section elements. Theme sticky header is
+ * z-index 70, height measured at runtime. 80px is safe default —
+ * adjust if header height changes materially. */
+.akr-hero-section,
+.akr-ing-section,
+.akr-social-section,
+.akr-num-section,
+.akr-why-section,
+.akr-benefits-section,
+.akr-faq-section {
+  scroll-margin-top: 80px;
+}
+
+/* =============================================================
+   SECTION: MEET THE INGREDIENTS
+   ============================================================= */
+.akr-ing-section {
+  background: var(--akr-cream);
+  padding: 100px 40px;
+}
+.akr-ing-inner {
+  max-width: var(--akr-container-default);
+  margin: 0 auto;
+}
+
+/* Force-override Enkel on all akr section elements */
+.akr-ing-section *,
+.akr-why-section *,
+.akr-benefits-section *,
+.akr-faq-section * {
+  font-family: Arial, sans-serif !important;
+}
+.akr-ing-heading,
+.akr-ing-heading em,
+.akr-ing-card-body h4,
+.akr-benefits-heading,
+.akr-benefits-heading em,
+.akr-benefits-text-heading,
+.akr-benefits-text-heading em,
+.akr-faq-heading {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+}
+.akr-num-title,
+.akr-ing-heading,
+.akr-benefits-heading,
+.akr-benefits-text-heading,
+.akr-faq-heading {
+  font-weight: 700 !important;
+}
+/* ── Heading block ── */
+.akr-ing-heading-outer {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+}
+.akr-ing-eyebrow {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akr-orange);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  font-family: Arial, sans-serif !important;
+}
+.akr-ing-heading-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 8px;
+}
+.akr-ing-heading {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-weight: 700 !important;
+  font-size: 68px;
+  color: var(--akr-dark);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+}
+.akr-ing-heading em { font-style: italic; }
+.akr-ing-branch {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Subtext below heading */
+.akr-ing-subtext {
+  font-size: 18px;
+  color: var(--akr-mid);
+  text-align: center;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Photo + NF layout ── */
+.akr-ing-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: stretch;
+  position: relative;
+}
+.akr-ing-photo-col {
+  grid-column: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.akr-ing-nf-col {
+  grid-column: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Photo frame — stretches to match right col height via align-items: stretch on parent */
+.akr-ing-photo-frame {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  position: relative;
+}
+.akr-ing-photo-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 40px;
+  overflow: hidden;
+}
+.akr-ing-photo-wrap img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  object-position: center;
+  max-width: none;
+  display: block;
+}
+
+/* ── Nutrition Facts card (harmonized) ── */
+/* NF panel font-family override — must beat [class*="akr-"] global rule
+   in styles-zz-custom.css (specificity 11pts) that sets font-family: inherit !important.
+   section[id] adds 100pts → wins at 111pts on all element descendants. */
+.akr-nf,
+.akr-nf *,
+section[id="akr-ingredients"] .akr-nf,
+section[id="akr-ingredients"] .akr-nf *,
+section[id="akr-ingredients"] .akr-nf h1,
+section[id="akr-ingredients"] .akr-nf h2,
+section[id="akr-ingredients"] .akr-nf h3,
+section[id="akr-ingredients"] .akr-nf p,
+section[id="akr-ingredients"] .akr-nf span,
+section[id="akr-ingredients"] .akr-nf div,
+section[id="akr-ingredients"] .akr-nf b,
+section[id="akr-ingredients"] .akr-nf strong,
+section[id="akr-ingredients"] .akr-nf i,
+section[id="akr-ingredients"] .akr-nf em {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+  color: var(--akr-dark) !important;
+}
+.akr-nf {
+  background: rgba(251, 218, 190, 0.2) !important;
+  border: 1px solid var(--akr-border) !important;
+  border-radius: 16px;
+  padding: 24px 26px;
+  font-family: Arial, sans-serif !important;
+  color: #2c1a10 !important;
+  box-shadow: 9px 15px 15px rgba(190,190,190,.25);
+  position: relative;
+}
+/* Halal corner stamp */
+.akr-nf-halal-stamp {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 46px;
+  height: 46px;
+  transform: rotate(-5deg);
+  z-index: 2;
+  pointer-events: none;
+}
+.akr-nf-halal-stamp img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.akr-nf-title {
+  font-size: 36px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  color: #2c1a10 !important;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--akr-border);
+  padding-bottom: 8px;
+  padding-right: 70px;
+}
+
+/* Serving row */
+.akr-nf-serving-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 6px 0;
+}
+.akr-nf-serv-bold {
+  font-weight: 700;
+  font-size: 16px;
+  display: block;
+}
+.akr-nf-serv-sub {
+  font-size: 13px !important;
+  font-weight: 400;
+  color: #2c1a10 !important;
+  margin-top: 2px;
+}
+.akr-nf-serv-weight {
+  font-weight: 700;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+/* Border helpers — harmonized: thick → 2px, color → token */
+.akr-nf-border8 { border-bottom: 2px solid var(--akr-dark); margin: 4px 0 6px; }
+.akr-nf-border4 { border-bottom: 2px solid var(--akr-dark); margin: 3px 0; }
+.akr-nf-border5 { border-bottom: 2px solid var(--akr-dark); margin: 3px 0; }
+
+.akr-nf-amount {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #2c1a10 !important;
+  margin: 6px 0 0;
+}
+
+/* Calories */
+.akr-nf-cal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 4px 0 8px;
+}
+.akr-nf-cal-label {
+  font-size: 32px !important;
+  font-weight: 900 !important;
+  color: #2c1a10 !important;
+  line-height: 1;
+}
+.akr-nf-cal-num {
+  font-size: 44px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  color: #2c1a10 !important;
+}
+
+/* % Daily Value */
+.akr-nf-dv {
+  text-align: right;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #2c1a10 !important;
+  padding: 4px 0;
+}
+
+/* Nutrient rows */
+.akr-nf-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px !important;
+  color: #2c1a10 !important;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--akr-border) !important;
+}
+.akr-nf-row span { color: #2c1a10 !important; font-size: 14px !important; }
+.akr-nf-row b    { font-weight: 700; color: #2c1a10 !important; }
+.akr-nf-indent   { padding-left: 20px !important; }
+.akr-nf-row-light {
+  font-weight: 400;
+  color: var(--akr-dark) !important;
+  border-bottom: 1px solid var(--akr-border) !important;
+}
+
+/* Vitamins 2-col grid */
+.akr-nf-vitamins {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 24px;
+  padding: 6px 0;
+}
+.akr-nf-vit-cell {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px !important;
+  color: #2c1a10 !important;
+  padding: 2px 0;
+}
+.akr-nf-vit-cell span { font-size: 13px !important; color: #2c1a10 !important; }
+
+/* Ingredients + Norway */
+.akr-nf-ing-line {
+  font-size: 13px;
+  color: #2c1a10 !important;
+  line-height: 1.4;
+  margin: 8px 0;
+}
+.akr-nf-ing-line b { font-weight: 700 !important; }
+
+/* ── Origin cards ── */
+.akr-ing-origin-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  margin-top: 16px;
+}
+.akr-ing-origin-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid var(--akr-border);
+}
+.akr-ing-origin-card--norway { background: rgba(186,12,47,0.06); }
+.akr-ing-origin-card--usa    { background: rgba(60,59,110,0.06); }
+.akr-ing-origin-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.akr-ing-origin-card--norway .akr-ing-origin-icon { background: rgba(186,12,47,0.12); }
+.akr-ing-origin-card--usa    .akr-ing-origin-icon { background: rgba(60,59,110,0.12); }
+.akr-ing-origin-icon img {
+  width: 32px;
+  height: 24px;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  display: block;
+}
+.akr-ing-origin-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+  min-width: 0;
+}
+.akr-ing-origin-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akr-dark);
+  margin-bottom: 2px;
+}
+.akr-ing-origin-sub {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6f5138;
+}
+
+
+/* ── Ingredients sub-CTA ── */
+.akr-ing-subcta {
+  text-align: center;
+  margin-top: 48px;
+}
+.akr-btn-cta-secondary,
+a.akr-btn-cta-secondary,
+button.akr-btn-cta-secondary {
+  display: inline-block;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: var(--akr-cta-secondary) !important;
+  text-decoration: none !important;
+  letter-spacing: 0.02em;
+  font-family: Arial, sans-serif !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  padding: 0 !important;
+  border: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+.akr-btn-cta-secondary:hover,
+a.akr-btn-cta-secondary:hover {
+  opacity: 0.75 !important;
+}
+
+/* ── Ingredient cards ── */
+.akr-ing-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 56px;
+  flex-wrap: wrap;
+}
+.akr-ing-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border: 1px solid var(--akr-border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  width: 450px;
+  flex-shrink: 0;
+}
+.akr-ing-card-circle {
+  width: 86px;
+  height: 86px;
+  min-width: 86px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.akr-ing-card-icon {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+.akr-ing-card-body h4 {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 20px;
+  color: var(--akr-dark);
+  margin-bottom: 4px;
+  margin-top: 0;
+  line-height: 1.3;
+}
+.akr-ing-card-body p {
+  font-size: 16px;
+  color: var(--akr-mid);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* =============================================================
+   SECTION: REAL BENEFITS
+   ============================================================= */
+.akr-benefits-section {
+  background: var(--akr-cream);
+  padding: 88px 40px;
+}
+.akr-benefits-inner {
+  max-width: var(--akr-container-default);
+  margin: 0 auto;
+}
+.akr-benefits-heading {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 68px;
+  color: var(--akr-dark);
+  text-align: center;
+  margin-bottom: 14px;
+  line-height: 1.05;
+}
+.akr-benefits-heading em {
+  font-style: italic;
+  position: relative;
+  display: inline-block;
+}
+.akr-benefits-inside-underline {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.akr-benefits-sub {
+  text-align: center;
+  font-size: 18px;
+  color: var(--akr-mid);
+  margin-bottom: 64px;
+}
+.akr-benefits-icons-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 80px;
+}
+.akr-benefit-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 165px;
+}
+.akr-benefit-circle {
+  width: 165px;
+  height: 165px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  flex-shrink: 0;
+}
+.akr-benefit-circle img,
+.akr-benefit-circle-icon {
+  width: auto;
+  height: auto;
+  max-width: 62%;
+  max-height: 62%;
+  object-fit: contain;
+  display: block;
+}
+.akr-benefit-name {
+  font-family: Arial, sans-serif !important;
+  font-size: 20px;
+  font-weight: 700;
+  color: #100807;
+  text-align: center;
+  line-height: 1.2;
+}
+.akr-benefit-desc {
+  font-size: 16px;
+  color: var(--akr-mid);
+  text-align: center;
+  letter-spacing: 0.72px;
+  margin-top: -8px;
+}
+.akr-benefits-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+.akr-benefits-photo {
+  border-radius: 40px;
+  overflow: hidden;
+  background: #e1cbb2;
+  aspect-ratio: 5/4;
+}
+.akr-benefits-photo img,
+.akr-benefits-photo-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: 98% 15%;
+  border-radius: 40px;
+}
+.akr-benefits-text-heading {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 68px;
+  color: var(--akr-dark);
+  line-height: 1.1;
+  margin-bottom: 18px;
+  margin-top: 0;
+}
+.akr-benefits-text-heading em { font-style: italic; }
+.akr-benefits-text-orange { color: #ea7552; font-style: italic; }
+.akr-benefits-text-desc {
+  font-size: 18px;
+  color: var(--akr-mid);
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+.akr-benefits-points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0;
+  margin: 0;
+}
+.akr-benefits-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 16px;
+  color: var(--akr-mid);
+  line-height: 1.55;
+}
+.akr-benefits-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  background: var(--akr-orange);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* =============================================================
+   BENEFITS — Scroll reveal + hover
+   ============================================================= */
+#akr-benefits [data-animate] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s cubic-bezier(0.34,1.56,0.64,1), transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
+}
+#akr-benefits [data-animate="scale"] {
+  transform: scale(0.82);
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.34,1.56,0.64,1), transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+#akr-benefits [data-animate="from-left"]  { transform: translateX(-32px); }
+#akr-benefits [data-animate="from-right"] { transform: translateX(32px); }
+#akr-benefits [data-animate].is-visible   { opacity: 1; transform: none; }
+
+.akr-benefit-circle {
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  box-shadow: 0 6px 16px rgba(44,26,16,0.10);
+}
+.akr-benefit-item:hover .akr-benefit-circle {
+  transform: translateY(-7px);
+  box-shadow: 0 14px 30px rgba(44,26,16,0.13);
+}
+
+
+/* -------- BENEFIT ICON ANIMATIONS -------- */
+.akr-benefit-item {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.akr-benefit-item.akr-ben-anim-ready {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.akr-benefit-item.akr-ben-anim-ready.akr-ben-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+.akr-protein-body, .akr-protein-smile,
+.akr-collagen-mol,
+.akr-joint-lower, .akr-joint-upper,
+.akr-gut-n1, .akr-gut-n2, .akr-gut-n3, .akr-gut-n4,
+.akr-energy-bolt, .akr-energy-rays,
+.akr-nordic-water {
+  transform-box: fill-box;
+  transform-origin: center center;
+}
+/* 1. PROTEIN — subtle float, pause to 5s */
+@keyframes akr-ben-protein-bounce {
+  0%, 100% { transform: translateY(0); }
+  40%       { transform: translateY(-3px); }
+  70%       { transform: translateY(-1.5px); }
+}
+.akr-protein-body {
+  animation: akr-ben-protein-bounce 5s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.akr-ben-animate .akr-protein-body { animation-play-state: running; }
+
+/* 2. COLLAGEN — gentle breathe (single path: no rotation) */
+@keyframes akr-ben-collagen-breathe {
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.96); }
+}
+.akr-collagen-mol {
+  animation: akr-ben-collagen-breathe 5s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.akr-ben-animate .akr-collagen-mol { animation-play-state: running; }
+
+/* 3. JOINTS — soft bend */
+@keyframes akr-ben-joints-bend {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  25%            { transform: rotate(-8deg); }
+  40%            { transform: rotate(-5deg); }
+}
+.akr-joint-lower {
+  transform-origin: center top !important;
+  animation: akr-ben-joints-bend 5s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.akr-ben-animate .akr-joint-lower { animation-play-state: running; }
+
+/* 4. GUT — gentle node swell */
+@keyframes akr-ben-gut-pulse {
+  0%, 70%, 100% { transform: scale(1); }
+  35%            { transform: scale(1.1); }
+}
+.akr-gut-n1 { animation: akr-ben-gut-pulse 4s ease-in-out 0s     infinite; animation-play-state: paused; }
+.akr-gut-n2 { animation: akr-ben-gut-pulse 4s ease-in-out 0.5s   infinite; animation-play-state: paused; }
+.akr-gut-n3 { animation: akr-ben-gut-pulse 4s ease-in-out 1s     infinite; animation-play-state: paused; }
+.akr-gut-n4 { animation: akr-ben-gut-pulse 4s ease-in-out 1.5s   infinite; animation-play-state: paused; }
+.akr-ben-animate .akr-gut-n1,
+.akr-ben-animate .akr-gut-n2,
+.akr-ben-animate .akr-gut-n3,
+.akr-ben-animate .akr-gut-n4 { animation-play-state: running; }
+
+/* 5. ENERGY — slow rays breathe + bolt fade */
+@keyframes akr-ben-energy-rays {
+  0%, 100% { transform: scale(1);    opacity: 1; }
+  50%       { transform: scale(1.05); opacity: 0.8; }
+}
+@keyframes akr-ben-energy-bolt {
+  0%, 60%, 100% { opacity: 1; }
+  80%            { opacity: 0.35; }
+  90%            { opacity: 1; }
+}
+.akr-energy-rays {
+  animation: akr-ben-energy-rays 4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.akr-energy-bolt {
+  animation: akr-ben-energy-bolt 4s ease-in-out 1s infinite;
+  animation-play-state: paused;
+}
+.akr-ben-animate .akr-energy-rays { animation-play-state: running; }
+.akr-ben-animate .akr-energy-bolt { animation-play-state: running; }
+
+/* 6. NORDIC — slow water drift */
+@keyframes akr-ben-nordic-water {
+  0%, 100% { transform: translateX(0); }
+  40%       { transform: translateX(3px); }
+  70%       { transform: translateX(-2px); }
+}
+.akr-nordic-water {
+  animation: akr-ben-nordic-water 7s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.akr-ben-animate .akr-nordic-water { animation-play-state: running; }
+
+/* Hover — subtil sirkel-løft, ingen akselerasjon */
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .akr-benefit-item.akr-ben-anim-ready { opacity: 1; transform: none; transition: none; }
+  .akr-protein-body, .akr-collagen-mol, .akr-joint-lower,
+  .akr-gut-n1, .akr-gut-n2, .akr-gut-n3, .akr-gut-n4,
+  .akr-energy-rays, .akr-energy-bolt, .akr-nordic-water { animation: none !important; }
+}
+
+/* =============================================================
+   SECTION: FAQ
+   ============================================================= */
+.akr-faq-section {
+  background: var(--akr-cream);
+  padding: 88px 40px;
+}
+.akr-faq-inner {
+  max-width: var(--akr-container-default);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 603px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.akr-faq-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.akr-faq-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: Arial, sans-serif;
+  border: none;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+.akr-faq-tab:hover { opacity: 0.8; }
+.akr-faq-tab.is-active { opacity: 1; font-weight: 700; }
+.akr-faq-tab-nutrition   { background: #fce4d4; color: #993c1d; }
+.akr-faq-tab-howto       { background: #e1f0e4; color: #2d5a3f; }
+.akr-faq-tab-sub         { background: #f5ead4; color: #6b5320; }
+.akr-faq-section .akr-faq-eyebrow {
+  font-family: Arial, sans-serif !important;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--akr-cta-secondary);
+  margin: 0 0 12px 0;
+  text-align: left;
+}
+.akr-faq-heading {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 68px;
+  color: var(--akr-dark);
+  line-height: 1;
+  margin-bottom: 14px;
+  margin-top: 0;
+}
+.akr-faq-heading em { font-style: italic; }
+.akr-faq-actually {
+  font-style: italic;
+  color: var(--akr-orange);
+  position: relative;
+  display: inline-block;
+}
+.akr-faq-actually-underline {
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.akr-faq-sub {
+  font-size: 18px;
+  color: var(--akr-mid);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+.akr-faq-social-proof {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.akr-faq-social-text {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--akr-mid);
+  font-family: Arial, sans-serif;
+}
+.akr-faq-list {
+  border-top: 1px solid #e8d9c4;
+}
+.akr-faq-item {
+  border-bottom: 1px solid #e8d9c4;
+}
+.akr-faq-q {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px 0 10px 0;
+  cursor: pointer;
+  list-style: none;
+}
+.akr-faq-section .akr-faq-q-text {
+  font-family: Arial, sans-serif !important;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--akr-dark);
+  flex: 1;
+  line-height: 1.45;
+}
+.akr-faq-toggle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--akr-cta-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.akr-faq-section .akr-faq-a {
+  font-family: Arial, sans-serif !important;
+  font-size: 16px;
+  color: var(--akr-mid);
+  line-height: 1.5;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0;
+  /* Close: fast — Emil: "fast when responding" */
+  transition: max-height 180ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 140ms ease-in,
+              padding 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.akr-faq-section .akr-faq-a p {
+  font-family: Arial, sans-serif !important;
+  font-weight: 400;
+  font-size: medium;
+}
+.akr-faq-section .akr-faq-a.is-open {
+  max-height: 600px;
+  opacity: 1;
+  padding: 0 0 24px 0;
+  /* Open: slower — comfortable reading expansion */
+  transition: max-height 320ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 260ms ease-out,
+              padding 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.akr-faq-still-curious {
+  margin-top: 28px;
+  padding-top: 24px;
+}
+.akr-btn-chat {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  background: var(--akr-cta-secondary);
+  border-radius: 9999px;
+  padding: 16px 24px;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+}
+.akr-btn-chat:hover { opacity: .9; color: #fff; }
+
+/* Right col — rotated photo card */
+.akr-faq-right {
+  position: relative;
+  padding-right: 55px;
+  padding-bottom: 55px;
+}
+.akr-faq-card-container {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.akr-faq-photo-card {
+  background: #fff;
+  border-radius: 40px;
+  padding: 14px 14px 16px;
+  box-shadow: 0px 20px 24px rgba(26,20,17,.18);
+  transform: rotate(-3deg);
+  transform-origin: center center;
+}
+.akr-faq-photo-inner {
+  background: #cbb38a;
+  border-radius: 24px;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 3/4;
+}
+.akr-faq-photo-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+.akr-faq-quote-overlay {
+  position: absolute;
+  bottom: -40px;
+  right: -37px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: 0px 20px 20px rgba(26,20,17,.12);
+  transform: rotate(5deg);
+  width: 250px;
+  z-index: 5;
+}
+.akr-faq-quote-stars {
+  font-size: 13px;
+  color: var(--akr-orange);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.akr-faq-quote-text {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 20px;
+  color: var(--akr-dark);
+  line-height: 1.3;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+.akr-faq-quote-attribution {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.akr-faq-quote-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #ea7552, #ffc03c);
+}
+.akr-faq-section .akr-faq-quote-avatar-initial {
+  background: var(--akr-cta-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif !important;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.akr-faq-quote-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--akr-dark);
+}
+.akr-faq-quote-loc {
+  font-size: 12px;
+  color: var(--akr-mid);
+}
+/* =============================================================
+   SECTION: HERO (akr-hero)
+   ============================================================= */
+.akr-hero-section {
+  background: var(--akr-cream);
+  padding: 80px 40px 40px;
+}
+.akr-hero-inner {
+  max-width: var(--akr-container-wide);
+  margin: 0 auto;
+  display: grid !important;
+  grid-template-columns: 590px 1fr !important;
+  gap: 0;
+  align-items: start;
+  border-bottom: 1px solid var(--akr-border);
+  padding-bottom: 40px;
+}
+
+/* --- Gallery column --- */
+.akr-hero-gallery-col {
+  padding-right: 48px;
+  border-right: 1px solid var(--akr-border);
+}
+.akr-hero-main-wrap {
+  position: relative;
+  border-radius: 20px;
+  overflow: visible;
+  aspect-ratio: 4 / 5;
+  background: #d96e3e;
+  margin-bottom: 14px;
+}
+.akr-hero-main-wrap > * {
+  overflow: hidden;
+}
+.akr-hero-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+}
+
+
+/* Thumbnails */
+.akr-hero-thumbs {
+  display: flex;
+  gap: 10px;
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+.akr-hero-thumb {
+  flex: 1;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2.5px solid transparent;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.akr-hero-thumb.active,
+.akr-hero-thumb:hover { border-color: var(--akr-orange); }
+.akr-hero-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.akr-hero-view-nf {
+  font-size: 12px;
+  font-family: Arial, sans-serif !important;
+  color: var(--akr-mid) !important;
+  text-decoration: underline;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 2px;
+}
+
+/* --- Info column --- */
+.akr-hero-info-col {
+  padding-left: 48px;
+  padding-top: 4px;
+}
+
+/* Yotpo wrapper */
+.akr-hero-yotpo {
+  margin-bottom: 10px;
+}
+
+/* Eyebrow */
+.akr-hero-eyebrow {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  font-family: Arial, sans-serif !important;
+  color: var(--akr-dark) !important;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* Title */
+.akr-hero-title {
+  font-family: 'Newsreader', 'Georgia', serif !important;
+  font-size: 44px !important;
+  font-weight: 600 !important;
+  color: var(--akr-dark) !important;
+  line-height: 1.1 !important;
+  margin: 0 0 12px !important;
+}
+
+/* Short desc */
+.akr-hero-short-desc {
+  font-size: 13px !important;
+  font-family: Arial, sans-serif !important;
+  color: var(--akr-mid) !important;
+  line-height: 1.5 !important;
+  margin-bottom: 14px !important;
+}
+
+/* Feature bullets */
+.akr-hero-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.akr-hero-bullets li {
+  font-size: 13px !important;
+  font-family: Arial, sans-serif !important;
+  color: var(--akr-mid) !important;
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.5 !important;
+}
+.akr-hero-bullets li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--akr-orange);
+  font-weight: 700;
+}
+
+/* Divider */
+.akr-hero-divider {
+  border: none;
+  border-top: 1px solid var(--akr-border);
+  margin: 16px 0;
+}
+
+/* Flavor selector */
+.akr-hero-flavor-label {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  font-family: Arial, sans-serif !important;
+  color: var(--akr-dark) !important;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.akr-hero-flavor-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.akr-hero-flavor-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none !important;
+  flex-shrink: 0;
+  position: relative;
+}
+.akr-hero-flavor-thumb {
+  width: 85px;
+  height: 110px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 3px solid transparent;
+  transition: border-color .2s, transform .15s;
+  position: relative;
+  background: var(--akr-border);
+}
+.akr-hero-flavor-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.akr-hero-flavor-name {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  font-family: Arial, sans-serif !important;
+  color: var(--akr-mid) !important;
+  text-align: center;
+}
+.akr-hero-flavor-item.active .akr-hero-flavor-name {
+  color: var(--akr-orange) !important;
+  font-weight: 700 !important;
+}
+
+/* Sprint 3.0.1 — flavor card interaction states */
+.akr-hero-flavor-item {
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.akr-hero-flavor-item .akr-hero-flavor-thumb {
+  transition: border-color 0.2s ease, transform 0.25s ease, box-shadow 0.25s ease, background 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.akr-hero-flavor-item:not(.active):hover .akr-hero-flavor-thumb {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(44, 26, 16, 0.08);
+  border-color: rgba(44, 26, 16, 0.15);
+}
+
+.akr-hero-flavor-item:focus-visible {
+  outline: none;
+}
+
+.akr-hero-flavor-item:focus-visible .akr-hero-flavor-thumb {
+  outline: 2px solid var(--akr-cta-secondary);
+  outline-offset: 4px;
+}
+
+.akr-hero-flavor-item.active {
+  pointer-events: none;
+}
+
+.akr-hero-flavor-item.active .akr-hero-flavor-thumb {
+  border: 2px solid var(--akr-cta-primary);
+  box-shadow:
+    0 0 0 4px rgba(210, 114, 74, 0.12),
+    0 8px 16px rgba(210, 114, 74, 0.18);
+  background: var(--akr-cream);
+}
+
+/* Sprint 3.0.3 — Active checkmark badge */
+.akr-hero-flavor-item.active::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 32px;
+  height: 32px;
+  background: var(--akr-cta-primary);
+  border: 3px solid var(--akr-cream);
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'><path d='M2.5 7L5.5 10L11.5 4' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
+  box-shadow: 0 2px 6px rgba(44, 26, 16, 0.15);
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+/* ═══════════════════════════════════════════════════════════ */
+/* Sprint 3.1 — PDP typography sweep                           */
+/* Triple-selector (section[id="akr-hero"] .akr-*) = 21pt     */
+/* wins against [class*="akr-"] { inherit } = 10pt            */
+/* ═══════════════════════════════════════════════════════════ */
+
+/* 1. Eyebrow */
+section[id="akr-hero"] .akr-hero-eyebrow {
+  font-family: Arial, sans-serif !important;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akr-cta-secondary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 16px 0;
+  line-height: 1.3;
+}
+
+/* 2. H1 title — DM Serif Display ensured */
+section[id="akr-hero"] .akr-hero-title {
+  font-family: 'DM Serif Display', serif !important;
+  color: var(--akr-dark);
+  line-height: 1.05;
+}
+
+/* 3. Subtitle */
+section[id="akr-hero"] .akr-hero-short-desc {
+  font-family: Arial, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--akr-dark);
+  margin: 16px 0 24px 0;
+}
+
+/* 4. Bullets */
+section[id="akr-hero"] .akr-hero-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+section[id="akr-hero"] .akr-hero-bullets li {
+  font-family: Arial, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--akr-dark);
+  padding-left: 28px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+section[id="akr-hero"] .akr-hero-bullets li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--akr-cta-secondary);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* 5. Flavor label */
+section[id="akr-hero"] .akr-hero-flavor-label {
+  font-family: Arial, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700;
+  color: var(--akr-cta-secondary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 32px 0 16px 0;
+  line-height: 1.3;
+}
+
+/* 6. Pack buttons container */
+section[id="akr-hero"] .akr-hero-pack-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+/* 7. Pack button base */
+section[id="akr-hero"] .akr-hero-pack-btn {
+  background: var(--akr-cream);
+  border: 1.5px solid var(--akr-border);
+  border-radius: 12px;
+  padding: 16px 12px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  text-align: center;
+}
+
+section[id="akr-hero"] .akr-hero-pack-btn:hover {
+  border-color: var(--akr-cta-primary);
+}
+
+/* 8. Best-variant */
+section[id="akr-hero"] .akr-hero-pack-btn--best {
+  border: 1.5px solid var(--akr-cta-primary);
+  background: rgba(210, 114, 74, 0.04);
+}
+
+/* 9. Pack name */
+section[id="akr-hero"] .akr-hero-pack-name {
+  font-family: Arial, sans-serif !important;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--akr-dark);
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+
+/* 10. Pack price */
+section[id="akr-hero"] .akr-hero-pack-price {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--akr-mid);
+  line-height: 1.3;
+}
+
+/* 11. "BEST VALUE" pill */
+section[id="akr-hero"] .akr-hero-best-label {
+  font-family: Arial, sans-serif !important;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--akr-cta-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: inline-block;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+/* 12. Subscribe card */
+section[id="akr-hero"] .akr-sub-card {
+  background: var(--akr-cream);
+  border: 1.5px solid #e8d5c4;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 16px 0;
+  position: relative;
+}
+section[id="akr-hero"] .akr-sub-card.akr-sub-card--selected {
+  border-color: var(--akr-cta-primary);
+}
+
+/* 13. Subscribe title */
+section[id="akr-hero"] .akr-sub-card-label {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--akr-dark);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+/* 14. Subscribe price main */
+section[id="akr-hero"] .akr-sub-price-main {
+  font-family: 'DM Serif Display', serif !important;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 400;
+  color: var(--akr-dark);
+  line-height: 1;
+}
+
+/* 15. Subscribe price period */
+section[id="akr-hero"] .akr-sub-price-period {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--akr-mid);
+}
+
+/* 16. Subscribe compare price */
+section[id="akr-hero"] .akr-sub-price-compare {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--akr-mid);
+  text-decoration: line-through;
+}
+
+/* 17. Billing note */
+section[id="akr-hero"] .akr-sub-billing {
+  font-family: Arial, sans-serif !important;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--akr-mid);
+  margin: 8px 0 16px 0;
+}
+
+/* 18. Subscribe perks */
+section[id="akr-hero"] .akr-sub-perk {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--akr-dark);
+  padding-left: 24px;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+section[id="akr-hero"] .akr-sub-perk em,
+section[id="akr-hero"] .akr-sub-perk i {
+  font-style: italic;
+  font-weight: 700;
+  color: var(--akr-dark);
+}
+
+section[id="akr-hero"] .akr-sub-perk::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--akr-cta-secondary);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* 19. Delivery label */
+section[id="akr-hero"] .akr-delivery-label {
+  font-family: Arial, sans-serif !important;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--akr-mid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 16px 0 8px 0;
+  line-height: 1.3;
+}
+
+/* 20. Delivery buttons */
+section[id="akr-hero"] .akr-delivery-btn {
+  font-family: Arial, sans-serif !important;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--akr-dark);
+  background: var(--akr-cream);
+  border: 1.5px solid var(--akr-border);
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+section[id="akr-hero"] .akr-delivery-btn:hover {
+  border-color: var(--akr-cta-primary);
+}
+
+section[id="akr-hero"] .akr-delivery-btn.active,
+section[id="akr-hero"] .akr-delivery-btn[aria-selected="true"] {
+  background: var(--akr-cream);
+  border-color: var(--akr-cta-primary);
+  color: var(--akr-dark);
+  box-shadow: 0 0 0 3px rgba(210, 114, 74, 0.10);
+}
+
+/* 21. One-time purchase */
+section[id="akr-hero"] .akr-one-time-label {
+  font-family: Arial, sans-serif !important;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akr-dark);
+  line-height: 1.3;
+}
+
+section[id="akr-hero"] .akr-one-time-price {
+  font-family: Arial, sans-serif !important;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--akr-mid);
+  margin-top: 4px;
+}
+
+/* 22. Main CTA button */
+section[id="akr-hero"] .akr-cta-btn {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff !important;
+  background: var(--akr-cta-primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 20px 32px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s ease;
+  line-height: 1.3;
+}
+
+section[id="akr-hero"] .akr-cta-btn:hover {
+  background: var(--akr-cta-primary-hover);
+}
+
+/* 23. Trust note */
+section[id="akr-hero"] .akr-hero-trust {
+  font-family: Arial, sans-serif !important;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--akr-mid);
+  text-align: center;
+  margin-top: 12px;
+  line-height: 1.4;
+}
+
+
+
+/* Pack size buttons */
+.akr-hero-pack-btns {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.akr-hero-pack-btn {
+  flex: 1;
+  padding: 12px 8px;
+  border-radius: 10px;
+  border: 1.5px solid var(--akr-border) !important;
+  background: #fff !important;
+  cursor: pointer;
+  font-family: Arial, sans-serif !important;
+  text-align: center;
+  position: relative;
+  transition: border-color .2s, background .2s;
+}
+.akr-hero-pack-btn.active,
+.akr-hero-pack-btn--best {
+  border: 2px solid var(--akr-orange) !important;
+  background: #fff5f2 !important;
+}
+.akr-hero-best-label {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--akr-orange);
+  color: #fff !important;
+  font-size: 8.5px !important;
+  font-weight: 700 !important;
+  font-family: Arial, sans-serif !important;
+  border-radius: 999px;
+  padding: 2px 8px;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.akr-hero-pack-name {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  font-family: Arial, sans-serif !important;
+  color: var(--akr-dark) !important;
+  line-height: 1.3;
+}
+.akr-hero-pack-btn.active .akr-hero-pack-name,
+.akr-hero-pack-btn--best .akr-hero-pack-name {
+  color: var(--akr-orange) !important;
+}
+.akr-hero-pack-price {
+  font-size: 12px !important;
+  font-family: Arial, sans-serif !important;
+  color: var(--akr-mid) !important;
+  margin-top: 2px;
+}
+
+
+/* Trust note */
+.akr-hero-trust {
+  font-size: 12px !important;
+  font-family: Arial, sans-serif !important;
+  color: var(--akr-mid) !important;
+  text-align: center;
+  margin-top: 10px !important;
+}
+
+/* Hero section force-override Enkel */
+.akr-hero-section * {
+  font-family: Arial, sans-serif !important;
+}
+/* Hero responsive — Sprint 3.M.3: !important added to beat desktop grid !important */
+@media (max-width: 768px) {
+  .akr-hero-inner {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    padding-bottom: 32px;
+  }
+  .akr-hero-gallery-col {
+    padding-right: 0 !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--akr-border);
+    padding-bottom: 32px;
+  }
+  .akr-hero-info-col { padding-left: 0 !important; }
+  .akr-hero-main-wrap { max-width: 560px; margin-left: auto; margin-right: auto; }
+}
+@media (max-width: 640px) {
+  .akr-hero-section { padding: 24px 16px; }
+  .akr-hero-title { font-size: 36px !important; }
+  .akr-hero-flavor-row { flex-wrap: wrap; }
+  .akr-hero-thumb { height: 80px; }
+}
+
+/* =============================================================
+   RESPONSIVE
+   ============================================================= */
+@media (max-width: 1240px) {
+  .akr-ing-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .akr-ing-photo-col,
+  .akr-ing-nf-col {
+    grid-column: auto;
+    width: 100%;
+    max-width: none;
+    justify-self: auto;
+  }
+  .akr-ing-photo-frame {
+    aspect-ratio: 3 / 4;
+    height: auto;
+    min-height: 0;
+  }
+  .akr-ing-photo-wrap {
+    width: 100%;
+    height: 100%;
+  }
+  .akr-benefits-bottom {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .akr-faq-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .akr-faq-quote-overlay { display: none; }
+  .akr-faq-right { padding-right: 0; padding-bottom: 0; }
+}
+@media (max-width: 768px) {
+  .akr-ing-section,
+  .akr-benefits-section,
+  .akr-faq-section {
+    padding: 56px 16px;
+  }
+  .akr-ing-heading { font-size: 40px; }
+  .akr-ing-subtext { font-size: 15px; }
+  .akr-ing-layout { grid-template-columns: 1fr; gap: 32px; }
+  .akr-ing-photo-col,
+  .akr-ing-nf-col { max-width: 100%; grid-column: 1; }
+  .akr-nf-halal-stamp { width: 44px; height: 44px; top: 12px; right: 12px; }
+  .akr-nf-title { padding-right: 56px; }
+  .akr-nf { border-radius: 8px; }
+  .akr-benefits-heading { font-size: 40px; }
+  .akr-benefits-text-heading { font-size: 36px; }
+  .akr-faq-heading { font-size: 36px; }
+  .akr-ing-cards { flex-direction: column; align-items: center; }
+  .akr-ing-card { width: 100%; }
+  .akr-benefits-icons-row { gap: 8px; }
+  .akr-benefit-item { width: 100px; }
+  .akr-benefit-circle { width: 100px; height: 100px; }
+  .akr-benefit-circle img,
+  .akr-benefit-circle-icon { max-width: 60%; max-height: 60%; }
+  .akr-faq-tabs { overflow-x: auto; padding-bottom: 4px; flex-wrap: nowrap; }
+}
+@media (max-width: 480px) {
+  .akr-ing-section { padding: 40px 16px; }
+  .akr-ing-heading { font-size: 32px; }
+  .akr-ing-branch svg { width: 36px !important; height: 32px !important; }
+  .akr-ing-eyebrow { font-size: 13px; }
+  .akr-ing-subtext { font-size: 14px; }
+  .akr-ing-card-circle { width: 72px; height: 72px; min-width: 72px; }
+  .akr-ing-card-icon { width: 44px; height: 44px; }
+  .akr-nf-title { font-size: 28px !important; }
+  .akr-nf-cal-num { font-size: 32px !important; }
+  .akr-nf-cal-label { font-size: 22px !important; }
+}
+
+/* =============================================================
+   SUBSCRIPTION CARD
+   ============================================================= */
+.akr-sub-wrap {
+  margin-top: 20px;
+  margin-bottom: 16px;
+}
+
+.akr-sub-card {
+  position: relative;
+  border: 1.5px solid #e8d5c4;
+  border-radius: 16px;
+  background: #fff;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: box-shadow .15s, border-color .15s;
+}
+.akr-sub-card--selected { border-color: #ea7552; }
+.akr-sub-card:hover { box-shadow: 0 4px 16px rgba(234,117,82,.15); }
+
+.akr-sub-stamp {
+  position: absolute;
+  top: -14px; right: -10px;
+  width: 72px; height: 72px;
+  background: #ea7552;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 9px; font-weight: 800;
+  letter-spacing: .06em; text-transform: uppercase;
+  text-align: center; line-height: 1.3;
+  box-shadow: 0 2px 10px rgba(234,117,82,.4);
+  pointer-events: none;
+}
+
+.akr-sub-card-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px 8px;
+}
+
+.akr-sub-radio-dot {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid #ea7552;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.akr-sub-radio-dot::after {
+  content: '';
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #ea7552;
+  position: absolute;
+  opacity: 0;
+  transition: opacity .15s;
+}
+.akr-sub-card--selected .akr-sub-radio-dot::after { opacity: 1; }
+
+.akr-sub-card-label {
+  font-family: Arial, sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: #2c1a10;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.akr-sub-card-body { padding: 0 16px 16px; }
+
+.akr-sub-price-row {
+  display: flex; align-items: baseline; gap: 5px;
+  margin-bottom: 3px;
+}
+.akr-sub-price-main {
+  font-family: Arial, sans-serif;
+  font-size: 28px; font-weight: 800;
+  color: #2c1a10;
+}
+.akr-sub-price-period {
+  font-size: 13px; color: #8a7060;
+  font-family: Arial, sans-serif;
+}
+.akr-sub-price-compare {
+  font-size: 13px; color: #b0998a;
+  font-family: Arial, sans-serif;
+  text-decoration: line-through;
+}
+.akr-sub-billing {
+  font-size: 12px; color: #8a7060;
+  font-family: Arial, sans-serif;
+  margin-bottom: 12px;
+}
+.akr-sub-perks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 14px;
+  margin-bottom: 14px;
+}
+.akr-sub-perk {
+  font-size: 12px; color: #3a2a1e;
+  font-family: Arial, sans-serif;
+  display: flex; align-items: flex-start; gap: 5px;
+  line-height: 1.4;
+}
+.akr-sub-perk::before {
+  content: '✓';
+  color: #ea7552; font-weight: 700;
+  flex-shrink: 0;
+}
+.akr-sub-perk em { font-style: normal; font-weight: 700; }
+
+.akr-delivery-row {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.akr-delivery-label {
+  font-size: 11px; font-weight: 700;
+  color: #8a7060;
+  letter-spacing: .07em; text-transform: uppercase;
+  font-family: Arial, sans-serif;
+  white-space: nowrap;
+}
+.akr-delivery-btns { display: flex; gap: 6px; }
+.akr-delivery-btn {
+  padding: 5px 12px;
+  border: 1.5px solid #e8d5c4;
+  border-radius: 20px;
+  background: #fff;
+  font-size: 12px; font-weight: 600;
+  color: #6a4a35;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  transition: border-color .15s, background .15s, color .15s;
+}
+.akr-delivery-btn.active,
+.akr-delivery-btn:hover {
+  border-color: #2c1a10;
+  background: #2c1a10;
+  color: #fff;
+}
+
+/* One-time option */
+.akr-one-time {
+  display: flex; align-items: center; gap: 12px;
+  border: 1.5px solid #e8d5c4;
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+  cursor: pointer;
+  background: rgba(251, 218, 190, 0.2);
+  transition: border-color .15s;
+}
+.akr-one-time:hover { border-color: #c0a090; }
+.akr-one-time--selected { border-color: #2c1a10; }
+
+.akr-one-time-radio {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid #c0a090;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color .15s;
+}
+.akr-one-time-radio::after {
+  content: '';
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #2c1a10;
+  position: absolute;
+  opacity: 0;
+  transition: opacity .15s;
+}
+.akr-one-time--selected .akr-one-time-radio { border-color: #2c1a10; }
+.akr-one-time--selected .akr-one-time-radio::after { opacity: 1; }
+
+.akr-one-time-text { flex: 1; }
+.akr-one-time-label {
+  font-size: 13px; font-weight: 700;
+  color: #2c1a10;
+  font-family: Arial, sans-serif;
+}
+.akr-one-time-price {
+  font-size: 12px; color: #8a7060;
+  font-family: Arial, sans-serif;
+  margin-top: 2px;
+}
+
+/* Custom CTA button */
+.akr-cta-btn,
+a.akr-cta-btn,
+button.akr-cta-btn {
+  display: block; width: 100%;
+  padding: 18px 20px;
+  background: var(--akr-cta-primary) !important;
+  background-color: var(--akr-cta-primary) !important;
+  background-image: none !important;
+  color: #fff !important;
+  opacity: 1 !important;
+  filter: none !important;
+  border: none; border-radius: 50px;
+  font-size: 15px; font-weight: 800;
+  letter-spacing: .04em; text-transform: uppercase;
+  cursor: pointer; text-align: center;
+  font-family: Arial, sans-serif;
+  transition: background .2s, transform .1s;
+  margin-bottom: 8px;
+}
+.akr-cta-btn:hover,
+a.akr-cta-btn:hover,
+button.akr-cta-btn:hover { background: var(--akr-cta-primary-hover) !important; background-color: var(--akr-cta-primary-hover) !important; color: #fff !important; }
+.akr-cta-btn:active { transform: scale(.99); }
+
+@media (max-width: 640px) {
+  .akr-sub-perks { grid-template-columns: 1fr; }
+  .akr-delivery-row { gap: 6px; }
+  .akr-sub-stamp { width: 60px; height: 60px; font-size: 8px; top: -10px; right: -8px; }
+}
+
+/* =============================================================
+   SECTION: WHY DRINK JUST BROTH? (v3)
+   ============================================================= */
+/* Force overflow visible on every ancestor so stick can bleed outside card */
+.akr-why-wrapper { overflow: visible !important; }
+.akr-why-section { background: var(--akr-cream); padding: 80px 32px 120px; position: relative; overflow: visible !important; }
+.akr-why-section * { box-sizing: border-box; }
+.akr-why-inner { max-width: var(--akr-container-default); margin: 0 auto; overflow: visible !important; }
+
+/* Eyebrow — matches "HOW WE STACK UP" from ingredients section (Bug 4: position:relative keeps it above header) */
+.akr-why-eyebrow { text-align: center; font-family: Arial, sans-serif !important; font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--akr-orange); margin: 0 0 24px; position: relative; z-index: 1; }
+
+/* Headline — single line on desktop (UNCHANGED from v2) */
+.akr-why-heading {
+  font-family: 'DM Serif Display', Georgia, serif !important;
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  color: var(--akr-dark);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-align: center;
+  white-space: nowrap;
+  display: block;
+  margin: 0 0 28px;
+}
+.akr-why-heading em { font-style: italic; color: var(--akr-orange); position: relative; display: inline-block; }
+.akr-why-heading em .akr-underline-just { position: absolute; bottom: -12px; left: 0; width: 100%; height: auto; pointer-events: none; display: block; }
+.akr-why-broth-outline { -webkit-text-stroke: 1px var(--akr-dark); color: var(--akr-cream); display: inline; }
+
+/* Subheadline */
+.akr-why-sub { text-align: center; max-width: 540px; margin: 0 auto 64px; }
+.akr-why-sub p { font-size: clamp(1rem, 1.4vw, 1.125rem); line-height: 1.55; color: rgba(43, 24, 16, 0.72); margin: 0; }
+.akr-why-sub em { font-style: italic; color: var(--akr-dark); }
+
+/* Comparison grid */
+.akr-why-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 0 auto 48px;
+  align-items: stretch;
+}
+
+/* Cards — base */
+.akr-compare-card { border-radius: 24px; padding: 32px 32px 0 32px; display: flex; flex-direction: column; overflow: hidden; }
+.akr-compare-card--avg { background: #EDE6DA; }
+
+/* Bug 1: overflow:hidden clips splash to card boundary */
+.akr-compare-card--ak {
+  background: #FBE8D9;
+  border: 1.5px solid rgba(198, 107, 69, 0.45);
+  position: relative;
+  overflow: visible;
+  padding-bottom: 0;
+}
+
+/* Average card: 2-col image + content */
+.akr-compare-inner { display: grid; grid-template-columns: 40% 60%; gap: 20px; align-items: flex-start; flex: 1; }
+.akr-compare-img-col { display: flex; align-items: center; justify-content: center; }
+.akr-compare-img-col img { width: 140px; height: auto; object-fit: contain; display: block; }
+
+/* Bug 2: accent inside card, absolute top-right pointing at stick */
+.akr-ak-accent {
+  position: absolute;
+  top: 24px;
+  right: 185px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: none;
+}
+.akr-ak-accent-text { font-family: 'DM Serif Display', Georgia, serif !important; font-style: italic; font-size: 18px; color: var(--akr-orange); line-height: 1.1; }
+.akr-ak-accent-arrow { display: block; margin-top: 4px; margin-left: 30%; }
+
+/* Visual — absolute right, overflows card boundary (overflow:visible on card) */
+.akr-compare-visual {
+  position: absolute;
+  right: -40px;
+  top: -60px;
+  bottom: auto;
+  width: 250px;
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  pointer-events: none;
+}
+
+@keyframes ak-stick-float {
+  0%, 100% { transform: rotate(-16deg) translateY(0); }
+  50%       { transform: rotate(-15deg) translateY(-10px); }
+}
+.akr-compare-stick {
+  width: 272px;
+  height: auto;
+  display: block;
+  transform: rotate(-16deg);
+  transform-origin: center center;
+  animation: ak-stick-float 6s ease-in-out infinite;
+  filter: drop-shadow(0 12px 24px rgba(43,24,16,0.18));
+}
+.akr-compare-card--ak:hover .akr-compare-stick {
+  animation-play-state: paused;
+  transform: rotate(-14deg) translateY(-14px) scale(1.03);
+  transition: transform 400ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .akr-compare-stick { animation: none; }
+}
+
+/* Content — right-padded to clear the stick column */
+.akr-compare-content { display: flex; flex-direction: column; }
+.akr-compare-card--ak .akr-compare-content { padding-right: 200px; position: relative; z-index: 2; }
+
+/* Hotfix Bug 3: Logo block — flex aligned to match avg card title height */
+.akr-compare-logo { display: flex; align-items: center; height: 40px; margin-bottom: 22px; }
+.akr-compare-logo img { height: 100%; width: auto; max-width: 160px; display: block; }
+
+/* Average card title — Hotfix Bug 3: min-height to match logo alignment */
+.akr-compare-title { font-family: 'DM Serif Display', Georgia, serif !important; font-size: 28px; font-weight: 500; line-height: 1.1; color: var(--akr-dark); margin: 0 0 20px; min-height: 40px; display: flex; align-items: center; }
+
+/* Bullet list — use margin-bottom (not gap) so spacing works whether ul is flex or block */
+.akr-compare-list { list-style: none; padding: 0; margin: 0; display: flex !important; flex-direction: column; flex: 1; }
+.akr-compare-list li { display: flex; align-items: center; gap: 12px; font-size: 15px; line-height: 1.4; color: var(--akr-dark); margin-bottom: 32px; }
+.akr-bullet-icon { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.akr-bullet-icon--neg { background: rgba(43, 24, 16, 0.25); }
+.akr-bullet-icon--pos { background: var(--akr-orange); }
+.akr-bullet-icon svg { width: 12px; height: 12px; display: block; }
+
+/* Fix 4a + 4b: Card footers — solid hex colors, readable */
+.akr-compare-footer {
+  margin: auto -32px 0 -32px;
+  padding: 14px 28px;
+  font-size: 13px;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.01em;
+  color: #3d2b1e;
+  background: rgba(43, 24, 16, 0.08);
+  border-radius: 0 0 24px 24px;
+  text-align: center;
+}
+.akr-compare-footer--ak {
+  font-size: 14px;
+  font-weight: 700;
+  font-style: normal;
+  color: #fff;
+  background: var(--akr-cta-primary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 0 0 22px 22px;
+}
+
+/* åKrrush "Why drink just broth?" CTA
+ * Note: !important on background-color and color is required because
+ * Shopify theme core CSS sets default a { color: ... } and a:hover { opacity }
+ * rules that override section-scoped styles. Removing !important here will
+ * break the CTA contrast. Verified May 2026 — no global opacity/filter rules
+ * exist in /assets/*.css that cause this; the culprit is theme core CSS.
+ */
+.akr-why-cta-wrap { text-align: center; }
+.akr-btn-cta-dark,
+a.akr-btn-cta-dark,
+button.akr-btn-cta-dark {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--akr-cta-primary) !important;
+  background-image: none !important;
+  background-color: var(--akr-cta-primary) !important;
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  border: none !important;
+  border-radius: 999px;
+  padding: 20px 44px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(210, 114, 74, 0.18);
+  transition: background-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+.akr-btn-cta-dark:visited,
+.akr-btn-cta-dark:focus { color: #FFFFFF !important; }
+.akr-btn-cta-dark:hover,
+a.akr-btn-cta-dark:hover {
+  background: var(--akr-cta-primary-hover) !important;
+  background-color: var(--akr-cta-primary-hover) !important;
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(210, 114, 74, 0.32);
+}
+.akr-btn-cta-dark:active { background-color: var(--akr-cta-primary-hover) !important; transform: translateY(0); box-shadow: none; }
+
+/* Fix 4c: Trust text — solid, readable */
+.akr-why-trust { font-size: 14px; font-weight: 500; letter-spacing: 0.02em; color: #6B5A4C; margin-top: 14px; margin-bottom: 0; }
+
+/* ≤1024px (tablet) */
+@media (max-width: 1024px) {
+  .akr-compare-visual { width: 220px; right: -24px; top: -40px; }
+  .akr-compare-stick { width: 221px; }
+  .akr-compare-card--ak .akr-compare-content { padding-right: 180px; }
+  .akr-ak-accent { right: 150px; }
+}
+
+/* ≤767px: stack cards, stick back in-flow below content */
+@media (max-width: 767px) {
+  .akr-why-section { padding: 56px 20px 80px; }
+  .akr-why-heading { white-space: normal; font-size: clamp(2.4rem, 10vw, 3.4rem); margin-bottom: 14px; }
+  .akr-why-sub { margin-bottom: 40px; }
+  .akr-why-compare { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; gap: 12px; margin-bottom: 40px; }
+  .akr-compare-img-col img { width: 100px; }
+  .akr-compare-title { font-size: 22px; min-height: auto; }
+  .akr-compare-list li { font-size: 14px; }
+  .akr-btn-cta-dark { display: flex !important; width: 100%; max-width: 360px; margin: 0 auto; font-size: 13px; }
+  .akr-compare-card--ak { overflow: hidden; } /* re-clip on mobile so stick doesn't cause scrollbar */
+  .akr-compare-card--ak .akr-compare-content { padding-right: 0; }
+  .akr-compare-visual { position: absolute; right: -10px; top: -30px; bottom: auto; width: 160px; height: auto; justify-content: center; }
+  .akr-compare-stick { width: 153px; filter: drop-shadow(0 8px 16px rgba(43,24,16,0.15)); }
+  .akr-ak-accent { position: static; display: none; }
+  .akr-compare-logo { height: 28px; }
+}
+
+/* ≤400px */
+@media (max-width: 400px) {
+  .akr-compare-inner { grid-template-columns: 1fr; }
+  .akr-compare-img-col { justify-content: center; }
+  .akr-compare-img-col img { width: 120px; max-width: 100%; }
+  .akr-compare-stick { width: 127px; }
+}
+
+/* =============================================================
+   SECTION: SOCIAL PROOF (Real ritual. Real results.)
+   ============================================================= */
+/* =============================================================
+   SECTION: REAL RITUAL (impeccable v2 — Nordic editorial warmth)
+   ============================================================= */
+.akr-social-wrapper { background: #fffbf2; }
+.akr-social-section {
+  background: #fffbf2;
+  position: relative;
+  overflow: visible;
+  padding: clamp(64px, 8vw, 112px) clamp(24px, 6vw, 100px);
+}
+/* Top-left orange glow blob */
+.akr-social-section::before {
+  content: '';
+  position: absolute;
+  left: -160px;
+  top: -160px;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(242,99,58,0.28) 0%, rgba(242,99,58,0) 68%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+.akr-social-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(48px, 5vw, 72px);
+  max-width: var(--akr-container-default);
+  margin: 0 auto;
+}
+
+/* ── LEFT column ── */
+.akr-social-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  min-width: 0;
+  flex: 1;
+  max-width: 560px;
+}
+
+/* Pills */
+.akr-social-pills {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.akr-social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-family: 'Epilogue', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: white;
+  line-height: 1;
+  white-space: nowrap;
+}
+.akr-social-pill svg { flex-shrink: 0; }
+.akr-social-pill-orange { background: #ea7552; }
+.akr-social-pill-teal   { background: #47b1b4; }
+
+/* Heading — left-aligned, DM Serif Display */
+.akr-social-heading-block { position: relative; width: 100%; text-align: center; }
+.akr-social-heading {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: 68px;
+  font-weight: 700;
+  font-style: normal;
+  color: #2c1a10;
+  line-height: 1.1;
+  text-align: center;
+  margin: 0;
+}
+.akr-social-real-wrap {
+  position: relative;
+  display: inline-block;
+}
+.akr-social-heading-orange {
+  font-style: italic !important;
+  color: #ea7552;
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+}
+.akr-social-real-underline {
+  position: absolute;
+  bottom: -8px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: 9px;
+  overflow: visible;
+  display: block;
+}
+
+/* Subtext */
+.akr-social-sub {
+  font-family: 'Epilogue', Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: #6f5138;
+  text-align: center;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 52ch;
+}
+
+/* Stats — editorial, no boxes */
+.akr-social-stats {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  width: 100%;
+  padding: 8px 0;
+}
+.akr-social-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  padding-right: 24px;
+}
+.akr-social-stat--sep {
+  padding-left: 24px;
+  padding-right: 24px;
+  border-left: 1px solid rgba(44,26,16,0.14);
+}
+.akr-social-stat:last-child { padding-right: 0; }
+.akr-social-stat-val {
+  font-family: 'DM Serif Display', 'Georgia', serif !important;
+  font-size: clamp(36px, 4vw, 48px);
+  font-weight: 700;
+  color: #2c1a10;
+  line-height: 1;
+}
+.akr-social-star { color: #ea7552; }
+.akr-social-stat-lbl {
+  font-family: 'Epilogue', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9a7060;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* CTA row */
+.akr-social-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.akr-social-arrow-l { transform: scaleX(-1); }
+.akr-social-btn {
+  display: inline-block;
+  background: var(--akr-cta-secondary);
+  color: white;
+  font-family: 'Epilogue', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 15px 28px;
+  border-radius: 9999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.akr-social-btn:hover { background: #d45e35; color: white; transform: translateY(-1px); }
+
+/* ── RIGHT: CSS-built phone frame ── */
+.akr-phone-side {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-shrink: 0;
+}
+/* Stronger glow — more warmth around phone */
+.akr-phone-glow {
+  position: absolute;
+  inset: -100px;
+  background: radial-gradient(ellipse 65% 75% at 55% 52%, rgba(234,117,82,0.42) 0%, rgba(234,117,82,0.12) 55%, transparent 78%);
+  z-index: 0;
+  pointer-events: none;
+}
+/* Phone chassis — 310px, tilted */
+.akr-phone-outer {
+  position: relative;
+  width: 310px;
+  flex-shrink: 0;
+  transform: rotate(5.9deg);
+  transform-origin: center bottom;
+  z-index: 1;
+}
+.akr-phone-frame {
+  background: #141414;
+  border-radius: 54px;
+  padding: 10px;
+  box-shadow:
+    0 40px 100px rgba(44,26,16,0.36),
+    0 0 0 1px rgba(255,255,255,0.06) inset,
+    0 0 0 1.5px rgba(0,0,0,0.22);
+}
+.akr-phone-screen {
+  border-radius: 46px;
+  overflow: hidden;
+  aspect-ratio: 9 / 19.5;
+  position: relative;
+  background: #000;
+  cursor: pointer;
+}
+/* Play button */
+.akr-phone-play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.akr-phone-play-circle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.93);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.28);
+  transition: transform 0.15s ease;
+}
+.akr-phone-screen:hover .akr-phone-play-circle { transform: scale(1.06); }
+.akr-phone-play-circle svg { margin-left: 3px; }
+/* TikTok sidebar */
+.akr-phone-likes {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  z-index: 2;
+}
+.akr-phone-like-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Epilogue', Arial, sans-serif;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));
+}
+/* TikTok bottom bar */
+.akr-phone-tiktok-ui {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 18px 14px 14px;
+  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+  z-index: 2;
+}
+.akr-phone-user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+.akr-phone-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ea7552;
+  border: 1.5px solid #fff;
+  flex-shrink: 0;
+}
+.akr-phone-username {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Epilogue', Arial, sans-serif;
+}
+.akr-phone-verified {
+  font-size: 9px;
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.2);
+  border-radius: 3px;
+  padding: 2px 5px;
+  margin-left: 2px;
+  font-family: 'Epilogue', Arial, sans-serif;
+  font-weight: 600;
+}
+.akr-phone-song {
+  font-size: 10px;
+  color: rgba(255,255,255,0.75);
+  font-family: 'Epilogue', Arial, sans-serif;
+}
+/* 240K badge */
+.akr-phone-views-badge {
+  position: absolute;
+  bottom: -16px;
+  right: -20px;
+  background: #47b1b4;
+  color: #fff;
+  border-radius: 14px;
+  padding: 10px 16px;
+  font-family: 'DM Serif Display', Georgia, serif !important;
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(44,26,16,0.2);
+  transform: rotate(-4deg);
+  line-height: 1.1;
+  z-index: 4;
+  min-width: 88px;
+}
+.akr-phone-views-badge small {
+  display: block;
+  font-family: 'Epilogue', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.82);
+  margin-top: 2px;
+}
+.akr-phone-views-spark {
+  position: absolute;
+  top: 4px;
+  right: -42px;
+  width: 30px;
+  height: auto;
+  transform: rotate(-90deg);
+  z-index: 5;
+}
+/* Responsive */
+@media (max-width: 1200px) {
+  .akr-social-left { max-width: 480px; }
+  .akr-phone-outer { width: 280px; }
+}
+@media (max-width: 900px) {
+  .akr-social-inner { flex-direction: column; gap: 56px; align-items: flex-start; }
+  .akr-social-left { max-width: 100%; }
+  .akr-phone-side { align-self: center; }
+  .akr-phone-outer { width: 300px; }
+}
+@media (max-width: 600px) {
+  .akr-social-heading { font-size: 44px; }
+  .akr-social-sub { font-size: 15px; }
+  .akr-phone-outer { width: 260px; }
+  /* Prevent horizontal overflow */
+  .akr-social-section { overflow-x: hidden; }
+  /* Stats: smaller values + allow label to wrap so "87% BOUGHT AGAIN" fits */
+  .akr-social-stat-val { font-size: 28px !important; }
+  .akr-social-stat-lbl { white-space: normal; font-size: 10px; }
+  .akr-social-stat--sep { padding-left: 10px; padding-right: 0; }
+  .akr-social-stat { padding-right: 10px; }
+  /* CTA row: hide decorative arrows, make button full-width */
+  .akr-social-cta-row { flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .akr-social-arrow-l,
+  .akr-social-cta-row > svg { display: none !important; }
+  .akr-social-btn { width: 100%; max-width: 320px; text-align: center; }
+}
+
+/* =============================================================
+   SECTION: NUMBERS DON'T LIE (Sprint 2.0)
+   ============================================================= */
+.akr-num-section {
+  padding: 80px 0;
+  background: var(--akr-cream);
+  scroll-margin-top: 80px;
+}
+
+.akr-num-inner {
+  max-width: var(--akr-container-wide);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header: centered above grid */
+.akr-num-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.akr-num-eyebrow {
+  font-family: Arial, sans-serif !important;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akr-cta-secondary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 16px 0;
+}
+
+.akr-num-title {
+  font-family: 'DM Serif Display', Georgia, serif !important;
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 1.05;
+  color: var(--akr-dark);
+  margin: 0;
+  display: inline-block;
+}
+
+.akr-num-title em {
+  font-family: 'DM Serif Display', Georgia, serif !important;
+  font-style: italic;
+  color: var(--akr-cta-secondary);
+}
+
+.akr-num-lie-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.akr-num-lie-underline {
+  position: absolute;
+  bottom: -8px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: 9px;
+  overflow: visible;
+  display: block;
+  pointer-events: none;
+}
+
+.akr-num-accent {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(20px, 2vw, 28px);
+  color: var(--akr-cta-secondary);
+  font-weight: 500;
+  margin-left: 12px;
+  position: relative;
+  top: -8px;
+  display: inline-block;
+  transform: rotate(-2deg);
+}
+
+/* 2-column grid */
+.akr-num-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.4fr;
+  gap: 48px;
+  align-items: center;
+}
+
+/* LEFT: stacked product images */
+.akr-num-products {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+}
+
+.akr-num-product {
+  position: relative;
+  width: 38%;
+  max-width: 200px;
+}
+
+.akr-num-product img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 340px;
+  display: block;
+  margin: 0 auto;
+}
+
+.akr-num-product--1 {
+  transform: rotate(-6deg) translateX(-10%);
+  z-index: 2;
+}
+
+.akr-num-product--2 {
+  transform: rotate(4deg) translateX(10%);
+  margin-top: -60px;
+  z-index: 1;
+}
+
+/* RIGHT: stats + CTA */
+.akr-num-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.akr-num-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 48px;
+}
+
+.akr-num-stat {
+  text-align: left;
+  border-left: 2px solid var(--akr-border);
+  padding-left: 20px;
+}
+
+.akr-num-stat-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(48px, 5vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--akr-dark);
+  margin-bottom: 8px;
+}
+
+.akr-num-stat-label {
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--akr-dark);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.akr-num-stat-sub {
+  font-family: Arial, sans-serif !important;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--akr-mid);
+  line-height: 1.4;
+}
+
+/* CTA */
+.akr-num-cta-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.akr-num-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--akr-cta-secondary);
+  color: #fff !important;
+  font-family: Arial, sans-serif !important;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 18px 40px;
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+.akr-num-cta:hover {
+  background: var(--akr-cta-secondary-hover);
+}
+
+/* Responsive 1024px */
+@media (max-width: 1024px) {
+  .akr-num-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .akr-num-products {
+    min-height: auto;
+    padding: 24px 0;
+  }
+
+  .akr-num-product {
+    width: 28%;
+    max-width: 180px;
+  }
+
+  .akr-num-product--1 {
+    transform: rotate(-5deg) translateX(-5%);
+  }
+
+  .akr-num-product--2 {
+    transform: rotate(3deg) translateX(5%);
+    margin-top: -40px;
+  }
+
+  .akr-num-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 32px;
+  }
+}
+
+/* Responsive 768px */
+@media (max-width: 768px) {
+  .akr-num-section {
+    padding: 56px 0;
+  }
+
+  .akr-num-header {
+    margin-bottom: 32px;
+  }
+
+  .akr-num-products {
+    min-height: auto;
+    gap: 0;
+  }
+
+  .akr-num-product {
+    width: 35%;
+    max-width: 140px;
+  }
+
+  /* Both sticks side-by-side on mobile — remove overlap/z-index hide */
+  .akr-num-product--1 {
+    transform: rotate(-6deg);
+    z-index: 1;
+  }
+  .akr-num-product--2 {
+    transform: rotate(4deg);
+    margin-top: 0;
+    z-index: 2;
+  }
+
+  .akr-num-stat {
+    padding-left: 16px;
+  }
+
+  .akr-num-stat-label {
+    font-size: 13px;
+  }
+
+  .akr-num-stat-sub {
+    font-size: 15px;
+  }
+
+  .akr-num-cta {
+    padding: 16px 32px;
+    font-size: 13px;
+  }
+}
+
+/* Small mobile 480px */
+@media (max-width: 480px) {
+  .akr-num-product {
+    width: 38%;
+    max-width: 120px;
+  }
+
+  .akr-num-stats {
+    gap: 20px 24px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Sprint 3.1.1 — Three post-QA fixes                                     */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Issue 1: One-Time Purchase card — remove blue browser focus outline ── */
+/* The .akr-one-time element is a div[role="button"][tabindex="0"].          */
+/* On click it receives :focus → browser default blue outline appears.       */
+/* The --selected border-color rule is correct; only the outline needs fix.  */
+section[id="akr-hero"] .akr-one-time:focus,
+section[id="akr-hero"] .akr-one-time:focus-visible {
+  outline: none;
+}
+/* Replace with on-brand terracotta ring when navigated via keyboard */
+section[id="akr-hero"] .akr-one-time:focus-visible {
+  box-shadow: 0 0 0 3px rgba(210, 114, 74, 0.20);
+}
+
+/* ── Issue 2: Pack button active vs --best double-highlight fix ────────── */
+/* Root cause: old rule `.akr-hero-pack-btn.active, .akr-hero-pack-btn--best */
+/* { border: 2px solid var(--akr-orange) !important }` at line ~1811 groups  */
+/* both selectors — so BEST VALUE pack always shows orange border even when  */
+/* another pack is selected. Fix: separate --best (passive) from .active.   */
+
+/* --best passive: subtle tint only, NOT full orange highlight */
+section[id="akr-hero"] .akr-hero-pack-btn--best:not(.active) {
+  border: 1.5px solid #e8d5c4 !important;
+  background: rgba(210, 114, 74, 0.04) !important;
+}
+section[id="akr-hero"] .akr-hero-pack-btn--best:not(.active) .akr-hero-pack-name {
+  color: var(--akr-dark) !important;
+}
+
+/* .active: full orange highlight (any pack when selected) */
+section[id="akr-hero"] .akr-hero-pack-btn.active {
+  border: 2px solid var(--akr-cta-primary) !important;
+  background: rgba(210, 114, 74, 0.08) !important;
+  box-shadow: 0 0 0 3px rgba(210, 114, 74, 0.12) !important;
+}
+section[id="akr-hero"] .akr-hero-pack-btn.active .akr-hero-pack-name {
+  color: var(--akr-cta-primary) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Sprint 3.1.2 — Pack-btn cream bg + BEST VALUE banner                   */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Part 1: Pack-btn cream bg ────────────────────────────────────────── */
+/* Old rule at line ~1804: `.akr-hero-pack-btn { background: #fff !important }` */
+/* wins over Sprint 3.1's cream rule (no !important). Override here.      */
+section[id="akr-hero"] .akr-hero-pack-btn {
+  background: var(--akr-cream) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Part 2: BEST VALUE banner (replaces floating pill) ──────────────── */
+/* .akr-hero-best-label is a <span> as direct first child of the button.  */
+/* Old CSS: position:absolute, top:-10px, translateX(-50%), pill-radius.  */
+/* New: full-width banner pinned to top of card, clipped by overflow:hidden. */
+
+section[id="akr-hero"] .akr-hero-pack-btn--best {
+  padding-top: 40px !important;   /* make room for banner height */
+  overflow: hidden !important;
+}
+
+section[id="akr-hero"] .akr-hero-pack-btn--best .akr-hero-best-label {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+
+  /* Banner look */
+  background: var(--akr-cta-primary) !important;
+  color: #fff !important;
+  font-family: Arial, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+  padding: 8px 0 !important;
+  line-height: 1.3 !important;
+  display: block !important;
+
+  /* Reset old pill styles */
+  border-radius: 0 !important;
+  transform: none !important;
+  margin: 0 !important;
+  box-shadow: 0 1px 3px rgba(44, 26, 16, 0.10) !important;
+  white-space: nowrap !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Sprint 3.3.1 — Vintage cream seal (Product of Norway-style)            */
+/* Cream bg + terracotta border — matches hero "Product of Norway" stamp. */
+/* $65/yr = ($53.99 - $48.59) × 12 = $64.80 ≈ $65. Update if prices change. */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+section[id="akr-hero"] .akr-sub-stamp {
+  background: var(--akr-cream) !important;
+  border: 2px solid var(--akr-cta-primary) !important;
+  color: var(--akr-dark) !important;
+  width: 80px !important;
+  height: 80px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 6px !important;
+  line-height: 1 !important;
+  transform: rotate(-5deg) !important;
+  box-shadow: 0 4px 10px rgba(44, 26, 16, 0.15) !important;
+  gap: 2px !important;
+}
+
+section[id="akr-hero"] .akr-sub-stamp-line1 {
+  font-family: Arial, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: var(--akr-cta-primary) !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+}
+
+section[id="akr-hero"] .akr-sub-stamp-line2 {
+  font-family: 'DM Serif Display', serif !important;
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  color: var(--akr-dark) !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  margin-top: 2px !important;
+}
+
+section[id="akr-hero"] .akr-sub-stamp-line3 {
+  font-family: Arial, sans-serif !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  color: var(--akr-mid) !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+  margin-top: 2px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Sprint 3.4.1 — Subscribe header alignment fix                          */
+/* Root cause: Sprint 3.1 wraps .akr-sub-card in padding:20px 24px,       */
+/* collapsing the bare .akr-sub-card-header flex context. Label also has  */
+/* margin-bottom:12px + line-height:1.3 causing vertical drift vs radio.  */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+section[id="akr-hero"] .akr-sub-card-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-bottom: 12px !important;
+  padding: 0 !important;
+}
+
+section[id="akr-hero"] .akr-sub-card-label {
+  margin: 0 !important;
+  line-height: 1 !important;
+}
+
+section[id="akr-hero"] .akr-sub-radio-dot {
+  flex-shrink: 0 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Sprint 3.4.2 — One-Time Purchase header alignment                      */
+/* Root cause: Sprint 3.1 sets .akr-one-time-label line-height:1.3 on a  */
+/* 16px font → ~20.8px line-box taller than 18px radio dot → drift.      */
+/* Fix: explicit flex on container + line-height:1 on label.             */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+section[id="akr-hero"] .akr-one-time {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+section[id="akr-hero"] .akr-one-time-radio {
+  flex-shrink: 0 !important;
+}
+
+section[id="akr-hero"] .akr-one-time-text {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+}
+
+section[id="akr-hero"] .akr-one-time-label {
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+section[id="akr-hero"] .akr-one-time-price {
+  line-height: 1.4 !important;
+  margin: 0 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* Sprint 3.M.2 — Full mobile override package (supersedes 3.M.1)        */
+/* Verified class names from discovery:                                    */
+/*   Flavor: .akr-hero-flavor-row                                         */
+/*   Pack: .akr-hero-pack-btns                                            */
+/*   Delivery: .akr-delivery-btns / .akr-delivery-btn                    */
+/*   Perks: .akr-sub-perks / .akr-sub-perk                               */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+/* Desktop (all viewports): perks explicitly 2-col */
+section[id="akr-hero"] .akr-sub-perks {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 6px 20px !important;
+  margin-bottom: 16px !important;
+}
+
+/* ≤768px: full mobile restructure */
+@media (max-width: 768px) {
+
+  /* Perks: force flex column — beats grid !important via display override */
+  section[id="akr-hero"] .akr-sub-perks {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  section[id="akr-hero"] .akr-sub-perk {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Subscribe label: allow wrap for "10% OFF" */
+  section[id="akr-hero"] .akr-sub-card-label {
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+
+  /* Subscribe card: tighter padding on mobile + right clearance for seal */
+  section[id="akr-hero"] .akr-sub-card {
+    padding: 16px 80px 16px 16px !important;
+  }
+
+  /* Vintage seal: scale down, prevent overlap */
+  section[id="akr-hero"] .akr-sub-stamp {
+    width: 64px !important;
+    height: 64px !important;
+    top: -10px !important;
+    right: 12px !important;
+  }
+
+  section[id="akr-hero"] .akr-sub-stamp-line2 {
+    font-size: 17px !important;
+  }
+
+  /* Delivery pills: wrap and compress */
+  section[id="akr-hero"] .akr-delivery-btns {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+
+  section[id="akr-hero"] .akr-delivery-btn {
+    flex: 1 !important;
+    min-width: 0 !important;
+    padding: 8px 6px !important;
+    font-size: 13px !important;
+  }
+
+  /* Flavor row: tighter gap */
+  section[id="akr-hero"] .akr-hero-flavor-row {
+    gap: 8px !important;
+  }
+}
+
+/* ≤480px: pack buttons stack vertically */
+@media (max-width: 480px) {
+  section[id="akr-hero"] .akr-hero-pack-btns {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+}
+
+/* cache-bust 2026-05-26-13-45 — Sprint 3.M.4 seal padding fix */
+/* cache-bust 2026-05-26-15-30 — Sprint 4.G dead CSS cleanup (21 classes) */
+/* cache-bust 2026-05-26-21-15 — Sprint 4.M num-title font fix */
+/* cache-bust 2026-05-30-00-00 — Sprint 5.1 RE-APPLY FAQ pills + cleanup */
+/* cache-bust 2026-05-30-17-00 — Sprint 5.2 accordion subtile justeringer */
+/* cache-bust 2026-06-04-00-00 — Sprint 5.3 funksjonelle tabs + aktiv-state */
+/* cache-bust 2026-06-04-14-00 — Sprint 5.3.1 15 spørsmål + fjern nummerering */
+/* cache-bust 2026-06-04-15-00 — Sprint 5.3.3 fix FAQ q-text font */
+/* cache-bust 2026-06-04-16-00 — Sprint 5.3.4 fix font spesifisitet */
+/* cache-bust 2026-06-04-17-00 — Sprint 5.4 quote-card + eyebrow */
+/* cache-bust 2026-06-04-19-00 — compare-list gap 14→18px + stripe fixes */
+/* cache-bust 2026-06-04-18-00 — Sprint 5.4.1 tab inactive opacity 0.55→0.75 */
+/* cache-bust 2026-06-08-00-00 — Emil Kowalski design quality layer */
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* DESIGN QUALITY LAYER — Emil Kowalski philosophy                        */
+/* Taste, responsiveness, invisible correctness.                          */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Custom easing variables ── */
+:root {
+  --akr-ease-snappy:  cubic-bezier(0.16, 1, 0.3, 1);   /* fast, responsive */
+  --akr-ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1); /* slight overshoot */
+  --akr-ease-smooth:  cubic-bezier(0.4, 0, 0.2, 1);    /* material morph */
+}
+
+/* ── Button press feedback: scale(0.97) on all interactive elements ──
+   Emil: "Buttons must feel responsive. scale(0.97) feels satisfying."    */
+.akr-cta-btn:active,
+button.akr-cta-btn:active,
+a.akr-cta-btn:active {
+  transform: scale(0.97) !important;
+  transition: transform 100ms var(--akr-ease-snappy) !important;
+}
+
+.akr-btn-cta-dark:active,
+a.akr-btn-cta-dark:active,
+button.akr-btn-cta-dark:active {
+  transform: scale(0.97) !important;
+  box-shadow: none !important;
+  transition: transform 100ms var(--akr-ease-snappy), box-shadow 100ms ease !important;
+}
+
+.akr-num-cta:active {
+  transform: scale(0.97);
+  transition: transform 100ms var(--akr-ease-snappy), background 0.2s ease;
+}
+
+.akr-btn-chat {
+  transition: opacity 150ms ease-out, color 150ms ease-out, transform 100ms var(--akr-ease-snappy);
+}
+.akr-btn-chat:active { transform: scale(0.97); }
+
+.akr-delivery-btn:active { transform: scale(0.97); }
+
+section[id="akr-hero"] .akr-hero-pack-btn:active {
+  transform: scale(0.97);
+  transition: transform 100ms var(--akr-ease-snappy), border-color 0.2s ease, background 0.2s ease;
+}
+
+.akr-faq-tab:active { transform: scale(0.97); }
+.akr-faq-tab {
+  transition: opacity 150ms ease-out, transform 100ms var(--akr-ease-snappy) !important;
+}
+
+/* ── CTA transition: custom easing replaces plain ease ── */
+.akr-btn-cta-dark,
+a.akr-btn-cta-dark,
+button.akr-btn-cta-dark {
+  transition: background-color 200ms var(--akr-ease-snappy),
+              transform 150ms var(--akr-ease-snappy),
+              box-shadow 200ms var(--akr-ease-snappy) !important;
+}
+
+/* ── Hover states: gate behind pointer:fine — prevents mobile false triggers ──
+   Emil: "Touch device hover states break the feel. Guard them."          */
+@media (hover: hover) and (pointer: fine) {
+  .akr-benefit-item:hover .akr-benefit-circle {
+    transform: translateY(-7px);
+    box-shadow: 0 14px 30px rgba(44,26,16,0.13);
+  }
+  .akr-sub-card:hover { box-shadow: 0 4px 16px rgba(234,117,82,.15); }
+  .akr-one-time:hover { border-color: #c0a090; }
+  .akr-hero-thumb:hover { border-color: var(--akr-orange); }
+  .akr-hero-flavor-item:not(.active):hover .akr-hero-flavor-thumb {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44,26,16,0.08);
+  }
+  .akr-phone-screen:hover .akr-phone-play-circle { transform: scale(1.06); }
+  .akr-compare-card--ak:hover .akr-compare-stick {
+    animation-play-state: paused;
+    transform: rotate(-14deg) translateY(-14px) scale(1.03);
+    transition: transform 400ms ease;
+  }
+  .akr-btn-cta-dark:hover,
+  a.akr-btn-cta-dark:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(210,114,74,0.32);
+  }
+  .akr-num-cta:hover { background: var(--akr-cta-secondary-hover); }
+  .akr-faq-tab:hover { opacity: 0.8; }
+  .akr-btn-chat:hover { opacity: .9; color: #fff; }
+  section[id="akr-hero"] .akr-hero-pack-btn:hover { border-color: var(--akr-cta-primary); }
+  section[id="akr-hero"] .akr-delivery-btn:hover { border-color: var(--akr-cta-primary); }
+}
+
+/* ── prefers-reduced-motion: comprehensive ── */
+@media (prefers-reduced-motion: reduce) {
+  .akr-btn-cta-dark,
+  a.akr-btn-cta-dark,
+  button.akr-btn-cta-dark,
+  .akr-cta-btn,
+  button.akr-cta-btn,
+  .akr-num-cta,
+  .akr-btn-chat,
+  .akr-delivery-btn,
+  .akr-hero-pack-btn,
+  .akr-faq-tab,
+  .akr-benefit-item,
+  .akr-benefit-circle,
+  .akr-compare-stick,
+  .akr-hero-flavor-thumb,
+  .akr-phone-play-circle {
+    transition: none !important;
+    animation: none !important;
+  }
+  .akr-faq-section .akr-faq-a,
+  .akr-faq-section .akr-faq-a.is-open {
+    transition: none !important;
+  }
+}

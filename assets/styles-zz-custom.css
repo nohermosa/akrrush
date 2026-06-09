@@ -87,6 +87,15 @@ p, div, span,
   font-family: 'Enkel', sans-serif !important;
 }
 
+/* Allow akr- section elements to inherit font-family from their parent
+   (prevents global Enkel !important from overriding custom section fonts) */
+[class*="akr-"] h3,
+[class*="akr-"] p,
+[class*="akr-"] span,
+[class*="akr-"] div {
+  font-family: inherit !important;
+}
+
 /* =============================================
    2. Typography
    ============================================= */

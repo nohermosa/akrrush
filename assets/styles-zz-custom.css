@@ -562,7 +562,7 @@ a.button--add-to-cart.button {
 
 @media (max-width: 768px) {
   /* Prevent horizontal page scroll on mobile */
-  html { overflow-x: hidden; }
+  html, body { overflow-x: hidden !important; }
 
   /* Typography */
   h1 {

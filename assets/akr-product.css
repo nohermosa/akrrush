@@ -1774,6 +1774,14 @@ section[id="akr-hero"] .akr-hero-trust {
   .akr-benefit-circle img,
   .akr-benefit-circle-icon { max-width: 60%; max-height: 60%; }
   .akr-faq-tabs { overflow-x: auto; padding-bottom: 4px; flex-wrap: nowrap; }
+  /* CURIOUS button: full-width on mobile so it doesn't overflow viewport */
+  .akr-faq-section { overflow-x: hidden; }
+  .akr-btn-chat {
+    display: flex !important;
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
 }
 @media (max-width: 480px) {
   .akr-ing-section { padding: 40px 16px; }

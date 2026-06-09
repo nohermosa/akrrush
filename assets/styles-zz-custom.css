@@ -615,3 +615,22 @@ a.button--add-to-cart.button {
     max-width: 60%;
   }
 }
+
+ @media (max-width: 768px) {
+    .akr-faq-inner {
+      grid-template-columns: 1fr !important;
+      width: 100% !important;
+    }
+    .akr-faq-left,
+    .akr-faq-right {
+      min-width: 0 !important;
+      width: 100% !important;
+    }
+    .akr-faq-right {
+      display: none !important;
+    }
+    .akr-faq-tabs {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+  }

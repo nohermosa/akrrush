@@ -54,10 +54,9 @@
   padding-bottom: calc(10px + env(safe-area-inset-bottom));
   box-shadow: 0 -4px 16px rgba(0,0,0,0.18);
   transition: bottom 0.3s cubic-bezier(0.4,0,0.2,1);
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  align-items: center !important;
+   display: grid !important;                                                                                      
+    grid-template-columns: 1fr auto !important;
+    align-items: center !important;  
   gap: 12px;
   font-family: Arial, sans-serif !important;
   width: 100% !important;

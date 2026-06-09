@@ -561,6 +561,9 @@ a.button--add-to-cart.button {
    ============================================= */
 
 @media (max-width: 768px) {
+  /* Prevent horizontal page scroll on mobile */
+  html { overflow-x: hidden; }
+
   /* Typography */
   h1 {
     font-size: 2rem;

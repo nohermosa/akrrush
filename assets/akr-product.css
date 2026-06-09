@@ -1750,10 +1750,27 @@ section[id="akr-hero"] .akr-hero-trust {
   .akr-faq-right { padding-right: 0; padding-bottom: 0; }
 }
 @media (max-width: 768px) {
+  /* Contain all sections within viewport — belt-and-suspenders overflow fix */
+  .akr-ing-section,
+  .akr-social-section,
+  .akr-num-section,
+  .akr-why-section,
+  .akr-benefits-section,
+  .akr-faq-section {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
   .akr-ing-section,
   .akr-benefits-section,
   .akr-faq-section {
     padding: 56px 16px;
+  }
+  /* CURIOUS button: shrink text to fit, allow wrap as last resort */
+  .akr-btn-chat {
+    font-size: 13px !important;
+    letter-spacing: 0.02em !important;
+    white-space: normal;
+    word-break: break-word;
   }
   .akr-ing-heading { font-size: 40px; }
   .akr-ing-subtext { font-size: 15px; }
@@ -1794,6 +1811,10 @@ section[id="akr-hero"] .akr-hero-trust {
   .akr-nf-title { font-size: 28px !important; }
   .akr-nf-cal-num { font-size: 32px !important; }
   .akr-nf-cal-label { font-size: 22px !important; }
+  /* FAQ heading: "Everything you / actually want to know." — DM Serif Display
+     at 36px is too wide at 390px. Scale down so line 2 fits in content area. */
+  .akr-faq-heading { font-size: 28px; }
+  .akr-social-heading { font-size: 36px; }
 }
 
 /* =============================================================

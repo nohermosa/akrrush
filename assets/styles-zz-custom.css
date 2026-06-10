@@ -708,11 +708,14 @@ a.button--add-to-cart.button {
   }                                                                                                                
                                                             
   /* 8. Benefits seksjon: icons-row scroll heller enn overflow clip */                                             
-  @media (max-width: 480px) {
-    .akr-benefits-icons-row {                                                                                      
-      overflow-x: auto;                                     
-      padding-bottom: 8px;                                                                                         
-      flex-wrap: nowrap !important;                         
-      -webkit-overflow-scrolling: touch;                                                                           
+@media (max-width: 480px) {                                                                                      
+    .akr-benefits-icons-row {                                                                                    
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;                                                            
+      gap: 16px !important;
+      overflow-x: visible !important;                                                                              
+    }                                                                                                            
+    .akr-benefit-item {
+      width: 100% !important;                                                                                      
     }
-  }     
+  }            

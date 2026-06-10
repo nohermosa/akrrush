@@ -6,6 +6,15 @@
 
 <style>
   .akr-compare-list li { margin-bottom: 32px !important; }
+  .akr-compare-card--avg .akr-compare-img-col img {
+    filter: drop-shadow(0 16px 32px rgba(0,0,0,0.18)) drop-shadow(0 4px 8px rgba(0,0,0,0.10));
+    transform: rotate(-2deg);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+  .akr-compare-card--avg .akr-compare-img-col img:hover {
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.22)) drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+    transform: rotate(-1deg) translateY(-4px);
+  }
 </style>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -57,7 +66,7 @@
             {%- if section.settings.average_image != blank -%}
               <img src="{{ section.settings.average_image | image_url: width: 400 }}" alt="{{ section.settings.avg_title | default: 'Average Bone Broth' }}" loading="lazy">
             {%- else -%}
-              <img src="{{ 'akr-grey-packet.png' | asset_url }}" alt="Generic bone broth packet" loading="lazy">
+              <img src="{{ 'akr-average-broth.png' | asset_url }}" alt="Average bone broth carton" loading="lazy">
             {%- endif -%}
           </div>
 

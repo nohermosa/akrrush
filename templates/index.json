@@ -195,6 +195,19 @@
         "section_class": ""
       }
     },
+    "akr_collection_banners_homepage": {
+      "type": "akr-collection-banners",
+      "settings": {
+        "heading": "Which broth is right for you?",
+        "pro_link": "shopify://collections/akrrush-pro",
+        "classic_link": "shopify://collections/bone-broth",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_side": 40,
+        "gap": 24,
+        "border_radius": 16
+      }
+    },
     "zz_positioned_callout_6BGdbh": {
       "type": "zz-positioned-callout",
       "blocks": {
@@ -724,19 +737,6 @@
         "custom_css": ".heading-wrapper-subtitle {\nmargin-bottom: 40px;\n}\n.heading-wrapper {\nmargin-bottom: 40px;\n}\n\n.featured-collection {\npadding-right: 3%;\nmargin-left: 3%;\n}"
       }
     },
-    "akr_collection_banners_homepage": {
-      "type": "akr-collection-banners",
-      "settings": {
-        "heading": "Which broth is right for you?",
-        "pro_link": "shopify://collections/akrrush-pro",
-        "classic_link": "shopify://collections/bone-broth",
-        "padding_top": 60,
-        "padding_bottom": 60,
-        "padding_side": 40,
-        "gap": 24,
-        "border_radius": 16
-      }
-    },
     "ecom_clean_nutrition_02_section_zjGHdE": {
       "type": "ecom-clean-nutrition-02-section",
       "settings": {}
@@ -775,11 +775,11 @@
     "ecom_main_video_banner_section_h6FEQ9",
     "index_slideshow_classic_ACb8ej",
     "qq_marquee_image_text_8DeHKh",
+    "akr_collection_banners_homepage",
     "zz_positioned_callout_6BGdbh",
     "zz_positioned_callout_yzwVMf",
     "index_featured_collection_Q8AyBg",
     "index_featured_collection_aUban4",
-    "akr_collection_banners_homepage",
     "ecom_clean_nutrition_02_section_zjGHdE",
     "ecom_the_proof_is_in_the_protein_section_pLQrRt",
     "ecom_meet_your_daily_ritual_section_pPnefH",

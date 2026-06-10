@@ -1,0 +1,270 @@
+{% comment %}
+  åKrrush — "Which broth is right for you?" dual-banner section
+  Desktop: 50/50 side-by-side | Tablet: 50/50 | Mobile: stacked (PRO on top)
+  Images: akr-pro-banner.png + akr-classic-banner.png (upload to Shopify Files)
+{% endcomment %}
+
+<section class="akr-collection-banners-section">
+  {% if section.settings.heading != blank %}
+    <div class="akr-cb-heading-wrap">
+      <h2 class="akr-cb-heading">{{ section.settings.heading }}</h2>
+    </div>
+  {% endif %}
+
+  <div class="akr-cb-grid">
+
+    {% comment %} PRO card — dark, athlete {% endcomment %}
+    <a
+      href="{{ section.settings.pro_link | default: '/collections/akrrush-pro' }}"
+      class="akr-cb-card akr-cb-card--pro"
+      aria-label="Shop åKrrush PRO collection"
+    >
+      <img
+        src="{{ section.settings.pro_image | default: 'akr-pro-banner.png' | asset_url }}"
+        alt="{{ section.settings.pro_image_alt | default: 'åKrrush PRO — For training, recovery & hydration' }}"
+        loading="lazy"
+        width="600"
+        height="450"
+        class="akr-cb-img"
+      >
+    </a>
+
+    {% comment %} Classic card — warm beige, wellness {% endcomment %}
+    <a
+      href="{{ section.settings.classic_link | default: '/collections/bone-broth' }}"
+      class="akr-cb-card akr-cb-card--classic"
+      aria-label="Shop åKrrush Classic collection"
+    >
+      <img
+        src="{{ section.settings.classic_image | default: 'akr-classic-banner.png' | asset_url }}"
+        alt="{{ section.settings.classic_image_alt | default: 'åKrrush Classic — For everyday comfort and well-being' }}"
+        loading="lazy"
+        width="600"
+        height="450"
+        class="akr-cb-img"
+      >
+    </a>
+
+  </div>
+</section>
+
+<style>
+  /* ── Section wrapper ── */
+  .akr-collection-banners-section {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: {{ section.settings.padding_top }}px {{ section.settings.padding_side }}px {{ section.settings.padding_bottom }}px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  /* ── Optional heading ── */
+  .akr-cb-heading-wrap {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .akr-cb-heading {
+    font-family: 'Enkel', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: #2C1A0E;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  /* ── Two-column grid ── */
+  .akr-cb-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: {{ section.settings.gap }}px;
+    align-items: stretch;
+  }
+
+  /* ── Cards ── */
+  .akr-cb-card {
+    display: block;
+    border-radius: {{ section.settings.border_radius }}px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    will-change: transform;
+  }
+
+  .akr-cb-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.18);
+  }
+
+  .akr-cb-card:active {
+    transform: translateY(-1px);
+  }
+
+  /* ── Images fill cards completely ── */
+  .akr-cb-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio: 4 / 3;
+    border-radius: inherit;
+  }
+
+  /* ── Tablet (768–1024px): keep side by side, slightly smaller gap ── */
+  @media (max-width: 1024px) {
+    .akr-cb-heading {
+      font-size: 30px;
+    }
+    .akr-collection-banners-section {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  /* ── Mobile (<= 767px): stack vertically, PRO on top (order 1), Classic below (order 2) ── */
+  @media (max-width: 767px) {
+    .akr-cb-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .akr-cb-card--pro {
+      order: 1;
+    }
+
+    .akr-cb-card--classic {
+      order: 2;
+    }
+
+    .akr-cb-img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .akr-cb-heading {
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .akr-collection-banners-section {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+
+  /* ── Small mobile (<= 480px) ── */
+  @media (max-width: 480px) {
+    .akr-cb-heading {
+      font-size: 22px;
+    }
+
+    .akr-cb-card:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "AKR — Collection Banners",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Which broth is right for you?"
+    },
+    {
+      "type": "image_picker",
+      "id": "pro_image",
+      "label": "PRO banner image"
+    },
+    {
+      "type": "text",
+      "id": "pro_image_alt",
+      "label": "PRO image alt text",
+      "default": "åKrrush PRO — For training, recovery & hydration"
+    },
+    {
+      "type": "url",
+      "id": "pro_link",
+      "label": "PRO collection URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "classic_image",
+      "label": "Classic banner image"
+    },
+    {
+      "type": "text",
+      "id": "classic_image_alt",
+      "label": "Classic image alt text",
+      "default": "åKrrush Classic — For everyday comfort and well-being"
+    },
+    {
+      "type": "url",
+      "id": "classic_link",
+      "label": "Classic collection URL"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_side",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Side padding (desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap between cards",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "AKR — Collection Banners",
+      "category": "åKrrush"
+    }
+  ]
+}
+{% endschema %}

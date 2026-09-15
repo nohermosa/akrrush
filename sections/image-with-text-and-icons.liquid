@@ -377,13 +377,7 @@
                           <a href="{{ block.settings[icon_link] }}">
                         {% endif %}
                           <div class="icon-container">
-                            {%
-                              render 'image-element',
-                              image: block.settings[icon_image],
-                              alt: block.settings[icon_text] | default: 'Icon',
-                              stretch_width: false,
-                              additional_classes: 'icon-image',
-                            %}
+                            {% render 'image-element', image: block.settings[icon_image], alt: block.settings[icon_text], default: 'Icon', stretch_width: false, additional_classes: 'icon-image' %}
                           </div>
                           {% if block.settings[icon_text] != blank %}
                             <span class="icon-text">{{ block.settings[icon_text] }}</span>
@@ -1103,4 +1097,21 @@
     ]
   }
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%
+                                  render 'image-element',
+                                  image: block.settings[icon_image],
+                                  alt: block.settings[icon_text] | default: 'Icon',
+                                  stretch_width: false,
+                                  additional_classes: 'icon-image',
+                                %}
+  to: "{% render 'image-element', image: block.settings[icon_image], alt: block.settings[icon_text],
+    default: 'Icon', stretch_width: false, additional_classes: 'icon-image' %}"
+  position: 12727..12895
+{%- endcomment -%}

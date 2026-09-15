@@ -304,15 +304,7 @@
       </div><!-- /akr-sub-wrap -->
 
       <!-- Product form — use the real snippet so Appstle can attach to it -->
-      {%
-        render 'product__form',
-        context: 'product',
-        product: product,
-        sold_out_options: 'disabled',
-        selected_variant: selected_variant,
-        show_payment_button: false,
-        collection_handles: product.collections | map: 'handle'
-      %}
+      {% render 'product__form', context: 'product', product: product, sold_out_options: 'disabled', selected_variant: selected_variant, show_payment_button: false, collection_handles: product.collections, map: 'handle' %}
 
       <!-- @app blocks (Appstle subscription widget) rendered after the form,
            matching the live product page structure: Appstle JS searches the
@@ -650,3 +642,24 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%
+            render 'product__form',
+            context: 'product',
+            product: product,
+            sold_out_options: 'disabled',
+            selected_variant: selected_variant,
+            show_payment_button: false,
+            collection_handles: product.collections | map: 'handle'
+          %}
+  to: "{% render 'product__form', context: 'product', product: product, sold_out_options:
+    'disabled', selected_variant: selected_variant, show_payment_button: false, collection_handles:
+    product.collections, map: 'handle' %}"
+  position: 14083..14299
+{% endcomment %}
